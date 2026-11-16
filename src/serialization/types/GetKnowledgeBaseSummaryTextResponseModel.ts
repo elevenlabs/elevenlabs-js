@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ChunkingOverride } from "./ChunkingOverride";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { GetKnowledgeBaseSummaryTextResponseModelDependentAgentsItem } from "./GetKnowledgeBaseSummaryTextResponseModelDependentAgentsItem";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
@@ -19,6 +20,7 @@ export const GetKnowledgeBaseSummaryTextResponseModel: core.serialization.Object
     supportedUsages: core.serialization.property("supported_usages", core.serialization.list(DocumentUsageModeEnum)),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
     folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
+    chunkingOverride: core.serialization.property("chunking_override", ChunkingOverride.optional()),
     folderPath: core.serialization.property(
         "folder_path",
         core.serialization.list(KnowledgeBaseFolderPathSegmentSummaryResponseModel).optional(),
@@ -37,6 +39,7 @@ export declare namespace GetKnowledgeBaseSummaryTextResponseModel {
         supported_usages: DocumentUsageModeEnum.Raw[];
         access_info: ResourceAccessInfo.Raw;
         folder_parent_id?: string | null;
+        chunking_override?: ChunkingOverride.Raw | null;
         folder_path?: KnowledgeBaseFolderPathSegmentSummaryResponseModel.Raw[] | null;
         dependent_agents: GetKnowledgeBaseSummaryTextResponseModelDependentAgentsItem.Raw[];
     }

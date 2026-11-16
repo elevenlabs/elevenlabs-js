@@ -17,6 +17,10 @@ export const BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch: core.s
         core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
     ),
     events: core.serialization.list(WorkspaceWebhookEventType).optional(),
+    logRedactedFields: core.serialization.property(
+        "log_redacted_fields",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch {
@@ -26,5 +30,6 @@ export declare namespace BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdP
         retry_enabled?: boolean | null;
         request_headers?: Record<string, string | null | undefined> | null;
         events?: WorkspaceWebhookEventType.Raw[] | null;
+        log_redacted_fields?: string[] | null;
     }
 }

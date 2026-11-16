@@ -131,4 +131,75 @@ describe("WebhooksClient", () => {
             status: "ok",
         });
     });
+
+    test("test", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { webhook_type: "project_conversion_status" };
+        const rawResponseBody = {
+            delivery_id: "delivery_id",
+            outcome: "delivered",
+            response_code: 1,
+            latency_ms: 1,
+            response_content_type: "response_content_type",
+            response_body_bytes: 1,
+            failure_origin: "failure_origin",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/webhooks/webhook_id/test")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.webhooks.test("webhook_id", {
+            webhookType: "project_conversion_status",
+        });
+        expect(response).toEqual({
+            deliveryId: "delivery_id",
+            outcome: "delivered",
+            responseCode: 1,
+            latencyMs: 1,
+            responseContentType: "response_content_type",
+            responseBodyBytes: 1,
+            failureOrigin: "failure_origin",
+        });
+    });
+
+    test("redeliver", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            delivery_id: "delivery_id",
+            outcome: "delivered",
+            response_code: 1,
+            latency_ms: 1,
+            response_content_type: "response_content_type",
+            response_body_bytes: 1,
+            failure_origin: "failure_origin",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/webhooks/webhook_id/deliveries/delivery_id/redeliver")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.webhooks.redeliver("webhook_id", "delivery_id");
+        expect(response).toEqual({
+            deliveryId: "delivery_id",
+            outcome: "delivered",
+            responseCode: 1,
+            latencyMs: 1,
+            responseContentType: "response_content_type",
+            responseBodyBytes: 1,
+            failureOrigin: "failure_origin",
+        });
+    });
 });

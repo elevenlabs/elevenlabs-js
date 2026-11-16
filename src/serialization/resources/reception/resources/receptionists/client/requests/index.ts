@@ -1,0 +1,1 @@
+export { ReceptionUpdateCustomerFacingAgentRequest } from "./ReceptionUpdateCustomerFacingAgentRequest";

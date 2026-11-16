@@ -23,6 +23,7 @@ export * as productions from "./productions";
 export * as pronunciationDictionaries from "./pronunciationDictionaries";
 export * from "./pronunciationDictionaries/client/requests";
 export * from "./pronunciationDictionaries/types";
+export * as reception from "./reception";
 export * as serviceAccounts from "./serviceAccounts";
 export * from "./serviceAccounts/client/requests";
 export * as speechEngine from "./speechEngine";

@@ -36,6 +36,7 @@ export const PermissionType: core.serialization.Schema<serializers.PermissionTyp
         "convai_read",
         "convai_write",
         "agents_architect",
+        "agents_environment_variables_write",
         "music_generation",
         "image_video_generation",
         "flows",
@@ -58,6 +59,7 @@ export const PermissionType: core.serialization.Schema<serializers.PermissionTyp
         "conversation_privacy_manage",
         "copy_resources_cross_workspace",
         "synthid_detector",
+        "watermark",
     ]);
 
 export declare namespace PermissionType {
@@ -92,6 +94,7 @@ export declare namespace PermissionType {
         | "convai_read"
         | "convai_write"
         | "agents_architect"
+        | "agents_environment_variables_write"
         | "music_generation"
         | "image_video_generation"
         | "flows"
@@ -113,5 +116,6 @@ export declare namespace PermissionType {
         | "audit_log_read"
         | "conversation_privacy_manage"
         | "copy_resources_cross_workspace"
-        | "synthid_detector";
+        | "synthid_detector"
+        | "watermark";
 }

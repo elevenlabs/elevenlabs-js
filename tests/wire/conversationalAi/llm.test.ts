@@ -11,14 +11,14 @@ describe("LlmClient", () => {
         const rawResponseBody = {
             llms: [
                 {
-                    llm: "gemini-2.5-flash",
+                    llm: "gemini-3.5-flash",
                     is_checkpoint: false,
-                    max_tokens_limit: 8192,
+                    max_tokens_limit: 65535,
                     max_context_limit: 1048576,
                     supports_image_input: true,
                     supports_document_input: true,
                     supports_parallel_tool_calls: true,
-                    available_reasoning_efforts: ["none"],
+                    available_reasoning_efforts: ["minimal", "low", "medium", "high"],
                     available_service_tiers: ["standard"],
                     deprecation_info: {
                         llm: "gpt-4o-mini",
@@ -60,14 +60,14 @@ describe("LlmClient", () => {
         expect(response).toEqual({
             llms: [
                 {
-                    llm: "gemini-2.5-flash",
+                    llm: "gemini-3.5-flash",
                     isCheckpoint: false,
-                    maxTokensLimit: 8192,
+                    maxTokensLimit: 65535,
                     maxContextLimit: 1048576,
                     supportsImageInput: true,
                     supportsDocumentInput: true,
                     supportsParallelToolCalls: true,
-                    availableReasoningEfforts: ["none"],
+                    availableReasoningEfforts: ["minimal", "low", "medium", "high"],
                     availableServiceTiers: ["standard"],
                     deprecationInfo: {
                         llm: "gpt-4o-mini",

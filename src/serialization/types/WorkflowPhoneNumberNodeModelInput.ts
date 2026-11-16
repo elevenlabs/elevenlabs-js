@@ -8,6 +8,7 @@ import { TransferTypeEnum } from "./TransferTypeEnum";
 import { UuiTransferConfig } from "./UuiTransferConfig";
 import { WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem } from "./WorkflowPhoneNumberNodeModelInputCustomSipHeadersItem";
 import { WorkflowPhoneNumberNodeModelInputPostDialDigits } from "./WorkflowPhoneNumberNodeModelInputPostDialDigits";
+import { WorkflowPhoneNumberNodeModelInputProviderConfigsItem } from "./WorkflowPhoneNumberNodeModelInputProviderConfigsItem";
 import { WorkflowPhoneNumberNodeModelInputTransferDestination } from "./WorkflowPhoneNumberNodeModelInputTransferDestination";
 
 export const WorkflowPhoneNumberNodeModelInput: core.serialization.ObjectSchema<
@@ -37,6 +38,10 @@ export const WorkflowPhoneNumberNodeModelInput: core.serialization.ObjectSchema<
         "edge_order",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    providerConfigs: core.serialization.property(
+        "provider_configs",
+        core.serialization.list(WorkflowPhoneNumberNodeModelInputProviderConfigsItem).optional(),
+    ),
 });
 
 export declare namespace WorkflowPhoneNumberNodeModelInput {
@@ -49,5 +54,6 @@ export declare namespace WorkflowPhoneNumberNodeModelInput {
         post_dial_digits?: WorkflowPhoneNumberNodeModelInputPostDialDigits.Raw | null;
         position?: PositionInput.Raw | null;
         edge_order?: string[] | null;
+        provider_configs?: WorkflowPhoneNumberNodeModelInputProviderConfigsItem.Raw[] | null;
     }
 }

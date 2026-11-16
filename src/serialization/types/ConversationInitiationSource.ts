@@ -35,6 +35,7 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "template_preview",
     "genesys_bot_connector",
     "subagent_tool",
+    "agent_messages_api",
 ]);
 
 export declare namespace ConversationInitiationSource {
@@ -65,5 +66,6 @@ export declare namespace ConversationInitiationSource {
         | "salesforce_integration"
         | "template_preview"
         | "genesys_bot_connector"
-        | "subagent_tool";
+        | "subagent_tool"
+        | "agent_messages_api";
 }

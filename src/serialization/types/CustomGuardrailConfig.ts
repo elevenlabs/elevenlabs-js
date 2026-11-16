@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { CustomGuardrailConfigModel } from "./CustomGuardrailConfigModel";
 import { CustomGuardrailConfigTriggerAction } from "./CustomGuardrailConfigTriggerAction";
 import { GuardrailExecutionMode } from "./GuardrailExecutionMode";
+import { LlmServiceTier } from "./LlmServiceTier";
 
 export const CustomGuardrailConfig: core.serialization.ObjectSchema<
     serializers.CustomGuardrailConfig.Raw,
@@ -16,6 +17,7 @@ export const CustomGuardrailConfig: core.serialization.ObjectSchema<
     prompt: core.serialization.string(),
     executionMode: core.serialization.property("execution_mode", GuardrailExecutionMode.optional()),
     model: CustomGuardrailConfigModel.optional(),
+    serviceTier: core.serialization.property("service_tier", LlmServiceTier.optional()),
     historyMessageCount: core.serialization.property("history_message_count", core.serialization.number().optional()),
     triggerAction: core.serialization.property("trigger_action", CustomGuardrailConfigTriggerAction.optional()),
     evaluateFullResponseOnly: core.serialization.property(
@@ -31,6 +33,7 @@ export declare namespace CustomGuardrailConfig {
         prompt: string;
         execution_mode?: GuardrailExecutionMode.Raw | null;
         model?: CustomGuardrailConfigModel.Raw | null;
+        service_tier?: LlmServiceTier.Raw | null;
         history_message_count?: number | null;
         trigger_action?: CustomGuardrailConfigTriggerAction.Raw | null;
         evaluate_full_response_only?: boolean | null;

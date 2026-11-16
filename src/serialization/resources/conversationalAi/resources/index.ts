@@ -6,6 +6,7 @@ export * from "./analysisItems/types";
 export * as batchCalls from "./batchCalls";
 export * from "./batchCalls/client/requests";
 export * as conversations from "./conversations";
+export * from "./conversations/client/requests";
 export * from "./conversations/types";
 export * as dashboard from "./dashboard";
 export * as exotel from "./exotel";

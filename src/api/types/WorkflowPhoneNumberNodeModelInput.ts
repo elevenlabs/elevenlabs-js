@@ -17,4 +17,6 @@ export interface WorkflowPhoneNumberNodeModelInput {
     position?: ElevenLabs.PositionInput;
     /** The ids of outgoing edges in the order they should be evaluated. */
     edgeOrder?: string[];
+    /** Per-provider transfer configuration. Mutually exclusive with a non-empty `transfer_destination`: when present, the configuration matching the call's telephony provider is executed and the legacy transfer fields are ignored. */
+    providerConfigs?: ElevenLabs.WorkflowPhoneNumberNodeModelInputProviderConfigsItem[];
 }

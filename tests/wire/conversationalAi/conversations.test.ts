@@ -208,6 +208,32 @@ describe("ConversationsClient", () => {
         });
     });
 
+    test("create", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { agent: { type: "persisted", agent_id: "agent_id" } };
+        const rawResponseBody = { conversation_id: "conversation_id" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/conversations")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.conversations.create({
+            agent: {
+                type: "persisted",
+                agentId: "agent_id",
+            },
+        });
+        expect(response).toEqual({
+            conversationId: "conversation_id",
+        });
+    });
+
     test("resolve", async () => {
         const server = mockServerPool.createServer();
         const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
@@ -1559,5 +1585,225 @@ describe("ConversationsClient", () => {
             nextCursor: "next_cursor",
             hasMore: true,
         });
+    });
+
+    test("send_message", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            input: [{ type: "client_tool_result", tool_call_id: "tool_call_id", result: "result", is_error: true }],
+        };
+        const rawResponseBody = {
+            turn_id: "turn_id",
+            status: "in_progress",
+            output: [{ type: "text", role: "agent", id: "id", text: "text", created_at_unix_ms: 1 }],
+            error: { type: "type", code: "code", message: "message" },
+            required_actions: [
+                {
+                    type: "client_tool_call",
+                    tool_call_id: "tool_call_id",
+                    tool_name: "tool_name",
+                    parameters: { key: "value" },
+                },
+            ],
+            stream_cursor: "stream_cursor",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/conversations/conversation_id/messages")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.conversations.sendMessage("conversation_id", {
+            input: [
+                {
+                    type: "client_tool_result",
+                    toolCallId: "tool_call_id",
+                    result: "result",
+                    isError: true,
+                },
+            ],
+        });
+        expect(response).toEqual({
+            turnId: "turn_id",
+            status: "in_progress",
+            output: [
+                {
+                    type: "text",
+                    role: "agent",
+                    id: "id",
+                    text: "text",
+                    createdAtUnixMs: 1,
+                },
+            ],
+            error: {
+                type: "type",
+                code: "code",
+                message: "message",
+            },
+            requiredActions: [
+                {
+                    type: "client_tool_call",
+                    toolCallId: "tool_call_id",
+                    toolName: "tool_name",
+                    parameters: {
+                        key: "value",
+                    },
+                },
+            ],
+            streamCursor: "stream_cursor",
+        });
+    });
+
+    test("send_message_stream", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            input: [{ type: "client_tool_result", tool_call_id: "tool_call_id", result: "result", is_error: true }],
+        };
+        const rawResponseBody =
+            'event: \ndata: {"conversation_id":"conversation_id","turn_id":"turn_id","created_at_unix_ms":1,"event":{"text_response_part":{"text":"text","type":"start","event_id":1,"response_id":"response_id"},"type":"agent_chat_response_part"}}\n\n';
+
+        server
+            .mockEndpoint()
+            .post("/v1/convai/conversations/conversation_id/messages/stream")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .sseBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.conversations.sendMessageStream("conversation_id", {
+            input: [
+                {
+                    type: "client_tool_result",
+                    toolCallId: "tool_call_id",
+                    result: "result",
+                    isError: true,
+                },
+            ],
+        });
+        const events: unknown[] = [];
+        for await (const event of response) {
+            events.push(event);
+        }
+        expect(events).toEqual([
+            {
+                conversationId: "conversation_id",
+                turnId: "turn_id",
+                createdAtUnixMs: 1,
+                event: {
+                    type: "agent_chat_response_part",
+                    textResponsePart: {
+                        text: "text",
+                        type: "start",
+                        eventId: 1,
+                        responseId: "response_id",
+                    },
+                },
+            },
+        ]);
+    });
+
+    test("get_turn", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            turn_id: "turn_id",
+            status: "in_progress",
+            output: [{ type: "text", role: "agent", id: "id", text: "text", created_at_unix_ms: 1 }],
+            error: { type: "type", code: "code", message: "message" },
+            required_actions: [
+                {
+                    type: "client_tool_call",
+                    tool_call_id: "tool_call_id",
+                    tool_name: "tool_name",
+                    parameters: { key: "value" },
+                },
+            ],
+            stream_cursor: "stream_cursor",
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversations/conversation_id/turns/turn_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.conversations.getTurn("conversation_id", "turn_id");
+        expect(response).toEqual({
+            turnId: "turn_id",
+            status: "in_progress",
+            output: [
+                {
+                    type: "text",
+                    role: "agent",
+                    id: "id",
+                    text: "text",
+                    createdAtUnixMs: 1,
+                },
+            ],
+            error: {
+                type: "type",
+                code: "code",
+                message: "message",
+            },
+            requiredActions: [
+                {
+                    type: "client_tool_call",
+                    toolCallId: "tool_call_id",
+                    toolName: "tool_name",
+                    parameters: {
+                        key: "value",
+                    },
+                },
+            ],
+            streamCursor: "stream_cursor",
+        });
+    });
+
+    test("stream_turn_events", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody =
+            'event: \ndata: {"conversation_id":"conversation_id","turn_id":"turn_id","created_at_unix_ms":1,"event":{"text_response_part":{"text":"text","type":"start","event_id":1,"response_id":"response_id"},"type":"agent_chat_response_part"}}\n\n';
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/conversations/conversation_id/turns/turn_id/events")
+            .respondWith()
+            .statusCode(200)
+            .sseBody(rawResponseBody)
+            .build();
+
+        const response = await client.conversationalAi.conversations.streamTurnEvents("conversation_id", "turn_id");
+        const events: unknown[] = [];
+        for await (const event of response) {
+            events.push(event);
+        }
+        expect(events).toEqual([
+            {
+                conversationId: "conversation_id",
+                turnId: "turn_id",
+                createdAtUnixMs: 1,
+                event: {
+                    type: "agent_chat_response_part",
+                    textResponsePart: {
+                        text: "text",
+                        type: "start",
+                        eventId: 1,
+                        responseId: "response_id",
+                    },
+                },
+            },
+        ]);
     });
 });

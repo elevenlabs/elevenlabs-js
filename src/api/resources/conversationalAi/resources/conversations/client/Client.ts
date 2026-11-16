@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { type NormalizedClientOptions, normalizeClientOptions } from "../../../../../../BaseClient";
 import * as core from "../../../../../../core";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers";
+import { mergeAdditionalBodyParameters } from "../../../../../../core/requestBody";
 import * as environments from "../../../../../../environments";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError";
 import * as errors from "../../../../../../errors/index";
@@ -529,6 +530,94 @@ export class ConversationsClient {
     }
 
     /**
+     * Create a text conversation with an agent. This does not run the agent, and the agent sends no first message. This endpoint is in alpha and may change.
+     *
+     * @param {ElevenLabs.conversationalAi.CreateAgentConversationRequest} request
+     * @param {ConversationsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.conversations.create({
+     *         agent: {
+     *             type: "persisted",
+     *             agentId: "agent_id"
+     *         }
+     *     })
+     */
+    public create(
+        request: ElevenLabs.conversationalAi.CreateAgentConversationRequest,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.CreateAgentConversationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    }
+
+    private async __create(
+        request: ElevenLabs.conversationalAi.CreateAgentConversationRequest,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.CreateAgentConversationResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                "v1/convai/conversations",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.CreateAgentConversationRequest.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.CreateAgentConversationResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/convai/conversations");
+    }
+
+    /**
      * Resolve a conversation URL (a Slack message URL or a Zendesk ticket URL) to the deterministic conversation ID for the given agent, then confirm the conversation exists.
      *
      * @param {ElevenLabs.conversationalAi.ConversationsResolveRequest} request
@@ -975,6 +1064,365 @@ export class ConversationsClient {
             _response.rawResponse,
             "GET",
             "/v1/convai/conversations/{conversation_id}/sip-messages",
+        );
+    }
+
+    /**
+     * Send input to a conversation, and wait until the agent finishes or waits on client tool results. With `background` set to true, the endpoint returns 202 when the server admits the turn. Then stream the turn's events with `Last-Event-ID` set to the `stream_cursor`. This endpoint is in alpha and may change.
+     *
+     * @param {string} conversation_id - The Conversation ID
+     * @param {ElevenLabs.conversationalAi.SendConversationMessageRequest} request
+     * @param {ConversationsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.conversations.sendMessage("conversation_id", {
+     *         input: [{
+     *                 type: "client_tool_result",
+     *                 toolCallId: "tool_call_id",
+     *                 result: "result",
+     *                 isError: true
+     *             }]
+     *     })
+     */
+    public sendMessage(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.SendConversationMessageRequest,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.ConversationTurn> {
+        return core.HttpResponsePromise.fromPromise(this.__sendMessage(conversation_id, request, requestOptions));
+    }
+
+    private async __sendMessage(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.SendConversationMessageRequest,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.ConversationTurn>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/messages`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.SendConversationMessageRequest.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.ConversationTurn.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/conversations/{conversation_id}/messages",
+        );
+    }
+
+    /**
+     * Send input to a conversation, and stream the events of the request as server-sent events. The last event is `stream_ended`, which has the outcome of the turn. This endpoint is in alpha and may change.
+     */
+    public sendMessageStream(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.SendConversationMessageStreamRequest,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): core.HttpResponsePromise<core.Stream<ElevenLabs.StreamEnvelope>> {
+        return core.HttpResponsePromise.fromPromise(this.__sendMessageStream(conversation_id, request, requestOptions));
+    }
+
+    private async __sendMessageStream(
+        conversation_id: string,
+        request: ElevenLabs.conversationalAi.SendConversationMessageStreamRequest,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<core.Stream<ElevenLabs.StreamEnvelope>>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)<ReadableStream>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/messages/stream`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                serializers.conversationalAi.SendConversationMessageStreamRequest.jsonOrThrow(request, {
+                    unrecognizedObjectKeys: "strip",
+                }),
+                requestOptions?.additionalBodyParameters,
+            ),
+            responseType: "sse",
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: new core.Stream({
+                    stream: _response.body,
+                    parse: async (data) => {
+                        return serializers.StreamEnvelope.parseOrThrow(data, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        });
+                    },
+                    signal: requestOptions?.abortSignal,
+                    eventShape: {
+                        type: "sse",
+                    },
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/convai/conversations/{conversation_id}/messages/stream",
+        );
+    }
+
+    /**
+     * Get the status and output of a turn. The status comes from the stored transcript, so a turn that failed after the agent started can show as completed. Only the `stream_ended` event has the real outcome. This endpoint is in alpha and may change.
+     *
+     * @param {string} conversation_id - The Conversation ID
+     * @param {string} turn_id - The Turn ID
+     * @param {ConversationsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link ElevenLabs.UnprocessableEntityError}
+     * @throws {@link errors.ElevenLabsError}
+     * @throws {@link errors.ElevenLabsTimeoutError}
+     *
+     * @example
+     *     await client.conversationalAi.conversations.getTurn("conversation_id", "turn_id")
+     */
+    public getTurn(
+        conversation_id: string,
+        turn_id: string,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): core.HttpResponsePromise<ElevenLabs.ConversationTurn> {
+        return core.HttpResponsePromise.fromPromise(this.__getTurn(conversation_id, turn_id, requestOptions));
+    }
+
+    private async __getTurn(
+        conversation_id: string,
+        turn_id: string,
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<ElevenLabs.ConversationTurn>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/turns/${core.url.encodePathParam(turn_id)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.ConversationTurn.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/conversations/{conversation_id}/turns/{turn_id}",
+        );
+    }
+
+    /**
+     * Stream the events of a turn as server-sent events. Send `Last-Event-ID` to resume after an event. The server keeps events for about an hour. This endpoint is in alpha and may change.
+     */
+    public streamTurnEvents(
+        conversation_id: string,
+        turn_id: string,
+        request: ElevenLabs.conversationalAi.ConversationsStreamTurnEventsRequest = {},
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): core.HttpResponsePromise<core.Stream<ElevenLabs.StreamEnvelope>> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__streamTurnEvents(conversation_id, turn_id, request, requestOptions),
+        );
+    }
+
+    private async __streamTurnEvents(
+        conversation_id: string,
+        turn_id: string,
+        request: ElevenLabs.conversationalAi.ConversationsStreamTurnEventsRequest = {},
+        requestOptions?: ConversationsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<core.Stream<ElevenLabs.StreamEnvelope>>> {
+        const { lastEventId } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Last-Event-ID": lastEventId,
+                "xi-api-key": requestOptions?.apiKey ?? this._options?.apiKey ?? process.env?.ELEVENLABS_API_KEY,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)<ReadableStream>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ElevenLabsEnvironment.Production,
+                `v1/convai/conversations/${core.url.encodePathParam(conversation_id)}/turns/${core.url.encodePathParam(turn_id)}/events`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            responseType: "sse",
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: new core.Stream({
+                    stream: _response.body,
+                    parse: async (data) => {
+                        return serializers.StreamEnvelope.parseOrThrow(data, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        });
+                    },
+                    signal: requestOptions?.abortSignal,
+                    eventShape: {
+                        type: "sse",
+                    },
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new ElevenLabs.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                default:
+                    throw new errors.ElevenLabsError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/convai/conversations/{conversation_id}/turns/{turn_id}/events",
         );
     }
 }

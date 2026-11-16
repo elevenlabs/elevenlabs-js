@@ -4,6 +4,8 @@ import type * as ElevenLabs from "../index";
 
 export interface TransferToNumberToolConfigInput {
     transfers: ElevenLabs.PhoneNumberTransfer[];
+    /** Per-provider transfer configuration. Mutually exclusive with `transfers`: a tool sets exactly one of the two. When present, the configuration matching the call's telephony provider is offered to the agent and executed. */
+    transferRules?: ElevenLabs.TransferRuleInput[];
     /** Whether to play a message to the client while they wait for transfer. Defaults to true for backward compatibility. */
     enableClientMessage?: boolean;
 }

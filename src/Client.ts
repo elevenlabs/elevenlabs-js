@@ -4,6 +4,7 @@ import { AssetsClient } from "./api/resources/assets/client/Client";
 import { AudioEffectsClient } from "./api/resources/audioEffects/client/Client";
 import { AudioIsolationClient } from "./api/resources/audioIsolation/client/Client";
 import { AudioNativeClient } from "./api/resources/audioNative/client/Client";
+import { ContentProvenanceClient } from "./api/resources/contentProvenance/client/Client";
 import { ConversationalAiClient } from "./api/resources/conversationalAi/client/Client";
 import { DubbingClient } from "./api/resources/dubbing/client/Client";
 import { EnvironmentsClient } from "./api/resources/environments/client/Client";
@@ -15,6 +16,7 @@ import { ModelsClient } from "./api/resources/models/client/Client";
 import { MusicClient } from "./api/resources/music/client/Client";
 import { ProductionsClient } from "./api/resources/productions/client/Client";
 import { PronunciationDictionariesClient } from "./api/resources/pronunciationDictionaries/client/Client";
+import { ReceptionClient } from "./api/resources/reception/client/Client";
 import { SamplesClient } from "./api/resources/samples/client/Client";
 import { ServiceAccountsClient } from "./api/resources/serviceAccounts/client/Client";
 import { SpeechEngineClient } from "./api/resources/speechEngine/client/Client";
@@ -59,6 +61,7 @@ export class ElevenLabsClient {
     protected _dubbing: DubbingClient | undefined;
     protected _models: ModelsClient | undefined;
     protected _audioNative: AudioNativeClient | undefined;
+    protected _contentProvenance: ContentProvenanceClient | undefined;
     protected _usage: UsageClient | undefined;
     protected _pronunciationDictionaries: PronunciationDictionariesClient | undefined;
     protected _workspace: WorkspaceClient | undefined;
@@ -74,6 +77,7 @@ export class ElevenLabsClient {
     protected _assets: AssetsClient | undefined;
     protected _flows: FlowsClient | undefined;
     protected _productions: ProductionsClient | undefined;
+    protected _reception: ReceptionClient | undefined;
     protected _tokens: TokensClient | undefined;
     protected _workspaces: WorkspacesClient | undefined;
 
@@ -141,6 +145,10 @@ export class ElevenLabsClient {
         return (this._audioNative ??= new AudioNativeClient(this._options));
     }
 
+    public get contentProvenance(): ContentProvenanceClient {
+        return (this._contentProvenance ??= new ContentProvenanceClient(this._options));
+    }
+
     public get usage(): UsageClient {
         return (this._usage ??= new UsageClient(this._options));
     }
@@ -199,6 +207,10 @@ export class ElevenLabsClient {
 
     public get productions(): ProductionsClient {
         return (this._productions ??= new ProductionsClient(this._options));
+    }
+
+    public get reception(): ReceptionClient {
+        return (this._reception ??= new ReceptionClient(this._options));
     }
 
     public get tokens(): TokensClient {

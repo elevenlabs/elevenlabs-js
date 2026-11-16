@@ -8,7 +8,7 @@ export interface AgentConversationTicketResponseModel {
     ownerUserId: string;
     agentId: string;
     needsClustering: boolean;
-    /** One-line headline for the ticket. None only on tickets created before titles existed. */
+    /** One-line headline for the agent issue. None only on issues created before titles existed. */
     title?: string;
     issueType?: ElevenLabs.AgentConversationTicketIssueType;
     labels: string[];
@@ -22,7 +22,7 @@ export interface AgentConversationTicketResponseModel {
     priority?: ElevenLabs.AgentConversationTicketPriority;
     priorityChanges: ElevenLabs.TicketPriorityChangeResponseModel[];
     statusChanges: ElevenLabs.TicketStatusChangeResponseModel[];
-    /** The ticket this one was merged into, set while its status is 'merged'. */
+    /** The agent issue this one was merged into, set while its status is 'merged'. */
     mergedIntoTicketId?: string;
     source: ElevenLabs.AgentConversationTicketSource;
     assigneeUserId?: string;

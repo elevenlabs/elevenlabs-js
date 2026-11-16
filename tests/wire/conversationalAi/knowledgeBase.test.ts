@@ -24,6 +24,7 @@ describe("KnowledgeBaseClient", () => {
                         access_source: "creator",
                     },
                     folder_parent_id: "folder_parent_id",
+                    chunking_override: {},
                     folder_path: [{ id: "id" }],
                     dependent_agents: [
                         { type: "available", id: "id", name: "name", created_at_unix_secs: 1, access_level: "admin" },
@@ -84,6 +85,7 @@ describe("KnowledgeBaseClient", () => {
                         accessSource: "creator",
                     },
                     folderParentId: "folder_parent_id",
+                    chunkingOverride: {},
                     folderPath: [
                         {
                             id: "id",
