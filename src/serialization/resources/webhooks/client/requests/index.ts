@@ -1,2 +1,3 @@
 export { BodyCreateWorkspaceWebhookV1WorkspaceWebhooksPost } from "./BodyCreateWorkspaceWebhookV1WorkspaceWebhooksPost";
+export { BodySendTestWebhookEventV1WorkspaceWebhooksWebhookIdTestPost } from "./BodySendTestWebhookEventV1WorkspaceWebhooksWebhookIdTestPost";
 export { BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch } from "./BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch";

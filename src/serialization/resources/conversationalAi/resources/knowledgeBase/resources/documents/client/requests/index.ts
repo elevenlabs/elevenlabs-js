@@ -6,3 +6,4 @@ export { BodyCreateUrlDocumentV1ConvaiKnowledgeBaseUrlPost } from "./BodyCreateU
 export { BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost } from "./BodyGetDependentAgentsForMultipleDocumentsV1ConvaiKnowledgeBaseDependentAgentsPost";
 export { BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost } from "./BodyMoveEntityToFolderV1ConvaiKnowledgeBaseDocumentIdMovePost";
 export { BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch } from "./BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch";
+export { UpdateDocumentChunkingOverrideRequestModel } from "./UpdateDocumentChunkingOverrideRequestModel";

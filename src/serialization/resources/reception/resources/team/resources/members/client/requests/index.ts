@@ -1,0 +1,1 @@
+export { BodySmbUpdateTeamMemberRole } from "./BodySmbUpdateTeamMemberRole";

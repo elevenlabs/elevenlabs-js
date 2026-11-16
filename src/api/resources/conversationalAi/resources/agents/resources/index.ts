@@ -14,6 +14,8 @@ export * as mergeProposals from "./mergeProposals";
 export * from "./mergeProposals/client/requests";
 export * as procedures from "./procedures";
 export * from "./procedures/client/requests";
+export * as subagents from "./subagents";
+export * from "./subagents/client/requests";
 export * as summaries from "./summaries";
 export * from "./summaries/client/requests";
 export * from "./summaries/types";

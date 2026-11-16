@@ -20,4 +20,6 @@ export interface BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch {
     requestHeaders?: Record<string, string | undefined>;
     /** The complete set of workspace-level events this webhook should be subscribed to. The webhook is added to the events in the list and removed from any not in the list. Omit to leave the current event subscriptions unchanged. */
     events?: ElevenLabs.WorkspaceWebhookEventType[];
+    /** Field names whose values the delivery log hides when it shows the request payload, matched at any depth, ignoring case and punctuation such as _ or -. Fields with secret-looking names, such as tokens and passwords, are always hidden. The stored log and redeliveries keep the original values. At most 50 names, each 1 to 128 characters, with no whitespace, dots or wildcards. */
+    logRedactedFields?: string[];
 }

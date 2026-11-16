@@ -7,4 +7,5 @@ export interface ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetai
     credentialId: string;
     integrationConnectionId: string;
     webhookDetails: ElevenLabs.ConversationHistoryTranscriptToolCallWebhookDetails;
+    functionDetails?: ElevenLabs.ConversationHistoryTranscriptToolCallIntegrationFunctionDetails;
 }

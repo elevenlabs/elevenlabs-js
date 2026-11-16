@@ -30,6 +30,10 @@ export const ProcedureRefResponseModel: core.serialization.ObjectSchema<
         "referenced_dynamic_variables",
         core.serialization.list(core.serialization.string()).optional(),
     ),
+    writtenDynamicVariables: core.serialization.property(
+        "written_dynamic_variables",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
     folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
 });
 
@@ -44,6 +48,7 @@ export declare namespace ProcedureRefResponseModel {
         referenced_kb_ids?: string[] | null;
         referenced_procedure_ids?: string[] | null;
         referenced_dynamic_variables?: string[] | null;
+        written_dynamic_variables?: string[] | null;
         folder_parent_id?: string | null;
     }
 }

@@ -7,6 +7,6 @@
  *     }
  */
 export interface MergeAgentConversationTicketsRequestModel {
-    /** Open tickets of the same agent to fold into this one. They are kept with status 'merged', pointing at this ticket. */
+    /** Open issues of the same agent to fold into this one. They are kept with status 'merged', pointing at this issue. */
     sourceTicketIds: string[];
 }

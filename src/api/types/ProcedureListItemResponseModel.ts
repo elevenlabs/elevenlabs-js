@@ -23,6 +23,8 @@ export interface ProcedureListItemResponseModel {
     referencedProcedureIds?: string[];
     /** Dynamic variable names used in the procedure content */
     referencedDynamicVariables?: string[];
+    /** Dynamic variable names written by Update state steps */
+    writtenDynamicVariables?: string[];
     /** Procedure ID of the folder this procedure is placed in. None means root. */
     folderParentId?: string;
 }

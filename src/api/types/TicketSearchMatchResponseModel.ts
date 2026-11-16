@@ -3,7 +3,7 @@
 import type * as ElevenLabs from "../index";
 
 export interface TicketSearchMatchResponseModel {
-    /** Which of the ticket's texts matched. */
+    /** Which of the agent issue's texts matched. */
     field: ElevenLabs.TicketSearchMatchField;
     /** Whitespace-collapsed excerpt around the match, with an ellipsis where it was cut. */
     snippet: string;

@@ -711,6 +711,7 @@ describe("AgentsClient", () => {
                         additional_tool_ids: ["additional_tool_ids"],
                         label: "label",
                         entry_behavior: "generate_immediately",
+                        allow_interruptions_on_entry: true,
                     },
                     failure_node: {
                         type: "override_agent",
@@ -917,6 +918,7 @@ describe("AgentsClient", () => {
                         additional_tool_ids: ["additional_tool_ids"],
                         label: "label",
                         entry_behavior: "generate_immediately",
+                        allow_interruptions_on_entry: true,
                     },
                     start_node: { type: "start", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_conversation: {
@@ -1124,6 +1126,7 @@ describe("AgentsClient", () => {
                         additional_tool_ids: ["additional_tool_ids"],
                         label: "label",
                         entry_behavior: "generate_immediately",
+                        allow_interruptions_on_entry: true,
                     },
                     success_end: {
                         type: "end",
@@ -1139,6 +1142,15 @@ describe("AgentsClient", () => {
                         sip_refer_play_dialtone: true,
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
+                        provider_configs: [
+                            {
+                                type: "exotel",
+                                config: {
+                                    type: "exotel_cold_blind_transfer",
+                                    transfer_destination: { type: "phone", destination: "destination" },
+                                },
+                            },
+                        ],
                         uui: null,
                         post_dial_digits: null,
                     },
@@ -1193,6 +1205,7 @@ describe("AgentsClient", () => {
                     referenced_kb_ids: ["kb_123"],
                     referenced_procedure_ids: ["agtprc_other"],
                     referenced_dynamic_variables: ["customer_id"],
+                    written_dynamic_variables: ["written_dynamic_variables"],
                     folder_parent_id: "folder_parent_id",
                 },
             },
@@ -2110,6 +2123,7 @@ describe("AgentsClient", () => {
                         additionalToolIds: ["additional_tool_ids"],
                         label: "label",
                         entryBehavior: "generate_immediately",
+                        allowInterruptionsOnEntry: true,
                     },
                     failure_node: {
                         type: "override_agent",
@@ -2352,6 +2366,7 @@ describe("AgentsClient", () => {
                         additionalToolIds: ["additional_tool_ids"],
                         label: "label",
                         entryBehavior: "generate_immediately",
+                        allowInterruptionsOnEntry: true,
                     },
                     start_node: {
                         type: "start",
@@ -2602,6 +2617,7 @@ describe("AgentsClient", () => {
                         additionalToolIds: ["additional_tool_ids"],
                         label: "label",
                         entryBehavior: "generate_immediately",
+                        allowInterruptionsOnEntry: true,
                     },
                     success_end: {
                         type: "end",
@@ -2632,6 +2648,18 @@ describe("AgentsClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        providerConfigs: [
+                            {
+                                type: "exotel",
+                                config: {
+                                    type: "exotel_cold_blind_transfer",
+                                    transferDestination: {
+                                        type: "phone",
+                                        destination: "destination",
+                                    },
+                                },
+                            },
+                        ],
                     },
                     success_transfer: {
                         type: "standalone_agent",
@@ -2697,6 +2725,7 @@ describe("AgentsClient", () => {
                     referencedKbIds: ["kb_123"],
                     referencedProcedureIds: ["agtprc_other"],
                     referencedDynamicVariables: ["customer_id"],
+                    writtenDynamicVariables: ["written_dynamic_variables"],
                     folderParentId: "folder_parent_id",
                 },
             },
@@ -3404,6 +3433,7 @@ describe("AgentsClient", () => {
                         additional_tool_ids: ["additional_tool_ids"],
                         label: "label",
                         entry_behavior: "generate_immediately",
+                        allow_interruptions_on_entry: true,
                     },
                     failure_node: {
                         type: "override_agent",
@@ -3610,6 +3640,7 @@ describe("AgentsClient", () => {
                         additional_tool_ids: ["additional_tool_ids"],
                         label: "label",
                         entry_behavior: "generate_immediately",
+                        allow_interruptions_on_entry: true,
                     },
                     start_node: { type: "start", position: { x: 1.1, y: 1.1 }, edge_order: ["edge_order"] },
                     success_conversation: {
@@ -3817,6 +3848,7 @@ describe("AgentsClient", () => {
                         additional_tool_ids: ["additional_tool_ids"],
                         label: "label",
                         entry_behavior: "generate_immediately",
+                        allow_interruptions_on_entry: true,
                     },
                     success_end: {
                         type: "end",
@@ -3832,6 +3864,15 @@ describe("AgentsClient", () => {
                         sip_refer_play_dialtone: true,
                         position: { x: 1.1, y: 1.1 },
                         edge_order: ["edge_order"],
+                        provider_configs: [
+                            {
+                                type: "exotel",
+                                config: {
+                                    type: "exotel_cold_blind_transfer",
+                                    transfer_destination: { type: "phone", destination: "destination" },
+                                },
+                            },
+                        ],
                         uui: null,
                         post_dial_digits: null,
                     },
@@ -3886,6 +3927,7 @@ describe("AgentsClient", () => {
                     referenced_kb_ids: ["kb_123"],
                     referenced_procedure_ids: ["agtprc_other"],
                     referenced_dynamic_variables: ["customer_id"],
+                    written_dynamic_variables: ["written_dynamic_variables"],
                     folder_parent_id: "folder_parent_id",
                 },
             },
@@ -4804,6 +4846,7 @@ describe("AgentsClient", () => {
                         additionalToolIds: ["additional_tool_ids"],
                         label: "label",
                         entryBehavior: "generate_immediately",
+                        allowInterruptionsOnEntry: true,
                     },
                     failure_node: {
                         type: "override_agent",
@@ -5046,6 +5089,7 @@ describe("AgentsClient", () => {
                         additionalToolIds: ["additional_tool_ids"],
                         label: "label",
                         entryBehavior: "generate_immediately",
+                        allowInterruptionsOnEntry: true,
                     },
                     start_node: {
                         type: "start",
@@ -5296,6 +5340,7 @@ describe("AgentsClient", () => {
                         additionalToolIds: ["additional_tool_ids"],
                         label: "label",
                         entryBehavior: "generate_immediately",
+                        allowInterruptionsOnEntry: true,
                     },
                     success_end: {
                         type: "end",
@@ -5326,6 +5371,18 @@ describe("AgentsClient", () => {
                             y: 1.1,
                         },
                         edgeOrder: ["edge_order"],
+                        providerConfigs: [
+                            {
+                                type: "exotel",
+                                config: {
+                                    type: "exotel_cold_blind_transfer",
+                                    transferDestination: {
+                                        type: "phone",
+                                        destination: "destination",
+                                    },
+                                },
+                            },
+                        ],
                     },
                     success_transfer: {
                         type: "standalone_agent",
@@ -5391,6 +5448,7 @@ describe("AgentsClient", () => {
                     referencedKbIds: ["kb_123"],
                     referencedProcedureIds: ["agtprc_other"],
                     referencedDynamicVariables: ["customer_id"],
+                    writtenDynamicVariables: ["written_dynamic_variables"],
                     folderParentId: "folder_parent_id",
                 },
             },

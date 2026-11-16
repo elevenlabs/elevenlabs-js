@@ -9,10 +9,10 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface CreateManualTicketRequestModel {
-    /** One-line headline shown in the triage list. Defaults to one derived from qa_comment. */
+    /** One-line headline shown in the issues list. Defaults to one derived from qa_comment. */
     title?: string;
-    /** What the ticket is about, e.g. a follow-up task for the agent. */
+    /** What the agent issue is about, e.g. a follow-up task for the agent. */
     qaComment: string;
-    /** How urgently the ticket needs attention. */
+    /** How urgently the agent issue needs attention. */
     priority?: ElevenLabs.AgentConversationTicketPriority;
 }

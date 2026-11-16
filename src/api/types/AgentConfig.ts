@@ -16,6 +16,8 @@ export interface AgentConfig {
     maxConversationDurationMessage?: string;
     /** Per-channel response behavior overrides for text conversations. Built-in channel defaults apply when unset. */
     textBehaviorOverrides?: Record<string, ElevenLabs.BehaviorOverride | undefined>;
+    /** Agents this agent can hand a single turn to. They don't see this conversation. */
+    subagentConfig?: ElevenLabs.SubagentConfigOutput;
     /** The prompt for the agent */
     prompt?: ElevenLabs.PromptAgentApiModelOutput;
 }

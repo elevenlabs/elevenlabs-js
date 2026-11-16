@@ -110,6 +110,7 @@ describe("DocumentsClient", () => {
                 access_source: "creator",
             },
             folder_parent_id: "folder_parent_id",
+            chunking_override: { max_chunk_size: 1, overlap_percentage: 1, custom_separators: ["custom_separators"] },
             folder_path: [{ id: "id", name: "name" }],
             url: "url",
             extracted_inner_html: "extracted_inner_html",
@@ -147,6 +148,11 @@ describe("DocumentsClient", () => {
                 accessSource: "creator",
             },
             folderParentId: "folder_parent_id",
+            chunkingOverride: {
+                maxChunkSize: 1,
+                overlapPercentage: 1,
+                customSeparators: ["custom_separators"],
+            },
             folderPath: [
                 {
                     id: "id",
@@ -206,6 +212,7 @@ describe("DocumentsClient", () => {
                 access_source: "creator",
             },
             folder_parent_id: "folder_parent_id",
+            chunking_override: { max_chunk_size: 1, overlap_percentage: 1, custom_separators: ["custom_separators"] },
             folder_path: [{ id: "id", name: "name" }],
             url: "url",
             extracted_inner_html: "extracted_inner_html",
@@ -242,6 +249,11 @@ describe("DocumentsClient", () => {
                 accessSource: "creator",
             },
             folderParentId: "folder_parent_id",
+            chunkingOverride: {
+                maxChunkSize: 1,
+                overlapPercentage: 1,
+                customSeparators: ["custom_separators"],
+            },
             folderPath: [
                 {
                     id: "id",
@@ -257,6 +269,79 @@ describe("DocumentsClient", () => {
                 consecFailures: 1,
                 nextRefreshBy: 1,
             },
+        });
+    });
+
+    test("get_chunking_override", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            id: "21m00Tcm4TlvDq8ikWAM",
+            chunking_override: { max_chunk_size: 800, overlap_percentage: 15, custom_separators: ["\n### "] },
+            effective_chunking_override: { max_chunk_size: 800, overlap_percentage: 15, custom_separators: ["\n### "] },
+            inherited_chunking_override: { max_chunk_size: 500, overlap_percentage: 10, custom_separators: ["\n## "] },
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/chunking-override")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response =
+            await client.conversationalAi.knowledgeBase.documents.getChunkingOverride("21m00Tcm4TlvDq8ikWAM");
+        expect(response).toEqual({
+            id: "21m00Tcm4TlvDq8ikWAM",
+            chunkingOverride: {
+                maxChunkSize: 800,
+                overlapPercentage: 15,
+                customSeparators: ["\n### "],
+            },
+            effectiveChunkingOverride: {
+                maxChunkSize: 800,
+                overlapPercentage: 15,
+                customSeparators: ["\n### "],
+            },
+            inheritedChunkingOverride: {
+                maxChunkSize: 500,
+                overlapPercentage: 10,
+                customSeparators: ["\n## "],
+            },
+        });
+    });
+
+    test("update_chunking_override", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            id: "21m00Tcm4TlvDq8ikWAM",
+            chunking_override: { max_chunk_size: 800, overlap_percentage: 10, custom_separators: ["\n## "] },
+            reindex_queued: true,
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/v1/convai/knowledge-base/21m00Tcm4TlvDq8ikWAM/chunking-override")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response =
+            await client.conversationalAi.knowledgeBase.documents.updateChunkingOverride("21m00Tcm4TlvDq8ikWAM");
+        expect(response).toEqual({
+            id: "21m00Tcm4TlvDq8ikWAM",
+            chunkingOverride: {
+                maxChunkSize: 800,
+                overlapPercentage: 10,
+                customSeparators: ["\n## "],
+            },
+            reindexQueued: true,
         });
     });
 

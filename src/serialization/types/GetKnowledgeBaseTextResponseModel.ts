@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ChunkingOverride } from "./ChunkingOverride";
 import { ContentFormat } from "./ContentFormat";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { KnowledgeBaseDocumentMetadataResponseModel } from "./KnowledgeBaseDocumentMetadataResponseModel";
@@ -19,6 +20,7 @@ export const GetKnowledgeBaseTextResponseModel: core.serialization.ObjectSchema<
     supportedUsages: core.serialization.property("supported_usages", core.serialization.list(DocumentUsageModeEnum)),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
     folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
+    chunkingOverride: core.serialization.property("chunking_override", ChunkingOverride.optional()),
     folderPath: core.serialization.property(
         "folder_path",
         core.serialization.list(KnowledgeBaseFolderPathSegmentResponseModel).optional(),
@@ -35,6 +37,7 @@ export declare namespace GetKnowledgeBaseTextResponseModel {
         supported_usages: DocumentUsageModeEnum.Raw[];
         access_info: ResourceAccessInfo.Raw;
         folder_parent_id?: string | null;
+        chunking_override?: ChunkingOverride.Raw | null;
         folder_path?: KnowledgeBaseFolderPathSegmentResponseModel.Raw[] | null;
         extracted_inner_html: string;
         content_format?: ContentFormat.Raw | null;

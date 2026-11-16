@@ -25,7 +25,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * List an agent's conversation triage tickets, ordered by most recently created first unless sorted by priority. These are tickets about the agent's own performance on a conversation (for triage with Architect), not tickets an agent opens for end users.
+     * List an agent's issues, ordered by most recently created first unless sorted by priority. These are issues about the agent's own performance on a conversation (to work on with Architect), not tickets an agent opens for end users.
      *
      * @param {string} agent_id
      * @param {ElevenLabs.conversationalAi.TriageTicketsListRequest} request
@@ -183,7 +183,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Manually raise a follow-up ticket against an agent, not tied to any conversation (for example a task like 'add the KB about X'). Without a title, one is derived from the comment. Requires viewer access to the agent.
+     * Manually raise a follow-up issue against an agent, not tied to any conversation (for example a task like 'add the KB about X'). Without a title, one is derived from the comment. Requires viewer access to the agent.
      *
      * @param {string} agent_id
      * @param {ElevenLabs.conversationalAi.CreateManualTicketRequestModel} request
@@ -276,7 +276,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller). Supports the same filters, sorting and search as the per-agent endpoint. Tickets for agents the caller cannot access are omitted.
+     * List agent issues across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, issues assigned to the caller). Supports the same filters, sorting and search as the per-agent endpoint. Issues for agents the caller cannot access are omitted.
      *
      * @param {ElevenLabs.conversationalAi.TriageTicketsListForWorkspaceRequest} request
      * @param {TriageTicketsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -426,7 +426,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Raise a ticket about an agent's performance on a conversation, for triage with Architect. Provide an overall comment and/or turn-level comments describing what went wrong.
+     * Raise an issue about an agent's performance on a conversation, to work on with Architect. Provide an overall comment and/or turn-level comments describing what went wrong.
      *
      * @param {ElevenLabs.conversationalAi.CreateAgentConversationTicketRequestModel} request
      * @param {TriageTicketsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -594,7 +594,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Get an agent conversation ticket by ID.
+     * Get an agent issue by ID.
      *
      * @param {string} agentqa_ticket_id
      * @param {TriageTicketsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -674,7 +674,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Delete an agent conversation ticket. Restricted to the ticket creator or a workspace admin.
+     * Delete an agent issue. Restricted to the issue creator or a workspace admin.
      *
      * @param {string} agentqa_ticket_id
      * @param {TriageTicketsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -746,7 +746,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Update a ticket's title, comment, status, priority, and/or assignee. Requires viewer access to the ticket's agent.
+     * Update an agent issue's title, comment, status, priority, and/or assignee. Requires viewer access to the issue's agent.
      *
      * @param {string} agentqa_ticket_id
      * @param {ElevenLabs.conversationalAi.PatchAgentConversationTicketRequestModel} request
@@ -837,7 +837,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Append a comment discussing how to resolve the ticket. Requires viewer access to the ticket's agent.
+     * Append a comment discussing how to resolve the agent issue. Requires viewer access to the issue's agent.
      *
      * @param {string} agentqa_ticket_id
      * @param {ElevenLabs.conversationalAi.AddTicketCommentRequestModel} request
@@ -930,7 +930,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Merge other open tickets of the same agent into this pending, in-progress, or resolved one. Their conversations move onto this ticket, its priority is raised to the highest among them, and they are kept with status 'merged'. Requires viewer access to the ticket's agent.
+     * Merge other open issues of the same agent into this pending, in-progress, or resolved one. Their conversations move onto this issue, its priority is raised to the highest among them, and they are kept with status 'merged'. Requires viewer access to the issue's agent.
      *
      * @param {string} agentqa_ticket_id
      * @param {ElevenLabs.conversationalAi.MergeAgentConversationTicketsRequestModel} request
@@ -1023,7 +1023,7 @@ export class TriageTicketsClient {
     }
 
     /**
-     * Append a turn-level comment to a ticket. Requires viewer access to the ticket's agent.
+     * Append a turn-level comment to an agent issue. Requires viewer access to the issue's agent.
      *
      * @param {string} agentqa_ticket_id
      * @param {ElevenLabs.conversationalAi.AddTurnCommentRequestModel} request

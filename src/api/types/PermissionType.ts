@@ -31,6 +31,7 @@ export const PermissionType = {
     ConvaiRead: "convai_read",
     ConvaiWrite: "convai_write",
     AgentsArchitect: "agents_architect",
+    AgentsEnvironmentVariablesWrite: "agents_environment_variables_write",
     MusicGeneration: "music_generation",
     ImageVideoGeneration: "image_video_generation",
     Flows: "flows",
@@ -53,5 +54,6 @@ export const PermissionType = {
     ConversationPrivacyManage: "conversation_privacy_manage",
     CopyResourcesCrossWorkspace: "copy_resources_cross_workspace",
     SynthidDetector: "synthid_detector",
+    Watermark: "watermark",
 } as const;
 export type PermissionType = (typeof PermissionType)[keyof typeof PermissionType];

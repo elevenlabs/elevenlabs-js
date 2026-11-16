@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { BehaviorOverride } from "./BehaviorOverride";
 import { PromptAgentApiModelOutput } from "./PromptAgentApiModelOutput";
+import { SubagentConfigOutput } from "./SubagentConfigOutput";
 
 export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfig.Raw, ElevenLabs.AgentConfig> =
     core.serialization.object({
@@ -24,6 +25,7 @@ export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfi
             "text_behavior_overrides",
             core.serialization.record(core.serialization.string(), BehaviorOverride.optional()).optional(),
         ),
+        subagentConfig: core.serialization.property("subagent_config", SubagentConfigOutput.optional()),
         prompt: PromptAgentApiModelOutput.optional(),
     });
 
@@ -36,6 +38,7 @@ export declare namespace AgentConfig {
         disable_first_message_interruptions?: boolean | null;
         max_conversation_duration_message?: string | null;
         text_behavior_overrides?: Record<string, BehaviorOverride.Raw | null | undefined> | null;
+        subagent_config?: SubagentConfigOutput.Raw | null;
         prompt?: PromptAgentApiModelOutput.Raw | null;
     }
 }

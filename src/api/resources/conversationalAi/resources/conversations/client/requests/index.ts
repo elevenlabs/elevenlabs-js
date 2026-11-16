@@ -5,3 +5,7 @@ export type { ConversationsGetSummaryRequest } from "./ConversationsGetSummaryRe
 export type { ConversationsGetWebrtcTokenRequest } from "./ConversationsGetWebrtcTokenRequest";
 export type { ConversationsListRequest } from "./ConversationsListRequest";
 export type { ConversationsResolveRequest } from "./ConversationsResolveRequest";
+export type { ConversationsStreamTurnEventsRequest } from "./ConversationsStreamTurnEventsRequest";
+export type { CreateAgentConversationRequest } from "./CreateAgentConversationRequest";
+export type { SendConversationMessageRequest } from "./SendConversationMessageRequest";
+export type { SendConversationMessageStreamRequest } from "./SendConversationMessageStreamRequest";
