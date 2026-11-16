@@ -1,0 +1,168 @@
+import { describe, expect, it, jest } from "@jest/globals";
+import { EventEmitter } from "events";
+import { ElevenLabsClient } from "../../src";
+import { AudioInterface, Conversation } from "../../src/api/resources/conversationalAi/conversation";
+import type { WebSocketInterface } from "../../src/api/resources/conversationalAi/conversation/interfaces/WebSocketInterface";
+
+class FakeSocket extends EventEmitter implements WebSocketInterface {
+    readyState = 1;
+    send = jest.fn((_data: string) => {});
+    close = jest.fn(() => {
+        this.readyState = 3;
+    });
+
+    serverClose(code: number, reason: string): void {
+        this.readyState = 3;
+        this.emit("close", code, Buffer.from(reason));
+    }
+}
+
+class FakeAudio extends AudioInterface {
+    input?: (audio: Buffer) => void;
+    start(inputCallback: (audio: Buffer) => void): void {
+        this.input = inputCallback;
+    }
+    stop(): void {
+        this.input = undefined;
+    }
+    output(): void {}
+    interrupt(): void {}
+}
+
+async function startConversation() {
+    const socket = new FakeSocket();
+    const audio = new FakeAudio();
+    const conversation = new Conversation({
+        client: new ElevenLabsClient({ apiKey: "test" }),
+        webSocketFactory: { create: () => socket },
+        agentId: "agent_1",
+        requiresAuth: false,
+        audioInterface: audio,
+    });
+    const sessionEnded = jest.fn();
+    conversation.on("session_ended", sessionEnded);
+    const started = conversation.startSession();
+    socket.emit("open");
+    await started;
+    socket.emit(
+        "message",
+        JSON.stringify({
+            type: "conversation_initiation_metadata",
+            conversation_initiation_metadata_event: { conversation_id: "conv_1" },
+        }),
+    );
+    return { conversation, socket, audio, sessionEnded };
+}
+
+describe("Conversation session end", () => {
+    it("emits session_ended once however many times endSession is called", async () => {
+        const { conversation, socket, sessionEnded } = await startConversation();
+
+        conversation.endSession();
+        conversation.endSession();
+        socket.serverClose(1000, "");
+        conversation.endSession();
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+    });
+
+    it("emits session_ended once when the socket closes synchronously inside endSession", async () => {
+        const { conversation, socket, sessionEnded } = await startConversation();
+        socket.close.mockImplementation(() => socket.serverClose(1000, "Normal closure"));
+
+        conversation.endSession();
+        conversation.endSession();
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not emit session_ended again when endSession follows a server close", async () => {
+        const { conversation, socket, audio, sessionEnded } = await startConversation();
+
+        socket.serverClose(1000, "bye");
+        conversation.endSession();
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1000, "bye", expect.anything());
+        expect(audio.input).toBeUndefined();
+    });
+
+    it("reports the user as having ended a session ended with endSession", async () => {
+        const { conversation, socket, sessionEnded } = await startConversation();
+
+        conversation.endSession();
+        socket.serverClose(1000, "");
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", undefined, undefined, { reason: "user" });
+    });
+
+    it("reports the agent as having ended a session after an end_call", async () => {
+        const { conversation, socket, sessionEnded } = await startConversation();
+
+        socket.emit(
+            "message",
+            JSON.stringify({
+                type: "agent_tool_response",
+                agent_tool_response: { tool_name: "end_call", tool_call_id: "t1", tool_type: "system" },
+            }),
+        );
+        socket.serverClose(1000, "");
+        conversation.endSession();
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1000, "", {
+            reason: "agent",
+            closeCode: 1000,
+            closeReason: "",
+        });
+    });
+
+    it("reports an error as having ended a session the server closed abnormally", async () => {
+        const { socket, sessionEnded } = await startConversation();
+
+        socket.serverClose(1011, "internal error");
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1011, "internal error", {
+            reason: "error",
+            message: "WebSocket closed with code 1011",
+            closeCode: 1011,
+            closeReason: "internal error",
+        });
+    });
+
+    it("reports an error as having ended a session after a socket error", async () => {
+        const { conversation, socket, sessionEnded } = await startConversation();
+        conversation.on("error", () => {});
+
+        socket.emit("error", new Error("read ECONNRESET"));
+        socket.serverClose(1006, "");
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", 1006, "", {
+            reason: "error",
+            message: "read ECONNRESET",
+            closeCode: 1006,
+            closeReason: "",
+        });
+    });
+
+    it("reports an error as having ended a session when sending audio fails", async () => {
+        const { socket, audio, sessionEnded } = await startConversation();
+        const consoleError = jest.spyOn(console, "error").mockImplementation(() => {});
+        socket.send.mockImplementation(() => {
+            throw new Error("socket write failed");
+        });
+
+        audio.input?.(Buffer.from([1, 2, 3]));
+        socket.serverClose(1000, "");
+        consoleError.mockRestore();
+
+        expect(sessionEnded).toHaveBeenCalledTimes(1);
+        expect(sessionEnded).toHaveBeenCalledWith("conv_1", undefined, undefined, {
+            reason: "error",
+            message: "socket write failed",
+        });
+    });
+});
