@@ -1,4 +1,5 @@
 import { SpeechEngineClient } from "../../../src/api/resources/speechEngine/client/Client";
+import { ElevenLabsClient } from "../../../src/wrapper/ElevenLabsClient";
 import { SpeechEngineClientWrapper } from "../../../src/wrapper/speech-engine/SpeechEngineClientWrapper";
 import { SpeechEngineResource } from "../../../src/wrapper/speech-engine/SpeechEngineResource";
 
@@ -59,5 +60,33 @@ describe("SpeechEngineClientWrapper", () => {
             expect(result).toBeInstanceOf(SpeechEngineResource);
             expect(result.engineId).toBe("seng_copy");
         });
+    });
+
+    describe("list and delete", () => {
+        it("returns the generated client promises without awaiting them", () => {
+            const wrapper = new SpeechEngineClientWrapper(TEST_OPTIONS);
+            const listPromise = Promise.resolve({ speechEngines: [] });
+            const deletePromise = Promise.resolve(undefined);
+            jest.spyOn(SpeechEngineClient.prototype, "list").mockReturnValue(
+                listPromise as unknown as ReturnType<SpeechEngineClient["list"]>,
+            );
+            jest.spyOn(SpeechEngineClient.prototype, "delete").mockReturnValue(
+                deletePromise as unknown as ReturnType<SpeechEngineClient["delete"]>,
+            );
+
+            expect(wrapper.list()).toBe(listPromise);
+            expect(wrapper.delete("seng_abc")).toBe(deletePromise);
+        });
+    });
+});
+
+describe("ElevenLabsClient.speechEngine", () => {
+    it("returns the wrapper and reuses the same instance", () => {
+        const client = new ElevenLabsClient({ apiKey: "test-key" });
+        const engine = client.speechEngine;
+
+        expect(engine).toBeInstanceOf(SpeechEngineClientWrapper);
+        expect(engine).not.toBeInstanceOf(SpeechEngineClient);
+        expect(client.speechEngine).toBe(engine);
     });
 });

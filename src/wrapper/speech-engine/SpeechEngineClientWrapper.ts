@@ -1,18 +1,33 @@
 import type { Server as HttpServer } from "node:http";
-import type { CreateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/CreateSpeechEngineRequest";
-import type { UpdateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/UpdateSpeechEngineRequest";
 import { SpeechEngineClient } from "../../api/resources/speechEngine/client/Client";
+import type { CreateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/CreateSpeechEngineRequest";
+import type { SpeechEngineListRequest } from "../../api/resources/speechEngine/client/requests/SpeechEngineListRequest";
+import type { UpdateSpeechEngineRequest } from "../../api/resources/speechEngine/client/requests/UpdateSpeechEngineRequest";
 import type { DuplicateSpeechEngineRequest } from "../../api/types/DuplicateSpeechEngineRequest";
+import type { ListSpeechEnginesResponse } from "../../api/types/ListSpeechEnginesResponse";
+import type { NormalizedClientOptions } from "../../BaseClient";
+import type * as core from "../../core";
 import type { SpeechEngineAttachment } from "./SpeechEngineAttachment";
 import { SpeechEngineResource } from "./SpeechEngineResource";
 import type { SpeechEngineCallbacks } from "./types";
 
 /**
+ * Subclass used only to read protected `_options`. It does not override any
+ * generated methods, so it stays assignable to `SpeechEngineClient` and does
+ * not appear as an illegal override in the published declarations.
+ */
+class SpeechEngineClientInternal extends SpeechEngineClient {
+    public options(): NormalizedClientOptions<SpeechEngineClient.Options> {
+        return this._options;
+    }
+}
+
+/**
  * Client for the Speech Engine resource. Accessible via `elevenlabs.speechEngine`.
  *
- * Extends the Fern-generated `SpeechEngineClient` with WebSocket integration
- * methods. `list` and `delete` are inherited from the generated client.
- * `create`, `get`, `update`, and `duplicate` are overridden to return a `SpeechEngineResource`
+ * Wraps the Fern-generated `SpeechEngineClient` with WebSocket integration
+ * methods. `list` and `delete` return the generated client's promises.
+ * `create`, `get`, `update`, and `duplicate` return a `SpeechEngineResource`
  * with WebSocket server setup methods.
  *
  * @example
@@ -29,7 +44,26 @@ import type { SpeechEngineCallbacks } from "./types";
  * });
  * ```
  */
-export class SpeechEngineClientWrapper extends SpeechEngineClient {
+export class SpeechEngineClientWrapper {
+    private readonly inner: SpeechEngineClientInternal;
+
+    constructor(options: SpeechEngineClient.Options = {}) {
+        this.inner = new SpeechEngineClientInternal(options);
+    }
+
+    /**
+     * Returns a paginated list of Speech Engine resources.
+     *
+     * @param {ElevenLabs.SpeechEngineListRequest} request
+     * @param {SpeechEngineClient.RequestOptions} requestOptions - Request-specific configuration.
+     */
+    public list(
+        request: SpeechEngineListRequest = {},
+        requestOptions?: SpeechEngineClient.RequestOptions,
+    ): core.HttpResponsePromise<ListSpeechEnginesResponse> {
+        return this.inner.list(request, requestOptions);
+    }
+
     /**
      * Create a Speech Engine and return a `SpeechEngineResource`.
      *
@@ -50,13 +84,12 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      * });
      * ```
      */
-    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<SpeechEngineResponse>
     public async create(
         request: CreateSpeechEngineRequest,
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<SpeechEngineResource> {
-        const response = await super.create(request, requestOptions);
-        return new SpeechEngineResource(response.speechEngineId, this._options, response);
+        const response = await this.inner.create(request, requestOptions);
+        return new SpeechEngineResource(response.speechEngineId, this.inner.options(), response);
     }
 
     /**
@@ -76,13 +109,12 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      * });
      * ```
      */
-    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<SpeechEngineResponse>
     public async get(
         speechEngineId: string,
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<SpeechEngineResource> {
-        const response = await super.get(speechEngineId, requestOptions);
-        return new SpeechEngineResource(speechEngineId, this._options, response);
+        const response = await this.inner.get(speechEngineId, requestOptions);
+        return new SpeechEngineResource(speechEngineId, this.inner.options(), response);
     }
 
     /**
@@ -102,24 +134,35 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      * });
      * ```
      */
-    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<SpeechEngineResponse>
     public async update(
         speechEngineId: string,
         request: UpdateSpeechEngineRequest = {},
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<SpeechEngineResource> {
-        const response = await super.update(speechEngineId, request, requestOptions);
-        return new SpeechEngineResource(speechEngineId, this._options, response);
+        const response = await this.inner.update(speechEngineId, request, requestOptions);
+        return new SpeechEngineResource(speechEngineId, this.inner.options(), response);
     }
 
-    // @ts-expect-error — intentionally returns SpeechEngineResource instead of HttpResponsePromise<SpeechEngineResponse>
     public async duplicate(
         speechEngineId: string,
         request?: DuplicateSpeechEngineRequest,
         requestOptions?: SpeechEngineClient.RequestOptions,
     ): Promise<SpeechEngineResource> {
-        const response = await super.duplicate(speechEngineId, request, requestOptions);
-        return new SpeechEngineResource(response.speechEngineId, this._options, response);
+        const response = await this.inner.duplicate(speechEngineId, request, requestOptions);
+        return new SpeechEngineResource(response.speechEngineId, this.inner.options(), response);
+    }
+
+    /**
+     * Delete a Speech Engine resource.
+     *
+     * @param {string} speechEngineId - The speech engine ID (accepts seng_ or agent_ prefix)
+     * @param {SpeechEngineClient.RequestOptions} requestOptions - Request-specific configuration.
+     */
+    public delete(
+        speechEngineId: string,
+        requestOptions?: SpeechEngineClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return this.inner.delete(speechEngineId, requestOptions);
     }
 
     /**
@@ -136,12 +179,12 @@ export class SpeechEngineClientWrapper extends SpeechEngineClient {
      * });
      * ```
      */
-    attach(
+    public attach(
         engineId: string,
         httpServer: HttpServer,
         path: string,
         handler: SpeechEngineCallbacks,
     ): SpeechEngineAttachment {
-        return new SpeechEngineResource(engineId, this._options).attach(httpServer, path, handler);
+        return new SpeechEngineResource(engineId, this.inner.options()).attach(httpServer, path, handler);
     }
 }

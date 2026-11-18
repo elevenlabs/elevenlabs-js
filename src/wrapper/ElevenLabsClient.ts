@@ -18,11 +18,10 @@ export declare namespace ElevenLabsClient {
     }
 }
 
-export class ElevenLabsClient extends FernClient {
+class ElevenLabsClientImpl extends FernClient {
     private _customWebhooks: WebhooksClient | undefined;
     private _customMusic: Music | undefined;
     private _customSpeechToText: SpeechToText | undefined;
-    private _customSpeechEngine: SpeechEngineClientWrapper | undefined;
     private _customFlows: Flows | undefined;
 
     constructor(options: ElevenLabsClient.Options = {}) {
@@ -34,6 +33,21 @@ export class ElevenLabsClient extends FernClient {
         }
         options.apiKey = apiKey;
         super(options);
+
+        // Own-property getter shadows FernClient.speechEngine. An `override`
+        // would be an illegal declaration: the wrapper is not a SpeechEngineClient.
+        const clientOptions = this._options;
+        let custom: SpeechEngineClientWrapper | undefined;
+        Object.defineProperty(this, "speechEngine", {
+            configurable: true,
+            enumerable: false,
+            get(): SpeechEngineClientWrapper {
+                if (custom === undefined) {
+                    custom = new SpeechEngineClientWrapper(clientOptions);
+                }
+                return custom;
+            },
+        });
     }
 
     public get webhooks(): WebhooksClient {
@@ -59,14 +73,6 @@ export class ElevenLabsClient extends FernClient {
         return this._customSpeechToText;
     }
 
-    // @ts-expect-error — SpeechEngineClientWrapper.get() returns SpeechEngineResource, not HttpResponsePromise<SpeechEngineResponse>
-    public override get speechEngine(): SpeechEngineClientWrapper {
-        if (!this._customSpeechEngine) {
-            this._customSpeechEngine = new SpeechEngineClientWrapper(this._options);
-        }
-        return this._customSpeechEngine;
-    }
-
     public override get flows(): Flows {
         if (!this._customFlows) {
             this._customFlows = new Flows(this._options);
@@ -74,3 +80,14 @@ export class ElevenLabsClient extends FernClient {
         return this._customFlows;
     }
 }
+
+type ElevenLabsClientInstance = Omit<ElevenLabsClientImpl, "speechEngine"> & {
+    readonly speechEngine: SpeechEngineClientWrapper;
+};
+
+export type ElevenLabsClient = ElevenLabsClientInstance;
+
+export const ElevenLabsClient: new (options?: ElevenLabsClient.Options) => ElevenLabsClient =
+    ElevenLabsClientImpl as unknown as new (
+        options?: ElevenLabsClient.Options,
+    ) => ElevenLabsClient;
