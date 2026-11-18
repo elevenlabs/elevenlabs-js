@@ -239,3 +239,52 @@ describe("agents.pull", () => {
         expect(Object.values(result.tools).map((t) => t.action)).toEqual(["unchanged", "unchanged"]);
     });
 });
+
+describe("push review fixes", () => {
+    it("updates a project tool whose only change is a field the SDK doesn't model", async () => {
+        const server = new FakeServer();
+        server.addTool("tool_1", { type: "client", name: "ping", description: "d", future_field: 1 }, ["agent_1"]);
+        server.addAgent("agent_1", {});
+        const files = {
+            "agents.json": JSON.stringify({ agents: [{ config: "agent_configs/a.json", id: "agent_1" }] }),
+            "tools.json": JSON.stringify({ tools: [{ type: "client", config: "tool_configs/t.json", id: "tool_1" }] }),
+            "agent_configs/a.json": JSON.stringify({
+                name: "A",
+                conversation_config: { agent: { prompt: { prompt: "p", tool_ids: ["tool_1"] } } },
+            }),
+            "tool_configs/t.json": JSON.stringify({ type: "client", name: "ping", description: "d", future_field: 2 }),
+        };
+        const project = AgentProject.fromFiles(files);
+        const result = await server.client().conversationalAi.agents.push(project.agent("A"), { project });
+        expect(result.tools.ping.action).toBe("updated");
+        expect(server.tools.get("tool_1").config.future_field).toBe(2);
+    });
+
+    it("brings the project up to date when the server already matches a new definition", async () => {
+        const server = new FakeServer();
+        const client = server.client();
+        const project = AgentProject.fromFiles({});
+        await client.conversationalAi.agents.push(supportAgent([getOrder("v2"), showOrder()]), { project });
+        const stale = AgentProject.fromFiles({
+            ...project.toFiles(),
+            "tool_configs/get_order.json": JSON.stringify(getOrder("v1").toJSON(), null, 4),
+        });
+        const result = await client.conversationalAi.agents.push(supportAgent([getOrder("v2"), showOrder()]), {
+            project: stale,
+        });
+        expect(result.tools.get_order.action).toBe("unchanged");
+        expect(JSON.parse(stale.toFiles()["tool_configs/get_order.json"]).description).toBe("v2");
+    });
+
+    it("doesn't report a tool as detached while the workflow still uses its id", async () => {
+        const server = new FakeServer();
+        const client = server.client();
+        server.addTool("tool_raw", showOrder().buildConfig() as never);
+        const wf = new Workflow();
+        wf.tool("run", ["tool_raw"]);
+        const agent = new Agent("A", { prompt: "p", workflow: wf });
+        const { agentId } = await client.conversationalAi.agents.push(agent);
+        const again = await client.conversationalAi.agents.push(agent, { agentId });
+        expect(again.tools).toEqual({});
+    });
+});

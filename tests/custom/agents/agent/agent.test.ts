@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "@jest/globals";
 import { Agent, AgentValidationError, Schema, SystemTool, Tool, Workflow } from "../../../../src";
+import { deepMerge } from "../../../../src/wrapper/agents/agent/wire";
 import { sortKeys } from "../../../../src/wrapper/agents/workflow/util";
 
 const CLI_PROJECT = join(__dirname, "../../../../docs/agents-as-code/fixtures/project/cli-graph");
@@ -174,5 +175,61 @@ describe("Agent.fromJSON", () => {
         ).nodes;
         expect(nodes.refunds.additional_tool_ids).toEqual(["tool_new"]);
         expect(nodes.refunds.additional_prompt).toBe("Handle refunds");
+    });
+});
+
+describe("review fixes", () => {
+    it("ignores keys that could reach a prototype when merging config", () => {
+        const target: Record<string, unknown> = { turn: {} };
+        deepMerge(target, JSON.parse('{"turn": {"__proto__": {"polluted": true}}, "__proto__": {"polluted": true}}'));
+        deepMerge(target, JSON.parse('{"turn": {"__proto__": {"polluted": true}}}'));
+        expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+        expect(Object.getPrototypeOf(target.turn)).toBe(Object.prototype);
+    });
+
+    it("replaces a loaded agent's system tools along with its other tools", () => {
+        const raw = readJson("agent_configs/support.json");
+        const agent = Agent.fromJSON(raw);
+        expect(agent.tools()).toEqual([]); // system tools aren't managed by push
+        agent.update({ tools: [] });
+        const prompt = (agent.toJSON().conversation_config as any).agent.prompt;
+        expect(prompt.built_in_tools).toBeUndefined();
+        expect(prompt.tool_ids).toEqual(["tool_lookup", "tool_from_dashboard"]); // ids it doesn't manage stay
+    });
+
+    it("treats an explicitly empty tool list as set", () => {
+        const agent = new Agent("A", {
+            prompt: "p",
+            toolIds: [],
+            conversationConfig: { agent: { prompt: { toolIds: ["tool_existing"] } } },
+        });
+        expect(issuesOf(() => agent.validate())).toEqual([
+            { code: "option_conflict", path: "conversation_config.agent.prompt.tool_ids" },
+        ]);
+    });
+
+    it("validates a loaded workflow without materializing it", () => {
+        const raw = readJson("agent_configs/support.beta.json") as any;
+        raw.workflow.edges.broken = { source: "start_node", target: "nowhere" };
+        const agent = Agent.fromJSON(raw);
+        expect(issuesOf(() => agent.validate())).toEqual([{ code: "invalid_workflow", path: "workflow" }]);
+    });
+
+    it("writes new tool ids into a loaded workflow it hasn't materialized", () => {
+        const raw = readJson("agent_configs/support.beta.json");
+        const refund = Tool.fromJSON(readJson("tool_configs/issue_refund.json"));
+        const agent = Agent.fromJSON(raw, { toolsById: { tool_refund: refund } });
+        const nodes = (agent.toJSON({ toolIds: { issue_refund: "tool_clone" } }).workflow as any).nodes;
+        expect(nodes.refunds.additional_tool_ids).toEqual(["tool_clone"]);
+    });
+});
+
+describe("Workflow tool refs", () => {
+    it("lets a removed node's tool name be reused by a new Tool object", () => {
+        const wf = new Workflow();
+        wf.tool("a", [getOrder()]);
+        wf.remove("a");
+        wf.tool("b", [getOrder()]);
+        expect(() => wf.build({ toolIds: { get_order: "tool_1" } })).not.toThrow();
     });
 });

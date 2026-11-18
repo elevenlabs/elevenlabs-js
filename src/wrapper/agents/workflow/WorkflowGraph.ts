@@ -151,7 +151,8 @@ export class WorkflowGraph {
             }
             const key = toolPlaceholder(ref.name);
             const known = this.toolRefs.get(key);
-            if (known !== undefined && known !== ref) {
+            // Only a tool another node still uses conflicts; one left behind by a removed or edited node doesn't.
+            if (known !== undefined && known !== ref && this._usesPlaceholder(key, nodeId)) {
                 this.issues.push({
                     code: "duplicate_tool_name",
                     severity: "error",
@@ -162,6 +163,19 @@ export class WorkflowGraph {
             this.toolRefs.set(key, ref);
             return key;
         });
+    }
+
+    private _usesPlaceholder(key: string, exceptNodeId: string): boolean {
+        for (const [id, model] of this.nodes) {
+            if (id === exceptNodeId) {
+                continue;
+            }
+            const node = model as { tools?: ElevenLabs.WorkflowToolLocator[]; additionalToolIds?: string[] };
+            if ((node.tools ?? []).some((t) => t.toolId === key) || (node.additionalToolIds ?? []).includes(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     addNode(id: string, model: NodeModel): void {

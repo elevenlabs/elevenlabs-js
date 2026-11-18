@@ -3,10 +3,11 @@ import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { describe, expect, it } from "@jest/globals";
 import { Agent, AgentProject, AgentProjectError, Tool } from "../../../../src";
-import { sanitizeFilename, uniquePath } from "../../../../src/wrapper/agents/project/format";
+import { formatConfig, formatIndex, sanitizeFilename, uniquePath } from "../../../../src/wrapper/agents/project/format";
 import { FakeServer } from "../agent/fakeServer";
 
 const CLI_PROJECT = join(__dirname, "../../../../docs/agents-as-code/fixtures/project/cli-graph");
+const readJson = (path: string): Record<string, unknown> => JSON.parse(readFileSync(join(CLI_PROJECT, path), "utf8"));
 
 function readTree(dir: string): Record<string, string> {
     const files: Record<string, string> = {};
@@ -105,5 +106,49 @@ describe("AgentProject on disk", () => {
         symlinkSync(outside, join(linked, "agent_configs"));
         writeFileSync(join(linked, "agents.json"), JSON.stringify({ agents: [{ config: "agent_configs/a.json" }] }));
         await expect(AgentProject.open(linked)).rejects.toThrow(/through a symlink/);
+    });
+});
+
+describe("AgentProject review fixes", () => {
+    it("rejects a branch the project has no file for, before any request", async () => {
+        const project = AgentProject.fromFiles(readTree(CLI_PROJECT));
+        const server = new FakeServer();
+        await expect(
+            server.client().conversationalAi.agents.push(project.agent("Billing"), { project, branchId: "agtbrch_x" }),
+        ).rejects.toThrow(/has no config file/);
+        await expect(
+            server.client().conversationalAi.agents.pull("agent_support", { project, branchId: "agtbrch_x" }),
+        ).rejects.toThrow(/has no config file/);
+        expect(server.calls).toEqual([]);
+    });
+
+    it("keeps the main agent when a branch is recorded, and the tool type in step with its config", () => {
+        const project = AgentProject.fromFiles(readTree(CLI_PROJECT));
+        const main = project.agent("Support");
+        const beta = Agent.fromJSON(readJson("agent_configs/support.beta.json"));
+        project._recordAgent(beta, "agent_support", beta.toJSON(), { branchId: "agtbrch_beta", matchBy: "id" });
+        expect(project.agent("Support")).toBe(main);
+        expect(project.changedFiles).toContain("agent_configs/support.beta.json");
+        expect(project.changedFiles).not.toContain("agent_configs/support.json");
+
+        const lookup = project.tools()[0];
+        const client = Tool.client("lookup_order", "Now a client tool");
+        project._recordTool(client, project.toolId(lookup) as string, client.toJSON(), "id");
+        expect(JSON.parse(project.toFiles()["tools.json"]).tools[0].type).toBe("client");
+    });
+
+    it("drops a pending write once a file is back to what was loaded", () => {
+        const loaded = { name: "A", conversation_config: {}, platform_settings: {}, tags: [] };
+        const files = {
+            "agents.json": formatIndex({ agents: [{ config: "agent_configs/a.json", id: "agent_1" }] }),
+            "agent_configs/a.json": formatConfig(loaded),
+        };
+        const project = AgentProject.fromFiles(files);
+        const agent = project.agent("A");
+        project._recordAgent(agent, "agent_1", { ...loaded, tags: ["x"] });
+        expect(project.changedFiles).toEqual(["agent_configs/a.json"]);
+        project._recordAgent(agent, "agent_1", loaded);
+        expect(project.changedFiles).toEqual([]);
+        expect(project.toFiles()).toEqual({ ...files, "tools.json": '{\n    "tools": []\n}' });
     });
 });

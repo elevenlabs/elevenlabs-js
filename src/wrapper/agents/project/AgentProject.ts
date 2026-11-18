@@ -236,6 +236,7 @@ export class AgentProject {
         }
         slot.tool = tool;
         slot.entry.id = id;
+        slot.entry.type = tool.kind;
         slot.raw = config;
         slot.baseline = safeJson(tool);
         this._write(slot.entry.config, formatConfig(config));
@@ -257,9 +258,12 @@ export class AgentProject {
             slot = { entry: { config: path }, agent };
             this._agents.push(slot);
         }
-        slot.agent = agent;
         slot.entry.id = id;
         const branch = Object.values(slot.entry.branches ?? {}).find((b) => b.branch_id === branchId);
+        // A branch has its own file; the slot's agent is the main branch's, which a branch must not replace.
+        if (branch === undefined) {
+            slot.agent = agent;
+        }
         // Like the CLI: the version the server reports, on the branch entry it belongs to.
         if (versionId !== undefined) {
             if (branch !== undefined) {
@@ -272,9 +276,40 @@ export class AgentProject {
         this._write(AGENTS_FILE, this._agentsIndex());
     }
 
+    /**
+     * @internal Rejects a branch the project has no file for, before anything is written: its settings would otherwise
+     * land in the main branch's file, and a later CLI push would send them to the main branch.
+     */
+    _checkBranch(agent: Agent, branchId: string | undefined): void {
+        this._checkBranchOf(this._agentSlot(agent), agent.name, branchId);
+    }
+
+    /** @internal `_checkBranch` for `pull`, which finds the agent by id. */
+    _checkBranchById(agentId: string, branchId: string | undefined): void {
+        this._checkBranchOf(
+            this._agents.find((s) => s.entry.id === agentId),
+            agentId,
+            branchId,
+        );
+    }
+
+    private _checkBranchOf(slot: AgentSlot | undefined, label: string, branchId: string | undefined): void {
+        if (branchId === undefined || slot?.entry.branch_id === branchId) {
+            return;
+        }
+        if (!Object.values(slot?.entry.branches ?? {}).some((b) => b.branch_id === branchId)) {
+            throw new AgentProjectError(
+                `Branch ${branchId} of "${label}" has no config file in ${AGENTS_FILE}. Add it under "branches" ` +
+                    "(the CLI's `agents pull --all-branches` does), or push the main branch",
+            );
+        }
+    }
+
     private _write(path: string, text: string): void {
         const key = normalizePath(path);
-        if (this._files.get(key) !== text) {
+        if (this._files.get(key) === text) {
+            this._changed.delete(key);
+        } else {
             this._changed.set(key, text);
         }
     }

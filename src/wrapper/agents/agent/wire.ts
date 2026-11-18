@@ -38,17 +38,39 @@ export function setPath(target: WireObject, path: string[], value: unknown): voi
     }
 }
 
-/** Merges `source` into `target`: objects merge key by key, anything else (arrays included) replaces. */
+const UNSAFE_KEYS = new Set(["__proto__", "constructor", "prototype"]);
+
+/**
+ * Merges `source` into `target`: objects merge key by key, anything else (arrays included) replaces. Only own keys are
+ * followed, and keys that could reach a prototype are skipped, so untrusted config can't pollute `Object.prototype`.
+ */
 export function deepMerge(target: WireObject, source: WireObject): WireObject {
     for (const [key, value] of Object.entries(source)) {
-        if (value === undefined) {
+        if (value === undefined || UNSAFE_KEYS.has(key)) {
             continue;
         }
-        if (isObject(value) && isObject(target[key])) {
-            deepMerge(target[key] as WireObject, value);
+        const existing = Object.prototype.hasOwnProperty.call(target, key) ? target[key] : undefined;
+        if (isObject(value) && isObject(existing)) {
+            deepMerge(existing, value);
         } else {
-            target[key] = structuredClone(value);
+            Object.defineProperty(target, key, {
+                value: structuredClone(value),
+                enumerable: true,
+                writable: true,
+                configurable: true,
+            });
         }
     }
     return target;
+}
+
+/** Whether every value in `local` is in `remote` at the same place. Extra keys in `remote` (server defaults) are fine. */
+export function isSubset(local: unknown, remote: unknown): boolean {
+    if (Array.isArray(local)) {
+        return Array.isArray(remote) && local.length === remote.length && local.every((v, i) => isSubset(v, remote[i]));
+    }
+    if (isObject(local)) {
+        return isObject(remote) && Object.entries(local).every(([k, v]) => v === null || isSubset(v, remote[k]));
+    }
+    return local === remote;
 }

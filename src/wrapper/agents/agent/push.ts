@@ -8,7 +8,7 @@ import { Tool } from "../tools/Tool";
 import { sortKeys } from "../workflow/util";
 import { Agent, rawWorkflowToolIds } from "./Agent";
 import { AgentPushError, type AgentPushResult } from "./errors";
-import { getPath, isObject, type WireObject } from "./wire";
+import { getPath, isObject, isSubset, type WireObject } from "./wire";
 
 export interface AgentPushOptions {
     /**
@@ -56,6 +56,7 @@ export async function pushAgent(clients: Clients, agent: Agent, options: AgentPu
         throw new Error("Pass agentId or project to agents.push(), not both: the project records the agent's id");
     }
     agent.validate();
+    project?._checkBranch(agent, branchId);
 
     const tools = agent.tools();
     const agentId = project !== undefined ? project.agentId(agent) : options.agentId;
@@ -80,12 +81,11 @@ export async function pushAgent(clients: Clients, agent: Agent, options: AgentPu
             }
             const config = project?._unchangedRaw(tool) ?? toolWire(tool);
             const body = { ...requestOptions, additionalBodyParameters: { tool_config: config } };
-            if (remote !== undefined && sameTool(remote, tool)) {
+            if (remote !== undefined && sameTool(remote, tool, config)) {
                 ids[tool.name] = remote.id;
                 result.tools[tool.name] = { id: remote.id, action: "unchanged" };
-                if (project !== undefined && project.toolId(tool) === undefined) {
-                    project._recordTool(tool, remote.id, config);
-                }
+                // The server already matches, but the project may hold an older definition: bring it up to date.
+                project?._recordTool(tool, remote.id, config);
                 continue;
             }
             if (remote !== undefined) {
@@ -102,16 +102,22 @@ export async function pushAgent(clients: Clients, agent: Agent, options: AgentPu
             project?._recordTool(tool, ids[tool.name], config);
         }
 
-        const kept = new Set([...Object.values(ids), ...agent.toolIds]);
+        // The typed body goes through the generated client; the API-format config, sent as extra body parameters,
+        // replaces its top-level fields, so settings this SDK doesn't model reach the API too.
+        const config = agent.toJSON({ toolIds: ids });
+
+        // Every id the new config still uses, wherever it is: the agent's tool_ids and the workflow's nodes.
+        const promptIds = getPath(config, ["conversation_config", "agent", "prompt", "tool_ids"]);
+        const kept = new Set([
+            ...(Array.isArray(promptIds) ? (promptIds as string[]) : []),
+            ...rawWorkflowToolIds(isObject(config.workflow) ? config.workflow : undefined),
+        ]);
         for (const remote of inUse) {
             if (!kept.has(remote.id) && result.tools[toolName(remote)] === undefined) {
                 result.tools[toolName(remote)] = { id: remote.id, action: "detached" };
             }
         }
 
-        // The typed body goes through the generated client; the API-format config, sent as extra body parameters,
-        // replaces its top-level fields, so settings this SDK doesn't model reach the API too.
-        const config = agent.toJSON({ toolIds: ids });
         const typed = agent.build({ toolIds: ids });
         const body = { ...requestOptions, additionalBodyParameters: config };
         let id: string;
@@ -142,6 +148,7 @@ export async function pushAgent(clients: Clients, agent: Agent, options: AgentPu
 /** The steps of `agents.pull()`. */
 export async function pullAgent(clients: Clients, agentId: string, options: AgentPullOptions): Promise<Agent> {
     const { project, branchId, requestOptions } = options;
+    project?._checkBranchById(agentId, branchId);
     const response = await clients.agents.get(agentId, { branchId }, requestOptions);
     const live = serializers.GetAgentResponseModel.jsonOrThrow(response, SERIALIZER_OPTIONS) as unknown as WireObject;
     // The CLI's pulled-config shape: these keys only, so ids and server metadata stay out of the file.
@@ -213,10 +220,15 @@ function toolWire(tool: Tool): WireObject {
     ) as WireObject;
 }
 
-/** Whether the server already has this tool as defined, compared through the builder so both sides normalize alike. */
-function sameTool(remote: ElevenLabs.ToolResponseModel, tool: Tool): boolean {
+/**
+ * Whether the server already has this tool as defined. Modeled fields are compared through the builder, so both sides
+ * normalize alike; the config to send must also be contained in the server's, so a change to a field the builder
+ * doesn't model still counts.
+ */
+function sameTool(remote: ElevenLabs.ToolResponseModel, tool: Tool, config: WireObject): boolean {
     try {
-        return Tool.fromResponse(remote).toJSONString() === tool.toJSONString();
+        const wire = serializers.ToolResponseModelToolConfig.jsonOrThrow(remote.toolConfig, SERIALIZER_OPTIONS);
+        return Tool.fromResponse(remote).toJSONString() === tool.toJSONString() && isSubset(config, wire);
     } catch {
         return false;
     }

@@ -1,6 +1,6 @@
 import type * as ElevenLabs from "../../../api/index";
 import * as serializers from "../../../serialization/index";
-import type { SystemTool, Tool } from "../tools/Tool";
+import { type SystemTool, Tool } from "../tools/Tool";
 import { sortKeys } from "../workflow/util";
 import { Workflow } from "../workflow/Workflow";
 import { type AgentIssue, AgentValidationError } from "./errors";
@@ -105,6 +105,10 @@ export class Agent {
     private _toolsById: Map<string, Tool> = new Map();
     /** The loaded `tool_ids`, so a loaded agent keeps its tool order. */
     private _loadedToolIds: string[] = [];
+    /** Whether `tools` or `toolIds` was given (even empty), so the agent sets `tool_ids` rather than leaving it alone. */
+    private _toolListGiven = false;
+    /** Loaded system tools with their config as loaded, sent as-is while the tool is unchanged. */
+    private readonly _loadedSystem = new Map<Tool, { raw: unknown; baseline: string | undefined }>();
     /** Settings loaded from a config, in API format. Typed options and raw options are applied on top. */
     private _base: WireObject = {};
     private _rawConversationConfig: ElevenLabs.ConversationalConfig[] = [];
@@ -140,6 +144,32 @@ export class Agent {
                 } else {
                     agent._tools.push(tool);
                 }
+            }
+        }
+        if (Array.isArray(ids)) {
+            agent._toolListGiven = true;
+        }
+        // System tools become SystemTool objects, so replacing `tools` replaces them like on an agent built in code.
+        const builtIn = getPath(base, BUILT_IN_TOOLS_PATH);
+        if (isObject(builtIn)) {
+            for (const [key, raw] of Object.entries(builtIn)) {
+                if (!isObject(raw)) {
+                    continue;
+                }
+                try {
+                    const tool = Tool.fromJSON({ type: "system", ...raw });
+                    if (tool.kind !== "system" || tool.asSystem()?.systemToolType !== key) {
+                        continue;
+                    }
+                    agent._tools.push(tool);
+                    agent._loadedSystem.set(tool, { raw, baseline: safeJson(tool) });
+                    delete builtIn[key];
+                } catch {
+                    // Kept in the config as it is.
+                }
+            }
+            if (Object.keys(builtIn).length === 0) {
+                setPath(base, BUILT_IN_TOOLS_PATH, undefined);
             }
         }
         if (isObject(workflow)) {
@@ -183,9 +213,11 @@ export class Agent {
         }
         if (tools !== undefined) {
             this._tools = [...tools];
+            this._toolListGiven = true;
         }
         if (toolIds !== undefined) {
             this._toolIds = [...toolIds];
+            this._toolListGiven = true;
         }
         if (workflow !== undefined) {
             this._workflow = workflow;
@@ -340,7 +372,7 @@ export class Agent {
 
         const managed = this._tools.filter((tool) => tool.kind !== "system");
         const system = this._tools.filter((tool): tool is SystemTool => tool.kind === "system");
-        if (managed.length > 0 || this._toolIds.length > 0) {
+        if (this._toolListGiven) {
             if (getPath(raw, TOOL_IDS_PATH) !== undefined) {
                 issues.push(conflict("tools", TOOL_IDS_PATH));
             }
@@ -351,9 +383,13 @@ export class Agent {
             if (getPath(raw, path) !== undefined) {
                 issues.push(conflict("tools", path));
             }
-            const wire = toWire(() =>
-                serializers.ToolRequestModelToolConfig.jsonOrThrow(tool.buildConfig(), SERIALIZER_OPTIONS),
-            );
+            const loaded = this._loadedSystem.get(tool);
+            const wire =
+                loaded !== undefined && loaded.baseline !== undefined && safeJson(tool) === loaded.baseline
+                    ? structuredClone(loaded.raw)
+                    : toWire(() =>
+                          serializers.ToolRequestModelToolConfig.jsonOrThrow(tool.buildConfig(), SERIALIZER_OPTIONS),
+                      );
             if (!(wire instanceof Error)) {
                 setPath(config, path, wire);
             }
@@ -385,7 +421,22 @@ export class Agent {
                 });
             }
         } else if (this._rawWorkflow !== undefined) {
-            config.workflow = structuredClone(this._rawWorkflow);
+            // Check the loaded graph without replacing the raw copy, which keeps fields this SDK doesn't model.
+            try {
+                Workflow.fromJSON(this._rawWorkflow).build();
+            } catch (err) {
+                issues.push({
+                    code: "invalid_workflow",
+                    severity: "error",
+                    message: err instanceof Error ? err.message : String(err),
+                    path: "workflow",
+                });
+            }
+            // Its managed tools may have new ids, e.g. when pushed as a new agent.
+            config.workflow = mapRawWorkflowToolIds(structuredClone(this._rawWorkflow), (id) => {
+                const tool = this._toolsById.get(id);
+                return tool === undefined ? id : (toolIds?.[tool.name] ?? id);
+            });
         }
 
         if (toolIds !== undefined) {
@@ -424,6 +475,34 @@ export class Agent {
         config.platform_settings = config.platform_settings ?? {};
         config.tags = this._tags ?? [];
         return sortKeys(config) as WireObject;
+    }
+}
+
+/** Replaces the tool ids in an API-format workflow's tool nodes and subagents, in place. */
+export function mapRawWorkflowToolIds(workflow: WireObject, map: (id: string) => string): WireObject {
+    for (const node of isObject(workflow.nodes) ? Object.values(workflow.nodes) : []) {
+        if (!isObject(node)) {
+            continue;
+        }
+        if (Array.isArray(node.tools)) {
+            for (const locator of node.tools) {
+                if (isObject(locator) && typeof locator.tool_id === "string") {
+                    locator.tool_id = map(locator.tool_id);
+                }
+            }
+        }
+        if (Array.isArray(node.additional_tool_ids)) {
+            node.additional_tool_ids = node.additional_tool_ids.map((id) => (typeof id === "string" ? map(id) : id));
+        }
+    }
+    return workflow;
+}
+
+function safeJson(tool: Tool): string | undefined {
+    try {
+        return tool.toJSONString();
+    } catch {
+        return undefined;
     }
 }
 
