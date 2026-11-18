@@ -1,5 +1,5 @@
 import { ElevenLabsError } from "../errors/ElevenLabsError";
-import { isNode, toAsyncIterable } from "./utils";
+import { isNode, pipeAudio, toAsyncIterable } from "./utils";
 
 export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
     if (!isNode()) {
@@ -9,8 +9,6 @@ export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
     }
 
     const { spawn } = await import("node:child_process");
-    const { Readable } = await import("node:stream");
-    const { pipeline } = await import("node:stream/promises");
 
     const mpv = spawn("mpv", ["--no-cache", "--no-terminal", "--", "fd://0"], {
         stdio: ["pipe", "ignore", "pipe"],
@@ -48,7 +46,7 @@ export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
             }
             reject(new ElevenLabsError({ message: `Failed to start mpv: ${err.message}` }));
         });
-        pipeline(Readable.from(toAsyncIterable(audio)), mpv.stdin).catch((error) => {
+        pipeAudio(toAsyncIterable(audio), mpv.stdin).catch((error) => {
             mpv.kill();
             reject(error);
         });

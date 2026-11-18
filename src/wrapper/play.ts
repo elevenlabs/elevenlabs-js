@@ -1,5 +1,5 @@
 import { ElevenLabsError } from "../errors/ElevenLabsError";
-import { isNode } from "./utils";
+import { isNode, pipeAudio } from "./utils";
 
 export async function play(audio: AsyncIterable<Uint8Array>): Promise<void> {
     if (!isNode()) {
@@ -9,8 +9,6 @@ export async function play(audio: AsyncIterable<Uint8Array>): Promise<void> {
     }
 
     const { spawn } = await import("node:child_process");
-    const { Readable } = await import("node:stream");
-    const { pipeline } = await import("node:stream/promises");
 
     const ffplay = spawn("ffplay", ["-autoexit", "-", "-nodisp"], {
         stdio: ["pipe", "ignore", "pipe"],
@@ -48,7 +46,7 @@ export async function play(audio: AsyncIterable<Uint8Array>): Promise<void> {
             }
             reject(new ElevenLabsError({ message: `Failed to start ffplay: ${err.message}` }));
         });
-        pipeline(Readable.from(audio), ffplay.stdin).catch((error) => {
+        pipeAudio(audio, ffplay.stdin).catch((error) => {
             ffplay.kill();
             reject(error);
         });

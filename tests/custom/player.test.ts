@@ -14,23 +14,29 @@ jest.mock("node:child_process", () => {
     };
 });
 
-async function* audioChunks(): AsyncGenerator<Uint8Array> {
-    yield new Uint8Array([1, 2, 3]);
-    yield new Uint8Array([4, 5, 6]);
+// Large enough to overflow the OS pipe buffer when the player stops reading.
+const LARGE_AUDIO_CHUNKS = 64;
+
+async function* audioChunks(count: number): AsyncGenerator<Uint8Array> {
+    for (let i = 0; i < count; i++) {
+        yield new Uint8Array(64 * 1024);
+    }
 }
 
-function audioStream(): ReadableStream<Uint8Array> {
+function audioStream(count: number): ReadableStream<Uint8Array> {
     return new ReadableStream({
         start(controller) {
-            controller.enqueue(new Uint8Array([1, 2, 3]));
+            for (let i = 0; i < count; i++) {
+                controller.enqueue(new Uint8Array(64 * 1024));
+            }
             controller.close();
         },
     });
 }
 
 const players = [
-    { name: "play", binary: "ffplay", run: () => play(audioChunks()), install: "brew install ffmpeg" },
-    { name: "stream", binary: "mpv", run: () => stream(audioStream()), install: "brew install mpv" },
+    { name: "play", binary: "ffplay", run: (chunks = 2) => play(audioChunks(chunks)), install: "brew install ffmpeg" },
+    { name: "stream", binary: "mpv", run: (chunks = 2) => stream(audioStream(chunks)), install: "brew install mpv" },
 ];
 
 describe.each(players)("$name", ({ binary, run, install }) => {
@@ -71,5 +77,14 @@ describe.each(players)("$name", ({ binary, run, install }) => {
     posixIt(`rejects with stderr when ${binary} exits with an error`, async () => {
         installFakeBinary("cat > /dev/null\necho boom >&2\nexit 3");
         await expect(run()).rejects.toThrow(`${binary} exited with code 3. Stderr: boom`);
+    });
+
+    posixIt(`rejects when ${binary} exits before reading all audio`, async () => {
+        installFakeBinary("exit 3");
+        await expect(run(LARGE_AUDIO_CHUNKS)).rejects.toThrow(`${binary} exited with code 3`);
+    });
+
+    it(`rejects with install instructions when ${binary} is missing and there is a lot of audio`, async () => {
+        await expect(run(LARGE_AUDIO_CHUNKS)).rejects.toThrow(install);
     });
 });
