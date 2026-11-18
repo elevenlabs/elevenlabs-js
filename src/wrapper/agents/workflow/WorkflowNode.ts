@@ -5,6 +5,7 @@ import type {
     EndOptions,
     NodeUpdate,
     ToolOptions,
+    ToolRef,
     TransferOptions,
     WorkflowGraph,
 } from "./WorkflowGraph";
@@ -63,8 +64,11 @@ export abstract class WorkflowChain {
         return this._connect(id);
     }
 
-    /** Runs the tools in parallel. Branch on the result with `onSuccess()` and `onFailure()`. */
-    tool(id: string, toolIds: string[], options: ToolOptions = {}): WorkflowNode {
+    /**
+     * Runs the tools in parallel. Branch on the result with `onSuccess()` and `onFailure()`. Each tool is an id, or a
+     * `Tool` object whose id is filled in when the workflow is built with `toolIds`, as `agents.push()` does.
+     */
+    tool(id: string, toolIds: ToolRef[], options: ToolOptions = {}): WorkflowNode {
         this._graph.addNode(id, this._graph.applyOptions(id, { type: "tool" }, { ...options, toolIds }));
         return this._connect(id);
     }

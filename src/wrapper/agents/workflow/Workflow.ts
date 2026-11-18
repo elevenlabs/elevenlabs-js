@@ -1,12 +1,13 @@
 import type * as ElevenLabs from "../../../api/index";
 import * as serializers from "../../../serialization/index";
+import type { Tool } from "../tools/Tool";
 import { Condition, type ConditionInput } from "./Condition";
 import { type WorkflowIssue, WorkflowValidationError } from "./errors";
 import { layout } from "./layout";
 import { serializerKnowsNodeType } from "./nodeTypes";
 import { sortKeys } from "./util";
 import { reverseEdgeMerges, validate } from "./validate";
-import { type GraphEdge, WorkflowGraph } from "./WorkflowGraph";
+import { type GraphEdge, type NodeModel, toolPlaceholder, WorkflowGraph } from "./WorkflowGraph";
 import { branch, type EdgeOrigin, type WhenOptions, WorkflowBranch, WorkflowChain, WorkflowNode } from "./WorkflowNode";
 
 export interface WorkflowOptions {
@@ -17,6 +18,11 @@ export interface WorkflowOptions {
 export interface BuildOptions {
     /** Called for each non-fatal problem, such as a node that can't be reached from the start. */
     onWarning?: (issue: WorkflowIssue) => void;
+    /**
+     * The id of each `Tool` object the workflow references, by tool name. `agents.push()` passes these after
+     * creating the tools. Every `Tool` object needs one.
+     */
+    toolIds?: Record<string, string>;
 }
 
 const SERIALIZER_OPTIONS = {
@@ -95,6 +101,36 @@ export class Workflow extends WorkflowChain {
             });
         }
         return new WorkflowNode(this._graph, id);
+    }
+
+    /** The `Tool` objects the workflow's nodes reference, in the order they were first used. */
+    tools(): Tool[] {
+        const used = new Set<string>();
+        for (const model of this._graph.nodes.values()) {
+            for (const id of nodeToolIds(model)) {
+                used.add(id);
+            }
+        }
+        return [...this._graph.toolRefs].filter(([key]) => used.has(key)).map(([, tool]) => tool);
+    }
+
+    /**
+     * @internal Swaps tool ids for the `Tool` objects they stand for, so a loaded workflow refers to tools by object.
+     * Ids missing from `byId` stay as they are.
+     */
+    _bindTools(byId: Map<string, Tool>): void {
+        const swap = (id: string): string => {
+            const tool = byId.get(id);
+            if (tool === undefined) {
+                return id;
+            }
+            const key = toolPlaceholder(tool.name);
+            this._graph.toolRefs.set(key, tool);
+            return key;
+        };
+        for (const [id, model] of this._graph.nodes) {
+            this._graph.nodes.set(id, mapNodeToolIds(model, swap));
+        }
     }
 
     /** Ids of every node, in the order they were added. */
@@ -190,7 +226,7 @@ export class Workflow extends WorkflowChain {
      */
     build(options: BuildOptions = {}): ElevenLabs.AgentWorkflowRequestModel {
         const graph = this._graph;
-        const issues = validate(graph);
+        const issues = [...validate(graph), ...unresolvedTools(graph, options.toolIds ?? {})];
         const errors = issues.filter((issue) => issue.severity === "error");
         if (errors.length > 0) {
             throw new WorkflowValidationError(errors);
@@ -240,7 +276,12 @@ export class Workflow extends WorkflowChain {
         });
 
         const nodes: Record<string, ElevenLabs.AgentWorkflowRequestModelNodesValue> = {};
-        for (const [id, model] of graph.nodes) {
+        const resolve = (toolId: string): string => {
+            const tool = graph.toolRefs.get(toolId);
+            return tool === undefined ? toolId : (options.toolIds?.[tool.name] as string);
+        };
+        for (const [id, unresolved] of graph.nodes) {
+            const model = mapNodeToolIds(unresolved, resolve);
             const order = edgeOrderOf(graph.loadedOrder.get(id) ?? [], outgoing.get(id) ?? []).map(
                 (edge) => idOf.get(edge) as string,
             );
@@ -274,6 +315,43 @@ export class Workflow extends WorkflowChain {
     protected _origin(): EdgeOrigin {
         return { source: this._graph.startId, forwardCondition: Condition.always().toModel() };
     }
+}
+
+/** The tool ids (or placeholders) a node uses: a tool node's tools, or a subagent's extra tools. */
+function nodeToolIds(model: NodeModel): string[] {
+    const node = model as { tools?: ElevenLabs.WorkflowToolLocator[]; additionalToolIds?: string[] };
+    return [...(node.tools ?? []).map((tool) => tool.toolId), ...(node.additionalToolIds ?? [])];
+}
+
+function mapNodeToolIds(model: NodeModel, map: (id: string) => string): NodeModel {
+    const node = model as NodeModel & { tools?: ElevenLabs.WorkflowToolLocator[]; additionalToolIds?: string[] };
+    if (model.type === "tool" && node.tools !== undefined) {
+        return { ...node, tools: node.tools.map((tool) => ({ ...tool, toolId: map(tool.toolId) })) } as NodeModel;
+    }
+    if (model.type === "override_agent" && node.additionalToolIds !== undefined) {
+        return { ...node, additionalToolIds: node.additionalToolIds.map(map) } as NodeModel;
+    }
+    return model;
+}
+
+function unresolvedTools(graph: WorkflowGraph, toolIds: Record<string, string>): WorkflowIssue[] {
+    const issues: WorkflowIssue[] = [];
+    for (const [nodeId, model] of graph.nodes) {
+        for (const id of nodeToolIds(model)) {
+            const tool = graph.toolRefs.get(id);
+            if (tool !== undefined && toolIds[tool.name] === undefined) {
+                issues.push({
+                    code: "unresolved_tool",
+                    severity: "error",
+                    message:
+                        `Node "${nodeId}" uses tool "${tool.name}", which has no id yet. Push the agent with ` +
+                        "agents.push(), or pass build({ toolIds })",
+                    nodeId,
+                });
+            }
+        }
+    }
+    return issues;
 }
 
 /** A loaded node's order for the edges it still has, then any others in edge-list order. */

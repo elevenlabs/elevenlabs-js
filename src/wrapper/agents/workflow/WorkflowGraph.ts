@@ -1,4 +1,5 @@
 import type * as ElevenLabs from "../../../api/index";
+import type { Tool } from "../tools/Tool";
 import type { ConditionModel } from "./Condition";
 import type { Destination } from "./Destination";
 import type { WorkflowIssue } from "./errors";
@@ -16,6 +17,14 @@ export interface GraphEdge {
     reroutes?: ElevenLabs.PositionInput[];
 }
 
+/** A tool by id, or a `Tool` object whose id is filled in when the workflow is built. */
+export type ToolRef = string | Tool;
+
+/** The placeholder a `Tool` object stands under in the graph until `build()` swaps in its id. */
+export function toolPlaceholder(name: string): string {
+    return `<tool:${name}>`;
+}
+
 export interface NodeOptions {
     /** Position in the workflow editor. Nodes without one are laid out automatically. */
     position?: ElevenLabs.PositionInput;
@@ -24,8 +33,11 @@ export interface NodeOptions {
 export interface ConverseOptions extends NodeOptions {
     /** Name shown in the workflow editor. Defaults to the node id. */
     label?: string;
-    /** Tools available to this subagent, on top of the agent's own. */
-    toolIds?: string[];
+    /**
+     * Tools available to this subagent, on top of the agent's own: tool ids, or `Tool` objects whose ids are filled in
+     * when the workflow is built with `toolIds`, as `agents.push()` does.
+     */
+    toolIds?: ToolRef[];
     /** Knowledge base documents available to this subagent, on top of the agent's own. */
     knowledgeBase?: ElevenLabs.KnowledgeBaseLocator[];
     /** Overrides for the agent's conversation config (LLM, voice, ...) while this subagent is active. */
@@ -34,7 +46,10 @@ export interface ConverseOptions extends NodeOptions {
 }
 
 export interface ToolOptions extends NodeOptions {
-    /** Parameter overrides per tool id, keyed by dotted parameter path (e.g. `path_params.order_id`). */
+    /**
+     * Parameter overrides per tool id (or tool name, for a `Tool` object), keyed by dotted parameter path (e.g.
+     * `path_params.order_id`).
+     */
     schemaOverrides?: Record<string, Record<string, ElevenLabs.WorkflowToolLocatorSchemaOverridesValue>>;
 }
 
@@ -71,7 +86,7 @@ export interface NodeUpdate extends ConverseOptions, ToolOptions, TransferOption
     /** Subagent nodes: the instructions added to the agent's prompt. */
     prompt?: string;
     /** Subagent nodes: extra tools. Tool nodes: the tools to run. */
-    toolIds?: string[];
+    toolIds?: ToolRef[];
     /** Transfer nodes: where to transfer to. */
     destination?: Destination;
 }
@@ -125,6 +140,29 @@ export class WorkflowGraph {
     /** Each loaded node's `edgeOrder`, as edges. `build()` keeps this order and appends edges added since. */
     readonly loadedOrder: Map<string, GraphEdge[]> = new Map();
     preventSubagentLoops: boolean | undefined;
+    /** `Tool` objects referenced by nodes, by placeholder. */
+    readonly toolRefs: Map<string, Tool> = new Map();
+
+    /** Swaps `Tool` objects for placeholders, remembering each one. */
+    refTools(nodeId: string, refs: ToolRef[]): string[] {
+        return refs.map((ref) => {
+            if (typeof ref === "string") {
+                return ref;
+            }
+            const key = toolPlaceholder(ref.name);
+            const known = this.toolRefs.get(key);
+            if (known !== undefined && known !== ref) {
+                this.issues.push({
+                    code: "duplicate_tool_name",
+                    severity: "error",
+                    message: `Node "${nodeId}" uses a different tool also named "${ref.name}"`,
+                    nodeId,
+                });
+            }
+            this.toolRefs.set(key, ref);
+            return key;
+        });
+    }
 
     addNode(id: string, model: NodeModel): void {
         const existing = this.nodes.get(id);
@@ -141,7 +179,17 @@ export class WorkflowGraph {
     }
 
     applyOptions(id: string, model: NodeModel, options: NodeUpdate): NodeModel {
-        const { destination, toolIds, schemaOverrides, ...rest } = options;
+        const { destination, toolIds: refs, schemaOverrides: overridesByRef, ...rest } = options;
+        const toolIds = refs === undefined ? undefined : this.refTools(id, refs);
+        const schemaOverrides =
+            overridesByRef === undefined
+                ? undefined
+                : Object.fromEntries(
+                      Object.entries(overridesByRef).map(([key, value]) => {
+                          const placeholder = toolPlaceholder(key);
+                          return [this.toolRefs.has(placeholder) ? placeholder : key, value];
+                      }),
+                  );
         let next = { ...model } as Record<string, unknown>;
 
         if (destination !== undefined) {
@@ -167,7 +215,7 @@ export class WorkflowGraph {
                     this.issues.push({
                         code: "invalid_option",
                         severity: "error",
-                        message: `Node "${id}" has schema overrides for tool "${toolId}", which it doesn't run`,
+                        message: `Node "${id}" has schema overrides for tool "${displayTool(toolId)}", which it doesn't run`,
                         nodeId: id,
                     });
                 }
@@ -255,4 +303,10 @@ export class WorkflowGraph {
             nodeId: id,
         });
     }
+}
+
+/** A tool id as shown in messages: the name for a `Tool` object's placeholder. */
+export function displayTool(id: string): string {
+    const match = /^<tool:(.*)>$/.exec(id);
+    return match === null ? id : match[1];
 }

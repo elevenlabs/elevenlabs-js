@@ -32,7 +32,7 @@ Node verbs exist on `Workflow`, `WorkflowNode` and `WorkflowBranch`. Each verb a
 | Verb | API node type |
 |---|---|
 | `converse(id, prompt, options?)` | `override_agent` (a "subagent" in the UI): the agent holds a conversation with `prompt` added to its instructions until an outgoing condition holds. `prompt` maps to `additional_prompt`. `label` defaults to `id`. |
-| `tool(id, toolIds, options?)` | `tool`. Creates one `{tool_id}` locator per id, with `schemaOverrides[toolId]` if given. |
+| `tool(id, toolIds, options?)` | `tool`. Creates one `{tool_id}` locator per id, with `schemaOverrides[toolId]` if given. Each entry may also be a `Tool` object, resolved when the workflow is built with `toolIds` (see `agent-spec.md`, "Workflow tool references"). |
 | `transfer(id, destination, options?)` | `phone_number` for phone or SIP destinations; `standalone_agent` for agent destinations. |
 | `end(options?)` | `end`. `options.id` defaults to `"end"`. When the id already belongs to an end node, that node is reused. |
 | `goTo(target, options?)` | No new node. Moves the conversation to `target` with a new edge to it, or, when `target` already has an edge to this node, as that edge's backward condition (see "One edge per pair of nodes"). `target` is a handle or an id, and may be created later. `options.back` sets the backward condition. |

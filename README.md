@@ -321,6 +321,63 @@ Each schema property gets its value from exactly one place: the LLM (`describe()
 
 `build()` checks the whole tool first and throws a `ToolValidationError` listing every problem. For example, it reports a `{placeholder}` in the URL with no matching `pathParam()`, a property with two value sources, or a `GET` with a body. Load an existing tool with `Tool.fromResponse(await client.conversationalAi.tools.get(toolId))` or `Tool.fromJSON(file)`, edit it, and push it back with `tools.update()`.
 
+## Agents as code
+
+`Agent` puts an agent's settings, tools and workflow in one definition. `agents.push()` creates or updates every webhook and client tool it uses, then the agent, with the tools' ids filled in:
+
+```typescript
+import { Agent, ElevenLabsClient, Schema, SystemTool, Tool, Workflow } from "@elevenlabs/elevenlabs-js";
+
+const getOrder = Tool.webhook("get_order", "Look up an order by its number")
+    .get("https://api.example.com/orders/{order_id}")
+    .pathParam("order_id", Schema.string().describe("The order number, e.g. A-1042"));
+
+const wf = new Workflow();
+wf.converse("triage", "Find out what the caller needs")
+    .when("Caller gave an order number")
+    .tool("lookup", [getOrder]) // a Tool object: push fills in its id
+    .onSuccess()
+    .converse("resolve", "Explain the order status");
+
+const agent = new Agent("Support line", {
+    prompt: "You are a support agent for Acme.",
+    firstMessage: "Hi, how can I help?",
+    voiceId: "21m00Tcm4TlvDq8ikWAM",
+    tools: [SystemTool.endCall()],
+    workflow: wf,
+});
+
+const client = new ElevenLabsClient();
+const { agentId } = await client.conversationalAi.agents.push(agent); // creates the agent and get_order
+await client.conversationalAi.agents.push(agent, { agentId }); // later: updates only what changed
+```
+
+- **Validation first:** `push()` calls `agent.validate()` before any request, so an invalid agent writes nothing. CI can call `validate()` without an API key.
+- **Tools are matched safely:** with `agentId`, existing tools are found among the tools that agent already uses, by name. A tool with the same name that another agent uses is never touched. Tools the agent stops using are reported as `"detached"`, not deleted.
+- **Escape hatch:** `conversationConfig` and `platformSettings` take any other setting, merged under the typed options. `toolIds` attaches existing tools that `push()` leaves alone.
+- **Partial failures:** if a request fails, `push()` throws an `AgentPushError` whose `result` lists the tools it had already created.
+
+### Keeping agents in git
+
+`AgentProject` reads and writes the ElevenLabs CLI's project layout (`agents.json`, `tools.json`, `agent_configs/`, `tool_configs/`). The same repo works with the SDK and with `elevenlabs agents push`. The project records each agent's and tool's id, so running a script again updates them instead of making copies:
+
+```typescript
+import { AgentProject } from "@elevenlabs/elevenlabs-js";
+
+const project = await AgentProject.open("."); // Node.js; an empty directory works too
+await client.conversationalAi.agents.push(agent, { project }); // writes the configs and ids it pushed
+
+// Edit an agent stored in the project
+const support = project.agent("Support line");
+support.update({ firstMessage: "Hello!" });
+await client.conversationalAi.agents.push(support, { project });
+
+// Bring an agent made in the dashboard into the repo
+await client.conversationalAi.agents.pull("agent_123", { project });
+```
+
+Configs are kept in API format and settings the SDK doesn't model survive a round trip. Only JSON configs are supported for now; projects that use YAML or TOML configs raise an `AgentProjectError`.
+
 ## Retries
 
 This Node SDK is instrumented with automatic retries with exponential backoff. A request will be

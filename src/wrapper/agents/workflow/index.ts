@@ -9,6 +9,7 @@ export type {
     NodeOptions,
     NodeUpdate,
     ToolOptions,
+    ToolRef,
     TransferOptions,
 } from "./WorkflowGraph";
 export {

@@ -12,7 +12,9 @@ export type WorkflowIssueCode =
     | "cannot_remove_start"
     | "missing_insert_result"
     | "unreachable_node"
-    | "unknown_node_type";
+    | "unknown_node_type"
+    | "duplicate_tool_name"
+    | "unresolved_tool";
 
 export interface WorkflowIssue {
     code: WorkflowIssueCode;
