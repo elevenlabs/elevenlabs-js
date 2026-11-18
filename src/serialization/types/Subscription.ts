@@ -70,6 +70,7 @@ export const Subscription: core.serialization.ObjectSchema<serializers.Subscript
         nextInvoice: core.serialization.property("next_invoice", InvoiceResponse.optional()),
         openInvoices: core.serialization.property("open_invoices", core.serialization.list(InvoiceResponse)),
         hasOpenInvoices: core.serialization.property("has_open_invoices", core.serialization.boolean()),
+        cancelsImmediately: core.serialization.property("cancels_immediately", core.serialization.boolean().optional()),
         pendingChange: core.serialization.property("pending_change", SubscriptionPendingChange.optional()),
         hasUsedStarterCouponOnAccount: core.serialization.property(
             "has_used_starter_coupon_on_account",
@@ -113,6 +114,7 @@ export declare namespace Subscription {
         next_invoice?: InvoiceResponse.Raw | null;
         open_invoices: InvoiceResponse.Raw[];
         has_open_invoices: boolean;
+        cancels_immediately?: boolean | null;
         pending_change?: SubscriptionPendingChange.Raw | null;
         has_used_starter_coupon_on_account?: boolean | null;
         has_used_creator_coupon_on_account?: boolean | null;

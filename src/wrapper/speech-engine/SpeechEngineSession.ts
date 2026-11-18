@@ -250,7 +250,7 @@ export class SpeechEngineSession {
      * - OpenAI Responses API (`response.output_text.delta`)
      * - OpenAI Chat Completions API (`choices[0].delta.content`)
      * - Anthropic Messages API (`content_block_delta` with `text_delta`)
-     * - Google Gemini API (`candidates[0].content.parts[0].text`)
+     * - Google Gemini API (text parts of `candidates[0].content.parts`, excluding thoughts)
      */
     private extractText(chunk: unknown): string | null {
         if (typeof chunk === "string") return chunk;
@@ -284,8 +284,13 @@ export class SpeechEngineSession {
             const content = (event.candidates[0] as Record<string, unknown>)?.content;
             if (typeof content === "object" && content !== null) {
                 const parts = (content as Record<string, unknown>).parts;
-                if (Array.isArray(parts) && typeof (parts[0] as Record<string, unknown>)?.text === "string") {
-                    return (parts[0] as Record<string, unknown>).text as string;
+                if (Array.isArray(parts) && parts.length > 0) {
+                    const texts: string[] = [];
+                    for (const part of parts as Array<Record<string, unknown> | null | undefined>) {
+                        if (part?.thought === true) continue;
+                        if (typeof part?.text === "string") texts.push(part.text);
+                    }
+                    if (texts.length > 0) return texts.join("");
                 }
             }
         }

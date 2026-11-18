@@ -12,4 +12,6 @@ export interface WebhookHmacSettings {
     webhookUrl: string;
     /** Optional custom request headers to include with each webhook delivery */
     requestHeaders?: Record<string, string | undefined>;
+    /** Field names whose values the delivery log hides when it shows the request payload, matched at any depth, ignoring case and punctuation such as _ or -. Fields with secret-looking names, such as tokens and passwords, are always hidden. The stored log and redeliveries keep the original values. At most 50 names, each 1 to 128 characters, with no whitespace, dots or wildcards. */
+    logRedactedFields?: string[];
 }

@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AutoSyncInfo } from "./AutoSyncInfo";
+import { ChunkingOverride } from "./ChunkingOverride";
 import { DocumentUsageModeEnum } from "./DocumentUsageModeEnum";
 import { ExternalFolderSyncInfo } from "./ExternalFolderSyncInfo";
 import { KbExternalSyncJob } from "./KbExternalSyncJob";
@@ -21,6 +22,7 @@ export const GetKnowledgeBaseFolderResponseModel: core.serialization.ObjectSchem
     supportedUsages: core.serialization.property("supported_usages", core.serialization.list(DocumentUsageModeEnum)),
     accessInfo: core.serialization.property("access_info", ResourceAccessInfo),
     folderParentId: core.serialization.property("folder_parent_id", core.serialization.string().optional()),
+    chunkingOverride: core.serialization.property("chunking_override", ChunkingOverride.optional()),
     folderPath: core.serialization.property(
         "folder_path",
         core.serialization.list(KnowledgeBaseFolderPathSegmentResponseModel).optional(),
@@ -41,6 +43,7 @@ export declare namespace GetKnowledgeBaseFolderResponseModel {
         supported_usages: DocumentUsageModeEnum.Raw[];
         access_info: ResourceAccessInfo.Raw;
         folder_parent_id?: string | null;
+        chunking_override?: ChunkingOverride.Raw | null;
         folder_path?: KnowledgeBaseFolderPathSegmentResponseModel.Raw[] | null;
         children_count: number;
         document_count: number;

@@ -15,7 +15,7 @@ export interface AgentKnowledgeBaseRagChunkResponseModel {
     text: string;
     /** Similarity distance when exposed by the retrieval strategy. */
     vectorDistance?: number;
-    /** Format of the chunk text. Markdown chunks contain raw markdown; HTML chunks contain HTML. */
+    /** Format of the chunk text. Markdown chunks contain raw markdown; HTML chunks contain HTML. Keyword search always returns markdown, including the plain text it indexes for HTML documents. */
     contentFormat: ElevenLabs.ContentFormat;
     /** Type of the source knowledge base document. */
     documentType: ElevenLabs.KnowledgeBaseDocumentType;

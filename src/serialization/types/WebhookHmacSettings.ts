@@ -15,6 +15,10 @@ export const WebhookHmacSettings: core.serialization.ObjectSchema<
         "request_headers",
         core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
     ),
+    logRedactedFields: core.serialization.property(
+        "log_redacted_fields",
+        core.serialization.list(core.serialization.string()).optional(),
+    ),
 });
 
 export declare namespace WebhookHmacSettings {
@@ -23,5 +27,6 @@ export declare namespace WebhookHmacSettings {
         name: string;
         webhook_url: string;
         request_headers?: Record<string, string | null | undefined> | null;
+        log_redacted_fields?: string[] | null;
     }
 }

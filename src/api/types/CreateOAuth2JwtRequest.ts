@@ -22,11 +22,15 @@ export interface CreateOAuth2JwtRequest {
     expirationSeconds?: number;
     /** Additional custom claims to include in the JWT */
     extraParams?: Record<string, string>;
+    /** Additional JWT header parameters (e.g. x5t). 'alg' and 'kid' are set from algorithm and key_id. */
+    extraHeaders?: Record<string, string>;
     /** Token endpoint URL for exchanging JWT for access token */
     tokenUrl: string;
     /** OAuth2 scopes to request when exchanging JWT for access token */
     scopes?: string[];
     /** Token field to extract from the token endpoint response. */
     tokenResponseField?: ElevenLabs.CreateOAuth2JwtRequestTokenResponseField;
+    /** How the JWT is used at the token endpoint. 'authorization_grant' sends it as a jwt-bearer grant. 'client_authentication' sends it as a client_assertion on a client_credentials request, with the subject as client_id and scopes in the request body. */
+    jwtUsage?: ElevenLabs.CreateOAuth2JwtRequestJwtUsage;
     secretKey: string;
 }

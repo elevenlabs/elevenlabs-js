@@ -20,9 +20,11 @@ export const WorkspaceGroupPermission: core.serialization.Schema<
     "conversational_ai",
     "conversational_ai_read",
     "architect",
+    "agents_environment_variables_write",
     "voice_isolator",
     "ai_speech_classifier",
     "synthid_detector",
+    "watermark",
     "add_voice_from_voice_library",
     "create_instant_voice_clone",
     "create_professional_voice_clone",
@@ -63,9 +65,11 @@ export declare namespace WorkspaceGroupPermission {
         | "conversational_ai"
         | "conversational_ai_read"
         | "architect"
+        | "agents_environment_variables_write"
         | "voice_isolator"
         | "ai_speech_classifier"
         | "synthid_detector"
+        | "watermark"
         | "add_voice_from_voice_library"
         | "create_instant_voice_clone"
         | "create_professional_voice_clone"

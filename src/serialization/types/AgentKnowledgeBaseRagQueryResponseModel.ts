@@ -4,18 +4,27 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AgentKnowledgeBaseRagChunkResponseModel } from "./AgentKnowledgeBaseRagChunkResponseModel";
+import { AgentKnowledgeBaseRagDocumentResponseModel } from "./AgentKnowledgeBaseRagDocumentResponseModel";
+import { AgentKnowledgeBaseRagListingResponseModel } from "./AgentKnowledgeBaseRagListingResponseModel";
+import { SearchStrategy } from "./SearchStrategy";
 
 export const AgentKnowledgeBaseRagQueryResponseModel: core.serialization.ObjectSchema<
     serializers.AgentKnowledgeBaseRagQueryResponseModel.Raw,
     ElevenLabs.AgentKnowledgeBaseRagQueryResponseModel
 > = core.serialization.object({
-    retrievalQuery: core.serialization.property("retrieval_query", core.serialization.string()),
+    strategy: SearchStrategy,
+    retrievalQuery: core.serialization.property("retrieval_query", core.serialization.string().optional()),
     chunks: core.serialization.list(AgentKnowledgeBaseRagChunkResponseModel),
+    document: AgentKnowledgeBaseRagDocumentResponseModel.optional(),
+    listing: AgentKnowledgeBaseRagListingResponseModel.optional(),
 });
 
 export declare namespace AgentKnowledgeBaseRagQueryResponseModel {
     export interface Raw {
-        retrieval_query: string;
+        strategy: SearchStrategy.Raw;
+        retrieval_query?: string | null;
         chunks: AgentKnowledgeBaseRagChunkResponseModel.Raw[];
+        document?: AgentKnowledgeBaseRagDocumentResponseModel.Raw | null;
+        listing?: AgentKnowledgeBaseRagListingResponseModel.Raw | null;
     }
 }

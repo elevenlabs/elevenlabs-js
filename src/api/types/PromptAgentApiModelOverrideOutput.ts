@@ -7,6 +7,8 @@ export interface PromptAgentApiModelOverrideOutput {
     prompt?: string;
     /** The LLM to query with the prompt and the chat history. If using data residency, the LLM must be supported in the data residency environment */
     llm?: ElevenLabs.Llm;
+    /** Reasoning effort of the model. Only available for some models. */
+    reasoningEffort?: ElevenLabs.LlmReasoningEffort;
     /** A list of IDs of tools used by the agent */
     toolIds?: string[];
     /** Only applies as a conversation override, allowed whenever tool_ids may be overridden. When true, the overridden tool_ids is the full list of tools allowed in the conversation, including tools on workflow nodes. Ignored when set on the agent. */

@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { ConversationHistoryTranscriptToolCallIntegrationFunctionDetails } from "./ConversationHistoryTranscriptToolCallIntegrationFunctionDetails";
 import { ConversationHistoryTranscriptToolCallWebhookDetails } from "./ConversationHistoryTranscriptToolCallWebhookDetails";
 
 export const ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetailsInput: core.serialization.ObjectSchema<
@@ -16,6 +17,10 @@ export const ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetailsIn
         core.serialization.string().optional(),
     ),
     webhookDetails: core.serialization.property("webhook_details", ConversationHistoryTranscriptToolCallWebhookDetails),
+    functionDetails: core.serialization.property(
+        "function_details",
+        ConversationHistoryTranscriptToolCallIntegrationFunctionDetails.optional(),
+    ),
 });
 
 export declare namespace ConversationHistoryTranscriptToolCallApiIntegrationWebhookDetailsInput {
@@ -24,5 +29,6 @@ export declare namespace ConversationHistoryTranscriptToolCallApiIntegrationWebh
         credential_id?: string | null;
         integration_connection_id?: string | null;
         webhook_details: ConversationHistoryTranscriptToolCallWebhookDetails.Raw;
+        function_details?: ConversationHistoryTranscriptToolCallIntegrationFunctionDetails.Raw | null;
     }
 }

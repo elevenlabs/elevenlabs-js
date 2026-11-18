@@ -8,6 +8,9 @@ export const CreatePrivateKeyJwtRequestAlgorithm = {
     Rs256: "RS256",
     Rs384: "RS384",
     Rs512: "RS512",
+    Ps256: "PS256",
+    Ps384: "PS384",
+    Ps512: "PS512",
 } as const;
 export type CreatePrivateKeyJwtRequestAlgorithm =
     (typeof CreatePrivateKeyJwtRequestAlgorithm)[keyof typeof CreatePrivateKeyJwtRequestAlgorithm];

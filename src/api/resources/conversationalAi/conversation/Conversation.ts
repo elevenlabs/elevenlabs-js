@@ -19,7 +19,26 @@ import { WebSocketFactory, WebSocketInterface, DefaultWebSocketFactory } from ".
 import { ConversationClient } from "./interfaces/ConversationClient";
 
 /**
+ * Why a conversation session ended, passed as the last argument of `session_ended`.
+ *
+ * `user` is an explicit `endSession()`. `agent` is the server closing the socket normally (code
+ * 1000, 1001 or none), which is how a session ends when the agent ends the call. `error` is a
+ * socket error, an abnormal close, or a failure to send audio; `closeCode` and `closeReason` are
+ * set when the socket closed, and a connection lost without a close frame has code 1006.
+ */
+export type DisconnectionDetails =
+    | { reason: "user" }
+    | { reason: "agent"; closeCode: number; closeReason: string }
+    | { reason: "error"; message: string; closeCode?: number; closeReason?: string };
+
+const NORMAL_CLOSE_CODES: number[] = [1000, 1001, 1005];
+
+/**
  * Conversational AI session for Node.js.
+ *
+ * Emits `session_ended` once per session with `(conversationId, closeCode, closeReason, details)`.
+ * `closeCode` and `closeReason` are set when the server closed the socket, and `details` is the
+ * session's {@link DisconnectionDetails}.
  *
  * BETA: This API is subject to change without regard to backwards compatibility.
  */
@@ -43,6 +62,7 @@ export class Conversation extends EventEmitter {
     // Internal state
     private ws?: WebSocketInterface;
     private shouldStop: boolean = false;
+    private socketError?: Error;
     private conversationId?: string;
     private lastInterruptId: number = 0;
     private inputCallback?: (audio: Buffer) => void;
@@ -108,6 +128,7 @@ export class Conversation extends EventEmitter {
             });
 
             this.ws.on("error", (error: Error) => {
+                this.socketError = error;
                 this.emit("error", error);
                 reject(error);
             });
@@ -120,8 +141,15 @@ export class Conversation extends EventEmitter {
 
     /**
      * Ends the conversation session and cleans up resources.
+     *
+     * `session_ended` is emitted once per session, however many times this is called.
      */
     public endSession(): void {
+        this._endSession({ reason: "user" });
+    }
+
+    private _endSession(details: DisconnectionDetails): void {
+        const notify = !this.shouldStop;
         this.shouldStop = true;
 
         if (this.audioInterface) {
@@ -133,7 +161,9 @@ export class Conversation extends EventEmitter {
             this.ws = undefined;
         }
 
-        this.emit("session_ended", this.conversationId);
+        if (notify) {
+            this.emit("session_ended", this.conversationId, undefined, undefined, details);
+        }
     }
 
     /**
@@ -269,7 +299,10 @@ export class Conversation extends EventEmitter {
                 this.ws!.send(JSON.stringify(audioEvent));
             } catch (error) {
                 console.error("Error sending user audio chunk:", error);
-                this.endSession();
+                this._endSession({
+                    reason: "error",
+                    message: error instanceof Error ? error.message : String(error),
+                });
             }
         };
 
@@ -292,7 +325,21 @@ export class Conversation extends EventEmitter {
     }
 
     private _onWebSocketClose(code: number, reason: Buffer): void {
-        this.emit("session_ended", this.conversationId, code, reason.toString());
+        if (this.shouldStop) {
+            return;
+        }
+        this.shouldStop = true;
+        const closeReason = reason.toString();
+        const details: DisconnectionDetails =
+            NORMAL_CLOSE_CODES.includes(code) && !this.socketError
+                ? { reason: "agent", closeCode: code, closeReason }
+                : {
+                      reason: "error",
+                      message: this.socketError?.message ?? `WebSocket closed with code ${code}`,
+                      closeCode: code,
+                      closeReason,
+                  };
+        this.emit("session_ended", this.conversationId, code, closeReason, details);
     }
 
     private _handleMessage(message: any): void {

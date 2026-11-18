@@ -5,6 +5,8 @@ import type * as ElevenLabs from "../index";
 export interface ConversationHistoryTranscriptSystemToolResultCommonModelOutput {
     requestId: string;
     toolName: string;
+    /** ID of the tool that produced this result: a workspace tool ID, 'mcp:<server_id>:<tool_name>' for MCP tools, or '__system_<tool_name>' for system tools. Not set for conversations recorded before tool IDs were tracked. */
+    toolId?: string;
     resultValue: string;
     isError: boolean;
     isBlocked?: boolean;

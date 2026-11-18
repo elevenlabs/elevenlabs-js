@@ -23,6 +23,7 @@ describe("DocumentClient", () => {
                 access_source: "creator",
             },
             folder_parent_id: "folder_parent_id",
+            chunking_override: { max_chunk_size: 1, overlap_percentage: 1, custom_separators: ["custom_separators"] },
             folder_path: [{ id: "id", name: "name" }],
             url: "url",
             extracted_inner_html: "extracted_inner_html",
@@ -58,6 +59,11 @@ describe("DocumentClient", () => {
                 accessSource: "creator",
             },
             folderParentId: "folder_parent_id",
+            chunkingOverride: {
+                maxChunkSize: 1,
+                overlapPercentage: 1,
+                customSeparators: ["custom_separators"],
+            },
             folderPath: [
                 {
                     id: "id",

@@ -365,6 +365,52 @@ describe("SpeechEngineSession", () => {
         expect(sent[2]).toEqual({ type: "agent_response", content: "", event_id: 13, is_final: true });
     });
 
+    it.each([
+        [[{ text: "Hello" }, { text: " world" }], "Hello world"],
+        [[{ functionCall: { name: "lookup" } }, { text: "Hello" }], "Hello"],
+        [[{ text: "Thinking", thought: true }, { text: "Answer", thought: false }], "Answer"],
+        [[{ text: "Thinking", thought: true }], ""],
+        [[{ text: "" }, { text: null }, { text: "Hello" }], "Hello"],
+        [[], ""],
+    ])("uses all Gemini answer parts from the first candidate (%j)", async (parts, expected) => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 13 });
+
+        async function* geminiStream() {
+            yield {
+                candidates: [{ content: { parts } }, { content: { parts: [{ text: "Another candidate" }] } }],
+            };
+        }
+
+        session.sendResponse(geminiStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent.map((m) => m.content).join("")).toBe(expected);
+        expect(sent.every((m) => m.event_id === 13)).toBe(true);
+        expect(sent.map((m) => m.is_final)).toEqual(expected ? [false, true] : [true]);
+        expect(sent[sent.length - 1].content).toBe("");
+    });
+
+    it("skips Gemini thought chunks that precede the answer", async () => {
+        ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 13 });
+
+        async function* geminiStream() {
+            yield { candidates: [{ content: { parts: [{ text: "Let me think", thought: true }] } }] };
+            yield { candidates: [{ content: { parts: [{ text: "Hey" }] } }] };
+            yield { candidates: [{ content: { parts: [{ text: " buddy" }] } }] };
+        }
+
+        session.sendResponse(geminiStream());
+        await new Promise((r) => setTimeout(r, 10));
+
+        const sent = ws.sent.map((s) => JSON.parse(s));
+        expect(sent).toEqual([
+            { type: "agent_response", content: "Hey", event_id: 13, is_final: false },
+            { type: "agent_response", content: " buddy", event_id: 13, is_final: false },
+            { type: "agent_response", content: "", event_id: 13, is_final: true },
+        ]);
+    });
+
     it("skips unrecognized stream events without breaking", async () => {
         ws.receiveMessage({ type: "user_transcript", user_transcript: transcript, event_id: 14 });
 

@@ -49,8 +49,8 @@ describe("AuditLogsClient", () => {
             timeFromUnixMs: 1,
             timeToUnixMs: 1,
             actorUid: "actor_uid",
-            className: "class_name",
-            activityName: "activity_name",
+            className: "Account Change",
+            activityName: "Account Security Change",
         });
         expect(response).toEqual({
             entries: [

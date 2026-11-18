@@ -25,7 +25,7 @@ export interface BodyCreateCrawlJobV1ConvaiKnowledgeBaseCrawlPost {
     enableAutoSync?: boolean;
     /** Whether to automatically remove the document if the URL becomes unavailable. Only applicable when auto-sync is enabled. */
     autoRemove?: boolean;
-    /** Automatically discover and add new pages linked from already-crawled pages during auto-sync. Requires enable_auto_sync=true. */
+    /** Automatically discover and add new pages during auto-sync: pages linked from already-crawled pages for website crawls, or new sitemap entries matching `pattern` and `exclude_patterns` for sitemap crawls. Requires enable_auto_sync=true. */
     autoDiscover?: boolean;
     /** Minimum frequency (in days) at which the underlying eligible documents are refreshed. The actual interval may be shorter, never longer. Defaults to 7, tightened to the parent folder's frequency if that is stricter. Only applicable when auto-sync is enabled. */
     minimumFrequencyDays?: number;

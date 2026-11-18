@@ -1,0 +1,1 @@
+export { ReceptionUpdateAgentInfoRequest } from "./ReceptionUpdateAgentInfoRequest";

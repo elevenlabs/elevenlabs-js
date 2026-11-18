@@ -14,6 +14,8 @@ export interface CustomGuardrailConfig {
     executionMode?: ElevenLabs.GuardrailExecutionMode;
     /** LLM model to use for custom guardrail evaluation */
     model?: ElevenLabs.CustomGuardrailConfigModel;
+    /** Service tier of the model, trading a per-token price premium for higher token throughput. Only available for some models. */
+    serviceTier?: ElevenLabs.LlmServiceTier;
     /** How much recent history the guardrail sees before the reply it evaluates, counted in user messages (the agent replies between them are included too). The guardrail always gets a single <conversation_history> transcript ending in the evaluated reply, marked 'AGENT [current reply]:'. 0 (default) adds no prior history (just that line); 1 adds the latest user message onward. */
     historyMessageCount?: number;
     triggerAction?: ElevenLabs.CustomGuardrailConfigTriggerAction;

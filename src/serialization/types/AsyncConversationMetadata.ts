@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { AsyncConversationMetadataDeliveryStatus } from "./AsyncConversationMetadataDeliveryStatus";
+import { AsyncConversationMetadataPlatformMetadata } from "./AsyncConversationMetadataPlatformMetadata";
 
 export const AsyncConversationMetadata: core.serialization.ObjectSchema<
     serializers.AsyncConversationMetadata.Raw,
@@ -21,6 +22,11 @@ export const AsyncConversationMetadata: core.serialization.ObjectSchema<
         "last_processed_external_message_id",
         core.serialization.string().optional(),
     ),
+    integrationTriggerId: core.serialization.property("integration_trigger_id", core.serialization.string().optional()),
+    platformMetadata: core.serialization.property(
+        "platform_metadata",
+        AsyncConversationMetadataPlatformMetadata.optional(),
+    ),
 });
 
 export declare namespace AsyncConversationMetadata {
@@ -34,5 +40,7 @@ export declare namespace AsyncConversationMetadata {
         retry_count?: number | null;
         last_retry_timestamp?: number | null;
         last_processed_external_message_id?: string | null;
+        integration_trigger_id?: string | null;
+        platform_metadata?: AsyncConversationMetadataPlatformMetadata.Raw | null;
     }
 }

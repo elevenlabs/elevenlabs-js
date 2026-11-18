@@ -19,6 +19,7 @@ import { LinkClient } from "../resources/link/client/Client";
 import { LlmUsageClient } from "../resources/llmUsage/client/Client";
 import { MergeProposalsClient } from "../resources/mergeProposals/client/Client";
 import { ProceduresClient } from "../resources/procedures/client/Client";
+import { SubagentsClient } from "../resources/subagents/client/Client";
 import { SummariesClient } from "../resources/summaries/client/Client";
 import { VersionsClient } from "../resources/versions/client/Client";
 import { WidgetClient } from "../resources/widget/client/Client";
@@ -32,6 +33,7 @@ export declare namespace AgentsClient {
 export class AgentsClient {
     protected readonly _options: NormalizedClientOptions<AgentsClient.Options>;
     protected _summaries: SummariesClient | undefined;
+    protected _subagents: SubagentsClient | undefined;
     protected _widget: WidgetClient | undefined;
     protected _link: LinkClient | undefined;
     protected _holdAudio: HoldAudioClient | undefined;
@@ -50,6 +52,10 @@ export class AgentsClient {
 
     public get summaries(): SummariesClient {
         return (this._summaries ??= new SummariesClient(this._options));
+    }
+
+    public get subagents(): SubagentsClient {
+        return (this._subagents ??= new SubagentsClient(this._options));
     }
 
     public get widget(): WidgetClient {

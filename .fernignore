@@ -17,3 +17,4 @@ tests/wire/conversationalAi/mcpServers/tools.test.ts
 .fern/replay.lock
 .fern/replay.yml
 .gitattributes
+docs/

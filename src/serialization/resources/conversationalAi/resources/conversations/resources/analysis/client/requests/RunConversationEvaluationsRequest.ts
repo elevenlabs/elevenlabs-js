@@ -11,11 +11,15 @@ export const RunConversationEvaluationsRequest: core.serialization.Schema<
 > = core.serialization.object({
     evaluationId: core.serialization.property("evaluation_id", core.serialization.string()),
     scope: AnalysisScope.optional(),
+    evaluatedAgentId: core.serialization.property("evaluated_agent_id", core.serialization.string().optional()),
+    evaluatedBranchId: core.serialization.property("evaluated_branch_id", core.serialization.string().optional()),
 });
 
 export declare namespace RunConversationEvaluationsRequest {
     export interface Raw {
         evaluation_id: string;
         scope?: AnalysisScope.Raw | null;
+        evaluated_agent_id?: string | null;
+        evaluated_branch_id?: string | null;
     }
 }

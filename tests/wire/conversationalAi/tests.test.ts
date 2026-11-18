@@ -116,6 +116,7 @@ describe("TestsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    created_at_unix_ms: 1,
                     triggered_guardrails: [{ guardrail_type: "custom" }],
                 },
             ],
@@ -222,6 +223,7 @@ describe("TestsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    createdAtUnixMs: 1,
                     triggeredGuardrails: [
                         {
                             guardrailType: "custom",
@@ -314,6 +316,7 @@ describe("TestsClient", () => {
                     used_static_kb_document_ids: ["used_static_kb_document_ids"],
                     user_identifier: "user_identifier",
                     id: "id",
+                    created_at_unix_ms: 1,
                     triggered_guardrails: [{ guardrail_type: "custom" }],
                 },
             ],
@@ -424,6 +427,7 @@ describe("TestsClient", () => {
                     usedStaticKbDocumentIds: ["used_static_kb_document_ids"],
                     userIdentifier: "user_identifier",
                     id: "id",
+                    createdAtUnixMs: 1,
                     triggeredGuardrails: [
                         {
                             guardrailType: "custom",

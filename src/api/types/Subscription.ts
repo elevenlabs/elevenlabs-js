@@ -55,6 +55,8 @@ export interface Subscription {
     openInvoices: ElevenLabs.InvoiceResponse[];
     /** Whether the user has open invoices. */
     hasOpenInvoices: boolean;
+    /** Whether cancelling the subscription now ends it immediately, because an unpaid invoice is being collected, rather than at the end of the billing period. */
+    cancelsImmediately?: boolean;
     /** The pending change for the user. */
     pendingChange?: ElevenLabs.SubscriptionPendingChange;
     /** True if any workspace owned by this user's auth account has redeemed the starter first-month discount coupon. */

@@ -20,6 +20,7 @@ export const TtsConversationalConfigOverride: core.serialization.ObjectSchema<
     stability: core.serialization.number().optional(),
     speed: core.serialization.number().optional(),
     similarityBoost: core.serialization.property("similarity_boost", core.serialization.number().optional()),
+    cloneStrength: core.serialization.property("clone_strength", core.serialization.number().optional()),
     pronunciationDictionaryLocators: core.serialization.property(
         "pronunciation_dictionary_locators",
         core.serialization.list(PydanticPronunciationDictionaryVersionLocator).optional(),
@@ -34,6 +35,7 @@ export declare namespace TtsConversationalConfigOverride {
         stability?: number | null;
         speed?: number | null;
         similarity_boost?: number | null;
+        clone_strength?: number | null;
         pronunciation_dictionary_locators?: PydanticPronunciationDictionaryVersionLocator.Raw[] | null;
     }
 }

@@ -10,3 +10,4 @@ export type { BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch } from
 export type { DocumentsDeleteRequest } from "./DocumentsDeleteRequest";
 export type { DocumentsGetAgentsRequest } from "./DocumentsGetAgentsRequest";
 export type { DocumentsGetRequest } from "./DocumentsGetRequest";
+export type { UpdateDocumentChunkingOverrideRequestModel } from "./UpdateDocumentChunkingOverrideRequestModel";

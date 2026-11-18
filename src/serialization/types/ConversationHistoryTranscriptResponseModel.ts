@@ -64,6 +64,7 @@ export const ConversationHistoryTranscriptResponseModel: core.serialization.Obje
     ),
     userIdentifier: core.serialization.property("user_identifier", core.serialization.string().optional()),
     id: core.serialization.string().optional(),
+    createdAtUnixMs: core.serialization.property("created_at_unix_ms", core.serialization.number().optional()),
     triggeredGuardrails: core.serialization.property(
         "triggered_guardrails",
         core.serialization.list(TriggeredGuardrailCommonModel).optional(),
@@ -105,6 +106,7 @@ export declare namespace ConversationHistoryTranscriptResponseModel {
         used_static_kb_document_ids?: string[] | null;
         user_identifier?: string | null;
         id?: string | null;
+        created_at_unix_ms?: number | null;
         triggered_guardrails?: TriggeredGuardrailCommonModel.Raw[] | null;
         file_input?: ConversationHistoryTranscriptFileInputResponseModel.Raw | null;
         file_inputs?: ConversationHistoryTranscriptFileInputResponseModel.Raw[] | null;

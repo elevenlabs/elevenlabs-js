@@ -26,5 +26,6 @@ export interface ConversationHistoryTranscriptCommonModelInput {
     usedStaticKbDocumentIds?: string[];
     userIdentifier?: string;
     id?: string;
+    createdAtUnixMs?: number;
     triggeredGuardrails?: ElevenLabs.TriggeredGuardrailCommonModel[];
 }

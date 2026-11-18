@@ -12,6 +12,8 @@ export interface AgentBranchSummary {
     isArchived: boolean;
     protectionStatus?: ElevenLabs.BranchProtectionStatus;
     autoRebase?: boolean;
+    /** Set while the branch is kept in sync with another branch (Main today), pulling in its new versions automatically. Null when it is not synced. */
+    syncStatus?: ElevenLabs.BranchSyncStatus;
     /** Access information for the branch */
     accessInfo?: ElevenLabs.ResourceAccessInfo;
     /** Percentage of traffic live on the branch */

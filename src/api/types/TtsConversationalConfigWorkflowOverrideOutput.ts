@@ -23,6 +23,8 @@ export interface TtsConversationalConfigWorkflowOverrideOutput {
     speed?: number;
     /** The similarity boost for generated speech */
     similarityBoost?: number;
+    /** The clone strength for generated speech */
+    cloneStrength?: number;
     /** Method for converting numbers to words before converting text to speech. If set to SYSTEM_PROMPT, the system prompt will be updated to include normalization instructions. If set to ELEVENLABS, the text will be normalized after generation, incurring slight additional latency. */
     textNormalisationType?: ElevenLabs.TextNormalisationType;
     /** The pronunciation dictionary locators */

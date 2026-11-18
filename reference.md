@@ -3050,6 +3050,72 @@ await client.audioNative.updateContentFromUrl({
 </dl>
 </details>
 
+## ContentProvenance
+<details><summary><code>client.contentProvenance.<a href="/src/api/resources/contentProvenance/client/Client.ts">watermark</a>({ ...params }) -> ElevenLabs.WatermarkCheck</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Check an audio file for an embedded ElevenLabs watermark. This endpoint is in beta and may change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.contentProvenance.watermark({
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyCheckWatermarkV1ContentProvenanceWatermarkPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ContentProvenanceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Usage
 <details><summary><code>client.usage.<a href="/src/api/resources/usage/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.UsageCharactersResponseModel</code></summary>
 <dl>
@@ -3666,7 +3732,7 @@ await client.serviceAccounts.list();
 <dl>
 <dd>
 
-Create a new service account in the workspace. By default, a workspace can have up to 20 service accounts. Enterprise customers may request an increase to this limit, up to 100.
+Create a new service account in the workspace. By default, a workspace can have up to 20 service accounts. Enterprise customers may request an increase to this limit.
 </dd>
 </dl>
 </dd>
@@ -3972,6 +4038,150 @@ await client.webhooks.update("G007vmtq9uWYl7SUW9zGS8GZZa1K", {
 <dd>
 
 **request:** `ElevenLabs.BodyUpdateWorkspaceWebhookV1WorkspaceWebhooksWebhookIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">test</a>(webhook_id, { ...params }) -> ElevenLabs.WebhookSendResultResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a sample event of the given type to the webhook once and returns the endpoint's status code, response time, content type and response size. Test events are signed like real ones, are never retried, and share a limit of 10 per webhook per minute with redeliveries.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.webhooks.test("webhook_id", {
+    webhookType: "project_conversion_status"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**webhook_id:** `string` — The ID of the webhook.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodySendTestWebhookEventV1WorkspaceWebhooksWebhookIdTestPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">redeliver</a>(webhook_id, delivery_id) -> ElevenLabs.WebhookSendResultResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a stored delivery again, once, with the same delivery ID, a new signature and an ElevenLabs-Webhook-Redelivery header. A retry that is already scheduled is still sent. Only workspace admins on a web session can redeliver, and only deliveries whose payload is stored. Redeliveries and test events share a limit of 10 per webhook per minute.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.webhooks.redeliver("webhook_id", "delivery_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**webhook_id:** `string` — The ID of the webhook.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**delivery_id:** `string` — The ID of the delivery to send again.
     
 </dd>
 </dl>
@@ -5324,7 +5534,7 @@ await client.environmentVariables.get("env_var_id");
 <dl>
 <dd>
 
-Delete an environment variable and its values in all environments. WARNING: Agents are not checked. A variable that an agent still uses (custom LLM, webhooks or cloud storage export, on any branch or version) is deleted anyway, and that agent's conversations then fail. The delete is only rejected while tools, MCP servers or the workspace conversation initiation webhook use the variable.
+Delete an environment variable and its values in all environments. The delete is rejected while the latest version of an unarchived agent branch, a tool, an MCP server or the workspace conversation initiation webhook uses the variable. Archived branches and earlier versions are not checked.
 </dd>
 </dl>
 </dd>
@@ -6078,13 +6288,20 @@ await client.conversationalAi.conversations.list({
     evaluationParams: ["evaluation_params"],
     dataCollectionParams: ["data_collection_params"],
     dynamicVariableParams: ["dynamic_variable_params"],
+    dataCollectionFilter: "data_collection_filter",
+    dynamicVariableFilter: "dynamic_variable_filter",
     dataCollectionIds: ["data_collection_ids"],
     evaluationCriteriaIds: ["evaluation_criteria_ids"],
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
+    toolIds: ["tool_ids"],
+    toolIdsSuccessful: ["tool_ids_successful"],
+    toolIdsErrored: ["tool_ids_errored"],
     includeInvalidToolCalls: true,
     mainLanguages: ["main_languages"],
+    phoneNumberIds: ["phone_number_ids"],
+    whatsappPhoneNumberIds: ["whatsapp_phone_number_ids"],
     pageSize: 1,
     summaryMode: "exclude",
     search: "search",
@@ -6119,6 +6336,74 @@ await client.conversationalAi.conversations.list({
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.ConversationsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.CreateAgentConversationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a text conversation with an agent. This does not run the agent, and the agent sends no first message. This endpoint is in alpha and may change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.create({
+    agent: {
+        type: "persisted",
+        agentId: "agent_id"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.CreateAgentConversationRequest` 
     
 </dd>
 </dl>
@@ -6468,6 +6753,318 @@ await client.conversationalAi.conversations.getSipMessages("21m00Tcm4TlvDq8ikWAM
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.ConversationsGetSipMessagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">sendMessage</a>(conversation_id, { ...params }) -> ElevenLabs.ConversationTurn</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Send input to a conversation, and wait until the agent finishes or waits on client tool results. With `background` set to true, the endpoint returns 202 when the server admits the turn. Then stream the turn's events with `Last-Event-ID` set to the `stream_cursor`. This endpoint is in alpha and may change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.sendMessage("conversation_id", {
+    input: [{
+            type: "client_tool_result",
+            toolCallId: "tool_call_id",
+            result: "result",
+            isError: true
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The Conversation ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.SendConversationMessageRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">sendMessageStream</a>(conversation_id, { ...params }) -> core.Stream&lt;ElevenLabs.StreamEnvelope&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Send input to a conversation, and stream the events of the request as server-sent events. The last event is `stream_ended`, which has the outcome of the turn. This endpoint is in alpha and may change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.conversationalAi.conversations.sendMessageStream("conversation_id", {
+    input: [{
+            type: "client_tool_result",
+            toolCallId: "tool_call_id",
+            result: "result",
+            isError: true
+        }]
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The Conversation ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.SendConversationMessageStreamRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">getTurn</a>(conversation_id, turn_id) -> ElevenLabs.ConversationTurn</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the status and output of a turn. The status comes from the stored transcript, so a turn that failed after the agent started can show as completed. Only the `stream_ended` event has the real outcome. This endpoint is in alpha and may change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.getTurn("conversation_id", "turn_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The Conversation ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**turn_id:** `string` — The Turn ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConversationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.<a href="/src/api/resources/conversationalAi/resources/conversations/client/Client.ts">streamTurnEvents</a>(conversation_id, turn_id, { ...params }) -> core.Stream&lt;ElevenLabs.StreamEnvelope&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stream the events of a turn as server-sent events. Send `Last-Event-ID` to resume after an event. The server keeps events for about an hour. This endpoint is in alpha and may change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.conversationalAi.conversations.streamTurnEvents("conversation_id", "turn_id");
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The Conversation ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**turn_id:** `string` — The Turn ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.ConversationsStreamTurnEventsRequest` 
     
 </dd>
 </dl>
@@ -8059,7 +8656,7 @@ await client.conversationalAi.users.list({
 <dl>
 <dd>
 
-List an agent's conversation triage tickets, ordered by most recently created first unless sorted by priority. These are tickets about the agent's own performance on a conversation (for triage with Architect), not tickets an agent opens for end users.
+List an agent's issues, ordered by most recently created first unless sorted by priority. These are issues about the agent's own performance on a conversation (to work on with Architect), not tickets an agent opens for end users.
 </dd>
 </dl>
 </dd>
@@ -8144,7 +8741,7 @@ await client.conversationalAi.triageTickets.list("agent_id", {
 <dl>
 <dd>
 
-Manually raise a follow-up ticket against an agent, not tied to any conversation (for example a task like 'add the KB about X'). Without a title, one is derived from the comment. Requires viewer access to the agent.
+Manually raise a follow-up issue against an agent, not tied to any conversation (for example a task like 'add the KB about X'). Without a title, one is derived from the comment. Requires viewer access to the agent.
 </dd>
 </dl>
 </dd>
@@ -8217,7 +8814,7 @@ await client.conversationalAi.triageTickets.createManual("agent_id", {
 <dl>
 <dd>
 
-List conversation triage tickets across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, tickets assigned to the caller). Supports the same filters, sorting and search as the per-agent endpoint. Tickets for agents the caller cannot access are omitted.
+List agent issues across every agent in the workspace, ordered by most recently created first. Use this to build a workspace-wide view (for example, issues assigned to the caller). Supports the same filters, sorting and search as the per-agent endpoint. Issues for agents the caller cannot access are omitted.
 </dd>
 </dl>
 </dd>
@@ -8294,7 +8891,7 @@ await client.conversationalAi.triageTickets.listForWorkspace({
 <dl>
 <dd>
 
-Raise a ticket about an agent's performance on a conversation, for triage with Architect. Provide an overall comment and/or turn-level comments describing what went wrong.
+Raise an issue about an agent's performance on a conversation, to work on with Architect. Provide an overall comment and/or turn-level comments describing what went wrong.
 </dd>
 </dl>
 </dd>
@@ -8422,7 +9019,7 @@ await client.conversationalAi.triageTickets.listAssignableUsers("agent_id");
 <dl>
 <dd>
 
-Get an agent conversation ticket by ID.
+Get an agent issue by ID.
 </dd>
 </dl>
 </dd>
@@ -8485,7 +9082,7 @@ await client.conversationalAi.triageTickets.get("agentqa_ticket_id");
 <dl>
 <dd>
 
-Delete an agent conversation ticket. Restricted to the ticket creator or a workspace admin.
+Delete an agent issue. Restricted to the issue creator or a workspace admin.
 </dd>
 </dl>
 </dd>
@@ -8548,7 +9145,7 @@ await client.conversationalAi.triageTickets.delete("agentqa_ticket_id");
 <dl>
 <dd>
 
-Update a ticket's title, comment, status, priority, and/or assignee. Requires viewer access to the ticket's agent.
+Update an agent issue's title, comment, status, priority, and/or assignee. Requires viewer access to the issue's agent.
 </dd>
 </dl>
 </dd>
@@ -8619,7 +9216,7 @@ await client.conversationalAi.triageTickets.update("agentqa_ticket_id");
 <dl>
 <dd>
 
-Append a comment discussing how to resolve the ticket. Requires viewer access to the ticket's agent.
+Append a comment discussing how to resolve the agent issue. Requires viewer access to the issue's agent.
 </dd>
 </dl>
 </dd>
@@ -8692,7 +9289,7 @@ await client.conversationalAi.triageTickets.addComment("agentqa_ticket_id", {
 <dl>
 <dd>
 
-Merge other open tickets of the same agent into this pending, in-progress, or resolved one. Their conversations move onto this ticket, its priority is raised to the highest among them, and they are kept with status 'merged'. Requires viewer access to the ticket's agent.
+Merge other open issues of the same agent into this pending, in-progress, or resolved one. Their conversations move onto this issue, its priority is raised to the highest among them, and they are kept with status 'merged'. Requires viewer access to the issue's agent.
 </dd>
 </dl>
 </dd>
@@ -8765,7 +9362,7 @@ await client.conversationalAi.triageTickets.merge("agentqa_ticket_id", {
 <dl>
 <dd>
 
-Append a turn-level comment to a ticket. Requires viewer access to the ticket's agent.
+Append a turn-level comment to an agent issue. Requires viewer access to the issue's agent.
 </dd>
 </dl>
 </dd>
@@ -11584,7 +12181,7 @@ await client.conversationalAi.batchCalls.retry("batch_id");
 <dl>
 <dd>
 
-Download all recipients and conversation results for a terminal batch call as CSV.
+Download all recipients and conversation results for a batch call as CSV, including calls that are still in progress.
 </dd>
 </dl>
 </dd>
@@ -12295,6 +12892,637 @@ await client.conversationalAi.whatsappAccounts.list({
 </dl>
 </details>
 
+## ConversationalAi OutboundCampaigns
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.CampaignPageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's outbound campaigns, newest first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.list({
+    pageSize: 1,
+    status: ["active"],
+    agentId: "agent_id",
+    channel: "phone",
+    mode: "voice",
+    search: "search",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.OutboundCampaignsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">pauseAll</a>() -> ElevenLabs.PauseAllCampaignsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pause every running outbound campaign in the workspace. Paused campaigns place no new calls until resumed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.pauseAll();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">stopAll</a>() -> ElevenLabs.StopAllCampaignsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stop every outbound campaign in the workspace that hasn't finished. Returns `202` while calls already placed are still finishing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.stopAll();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.SubmitCampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an outbound campaign that calls or messages each recipient with the agent, within the policy's calling windows, retrying and following up as it allows. Returns `201` for a new campaign. A repeated request, matched by `idempotency_key` or else by its body, returns the existing campaign with `created` false.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.create({
+    callName: "call_name",
+    agentId: "agent_id",
+    recipients: [{}],
+    channelConfig: {
+        channel: "phone",
+        agentPhoneNumberId: "agent_phone_number_id"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.SubmitCampaignRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">get</a>(campaign_id) -> ElevenLabs.CampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get an outbound campaign and its lead counts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.get("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">getProgress</a>(campaign_id) -> ElevenLabs.CampaignProgressResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get where an outbound campaign's leads and calls stand, and when its next call is due.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.getProgress("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">getFollowUpRequests</a>(campaign_id) -> ElevenLabs.CampaignFollowUpRequestsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Count the callbacks and redirects contacts asked for during an outbound campaign's calls.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.getFollowUpRequests("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">pause</a>(campaign_id) -> ElevenLabs.CampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pause an outbound campaign. It places no new calls until resumed; calls already placed carry on.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.pause("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">resume</a>(campaign_id) -> ElevenLabs.CampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Resume a paused outbound campaign, including calls an attention item held back.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.resume("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/client/Client.ts">stop</a>(campaign_id) -> ElevenLabs.CampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stop an outbound campaign for good: queued calls are cancelled and no lead is called again. Returns `202` with the campaign `stopping` while calls already placed are still finishing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.stop("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OutboundCampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Realtime
 <details><summary><code>client.conversationalAi.realtime.<a href="/src/api/resources/conversationalAi/resources/realtime/client/Client.ts">listConversationGroups</a>({ ...params }) -> ElevenLabs.RealtimeConversationGroupsResponseModel</code></summary>
 <dl>
@@ -12879,6 +14107,81 @@ await client.conversationalAi.agents.summaries.get({
 <dd>
 
 **requestOptions:** `SummariesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi Agents Subagents
+<details><summary><code>client.conversationalAi.agents.subagents.<a href="/src/api/resources/conversationalAi/resources/agents/resources/subagents/client/Client.ts">getDependents</a>(agent_id, { ...params }) -> ElevenLabs.GetAgentSubagentDependentsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a list of agents that use this agent as a subagent.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.agents.subagents.getDependents("agent_3701k3ttaq12ewp8b7qv5rfyszkz", {
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — The id of an agent. This is returned on agent creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.agents.SubagentsGetDependentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubagentsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -15908,6 +17211,222 @@ await client.conversationalAi.conversations.audio.get("conversation_id");
 </dl>
 </details>
 
+## ConversationalAi Conversations Files
+<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">get</a>(conversation_id, file_id) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download a file the user attached to a conversation, including while the conversation is still active.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.files.get("conversation_id", "file_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` — The id of the conversation you're taking the action on.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_id:** `string` — The file ID returned when it was uploaded.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">delete</a>(conversation_id, file_id) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.files.delete("conversation_id", "file_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">create</a>(conversation_id, { ...params }) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload an image, PDF, or text file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.conversations.files.create("conversation_id", {
+    file: fs.createReadStream("/path/to/your/file")
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**conversation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.conversations.BodyUploadFileV1ConvaiConversationsConversationIdFilesPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ConversationalAi Conversations Feedback
 <details><summary><code>client.conversationalAi.conversations.feedback.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/feedback/client/Client.ts">create</a>(conversation_id, { ...params }) -> unknown</code></summary>
 <dl>
@@ -16031,8 +17550,13 @@ await client.conversationalAi.conversations.messages.textSearch({
     toolNames: ["tool_names"],
     toolNamesSuccessful: ["tool_names_successful"],
     toolNamesErrored: ["tool_names_errored"],
+    toolIds: ["tool_ids"],
+    toolIdsSuccessful: ["tool_ids_successful"],
+    toolIdsErrored: ["tool_ids_errored"],
     includeInvalidToolCalls: true,
     mainLanguages: ["main_languages"],
+    phoneNumberIds: ["phone_number_ids"],
+    whatsappPhoneNumberIds: ["whatsapp_phone_number_ids"],
     excludeStatuses: ["initiated"],
     terminationReasons: ["termination_reasons"],
     pageSize: 1,
@@ -16612,151 +18136,6 @@ await client.conversationalAi.conversations.tags.update("tag_id");
 <dd>
 
 **requestOptions:** `TagsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ConversationalAi Conversations Files
-<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">create</a>(conversation_id, { ...params }) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Upload an image, PDF, or text file for a conversation. Returns a unique file ID that can be used to reference the file in the conversation.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.conversations.files.create("conversation_id", {
-    file: fs.createReadStream("/path/to/your/file")
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**conversation_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.conversationalAi.conversations.BodyUploadFileV1ConvaiConversationsConversationIdFilesPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `FilesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.conversationalAi.conversations.files.<a href="/src/api/resources/conversationalAi/resources/conversations/resources/files/client/Client.ts">delete</a>(conversation_id, file_id) -> ElevenLabs.ConvAiFileUploadResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Remove a file upload from a conversation. Only possible if the file hasn't already been used in the conversation.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.conversationalAi.conversations.files.delete("conversation_id", "file_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**conversation_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**file_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `FilesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -17563,6 +18942,140 @@ await client.conversationalAi.knowledgeBase.documents.update("21m00Tcm4TlvDq8ikW
 <dd>
 
 **request:** `ElevenLabs.conversationalAi.knowledgeBase.BodyUpdateDocumentV1ConvaiKnowledgeBaseDocumentationIdPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">getChunkingOverride</a>(documentation_id) -> ElevenLabs.GetDocumentChunkingOverrideResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the stored and effective RAG chunking overrides for a document or folder.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.documents.getChunkingOverride("21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentation_id:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.knowledgeBase.documents.<a href="/src/api/resources/conversationalAi/resources/knowledgeBase/resources/documents/client/Client.ts">updateChunkingOverride</a>(documentation_id, { ...params }) -> ElevenLabs.UpdateDocumentChunkingOverrideResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Set or clear the RAG chunking override for a document or folder.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.knowledgeBase.documents.updateChunkingOverride("21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentation_id:** `string` — The id of a document from the knowledge base. This is returned on document addition.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.knowledgeBase.UpdateDocumentChunkingOverrideRequestModel` 
     
 </dd>
 </dl>
@@ -19326,6 +20839,702 @@ await client.conversationalAi.mcpServers.toolConfigs.update("mcp_server_id", "to
 <dd>
 
 **requestOptions:** `ToolConfigsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns Config
+<details><summary><code>client.conversationalAi.outboundCampaigns.config.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/config/client/Client.ts">get</a>() -> ElevenLabs.WorkspaceConfigResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the workspace's outbound campaign configuration: the default policy new campaigns take, and per-agent overrides.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.config.get();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConfigClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.config.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/config/client/Client.ts">update</a>({ ...params }) -> ElevenLabs.WorkspaceConfigResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create or replace the workspace's outbound campaign configuration. Send the `version` you last read as `expected_version`, or omit it to create the first configuration. A configuration changed since you read it is not replaced. Campaigns keep the policy they started with.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.config.update({
+    config: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.ReplaceWorkspaceConfigRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConfigClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns Leads
+<details><summary><code>client.conversationalAi.outboundCampaigns.leads.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/leads/client/Client.ts">list</a>(campaign_id, { ...params }) -> ElevenLabs.CampaignLeadsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the leads of an outbound campaign, one per recipient.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.leads.list("campaign_id", {
+    pageSize: 1,
+    search: "search",
+    status: "in_progress",
+    disposition: ["campaign_ended"],
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.LeadsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LeadsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.leads.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/leads/client/Client.ts">get</a>(campaign_id, lead_id) -> ElevenLabs.LeadDetailResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get one lead of an outbound campaign.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.leads.get("campaign_id", "lead_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lead_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LeadsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.leads.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/leads/client/Client.ts">delete</a>(campaign_id, lead_id) -> ElevenLabs.SuppressLeadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a lead from an outbound campaign so it is never called again. Returns `202` when a call already placed may still go through.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.leads.delete("campaign_id", "lead_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lead_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LeadsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns Calls
+<details><summary><code>client.conversationalAi.outboundCampaigns.calls.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/calls/client/Client.ts">list</a>(campaign_id, { ...params }) -> ElevenLabs.CampaignCallsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the calls of an outbound campaign, newest first: first contacts, retries, callbacks and redirects, whether queued, under way or done.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.calls.list("campaign_id", {
+    pageSize: 1,
+    leadId: "lead_id",
+    status: "queued",
+    callResult: ["answered"],
+    stage: "queued",
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.CallsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.calls.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/calls/client/Client.ts">export</a>(campaign_id, { ...params }) -> ReadableStream&lt;Uint8Array&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download every call of a campaign, with its lead and conversation results, as CSV.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.calls.export("campaign_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**campaign_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.CallsExportRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CallsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ConversationalAi OutboundCampaigns Attention
+<details><summary><code>client.conversationalAi.outboundCampaigns.attention.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/attention/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.AttentionPageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List problems in the workspace's outbound campaigns that need you to act, such as an agent or phone number that can no longer be used, newest first. A campaign with an open item holds back the calls it affects.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.attention.list({
+    campaignId: "campaign_id",
+    includeResolved: true,
+    pageSize: 1,
+    cursor: "cursor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.AttentionListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AttentionClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.attention.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/attention/client/Client.ts">retry</a>(attention_id) -> ElevenLabs.AttentionView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Place the calls a retryable attention item holds back, once its cause is fixed. Resumes the campaign.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.attention.retry("attention_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**attention_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AttentionClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.conversationalAi.outboundCampaigns.attention.<a href="/src/api/resources/conversationalAi/resources/outboundCampaigns/resources/attention/client/Client.ts">resolve</a>(attention_id, { ...params }) -> ElevenLabs.AttentionView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Close an attention item that can't be retried, recording how it was handled.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.conversationalAi.outboundCampaigns.attention.resolve("attention_id", {
+    resolution: "resolution"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**attention_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.conversationalAi.outboundCampaigns.AttentionResolutionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AttentionClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -24865,6 +27074,5304 @@ await client.pronunciationDictionaries.rules.remove("21m00Tcm4TlvDq8ikWAM", {
 </dl>
 </details>
 
+## Reception Services
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionService[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all services for the current workspace with optional filters
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.list({
+    xiWorkspaceId: "xi-workspace-id",
+    staffId: "staff_id",
+    assetId: "asset_id",
+    isActive: true,
+    kind: "classic"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ServicesListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ReceptionService</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new service
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.create({
+    xiWorkspaceId: "xi-workspace-id",
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionCreateServiceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">get</a>(service_id, { ...params }) -> ElevenLabs.ReceptionService</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific service by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.get("service_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_id:** `string` — ID of the service. Returned when you create one; list them with `GET /v1/reception/services`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ServicesGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">update</a>(service_id, { ...params }) -> ElevenLabs.ReceptionServiceUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing service. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.update("service_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_id:** `string` — ID of the service. Returned when you create one; list them with `GET /v1/reception/services`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionUpdateServiceRequestPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">delete</a>(service_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a service
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.delete("service_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_id:** `string` — ID of the service. Returned when you create one; list them with `GET /v1/reception/services`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ServicesDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.services.<a href="/src/api/resources/reception/resources/services/client/Client.ts">confirmUpdate</a>(service_id, { ...params }) -> ElevenLabs.ReceptionServiceUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Save a service update that changes the price of existing bookings. Optionally reprice future bookings.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.services.confirmUpdate("service_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    reprice: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_id:** `string` — ID of the service. Returned when you create one; list them with `GET /v1/reception/services`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionConfirmServiceUpdateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ServicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Assets
+<details><summary><code>client.reception.assets.<a href="/src/api/resources/reception/resources/assets/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionAssetResource[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's bookable assets, such as rooms or equipment.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.assets.list({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.AssetsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.assets.<a href="/src/api/resources/reception/resources/assets/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ReceptionAssetResource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a bookable asset, such as a room or a piece of equipment.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.assets.create({
+    xiWorkspaceId: "xi-workspace-id",
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionCreateAssetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.assets.<a href="/src/api/resources/reception/resources/assets/client/Client.ts">get</a>(asset_id, { ...params }) -> ElevenLabs.ReceptionAssetResource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get an asset by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.assets.get("asset_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asset_id:** `string` — ID of the asset. Returned when you create one; list them with `GET /v1/reception/assets`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.AssetsGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.assets.<a href="/src/api/resources/reception/resources/assets/client/Client.ts">update</a>(asset_id, { ...params }) -> ElevenLabs.ReceptionAssetResource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an asset. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.assets.update("asset_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asset_id:** `string` — ID of the asset. Returned when you create one; list them with `GET /v1/reception/assets`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionUpdateAssetRequestPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.assets.<a href="/src/api/resources/reception/resources/assets/client/Client.ts">delete</a>(asset_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an asset.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.assets.delete("asset_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asset_id:** `string` — ID of the asset. Returned when you create one; list them with `GET /v1/reception/assets`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.AssetsDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Products
+<details><summary><code>client.reception.products.<a href="/src/api/resources/reception/resources/products/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionProduct[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's products, optionally filtered by group or active state.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.products.list({
+    xiWorkspaceId: "xi-workspace-id",
+    group: "group",
+    isActive: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ProductsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.products.<a href="/src/api/resources/reception/resources/products/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ReceptionProduct</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a product the receptionist can quote and take orders for. A product created with `track_quantity` starts with nothing on hand; add stock with the stock endpoints.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.products.create({
+    xiWorkspaceId: "xi-workspace-id",
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionCreateProductRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.products.<a href="/src/api/resources/reception/resources/products/client/Client.ts">get</a>(product_id, { ...params }) -> ElevenLabs.ReceptionProduct</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a product by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.products.get("product_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**product_id:** `string` — ID of the product. Returned when you create one; list them with `GET /v1/reception/products`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ProductsGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.products.<a href="/src/api/resources/reception/resources/products/client/Client.ts">update</a>(product_id, { ...params }) -> ElevenLabs.ReceptionProduct</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a product's catalog fields. Only the fields sent are changed. On-hand quantities are not part of this call; use the stock endpoints.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.products.update("product_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**product_id:** `string` — ID of the product. Returned when you create one; list them with `GET /v1/reception/products`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionUpdateProductRequestPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.products.<a href="/src/api/resources/reception/resources/products/client/Client.ts">delete</a>(product_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a product.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.products.delete("product_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**product_id:** `string` — ID of the product. Returned when you create one; list them with `GET /v1/reception/products`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ProductsDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Staff
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionStaffResource[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all staff for the current workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.list({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.StaffListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ReceptionStaffResource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new staff member
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.create({
+    xiWorkspaceId: "xi-workspace-id",
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionCreateStaffRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">get</a>(staff_id, { ...params }) -> ElevenLabs.ReceptionStaffResource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific staff member by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.get("staff_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**staff_id:** `string` — ID of the staff member. Returned when you create one; list them with `GET /v1/reception/staff`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.StaffGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">update</a>(staff_id, { ...params }) -> ElevenLabs.ReceptionStaffResource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing staff member. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.update("staff_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**staff_id:** `string` — ID of the staff member. Returned when you create one; list them with `GET /v1/reception/staff`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionUpdateStaffRequestPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.staff.<a href="/src/api/resources/reception/resources/staff/client/Client.ts">delete</a>(staff_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a staff member
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.staff.delete("staff_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**staff_id:** `string` — ID of the staff member. Returned when you create one; list them with `GET /v1/reception/staff`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.StaffDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StaffClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Receptionists
+<details><summary><code>client.reception.receptionists.<a href="/src/api/resources/reception/resources/receptionists/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionCustomerFacingAgentResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List every customer-facing receptionist for the workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.list({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionistsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReceptionistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.<a href="/src/api/resources/reception/resources/receptionists/client/Client.ts">update</a>(agent_id, { ...params }) -> ElevenLabs.ReceptionCustomerFacingAgentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a receptionist's display name, config and/or widget appearance.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.update("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionUpdateCustomerFacingAgentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReceptionistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.<a href="/src/api/resources/reception/resources/receptionists/client/Client.ts">activate</a>(agent_id, { ...params }) -> ElevenLabs.ReceptionCustomerFacingAgentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Re-activate a deactivated receptionist. Fails with `quota_exceeded` when the plan has no free receptionist slot.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.activate("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionistsActivateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReceptionistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception PhoneNumbers
+<details><summary><code>client.reception.phoneNumbers.<a href="/src/api/resources/reception/resources/phoneNumbers/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionPhoneAssignment[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's phone numbers and the receptionist each one rings. A number with no `customer_facing_agent_id` is held by the workspace but not attached to a receptionist yet.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.phoneNumbers.list({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.PhoneNumbersListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.phoneNumbers.<a href="/src/api/resources/reception/resources/phoneNumbers/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ReceptionPhoneAssignment</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Give a receptionist a phone number. A number the workspace already holds but has not attached is used first. Otherwise, in the US and Canada, a number with one of the requested `area_codes` is taken from the pool or bought, falling back to any number in the business's country. In countries that require paperwork, the number is issued right away but takes public calls only once the workspace's own registration is approved (see `accepts_public_calls`). Counts toward the plan's phone number limit, and free plans can take only a few new numbers a day. Returns 404 when no number is available and 403 `telephony_managed_by_reseller` when the reseller supplies the workspace's numbers from its own Twilio account or SIP trunk and none is free.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.phoneNumbers.create({
+    xiWorkspaceId: "xi-workspace-id",
+    customerFacingAgentId: "agent_4801jx8k3m5n7p9q2r4s6t8v0w2y"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.CreatePhoneAssignmentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.phoneNumbers.<a href="/src/api/resources/reception/resources/phoneNumbers/client/Client.ts">delete</a>(phone_assignment_id, { ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a phone number from the workspace. A pool number goes back to the pool it came from. A number the business brought from its own Twilio account, or one issued in a country that requires paperwork, is released at Twilio and cannot be recovered. Returns 403 `telephony_managed_by_reseller` when the reseller supplies the workspace's numbers from its own Twilio account or SIP trunk.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.phoneNumbers.delete("phone_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_assignment_id:** `string` — ID of the phone number assignment. Returned when you assign a number; list them with `GET /v1/reception/phone-numbers/assignments`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.PhoneNumbersDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.phoneNumbers.<a href="/src/api/resources/reception/resources/phoneNumbers/client/Client.ts">update</a>(phone_assignment_id, { ...params }) -> ElevenLabs.ReceptionPhoneAssignment</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Move a phone number to a different receptionist in the same workspace, which answers its calls from then on. Returns 409 `phone_number_not_attached` for a number no receptionist answers yet (attach it with `POST /v1/reception/phone-numbers/assignments`).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.phoneNumbers.update("phone_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    customerFacingAgentId: "agent_4801jx8k3m5n7p9q2r4s6t8v0w2y"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**phone_assignment_id:** `string` — ID of the phone number assignment. Returned when you assign a number; list them with `GET /v1/reception/phone-numbers/assignments`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReassignPhoneRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PhoneNumbersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Holidays
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.HolidayResponseModel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get all holidays/time-off entries for the current workspace with optional filters
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.list({
+    xiWorkspaceId: "xi-workspace-id",
+    startUnix: 1,
+    endUnix: 1,
+    timeOffType: "staff",
+    resourceId: "resource_id",
+    locationId: "location_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.HolidaysListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.HolidayResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new holiday
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.create({
+    xiWorkspaceId: "xi-workspace-id",
+    name: "Christmas Eve",
+    startDate: {
+        year: 2026,
+        month: 12,
+        day: 25
+    },
+    endDate: {
+        year: 2026,
+        month: 12,
+        day: 25
+    },
+    timeOffType: "staff"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionCreateHolidayRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">get</a>(holiday_id, { ...params }) -> ElevenLabs.HolidayResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific holiday by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.get("holiday_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**holiday_id:** `string` — ID of the holiday or time-off entry. Returned when you create one; list them with `GET /v1/reception/holidays`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.HolidaysGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">update</a>(holiday_id, { ...params }) -> ElevenLabs.HolidayResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing holiday. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.update("holiday_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**holiday_id:** `string` — ID of the holiday or time-off entry. Returned when you create one; list them with `GET /v1/reception/holidays`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionUpdateHolidayRequestPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.holidays.<a href="/src/api/resources/reception/resources/holidays/client/Client.ts">delete</a>(holiday_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a holiday
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.holidays.delete("holiday_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**holiday_id:** `string` — ID of the holiday or time-off entry. Returned when you create one; list them with `GET /v1/reception/holidays`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.HolidaysDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HolidaysClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Locations
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionLocationResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all business locations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.list({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.LocationsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ReceptionLocationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a new business location.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.create({
+    xiWorkspaceId: "xi-workspace-id",
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionLocationRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">get</a>(location_id, { ...params }) -> ElevenLabs.ReceptionLocationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a single location by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.get("location_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**location_id:** `string` — ID of the location. Returned when you create one; list them with `GET /v1/reception/locations`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.LocationsGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">update</a>(location_id, { ...params }) -> ElevenLabs.ReceptionLocationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an existing location. Only the fields sent are changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.update("location_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**location_id:** `string` — ID of the location. Returned when you create one; list them with `GET /v1/reception/locations`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionLocationRequestPatch` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.locations.<a href="/src/api/resources/reception/resources/locations/client/Client.ts">delete</a>(location_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a location.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.locations.delete("location_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**location_id:** `string` — ID of the location. Returned when you create one; list them with `GET /v1/reception/locations`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.LocationsDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LocationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception BusinessProfile
+<details><summary><code>client.reception.businessProfile.<a href="/src/api/resources/reception/resources/businessProfile/client/Client.ts">get</a>({ ...params }) -> ElevenLabs.ReceptionAgentInfoResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the business profile the receptionists answer from, with the current time in the business's timezone.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.businessProfile.get({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BusinessProfileGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessProfileClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.businessProfile.<a href="/src/api/resources/reception/resources/businessProfile/client/Client.ts">update</a>({ ...params }) -> ElevenLabs.ReceptionAgentInfoResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the business profile. Every receptionist is updated to match.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.businessProfile.update({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ReceptionUpdateAgentInfoRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessProfileClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception KnowledgeSources
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionKnowledgeSource[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all knowledge sources for the current workspace
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.list({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.KnowledgeSourcesListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">upload</a>({ ...params }) -> ElevenLabs.ReceptionKnowledgeSource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload a file as a knowledge source
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.upload({
+    file: fs.createReadStream("/path/to/your/file"),
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BodySmbUploadKnowledgeSource` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">get</a>(source_id, { ...params }) -> ElevenLabs.ReceptionKnowledgeSource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific knowledge source by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.get("ksource_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**source_id:** `string` — ID of the knowledge source. Returned when you add one; list them with `GET /v1/reception/knowledge-sources`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.KnowledgeSourcesGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">delete</a>(source_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a knowledge source
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.delete("ksource_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**source_id:** `string` — ID of the knowledge source. Returned when you add one; list them with `GET /v1/reception/knowledge-sources`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.KnowledgeSourcesDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.knowledgeSources.<a href="/src/api/resources/reception/resources/knowledgeSources/client/Client.ts">addUrl</a>({ ...params }) -> ElevenLabs.ReceptionKnowledgeSource</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a URL as a knowledge source
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.knowledgeSources.addUrl({
+    xiWorkspaceId: "xi-workspace-id",
+    url: "https://example.com"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.AddUrlRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `KnowledgeSourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Workspaces
+<details><summary><code>client.reception.workspaces.<a href="/src/api/resources/reception/resources/workspaces/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ResellerWorkspacesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List workspaces attributed to the caller's reseller, with cursor-based pagination
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.workspaces.list({
+    cursor: "cursor",
+    pageSize: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.WorkspacesListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspacesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.workspaces.<a href="/src/api/resources/reception/resources/workspaces/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.ProvisionResellerWorkspaceResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a workspace for one of your customers, optionally with a tier, a phone number and team invites.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.workspaces.create({
+    businessName: "business_name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ProvisionResellerWorkspaceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspacesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.workspaces.<a href="/src/api/resources/reception/resources/workspaces/client/Client.ts">completeOnboarding</a>(workspace_id) -> ElevenLabs.ResellerWorkspaceOnboardingResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Finish setting up the workspace: create its receptionist and assistant from the business profile, reusing a receptionist from a setup already started, and connect your phone number, if you supply one. Safe to retry.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.workspaces.completeOnboarding("3f2c9a7e1b4d4c8e9a6f0b2d5e7c1a93");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` — ID of the customer workspace. Returned when you provision one; list them with `GET /v1/reception/reseller/workspaces`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspacesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Subscriptions
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">assign</a>(workspace_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Subscribe a reseller-attributed workspace to one of the reseller's tiers
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.assign("3f2c9a7e1b4d4c8e9a6f0b2d5e7c1a93", {
+    tierId: "tier_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` — ID of the customer workspace. Returned when you provision one; list them with `GET /v1/reception/reseller/workspaces`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.AssignResellerTierRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">unassign</a>(workspace_id) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+End a reseller-attributed workspace's subscription at the end of the current billing period
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.unassign("3f2c9a7e1b4d4c8e9a6f0b2d5e7c1a93");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` — ID of the customer workspace. Returned when you provision one; list them with `GET /v1/reception/reseller/workspaces`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">change</a>(workspace_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Move a reseller-attributed workspace between the reseller's tiers. Upgrades apply immediately; downgrades and lateral moves take effect at the end of the billing period.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.change("3f2c9a7e1b4d4c8e9a6f0b2d5e7c1a93", {
+    tierId: "tier_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` — ID of the customer workspace. Returned when you provision one; list them with `GET /v1/reception/reseller/workspaces`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.ChangeResellerTierRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">restore</a>(workspace_id) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Undo a pending unassignment so the subscription renews normally
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.restore("3f2c9a7e1b4d4c8e9a6f0b2d5e7c1a93");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` — ID of the customer workspace. Returned when you provision one; list them with `GET /v1/reception/reseller/workspaces`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.subscriptions.<a href="/src/api/resources/reception/resources/subscriptions/client/Client.ts">cancelPendingDowngrade</a>(workspace_id) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Drop a scheduled downgrade, leaving the workspace on its current tier
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.subscriptions.cancelPendingDowngrade("3f2c9a7e1b4d4c8e9a6f0b2d5e7c1a93");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workspace_id:** `string` — ID of the customer workspace. Returned when you provision one; list them with `GET /v1/reception/reseller/workspaces`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SubscriptionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Tiers
+<details><summary><code>client.reception.tiers.<a href="/src/api/resources/reception/resources/tiers/client/Client.ts">list</a>() -> ElevenLabs.ResellerTierResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The tiers you can sell, cheapest first. The first is the trial. Retired tiers are left out.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.tiers.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `TiersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Billing
+<details><summary><code>client.reception.billing.<a href="/src/api/resources/reception/resources/billing/client/Client.ts">listInvoices</a>({ ...params }) -> ElevenLabs.ResellerInvoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the invoices charged to the reseller's card, newest first, one per workspace invoice
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.billing.listInvoices({
+    cursor: "cursor",
+    pageSize: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.BillingListInvoicesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BillingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.billing.<a href="/src/api/resources/reception/resources/billing/client/Client.ts">getInvoice</a>(invoice_id) -> ElevenLabs.ResellerInvoiceDetail</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get one invoice charged to the reseller's card, broken down into the workspace invoice's lines
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.billing.getInvoice("in_1QzX8vLkdIwHu7ix3Bv0Wy2d");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoice_id:** `string` — ID of the invoice. List them with `GET /v1/reception/reseller/billing/invoices`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BillingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.billing.<a href="/src/api/resources/reception/resources/billing/client/Client.ts">listUpcomingPayments</a>() -> ElevenLabs.ResellerUpcomingPaymentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the next workspace renewals the reseller's card will be charged for, soonest first
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.billing.listUpcomingPayments();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `BillingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Products Stock
+<details><summary><code>client.reception.products.stock.<a href="/src/api/resources/reception/resources/products/resources/stock/client/Client.ts">set</a>(product_id, { ...params }) -> ElevenLabs.ReceptionProduct</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Set the on-hand quantity of a counted product at one location. Rejected with a 409 if it changed since `expected_on_hand` was read.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.products.stock.set("product_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    locationId: "location_4801jx8k3m5n7p9q2r4s6t8v0w2y",
+    onHand: 24,
+    expectedOnHand: 25
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**product_id:** `string` — ID of the product. Returned when you create one; list them with `GET /v1/reception/products`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.products.ReceptionUpdateProductStockRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StockClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.products.stock.<a href="/src/api/resources/reception/resources/products/resources/stock/client/Client.ts">adjust</a>(product_id, { ...params }) -> ElevenLabs.ReceptionProduct</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add to or subtract from the on-hand quantity of a counted product at one location, without overwriting orders taken at the same time.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.products.stock.adjust("product_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    locationId: "location_4801jx8k3m5n7p9q2r4s6t8v0w2y",
+    delta: -2
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**product_id:** `string` — ID of the product. Returned when you create one; list them with `GET /v1/reception/products`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.products.ReceptionAdjustProductStockRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `StockClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Receptionists Rules
+<details><summary><code>client.reception.receptionists.rules.<a href="/src/api/resources/reception/resources/receptionists/resources/rules/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.AgentRule</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a behavioral rule to the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.rules.create("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    title: "title",
+    description: "description"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ReceptionCreateAgentRuleRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.rules.<a href="/src/api/resources/reception/resources/receptionists/resources/rules/client/Client.ts">update</a>(agent_id, rule_id, { ...params }) -> ElevenLabs.AgentRule</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace an existing rule on the named receptionist. Send every field: an omitted `priority` resets to `strict`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.rules.update("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", "rule_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    title: "title",
+    description: "description"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rule_id:** `string` — ID of the rule. Returned when you add one, and listed in the receptionist's `config.agent_rules`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ReceptionUpdateAgentRuleRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.rules.<a href="/src/api/resources/reception/resources/receptionists/resources/rules/client/Client.ts">delete</a>(agent_id, rule_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a rule from the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.rules.delete("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", "rule_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rule_id:** `string` — ID of the rule. Returned when you add one, and listed in the receptionist's `config.agent_rules`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.RulesDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Receptionists Procedures
+<details><summary><code>client.reception.receptionists.procedures.<a href="/src/api/resources/reception/resources/receptionists/resources/procedures/client/Client.ts">list</a>(agent_id, { ...params }) -> ElevenLabs.ReceptionProcedureResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the procedures (SOPs) on the named receptionist, with the tools each one is missing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.procedures.list("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ProceduresListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.procedures.<a href="/src/api/resources/reception/resources/receptionists/resources/procedures/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.ReceptionProcedure</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a procedure (SOP) to the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.procedures.create("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    name: "name",
+    trigger: "trigger"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ReceptionCreateProcedureRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.procedures.<a href="/src/api/resources/reception/resources/receptionists/resources/procedures/client/Client.ts">update</a>(agent_id, procedure_id, { ...params }) -> ElevenLabs.ReceptionProcedure</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace an existing procedure on the named receptionist. Send every field: an omitted `body` resets to empty.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.procedures.update("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", "agtprc_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    name: "name",
+    trigger: "trigger"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — ID of the procedure. Returned when you add one; list them with `GET /v1/reception/customer-facing-agents/{agent_id}/procedures`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ReceptionUpdateProcedureRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.procedures.<a href="/src/api/resources/reception/resources/receptionists/resources/procedures/client/Client.ts">delete</a>(agent_id, procedure_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a procedure from the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.procedures.delete("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", "agtprc_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**procedure_id:** `string` — ID of the procedure. Returned when you add one; list them with `GET /v1/reception/customer-facing-agents/{agent_id}/procedures`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ProceduresDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProceduresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Receptionists TransferRules
+<details><summary><code>client.reception.receptionists.transferRules.<a href="/src/api/resources/reception/resources/receptionists/resources/transferRules/client/Client.ts">create</a>(agent_id, { ...params }) -> ElevenLabs.ReceptionTransferRule</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a phone forwarding rule to the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.transferRules.create("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    label: "label",
+    phoneNumber: "phone_number",
+    condition: "condition"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ReceptionCreateTransferRuleRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TransferRulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.transferRules.<a href="/src/api/resources/reception/resources/receptionists/resources/transferRules/client/Client.ts">update</a>(agent_id, rule_id, { ...params }) -> ElevenLabs.ReceptionTransferRule</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace an existing transfer rule on the named receptionist. Send every field: an omitted `post_dial_digits` clears it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.transferRules.update("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", "transferrule_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id",
+    label: "label",
+    phoneNumber: "phone_number",
+    condition: "condition"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rule_id:** `string` — ID of the transfer rule. Returned when you add one, and listed in the receptionist's `config.transfer_rules`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.ReceptionUpdateTransferRuleRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TransferRulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.receptionists.transferRules.<a href="/src/api/resources/reception/resources/receptionists/resources/transferRules/client/Client.ts">delete</a>(agent_id, rule_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a transfer rule from the named receptionist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.receptionists.transferRules.delete("agent_4801jx8k3m5n7p9q2r4s6t8v0w2y", "transferrule_4801jx8k3m5n7p9q2r4s6t8v0w2y", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` — ID of the receptionist. List them with `GET /v1/reception/customer-facing-agents`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rule_id:** `string` — ID of the transfer rule. Returned when you add one, and listed in the receptionist's `config.transfer_rules`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.receptionists.TransferRulesDeleteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TransferRulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Team Members
+<details><summary><code>client.reception.team.members.<a href="/src/api/resources/reception/resources/team/resources/members/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionTeamMemberResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's members, suspended members last.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.team.members.list({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.team.MembersListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.team.members.<a href="/src/api/resources/reception/resources/team/resources/members/client/Client.ts">remove</a>(user_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a member from the workspace. Their seat goes to a suspended member, if any.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.team.members.remove("user_id", {
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `string` — User ID of the member to remove
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.team.MembersRemoveRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.team.members.<a href="/src/api/resources/reception/resources/team/resources/members/client/Client.ts">updateRole</a>(user_id, { ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Promote a member to admin or demote an admin to member.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.team.members.updateRole("user_id", {
+    xiWorkspaceId: "xi-workspace-id",
+    role: "workspace_admin"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `string` — User ID of the member to update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.team.BodySmbUpdateTeamMemberRole` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Reception Team Invites
+<details><summary><code>client.reception.team.invites.<a href="/src/api/resources/reception/resources/team/resources/invites/client/Client.ts">list</a>({ ...params }) -> ElevenLabs.ReceptionTeamInviteResponse[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the workspace's pending invites.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.team.invites.list({
+    xiWorkspaceId: "xi-workspace-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.team.InvitesListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvitesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.team.invites.<a href="/src/api/resources/reception/resources/team/resources/invites/client/Client.ts">create</a>({ ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Email an invite to join the workspace. A pending invite takes a seat, so this is refused once members and invites reach the plan's team limit.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.team.invites.create({
+    xiWorkspaceId: "xi-workspace-id",
+    email: "sam@example.com"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.team.CreateTeamInviteRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvitesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reception.team.invites.<a href="/src/api/resources/reception/resources/team/resources/invites/client/Client.ts">cancel</a>({ ...params }) -> Record&lt;string, string&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancel a pending invite, freeing its seat.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reception.team.invites.cancel({
+    xiWorkspaceId: "xi-workspace-id",
+    email: "jane@example.com"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.reception.team.BodySmbCancelTeamInvite` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvitesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ServiceAccounts ApiKeys
 <details><summary><code>client.serviceAccounts.apiKeys.<a href="/src/api/resources/serviceAccounts/resources/apiKeys/client/Client.ts">list</a>(service_account_user_id) -> ElevenLabs.WorkspaceApiKeyListResponseModel</code></summary>
 <dl>
@@ -29011,8 +36518,8 @@ await client.workspace.auditLogs.list({
     timeFromUnixMs: 1,
     timeToUnixMs: 1,
     actorUid: "actor_uid",
-    className: "class_name",
-    activityName: "activity_name"
+    className: "Account Change",
+    activityName: "Account Security Change"
 });
 
 ```
@@ -29749,6 +37256,77 @@ await client.workspace.members.update({
 </dl>
 </details>
 
+<details><summary><code>client.workspace.members.<a href="/src/api/resources/workspace/resources/members/client/Client.ts">updateUsageLimit</a>(user_id, { ...params }) -> ElevenLabs.UpdateMemberUsageLimitResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets or clears the monthly credit usage limit of a workspace member or service account. This endpoint may only be called by workspace administrators.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.members.updateUsageLimit("user_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `string` — User ID of the target user.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspace.UpdateMemberUsageLimitRequestModel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Workspace Resources
 <details><summary><code>client.workspace.resources.<a href="/src/api/resources/workspace/resources/resources/client/Client.ts">get</a>(resource_id, { ...params }) -> ElevenLabs.ResourceMetadataResponseModel</code></summary>
 <dl>
@@ -29983,7 +37561,7 @@ await client.workspace.resources.unshare("resource_id", {
 <dl>
 <dd>
 
-Returns credit usage broken down by product type over time. The response is a tabular structure with columns, column_types, column_units, and rows. Some id columns also get a display-name column, such as user_label or voice_name, appended after the existing columns.
+Returns credit usage broken down by product type over time, for workspaces billed in credits. The response is a tabular structure with columns, column_types, column_units, and rows. Some id columns also get a display-name column, such as user_label or voice_name, appended after the existing columns. For workspaces billed by cost, ranges that reach the date the workspace moved to cost billing return an error; use /v1/workspace/analytics/usage instead.
 </dd>
 </dl>
 </dd>
@@ -30018,6 +37596,73 @@ await client.workspace.usage.getUsageByProductOverTime({
 <dd>
 
 **request:** `ElevenLabs.workspace.BodyGetWorkspaceUsageV1WorkspaceAnalyticsQueryUsageByProductOverTimePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `UsageClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.usage.<a href="/src/api/resources/workspace/resources/usage/client/Client.ts">getUsage</a>({ ...params }) -> ElevenLabs.WorkspaceAnalyticsQueryResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the cost of the workspace's usage over time, for workspaces billed by cost. Usage is bucketed by UTC day. The response is a tabular structure with columns, column_types, column_units, and rows, with one row per group and bucket. `total_cost` is the cost in the workspace's currency and `total_charge_count` the billed quantity. Usage can be grouped or filtered by at most two of `user_id`, `hashed_xi_api_key`, `region`, `reporting_workspace_id`, `billing_group_id`, `product_type`, `surface` and `actor`, and grouping by two of them requires an `eq` or `in` filter on one. `model`, `request_source`, `fiat_charge_type` and `fiat_currency` can always be added. Some id columns also get a display-name column, such as user_label, appended after the existing columns. Workspaces billed in credits should use /v1/workspace/analytics/query/usage-by-product-over-time.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.usage.getUsage({
+    startTime: 1,
+    endTime: 1,
+    intervalSeconds: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.workspace.BodyGetWorkspaceCostUsageV1WorkspaceAnalyticsUsagePost` 
     
 </dd>
 </dl>

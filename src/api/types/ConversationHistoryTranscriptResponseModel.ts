@@ -26,6 +26,7 @@ export interface ConversationHistoryTranscriptResponseModel {
     usedStaticKbDocumentIds?: string[];
     userIdentifier?: string;
     id?: string;
+    createdAtUnixMs?: number;
     triggeredGuardrails?: ElevenLabs.TriggeredGuardrailCommonModel[];
     /** Deprecated: the first attachment on this turn. Use `file_inputs` to see every attachment. */
     fileInput?: ElevenLabs.ConversationHistoryTranscriptFileInputResponseModel;

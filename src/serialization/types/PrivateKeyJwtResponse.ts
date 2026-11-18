@@ -23,6 +23,10 @@ export const PrivateKeyJwtResponse: core.serialization.ObjectSchema<
         "extra_params",
         core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     ),
+    extraHeaders: core.serialization.property(
+        "extra_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    ),
     id: core.serialization.string(),
     usedBy: core.serialization.property("used_by", AuthConnectionDependencies.optional()),
     status: AuthConnectionStatus.optional(),
@@ -41,6 +45,7 @@ export declare namespace PrivateKeyJwtResponse {
         subject: string;
         expiration_seconds?: number | null;
         extra_params?: Record<string, string> | null;
+        extra_headers?: Record<string, string> | null;
         id: string;
         used_by?: AuthConnectionDependencies.Raw | null;
         status?: AuthConnectionStatus.Raw | null;

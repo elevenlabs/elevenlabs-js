@@ -35,4 +35,37 @@ describe("UsageClient", () => {
             columnUnits: ["ms"],
         });
     });
+
+    test("get_usage", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ElevenLabsClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { start_time: 1, end_time: 1, interval_seconds: 1 };
+        const rawResponseBody = {
+            columns: ["columns"],
+            column_types: ["String"],
+            rows: [["rows"]],
+            column_units: ["ms"],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/workspace/analytics/usage")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.usage.getUsage({
+            startTime: 1,
+            endTime: 1,
+            intervalSeconds: 1,
+        });
+        expect(response).toEqual({
+            columns: ["columns"],
+            columnTypes: ["String"],
+            rows: [["rows"]],
+            columnUnits: ["ms"],
+        });
+    });
 });

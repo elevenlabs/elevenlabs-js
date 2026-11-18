@@ -21,6 +21,8 @@ export const ConversationSummaryResponseModel: core.serialization.ObjectSchema<
     conversationId: core.serialization.property("conversation_id", core.serialization.string()),
     startTimeUnixSecs: core.serialization.property("start_time_unix_secs", core.serialization.number()),
     callDurationSecs: core.serialization.property("call_duration_secs", core.serialization.number()),
+    cost: core.serialization.number().optional(),
+    costFiat: core.serialization.property("cost_fiat", core.serialization.number().optional()),
     messageCount: core.serialization.property("message_count", core.serialization.number()),
     userMessageCount: core.serialization.property("user_message_count", core.serialization.number().optional()),
     agentMessageCount: core.serialization.property("agent_message_count", core.serialization.number().optional()),
@@ -62,6 +64,8 @@ export declare namespace ConversationSummaryResponseModel {
         conversation_id: string;
         start_time_unix_secs: number;
         call_duration_secs: number;
+        cost?: number | null;
+        cost_fiat?: number | null;
         message_count: number;
         user_message_count?: number | null;
         agent_message_count?: number | null;

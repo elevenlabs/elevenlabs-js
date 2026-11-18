@@ -21,29 +21,29 @@ import type * as ElevenLabs from "../../../../../../index";
  *     }
  */
 export interface TriageTicketsListForWorkspaceRequest {
-    /** How many agent conversation tickets to return. Can not exceed 100. */
+    /** How many agent issues to return. Can not exceed 100. */
     pageSize?: number;
-    /** Only tickets for this agent. */
+    /** Only issues for this agent. */
     agentId?: string;
-    /** Filter tickets by status. */
+    /** Filter agent issues by status. */
     status?: ElevenLabs.AgentConversationTicketStatus;
-    /** Filter tickets by how they were raised (qa, agent, manual). Repeat the parameter to filter by multiple sources. */
+    /** Filter agent issues by how they were raised (qa, agent, manual). Repeat the parameter to filter by multiple sources. */
     sources?: ElevenLabs.AgentConversationTicketSource | ElevenLabs.AgentConversationTicketSource[];
-    /** Filter tickets by priority. Repeat the parameter to filter by multiple priorities. */
+    /** Filter agent issues by priority. Repeat the parameter to filter by multiple priorities. */
     priorities?: ElevenLabs.AgentConversationTicketPriority | ElevenLabs.AgentConversationTicketPriority[];
-    /** Order by most recently created, or by priority (most urgent first, then most recently created). */
+    /** Order by most recently created, by priority (most urgent first, then most recently created), or by most recently reported (the newest report merged into the agent issue, else its creation). */
     sortBy?: ElevenLabs.AgentConversationTicketSortBy;
-    /** Filter tickets by creator. Use 'agent' for agent-raised tickets. */
+    /** Filter agent issues by creator. Use 'agent' for agent-raised issues. */
     ownerUserId?: string;
-    /** Filter tickets by assignee. Use 'unassigned' for tickets with no assignee. */
+    /** Filter agent issues by assignee. Use 'unassigned' for issues with no assignee. */
     assigneeUserId?: string;
-    /** Filter clusters by issue type. */
+    /** Filter agent issues by type. */
     issueType?: ElevenLabs.AgentConversationTicketIssueType;
-    /** Filter tickets by an exact label. */
+    /** Filter agent issues by an exact label. */
     label?: string;
-    /** Filter tickets merged into this ticket. */
+    /** Filter agent issues merged into this issue. */
     mergedIntoTicketId?: string;
-    /** Case-insensitive free-text search across the ticket's title, description, comments, and turn comments. */
+    /** Case-insensitive free-text search across the agent issue's title, description, comments, and turn comments. */
     search?: string;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;

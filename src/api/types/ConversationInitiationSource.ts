@@ -29,6 +29,7 @@ export const ConversationInitiationSource = {
     TemplatePreview: "template_preview",
     GenesysBotConnector: "genesys_bot_connector",
     SubagentTool: "subagent_tool",
+    AgentMessagesApi: "agent_messages_api",
 } as const;
 export type ConversationInitiationSource =
     (typeof ConversationInitiationSource)[keyof typeof ConversationInitiationSource];

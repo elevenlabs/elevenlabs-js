@@ -19,6 +19,6 @@ export interface BodyCreateAMergeProposalV1ConvaiAgentsAgentIdMergeProposalsPost
     description?: string;
     /** User IDs to request a review from. */
     requestedReviewerUserIds?: string[];
-    /** Triage ticket of this agent that the merge_proposal resolves. Merging it resolves the ticket if still open. */
+    /** Issue of this agent that the merge_proposal resolves. Merging it resolves the issue if still open. */
     triageTicketId?: string;
 }

@@ -3,7 +3,9 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { GuardrailExecutionMode } from "./GuardrailExecutionMode";
 import { GuardrailType } from "./GuardrailType";
+import { TriggeredGuardrailCommonModelGuardrailDetails } from "./TriggeredGuardrailCommonModelGuardrailDetails";
 
 export const TriggeredGuardrailCommonModel: core.serialization.ObjectSchema<
     serializers.TriggeredGuardrailCommonModel.Raw,
@@ -11,11 +13,18 @@ export const TriggeredGuardrailCommonModel: core.serialization.ObjectSchema<
 > = core.serialization.object({
     guardrailType: core.serialization.property("guardrail_type", GuardrailType),
     guardrailName: core.serialization.property("guardrail_name", core.serialization.string().optional()),
+    executionMode: core.serialization.property("execution_mode", GuardrailExecutionMode.optional()),
+    guardrailDetails: core.serialization.property(
+        "guardrail_details",
+        TriggeredGuardrailCommonModelGuardrailDetails.optional(),
+    ),
 });
 
 export declare namespace TriggeredGuardrailCommonModel {
     export interface Raw {
         guardrail_type: GuardrailType.Raw;
         guardrail_name?: string | null;
+        execution_mode?: GuardrailExecutionMode.Raw | null;
+        guardrail_details?: TriggeredGuardrailCommonModelGuardrailDetails.Raw | null;
     }
 }

@@ -2,7 +2,12 @@
 
 import type * as ElevenLabs from "../index";
 
+/**
+ * LLM usage of a conversation, split by whether the generated response reached the user.
+ */
 export interface LlmCategoryUsage {
+    /** Subset of `initiated_generation`: usage of agent turns whose audio had started playing to the user, whether the turn then completed or was interrupted. A turn the user interrupted while the LLM was still generating, or that was cut off by the call ending, can be missing here even if part of it was heard. Informational; LLM charges are based on `initiated_generation`. */
     irreversibleGeneration?: ElevenLabs.LlmUsageOutput;
+    /** Usage of every LLM call made during the conversation: turns the user heard, turns the user interrupted, and speculative turns that were started and dropped before any audio was sent. LLM charges are based on this block; its prices sum to `llm_price`. Always greater than or equal to `irreversible_generation`. */
     initiatedGeneration?: ElevenLabs.LlmUsageOutput;
 }

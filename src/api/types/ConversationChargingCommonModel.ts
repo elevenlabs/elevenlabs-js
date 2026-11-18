@@ -6,8 +6,11 @@ export interface ConversationChargingCommonModel {
     devDiscount?: boolean;
     isBurst?: boolean;
     tier?: string;
+    /** Per-model LLM token usage and USD price for the conversation. */
     llmUsage?: ElevenLabs.LlmCategoryUsage;
+    /** Total LLM price in USD. Equals the sum of the prices in `llm_usage.initiated_generation`. */
     llmPrice?: number;
+    /** Credits charged for LLM usage. */
     llmCharge?: number;
     callCharge?: number;
     platformCharge?: number;

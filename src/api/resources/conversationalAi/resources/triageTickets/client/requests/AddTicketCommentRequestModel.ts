@@ -7,6 +7,6 @@
  *     }
  */
 export interface AddTicketCommentRequestModel {
-    /** A comment discussing how to resolve the ticket. */
+    /** A comment discussing how to resolve the agent issue. */
     comment: string;
 }

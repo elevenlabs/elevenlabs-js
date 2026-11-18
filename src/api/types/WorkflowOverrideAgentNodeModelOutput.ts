@@ -19,4 +19,6 @@ export interface WorkflowOverrideAgentNodeModelOutput {
     label: string;
     /** Dictates whether this node should immediately generate a response upon entry or wait for the user input. When set to "auto", the behavior will be decided based on the type of the preceding node: "wait_for_user" after the "say" and "start" nodes and "generate_immediately" otherwise. */
     entryBehavior: ElevenLabs.EntryBehavior;
+    /** Lets the caller interrupt the response this node gives on entry. Ignored unless entry_behavior is "generate_immediately". */
+    allowInterruptionsOnEntry: boolean;
 }

@@ -22,6 +22,10 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     file?: core.file.Uploadable | undefined;
     /** An ISO-639-1 or ISO-639-3 language_code corresponding to the language of the audio file. Can sometimes improve transcription performance if known beforehand. Defaults to null, in this case the language is predicted automatically. */
     languageCode?: string;
+    /** Additional ISO-639-1 or ISO-639-3 language codes that may be present in the audio, alongside language_code. Improves transcription accuracy for multilingual audio. Supported by scribe_v3. */
+    secondaryLanguageCodes?: string[];
+    /** How numbers are formatted in the transcript: 'digits' (e.g. '42') or 'words' (e.g. 'forty-two'). Supported by scribe_v3. */
+    numbersFormat?: ElevenLabs.SpeechToTextConvertRequestNumbersFormat;
     /** Natural-language instruction applied to the final transcript (max 2000 characters). The edited text is returned in 'edited_transcript' alongside the original transcript. Cannot be combined with entity_detection, entity_redaction or use_multi_channel. Usage of this parameter will incur an additional 30% surcharge on the base transcription cost, billed for at least 10 seconds of audio. */
     transcriptEdit?: string;
     /** Whether to tag audio events like (laughter), (footsteps), etc. in the transcription. */
@@ -58,7 +62,7 @@ export interface BodySpeechToTextV1SpeechToTextPost {
     webhookMetadata?: ElevenLabs.SpeechToTextConvertRequestWebhookMetadata;
     /** Detect entities in the transcript. Can be 'all' to detect all entities, a single entity type or category string, or a list of entity types/categories. Categories include 'pii', 'phi', 'pci', 'other', 'offensive_language'. When enabled, detected entities will be returned in the 'entities' field with their text, type, and character positions. */
     entityDetection?: ElevenLabs.SpeechToTextConvertRequestEntityDetection;
-    /** If true, the transcription will not have any filler words, false starts and non-speech sounds. */
+    /** If true, the transcription will not have any filler words, false starts and non-speech sounds. Supported by scribe_v2, scribe_v2_medical and scribe_v3. */
     noVerbatim?: boolean;
     /** Whether to use the speaker library for identifying known speakers during diarization. When enabled and diarize is true, detected speakers will be matched against registered speakers in the workspace's speaker library. */
     useSpeakerLibrary?: boolean;

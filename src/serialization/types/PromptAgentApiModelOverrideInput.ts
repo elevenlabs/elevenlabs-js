@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { KnowledgeBaseLocator } from "./KnowledgeBaseLocator";
 import { Llm } from "./Llm";
+import { LlmReasoningEffort } from "./LlmReasoningEffort";
 
 export const PromptAgentApiModelOverrideInput: core.serialization.ObjectSchema<
     serializers.PromptAgentApiModelOverrideInput.Raw,
@@ -12,6 +13,7 @@ export const PromptAgentApiModelOverrideInput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     prompt: core.serialization.string().optional(),
     llm: Llm.optional(),
+    reasoningEffort: core.serialization.property("reasoning_effort", LlmReasoningEffort.optional()),
     toolIds: core.serialization.property("tool_ids", core.serialization.list(core.serialization.string()).optional()),
     toolIdsStrict: core.serialization.property("tool_ids_strict", core.serialization.boolean().optional()),
     nativeMcpServerIds: core.serialization.property(
@@ -28,6 +30,7 @@ export declare namespace PromptAgentApiModelOverrideInput {
     export interface Raw {
         prompt?: string | null;
         llm?: Llm.Raw | null;
+        reasoning_effort?: LlmReasoningEffort.Raw | null;
         tool_ids?: string[] | null;
         tool_ids_strict?: boolean | null;
         native_mcp_server_ids?: string[] | null;

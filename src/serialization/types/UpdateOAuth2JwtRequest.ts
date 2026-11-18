@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { UpdateOAuth2JwtRequestAlgorithm } from "./UpdateOAuth2JwtRequestAlgorithm";
+import { UpdateOAuth2JwtRequestJwtUsage } from "./UpdateOAuth2JwtRequestJwtUsage";
 import { UpdateOAuth2JwtRequestTokenResponseField } from "./UpdateOAuth2JwtRequestTokenResponseField";
 
 export const UpdateOAuth2JwtRequest: core.serialization.ObjectSchema<
@@ -26,6 +27,11 @@ export const UpdateOAuth2JwtRequest: core.serialization.ObjectSchema<
         "token_response_field",
         UpdateOAuth2JwtRequestTokenResponseField.optional(),
     ),
+    jwtUsage: core.serialization.property("jwt_usage", UpdateOAuth2JwtRequestJwtUsage.optional()),
+    extraHeaders: core.serialization.property(
+        "extra_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string().optional()).optional(),
+    ),
     secretKey: core.serialization.property("secret_key", core.serialization.string().optional()),
 });
 
@@ -41,6 +47,8 @@ export declare namespace UpdateOAuth2JwtRequest {
         extra_params?: Record<string, string | null | undefined> | null;
         scopes?: string[] | null;
         token_response_field?: UpdateOAuth2JwtRequestTokenResponseField.Raw | null;
+        jwt_usage?: UpdateOAuth2JwtRequestJwtUsage.Raw | null;
+        extra_headers?: Record<string, string | null | undefined> | null;
         secret_key?: string | null;
     }
 }

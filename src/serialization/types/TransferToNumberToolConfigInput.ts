@@ -4,18 +4,21 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { PhoneNumberTransfer } from "./PhoneNumberTransfer";
+import { TransferRuleInput } from "./TransferRuleInput";
 
 export const TransferToNumberToolConfigInput: core.serialization.ObjectSchema<
     serializers.TransferToNumberToolConfigInput.Raw,
     ElevenLabs.TransferToNumberToolConfigInput
 > = core.serialization.object({
     transfers: core.serialization.list(PhoneNumberTransfer),
+    transferRules: core.serialization.property("transfer_rules", core.serialization.list(TransferRuleInput).optional()),
     enableClientMessage: core.serialization.property("enable_client_message", core.serialization.boolean().optional()),
 });
 
 export declare namespace TransferToNumberToolConfigInput {
     export interface Raw {
         transfers: PhoneNumberTransfer.Raw[];
+        transfer_rules?: TransferRuleInput.Raw[] | null;
         enable_client_message?: boolean | null;
     }
 }

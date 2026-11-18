@@ -7,8 +7,8 @@ import type * as serializers from "../index";
 export const BytedanceSeedance25RequestResolution: core.serialization.Schema<
     serializers.BytedanceSeedance25RequestResolution.Raw,
     ElevenLabs.BytedanceSeedance25RequestResolution
-> = core.serialization.enum_(["480p", "720p", "1080p"]);
+> = core.serialization.enum_(["480p", "720p", "1080p", "4k"]);
 
 export declare namespace BytedanceSeedance25RequestResolution {
-    export type Raw = "480p" | "720p" | "1080p";
+    export type Raw = "480p" | "720p" | "1080p" | "4k";
 }

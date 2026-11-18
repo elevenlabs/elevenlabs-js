@@ -5,6 +5,7 @@ export const BytedanceSeedance25RequestResolution = {
     FourHundredEightyP: "480p",
     SevenHundredTwentyP: "720p",
     OneThousandEightyP: "1080p",
+    FourK: "4k",
 } as const;
 export type BytedanceSeedance25RequestResolution =
     (typeof BytedanceSeedance25RequestResolution)[keyof typeof BytedanceSeedance25RequestResolution];

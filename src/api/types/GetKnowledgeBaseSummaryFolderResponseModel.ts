@@ -10,9 +10,11 @@ export interface GetKnowledgeBaseSummaryFolderResponseModel {
     accessInfo: ElevenLabs.ResourceAccessInfo;
     /** The ID of the parent folder, or null if the document is at the root level. */
     folderParentId?: string;
+    /** Per-entity RAG chunking override. Null means inherit from ancestors or the embedding model default. */
+    chunkingOverride?: ElevenLabs.ChunkingOverride;
     /** The folder path segments leading to this entity, from root to parent folder. */
     folderPath?: ElevenLabs.KnowledgeBaseFolderPathSegmentSummaryResponseModel[];
-    /** This field is deprecated and will be removed in the future, use the separate endpoint to get dependent agents instead. */
+    /** This field is deprecated, always empty, and will be removed in the future. Use the separate endpoint to get dependent agents instead. */
     dependentAgents: ElevenLabs.GetKnowledgeBaseSummaryFolderResponseModelDependentAgentsItem[];
     childrenCount: number;
     /** Number of non-folder documents anywhere in this folder's subtree (recursive). Counting stops past 1000; */

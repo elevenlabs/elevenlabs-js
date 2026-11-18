@@ -30,6 +30,7 @@ describe("ExecutionsClient", () => {
                         credential_id: "credential_id",
                         integration_connection_id: "integration_connection_id",
                         webhook_details: { method: "method", url: "url" },
+                        function_details: null,
                     },
                 },
             ],

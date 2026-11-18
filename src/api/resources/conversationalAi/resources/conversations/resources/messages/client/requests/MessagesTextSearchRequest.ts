@@ -25,8 +25,13 @@ import type * as ElevenLabs from "../../../../../../../../index";
  *         toolNames: ["tool_names"],
  *         toolNamesSuccessful: ["tool_names_successful"],
  *         toolNamesErrored: ["tool_names_errored"],
+ *         toolIds: ["tool_ids"],
+ *         toolIdsSuccessful: ["tool_ids_successful"],
+ *         toolIdsErrored: ["tool_ids_errored"],
  *         includeInvalidToolCalls: true,
  *         mainLanguages: ["main_languages"],
+ *         phoneNumberIds: ["phone_number_ids"],
+ *         whatsappPhoneNumberIds: ["whatsapp_phone_number_ids"],
  *         excludeStatuses: ["initiated"],
  *         terminationReasons: ["termination_reasons"],
  *         pageSize: 1,
@@ -82,10 +87,20 @@ export interface MessagesTextSearchRequest {
     toolNamesSuccessful?: string | string[];
     /** Filter conversations by tool names that had errored calls. */
     toolNamesErrored?: string | string[];
+    /** Filter conversations by IDs of tools used during the call. Use '__system_<tool_name>' for system tools. Unlike tool_names, distinguishes between tools that share a name. */
+    toolIds?: string | string[];
+    /** Filter conversations by IDs of tools that had successful calls. */
+    toolIdsSuccessful?: string | string[];
+    /** Filter conversations by IDs of tools that had errored calls. */
+    toolIdsErrored?: string | string[];
     /** Also match tool calls that never ran. */
     includeInvalidToolCalls?: boolean;
     /** Filter conversations by detected main language (language code). */
     mainLanguages?: string | string[];
+    /** Filter conversations by agent phone number IDs. */
+    phoneNumberIds?: string | string[];
+    /** Filter conversations by agent WhatsApp number IDs. */
+    whatsappPhoneNumberIds?: string | string[];
     /** Exclude conversations with the given statuses. Useful for hiding in-progress / processing conversations from list views. */
     excludeStatuses?:
         | ElevenLabs.conversationalAi.conversations.MessagesTextSearchRequestExcludeStatusesItem

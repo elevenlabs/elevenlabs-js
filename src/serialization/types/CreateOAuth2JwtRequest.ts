@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { CreateOAuth2JwtRequestAlgorithm } from "./CreateOAuth2JwtRequestAlgorithm";
+import { CreateOAuth2JwtRequestJwtUsage } from "./CreateOAuth2JwtRequestJwtUsage";
 import { CreateOAuth2JwtRequestTokenResponseField } from "./CreateOAuth2JwtRequestTokenResponseField";
 
 export const CreateOAuth2JwtRequest: core.serialization.ObjectSchema<
@@ -22,12 +23,17 @@ export const CreateOAuth2JwtRequest: core.serialization.ObjectSchema<
         "extra_params",
         core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     ),
+    extraHeaders: core.serialization.property(
+        "extra_headers",
+        core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
+    ),
     tokenUrl: core.serialization.property("token_url", core.serialization.string()),
     scopes: core.serialization.list(core.serialization.string()).optional(),
     tokenResponseField: core.serialization.property(
         "token_response_field",
         CreateOAuth2JwtRequestTokenResponseField.optional(),
     ),
+    jwtUsage: core.serialization.property("jwt_usage", CreateOAuth2JwtRequestJwtUsage.optional()),
     secretKey: core.serialization.property("secret_key", core.serialization.string()),
 });
 
@@ -42,9 +48,11 @@ export declare namespace CreateOAuth2JwtRequest {
         subject: string;
         expiration_seconds?: number | null;
         extra_params?: Record<string, string> | null;
+        extra_headers?: Record<string, string> | null;
         token_url: string;
         scopes?: string[] | null;
         token_response_field?: CreateOAuth2JwtRequestTokenResponseField.Raw | null;
+        jwt_usage?: CreateOAuth2JwtRequestJwtUsage.Raw | null;
         secret_key: string;
     }
 }

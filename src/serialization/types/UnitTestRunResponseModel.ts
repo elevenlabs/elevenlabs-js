@@ -8,6 +8,7 @@ import { ConversationHistoryTranscriptCommonModelOutput } from "./ConversationHi
 import { TestConditionResultCommonModel } from "./TestConditionResultCommonModel";
 import { TestRunMetadata } from "./TestRunMetadata";
 import { TestRunStatus } from "./TestRunStatus";
+import { TriggeredGuardrailCommonModel } from "./TriggeredGuardrailCommonModel";
 import { UnitTestRunResponseModelTestInfo } from "./UnitTestRunResponseModelTestInfo";
 
 export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
@@ -26,6 +27,10 @@ export const UnitTestRunResponseModel: core.serialization.ObjectSchema<
     agentResponses: core.serialization.property(
         "agent_responses",
         core.serialization.list(ConversationHistoryTranscriptCommonModelOutput).optional(),
+    ),
+    triggeredGuardrails: core.serialization.property(
+        "triggered_guardrails",
+        core.serialization.list(TriggeredGuardrailCommonModel).optional(),
     ),
     testId: core.serialization.property("test_id", core.serialization.string()),
     testName: core.serialization.property("test_name", core.serialization.string().optional()),
@@ -51,6 +56,7 @@ export declare namespace UnitTestRunResponseModel {
         workflow_node_id?: string | null;
         status: TestRunStatus.Raw;
         agent_responses?: ConversationHistoryTranscriptCommonModelOutput.Raw[] | null;
+        triggered_guardrails?: TriggeredGuardrailCommonModel.Raw[] | null;
         test_id: string;
         test_name?: string | null;
         condition_result?: TestConditionResultCommonModel.Raw | null;

@@ -22,13 +22,20 @@ import type * as ElevenLabs from "../../../../../../index";
  *         evaluationParams: ["evaluation_params"],
  *         dataCollectionParams: ["data_collection_params"],
  *         dynamicVariableParams: ["dynamic_variable_params"],
+ *         dataCollectionFilter: "data_collection_filter",
+ *         dynamicVariableFilter: "dynamic_variable_filter",
  *         dataCollectionIds: ["data_collection_ids"],
  *         evaluationCriteriaIds: ["evaluation_criteria_ids"],
  *         toolNames: ["tool_names"],
  *         toolNamesSuccessful: ["tool_names_successful"],
  *         toolNamesErrored: ["tool_names_errored"],
+ *         toolIds: ["tool_ids"],
+ *         toolIdsSuccessful: ["tool_ids_successful"],
+ *         toolIdsErrored: ["tool_ids_errored"],
  *         includeInvalidToolCalls: true,
  *         mainLanguages: ["main_languages"],
+ *         phoneNumberIds: ["phone_number_ids"],
+ *         whatsappPhoneNumberIds: ["whatsapp_phone_number_ids"],
  *         pageSize: 1,
  *         summaryMode: "exclude",
  *         search: "search",
@@ -83,6 +90,10 @@ export interface ConversationsListRequest {
     dataCollectionParams?: string | string[];
     /** Dynamic variable filters. Repeat param. Format: name:op:value where op is one of eq|neq|gt|gte|lt|lte|in. For in, pipe-delimit values. An empty value matches conversations where the variable was not set (name:eq:), and neq with an empty value matches where it was (name:neq:). eq is exact equality. gt|gte|lt|lte require a numeric value. Names containing ':' cannot be expressed. */
     dynamicVariableParams?: string | string[];
+    /** A single data collection filter, for callers that can only send one scalar value per query param. Same format as data_collection_params (id:op:value); combined with it when both are given. */
+    dataCollectionFilter?: string;
+    /** A single dynamic variable filter, for callers that can only send one scalar value per query param. Same format as dynamic_variable_params (name:op:value); combined with it when both are given. */
+    dynamicVariableFilter?: string;
     /** Data collection field IDs to include in each conversation summary. Repeat param. When omitted, data_collection_results is not returned. */
     dataCollectionIds?: string | string[];
     /** Evaluation criteria IDs to include in each conversation summary. Repeat param. When omitted, evaluation_criteria_results is not returned. */
@@ -93,10 +104,20 @@ export interface ConversationsListRequest {
     toolNamesSuccessful?: string | string[];
     /** Filter conversations by tool names that had errored calls. */
     toolNamesErrored?: string | string[];
+    /** Filter conversations by IDs of tools used during the call. Use '__system_<tool_name>' for system tools. Unlike tool_names, distinguishes between tools that share a name. */
+    toolIds?: string | string[];
+    /** Filter conversations by IDs of tools that had successful calls. */
+    toolIdsSuccessful?: string | string[];
+    /** Filter conversations by IDs of tools that had errored calls. */
+    toolIdsErrored?: string | string[];
     /** Also match tool calls that never ran. */
     includeInvalidToolCalls?: boolean;
     /** Filter conversations by detected main language (language code). */
     mainLanguages?: string | string[];
+    /** Filter conversations by agent phone number IDs. */
+    phoneNumberIds?: string | string[];
+    /** Filter conversations by agent WhatsApp number IDs. */
+    whatsappPhoneNumberIds?: string | string[];
     /** How many conversations to return at maximum. Can not exceed 100, defaults to 30. */
     pageSize?: number;
     /** Whether to include transcript summaries in the response. */

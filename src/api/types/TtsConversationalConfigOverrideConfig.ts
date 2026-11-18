@@ -13,6 +13,8 @@ export interface TtsConversationalConfigOverrideConfig {
     speed?: boolean;
     /** Whether to allow overriding the similarity_boost field. */
     similarityBoost?: boolean;
+    /** Whether to allow overriding the clone_strength field. */
+    cloneStrength?: boolean;
     /** Whether to allow overriding the pronunciation_dictionary_locators field. */
     pronunciationDictionaryLocators?: boolean;
 }

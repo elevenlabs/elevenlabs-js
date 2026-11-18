@@ -12,4 +12,5 @@ export interface SupportedVoice {
     stability?: number;
     speed?: number;
     similarityBoost?: number;
+    cloneStrength?: number;
 }

@@ -32,6 +32,10 @@ export const WorkflowOverrideAgentNodeModelInput: core.serialization.ObjectSchem
     ),
     label: core.serialization.string(),
     entryBehavior: core.serialization.property("entry_behavior", EntryBehavior.optional()),
+    allowInterruptionsOnEntry: core.serialization.property(
+        "allow_interruptions_on_entry",
+        core.serialization.boolean().optional(),
+    ),
 });
 
 export declare namespace WorkflowOverrideAgentNodeModelInput {
@@ -44,5 +48,6 @@ export declare namespace WorkflowOverrideAgentNodeModelInput {
         additional_tool_ids?: string[] | null;
         label: string;
         entry_behavior?: EntryBehavior.Raw | null;
+        allow_interruptions_on_entry?: boolean | null;
     }
 }

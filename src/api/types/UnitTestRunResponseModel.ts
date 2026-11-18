@@ -13,6 +13,8 @@ export interface UnitTestRunResponseModel {
     workflowNodeId?: string;
     status: ElevenLabs.TestRunStatus;
     agentResponses?: ElevenLabs.ConversationHistoryTranscriptCommonModelOutput[];
+    /** Guardrails observed during this run, including blocks before an agent response. */
+    triggeredGuardrails?: ElevenLabs.TriggeredGuardrailCommonModel[];
     testId: string;
     testName?: string;
     conditionResult?: ElevenLabs.TestConditionResultCommonModel;

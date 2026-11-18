@@ -10,6 +10,7 @@ node_modules
 /.fern
 /.gitattributes
 /assets
+/docs
 /scripts
 /AGENTS.md
 /CONTRIBUTING.md
