@@ -15,6 +15,8 @@ export async function play(audio: AsyncIterable<Uint8Array>): Promise<void> {
         stdio: ["pipe", "ignore", "pipe"],
     });
 
+    // Writes fail with EPIPE once ffplay is gone; the outcome is reported by the "error" and "close" handlers below.
+    ffplay.stdin.on("error", () => {});
     Readable.from(audio).pipe(ffplay.stdin);
 
     const errorChunks: Buffer[] = [];

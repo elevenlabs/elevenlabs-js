@@ -15,6 +15,8 @@ export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
         stdio: ["pipe", "ignore", "pipe"],
     });
 
+    // Writes fail with EPIPE once mpv is gone; the outcome is reported by the "error" and "close" handlers below.
+    mpv.stdin.on("error", () => {});
     Readable.from(toAsyncIterable(audio)).pipe(mpv.stdin);
 
     const errorChunks: Buffer[] = [];
