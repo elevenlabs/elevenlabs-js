@@ -235,6 +235,7 @@ export class Agent {
     /** Adds a tool the agent can use anywhere. */
     addTool(tool: Tool): this {
         this._tools.push(tool);
+        this._toolListGiven = true;
         return this;
     }
 

@@ -209,9 +209,12 @@ export class AgentProject {
         );
     }
 
-    /** @internal The loaded config to send for a tool nobody edited, so fields this SDK doesn't model survive. */
+    /**
+     * @internal The loaded config to send for a tool whose definition matches its project entry (the loaded object, or
+     * one rebuilt in code with the same name), so fields this SDK doesn't model survive.
+     */
     _unchangedRaw(tool: Tool): WireObject | undefined {
-        const slot = this._tools.find((s) => s.tool === tool);
+        const slot = this._toolSlot(tool);
         if (slot?.raw === undefined || slot.baseline === undefined) {
             return undefined;
         }

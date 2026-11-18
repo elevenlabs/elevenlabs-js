@@ -288,3 +288,27 @@ describe("push review fixes", () => {
         expect(again.tools).toEqual({});
     });
 });
+
+describe("push review fixes, round 2", () => {
+    it("attaches a tool added with addTool()", () => {
+        const agent = new Agent("A", { prompt: "p" }).addTool(getOrder());
+        const prompt = (agent.toJSON({ toolIds: { get_order: "tool_1" } }).conversation_config as any).agent.prompt;
+        expect(prompt.tool_ids).toEqual(["tool_1"]);
+    });
+
+    it("keeps a project tool's unmodeled fields when the same tool is rebuilt in code", async () => {
+        const server = new FakeServer();
+        const client = server.client();
+        const project = AgentProject.fromFiles({});
+        await client.conversationalAi.agents.push(supportAgent(), { project });
+        const files = project.toFiles();
+        const withExtra = { ...JSON.parse(files["tool_configs/get_order.json"]), future_field: 1 };
+        files["tool_configs/get_order.json"] = JSON.stringify(withExtra, null, 4);
+        server.tools.get("tool_new_2").config = withExtra;
+
+        const reloaded = AgentProject.fromFiles(files);
+        const result = await client.conversationalAi.agents.push(supportAgent(), { project: reloaded });
+        expect(result.tools.get_order.action).toBe("unchanged");
+        expect(JSON.parse(reloaded.toFiles()["tool_configs/get_order.json"]).future_field).toBe(1);
+    });
+});
