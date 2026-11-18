@@ -1,4 +1,4 @@
-import { mkdtempSync, readdirSync, readFileSync, statSync, symlinkSync, writeFileSync, mkdirSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, statSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { describe, expect, it } from "@jest/globals";
