@@ -10,20 +10,13 @@ export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
 
     const { spawn } = await import("node:child_process");
     const { Readable } = await import("node:stream");
-    const commandExists = (await import("command-exists")).default;
-
-    if (!commandExists.sync("mpv")) {
-        throw new ElevenLabsError({
-            message: `mpv not found, necessary to stream audio."
-            On mac you can install it with 'brew install mpv'.
-            On linux and windows you can install it from https://mpv.io/`,
-        });
-    }
 
     const mpv = spawn("mpv", ["--no-cache", "--no-terminal", "--", "fd://0"], {
         stdio: ["pipe", "ignore", "pipe"],
     });
 
+    // Writes fail with EPIPE once mpv is gone; the outcome is reported by the "error" and "close" handlers below.
+    mpv.stdin.on("error", () => {});
     Readable.from(toAsyncIterable(audio)).pipe(mpv.stdin);
 
     const errorChunks: Buffer[] = [];
@@ -44,7 +37,18 @@ export async function stream(audio: ReadableStream<Uint8Array>): Promise<void> {
                 );
             }
         });
-        mpv.on("error", (err) => {
+        mpv.on("error", (err: NodeJS.ErrnoException) => {
+            if (err.code === "ENOENT") {
+                reject(
+                    new ElevenLabsError({
+                        message:
+                            "mpv not found, necessary to stream audio.\n" +
+                            "On mac you can install it with 'brew install mpv'.\n" +
+                            "On linux and windows you can install it from https://mpv.io/",
+                    }),
+                );
+                return;
+            }
             reject(new ElevenLabsError({ message: `Failed to start mpv: ${err.message}` }));
         });
     });
