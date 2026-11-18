@@ -144,6 +144,17 @@ export class Workflow extends WorkflowChain {
             });
             return undefined;
         }
+        // Splitting a bidirectional edge can't preserve the original target's reverse route, so reject it
+        // rather than silently drop or misattach that route. Remove the backward condition first.
+        if (graph.edges[index].backwardCondition !== undefined) {
+            graph.issues.push({
+                code: "cannot_insert_bidirectional",
+                severity: "error",
+                message: `Edge "${sourceId}" → "${targetId}" has a backward condition; inserting into a bidirectional edge would drop its reverse route. Remove the backward condition first`,
+                nodeId: sourceId,
+            });
+            return undefined;
+        }
         const [original] = graph.edges.splice(index, 1);
         const before = graph.edges.length;
         const last = insert(
@@ -223,8 +234,12 @@ export class Workflow extends WorkflowChain {
                 return;
             }
             const id = idOf.get(edge) as string;
-            addToOrder(edge.source, edge);
-            // The API lists an edge with a backward condition among its target's outgoing edges as well.
+            // An edge belongs in a node's outgoing order only for a transition that leaves it: the source
+            // when it has a forward condition, the target when it has a backward condition. A loaded edge
+            // may carry only one.
+            if (edge.forwardCondition !== undefined) {
+                addToOrder(edge.source, edge);
+            }
             if (edge.backwardCondition !== undefined) {
                 addToOrder(edge.target, edge);
             }

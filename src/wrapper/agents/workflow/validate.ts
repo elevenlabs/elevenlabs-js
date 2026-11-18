@@ -48,41 +48,85 @@ export function validate(graph: WorkflowGraph): WorkflowIssue[] {
                 });
             }
         }
-        if (edge.target === graph.startId) {
-            issues.push({
-                code: "edge_into_start",
-                severity: "error",
-                message: `Edge ${name} points into the start node; go to the first node after it instead`,
-                nodeId: edge.source,
-            });
+        // Forward routing rules apply only when there is a forward transition (a forward condition). A
+        // loaded edge can be backward-only, and then source → target does not exist.
+        if (edge.forwardCondition !== undefined) {
+            if (edge.target === graph.startId) {
+                issues.push({
+                    code: "edge_into_start",
+                    severity: "error",
+                    message: `Edge ${name} points into the start node; go to the first node after it instead`,
+                    nodeId: edge.source,
+                });
+            }
+            const sourceType = graph.nodes.get(edge.source)?.type;
+            const conditionType = edge.forwardCondition?.type;
+            if (sourceType === "end" && !endsWithEdges.has(edge.source)) {
+                endsWithEdges.add(edge.source);
+                issues.push({
+                    code: "end_has_outgoing_edges",
+                    severity: "error",
+                    message: `End node "${edge.source}" can't have outgoing edges`,
+                    nodeId: edge.source,
+                });
+            }
+            if (sourceType === "tool" && conditionType !== "result") {
+                issues.push({
+                    code: "tool_edge_needs_result",
+                    severity: "error",
+                    message: `Edge ${name} leaves a tool node, so it must use onSuccess() or onFailure()`,
+                    nodeId: edge.source,
+                });
+            }
+            if (sourceType !== undefined && sourceType !== "tool" && conditionType === "result") {
+                issues.push({
+                    code: "result_edge_needs_tool",
+                    severity: "error",
+                    message: `Edge ${name} uses onSuccess()/onFailure(), which only applies to tool nodes`,
+                    nodeId: edge.source,
+                });
+            }
         }
 
-        const sourceType = graph.nodes.get(edge.source)?.type;
-        const conditionType = edge.forwardCondition?.type;
-        if (sourceType === "end" && !endsWithEdges.has(edge.source)) {
-            endsWithEdges.add(edge.source);
-            issues.push({
-                code: "end_has_outgoing_edges",
-                severity: "error",
-                message: `End node "${edge.source}" can't have outgoing edges`,
-                nodeId: edge.source,
-            });
-        }
-        if (sourceType === "tool" && conditionType !== "result") {
-            issues.push({
-                code: "tool_edge_needs_result",
-                severity: "error",
-                message: `Edge ${name} leaves a tool node, so it must use onSuccess() or onFailure()`,
-                nodeId: edge.source,
-            });
-        }
-        if (sourceType !== undefined && sourceType !== "tool" && conditionType === "result") {
-            issues.push({
-                code: "result_edge_needs_tool",
-                severity: "error",
-                message: `Edge ${name} uses onSuccess()/onFailure(), which only applies to tool nodes`,
-                nodeId: edge.source,
-            });
+        // A backward condition is a second transition the other way, target → source, that the API stores on
+        // this same edge. It must obey the same routing rules as any edge leaving the target.
+        if (edge.backwardCondition !== undefined) {
+            const backName = `"${edge.target}" → "${edge.source}"`;
+            const backSourceType = graph.nodes.get(edge.target)?.type;
+            const backConditionType = edge.backwardCondition?.type;
+            if (edge.source === graph.startId) {
+                issues.push({
+                    code: "edge_into_start",
+                    severity: "error",
+                    message: `Edge ${backName} points into the start node; go to the first node after it instead`,
+                    nodeId: edge.target,
+                });
+            }
+            if (backSourceType === "end" && !endsWithEdges.has(edge.target)) {
+                endsWithEdges.add(edge.target);
+                issues.push({
+                    code: "end_has_outgoing_edges",
+                    severity: "error",
+                    message: `End node "${edge.target}" can't have outgoing edges`,
+                    nodeId: edge.target,
+                });
+            }
+            if (backSourceType === "tool" && backConditionType !== "result") {
+                issues.push({
+                    code: "tool_edge_needs_result",
+                    severity: "error",
+                    message: `Edge ${backName} leaves a tool node, so it must use onSuccess() or onFailure()`,
+                    nodeId: edge.target,
+                });
+            }
+            if (backSourceType !== undefined && backSourceType !== "tool" && backConditionType === "result") {
+                issues.push({
+                    code: "result_edge_needs_tool",
+                    severity: "error",
+                    message: `Edge ${backName} uses onSuccess()/onFailure(), which only applies to tool nodes`,
+                    nodeId: edge.target,
+                });
+            }
         }
     }
 
@@ -158,7 +202,12 @@ export function depthsFrom(graph: WorkflowGraph): Map<string, number> {
         while (queue.length > 0) {
             const current = queue.shift() as string;
             for (const edge of graph.edges) {
-                if (edge.source === current && !depths.has(edge.target) && graph.nodes.has(edge.target)) {
+                if (
+                    edge.source === current &&
+                    edge.forwardCondition !== undefined &&
+                    !depths.has(edge.target) &&
+                    graph.nodes.has(edge.target)
+                ) {
                     depths.set(edge.target, (depths.get(current) as number) + 1);
                     queue.push(edge.target);
                 }
