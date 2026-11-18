@@ -338,7 +338,7 @@ describe("ScribeRealtime URL streaming without ffmpeg", () => {
 
         try {
             const scribe = new ScribeRealtime({ apiKey: TEST_API_KEY });
-            const connection = await scribe.connect({ modelId: TEST_MODEL_ID, url: "https://example.com/a.mp3" });
+            const connection = await scribe.connect({ modelId: TEST_MODEL_ID, url: "http://127.0.0.1/a.mp3" });
             const errors: unknown[] = [];
             connection.on(RealtimeEvents.ERROR, (error) => errors.push(error));
 
