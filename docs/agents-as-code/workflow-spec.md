@@ -131,14 +131,15 @@ These rules make every SDK emit byte-identical JSON for the same program.
 | `tool_edge_needs_result` | error | An edge leaving a tool node has a condition other than `result` |
 | `result_edge_needs_tool` | error | A `result` condition is used on an edge that doesn't leave a tool node |
 | `cannot_remove_start` | error | `remove` is called on the start node |
+| `cannot_insert_bidirectional` | error | `insertBetween` targets an edge that also has a backward condition; splitting it would drop the reverse route |
 | `missing_insert_result` | error | An `insertBetween` callback doesn't return a node |
 | `unreachable_node` | warning | A node can't be reached from start |
 | `unknown_node_type` | warning | A node's type isn't in this SDK version's generated types, so the SDK's create/update request would reject `build()`'s output |
 
 ## `insertBetween(sourceId, targetId, insert)`
 
-1. Find the first edge `source → target`. If there is none, record `unknown_edge`.
-2. Remove that edge. Call `insert` with a branch from `source` that carries the removed edge's forward and backward conditions.
+1. Find the first edge `source → target`. If there is none, record `unknown_edge` and stop. If that edge also has a backward condition, record `cannot_insert_bidirectional` and stop: splitting a bidirectional edge can't preserve the reverse route from `target`, so the caller must remove the backward condition first.
+2. Remove that edge. Call `insert` with a branch from `source` that carries the removed edge's forward condition.
 3. Move the first new edge that leaves `source` into the removed edge's position. It gets a new generated id, because the old id named the old target.
 4. Connect the node `insert` returned to `target`. Use `onSuccess` if it's a tool node, otherwise an unconditional edge.
 5. Return that node, so callers can add more branches to it. When step 1 or 4 fails, return nothing (`undefined`, `None`, `nil`, `null`, or an empty `Option`); the problem is reported by `build()`.
