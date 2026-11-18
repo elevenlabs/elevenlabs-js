@@ -186,7 +186,9 @@ export class WorkflowGraph {
             }
         }
 
-        const fields = FIELDS[next.type as string] ?? {};
+        // Node kinds without a dedicated field map (e.g. generated say/update_state) still accept
+        // position, which is common to every node kind.
+        const fields = FIELDS[next.type as string] ?? { position: "position" };
         for (const [key, value] of Object.entries(rest)) {
             if (value === undefined) {
                 continue;

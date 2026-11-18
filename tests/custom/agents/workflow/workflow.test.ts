@@ -181,6 +181,31 @@ describe("build()", () => {
         expect(warnings).toEqual([]);
     });
 
+    it("does not invent a forward transition for a loaded backward-only edge", () => {
+        // `hub__orphan` carries only a backward condition, so it is the reverse transition orphan -> hub.
+        // There is no forward hub -> orphan, so orphan stays unreachable and the edge belongs only to
+        // orphan's edgeOrder (the node the reverse transition leaves), never hub's.
+        const always = { type: "unconditional" };
+        const wf = Workflow.fromJSON({
+            nodes: {
+                start: { type: "start", edge_order: ["start__hub"], position: { x: 0, y: 0 } },
+                hub: { type: "override_agent", label: "hub", additional_prompt: "H", edge_order: [] },
+                orphan: { type: "override_agent", label: "orphan", additional_prompt: "O", edge_order: ["hub__orphan"] },
+            },
+            edges: {
+                start__hub: { source: "start", target: "hub", forward_condition: always },
+                hub__orphan: { source: "hub", target: "orphan", backward_condition: always },
+            },
+        });
+        const warnings: WorkflowIssue[] = [];
+
+        const model = wf.build({ onWarning: (issue) => warnings.push(issue) });
+
+        expect(warnings.map((w) => [w.code, w.nodeId])).toEqual([["unreachable_node", "orphan"]]);
+        expect(model.nodes?.orphan?.edgeOrder).toEqual(["hub__orphan"]);
+        expect(model.nodes?.hub?.edgeOrder).toEqual([]);
+    });
+
     it("lays out a node by its forward path, not by a back edge to an ancestor", () => {
         const wf = new Workflow();
         const a = wf.converse("a", "A");

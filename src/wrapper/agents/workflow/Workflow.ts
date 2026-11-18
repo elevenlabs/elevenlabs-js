@@ -120,9 +120,11 @@ export class Workflow extends WorkflowChain {
 
     /**
      * Splices new nodes into the edge from `sourceId` to `targetId`. `insert` receives a branch carrying that
-     * edge's conditions and returns the last new node, which is then connected to `targetId`. Returns that node, or
-     * `undefined` if there is no such edge (the callback isn't called) or the callback returned nothing; `build()`
-     * reports both.
+     * edge's forward condition and returns the last new node, which is then connected to `targetId`. Returns that
+     * node, or `undefined` if there is no such edge (the callback isn't called) or the callback returned nothing;
+     * `build()` reports both. If the edge also has a backward condition, splitting it can't preserve the reverse
+     * route, so it is rejected with `cannot_insert_bidirectional` and the callback isn't called — remove the
+     * backward condition first.
      *
      * @example
      * const verify = wf.insertBetween("identify", "lookup_order", (from) => from.converse("verify", "Verify the caller"));
@@ -140,6 +142,17 @@ export class Workflow extends WorkflowChain {
                 code: "unknown_edge",
                 severity: "error",
                 message: `There is no edge from "${sourceId}" to "${targetId}" to insert into`,
+                nodeId: sourceId,
+            });
+            return undefined;
+        }
+        // Splitting a bidirectional edge can't preserve the original target's reverse route, so reject it
+        // rather than silently drop or misattach that route. Remove the backward condition first.
+        if (graph.edges[index].backwardCondition !== undefined) {
+            graph.issues.push({
+                code: "cannot_insert_bidirectional",
+                severity: "error",
+                message: `Edge "${sourceId}" → "${targetId}" has a backward condition; inserting into a bidirectional edge would drop its reverse route. Remove the backward condition first`,
                 nodeId: sourceId,
             });
             return undefined;
@@ -223,8 +236,12 @@ export class Workflow extends WorkflowChain {
                 return;
             }
             const id = idOf.get(edge) as string;
-            addToOrder(edge.source, edge);
-            // The API lists an edge with a backward condition among its target's outgoing edges as well.
+            // An edge belongs in a node's outgoing order only for a transition that leaves it: the source
+            // when it has a forward condition, the target when it has a backward condition. A loaded edge
+            // may carry only one.
+            if (edge.forwardCondition !== undefined) {
+                addToOrder(edge.source, edge);
+            }
             if (edge.backwardCondition !== undefined) {
                 addToOrder(edge.target, edge);
             }
