@@ -2,6 +2,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import type * as ElevenLabs from "../../../../src/api/index";
 import * as serializers from "../../../../src/serialization/index";
+import { Tool } from "../../../../src/wrapper/agents/tools/Tool";
 import {
     Condition,
     Destination,
@@ -546,5 +547,21 @@ describe("loading existing workflows", () => {
         };
 
         expect(Workflow.fromJSON(JSON.stringify(cliConfig)).toJSON()).toEqual(workflow);
+    });
+});
+
+describe("Workflow.fromJSON with toolsById", () => {
+    it("swaps known tool ids for Tool objects and keeps unknown ids", () => {
+        const getOrder = Tool.client("get_order", "Look up an order");
+        const wf = new Workflow();
+        wf.converse("a", "A", { toolIds: ["tool_1", "tool_other"] });
+        const json = wf.toJSON();
+
+        const loaded = Workflow.fromJSON(json, { toolsById: new Map([["tool_1", getOrder]]) });
+        expect(loaded.tools()).toEqual([getOrder]);
+        const built = loaded.build({ toolIds: { get_order: "tool_9" } });
+        expect(JSON.stringify(built)).toContain("tool_9");
+        expect(JSON.stringify(built)).toContain("tool_other");
+        expect(JSON.stringify(built)).not.toContain('tool_1"');
     });
 });

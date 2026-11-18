@@ -67,9 +67,10 @@ export class Workflow extends WorkflowChain {
     /**
      * Loads a workflow stored as API-format JSON (snake_case), for example from `toJSONString()` or a CLI
      * `agent_configs/*.json` file. Accepts a JSON string or a parsed object, holding either the workflow itself or
-     * a whole agent config with a `workflow` key.
+     * a whole agent config with a `workflow` key. Tool ids found in `toolsById` are swapped for those `Tool` objects,
+     * so the loaded workflow refers to them as a built one would; other ids stay as they are.
      */
-    static fromJSON(json: string | object): Workflow {
+    static fromJSON(json: string | object, options: { toolsById?: Map<string, Tool> } = {}): Workflow {
         const parsed: unknown = typeof json === "string" ? JSON.parse(json) : json;
         const raw =
             typeof parsed === "object" && parsed !== null && "workflow" in parsed
@@ -77,6 +78,9 @@ export class Workflow extends WorkflowChain {
                 : parsed;
         const wf = new Workflow();
         wf._graph.load(serializers.AgentWorkflowRequestModel.parseOrThrow(raw, SERIALIZER_OPTIONS));
+        if (options.toolsById !== undefined) {
+            bindTools(wf._graph, options.toolsById);
+        }
         return wf;
     }
 
@@ -112,25 +116,6 @@ export class Workflow extends WorkflowChain {
             }
         }
         return [...this._graph.toolRefs].filter(([key]) => used.has(key)).map(([, tool]) => tool);
-    }
-
-    /**
-     * @internal Swaps tool ids for the `Tool` objects they stand for, so a loaded workflow refers to tools by object.
-     * Ids missing from `byId` stay as they are.
-     */
-    _bindTools(byId: Map<string, Tool>): void {
-        const swap = (id: string): string => {
-            const tool = byId.get(id);
-            if (tool === undefined) {
-                return id;
-            }
-            const key = toolPlaceholder(tool.name);
-            this._graph.toolRefs.set(key, tool);
-            return key;
-        };
-        for (const [id, model] of this._graph.nodes) {
-            this._graph.nodes.set(id, mapNodeToolIds(model, swap));
-        }
     }
 
     /** Ids of every node, in the order they were added. */
@@ -375,4 +360,20 @@ function assignEdgeIds(edges: GraphEdge[]): string[] {
         taken.add(id);
         return id;
     });
+}
+
+/** Swaps tool ids for the `Tool` objects they stand for. Ids missing from `byId` stay as they are. */
+function bindTools(graph: WorkflowGraph, byId: Map<string, Tool>): void {
+    const swap = (id: string): string => {
+        const tool = byId.get(id);
+        if (tool === undefined) {
+            return id;
+        }
+        const key = toolPlaceholder(tool.name);
+        graph.toolRefs.set(key, tool);
+        return key;
+    };
+    for (const [id, model] of graph.nodes) {
+        graph.nodes.set(id, mapNodeToolIds(model, swap));
+    }
 }

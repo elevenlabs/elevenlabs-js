@@ -14,7 +14,7 @@ Names are given in camelCase. Each SDK applies its own casing: `on_success` in P
 |---|---|
 | `new Workflow(options?)` | An empty workflow. `options.preventSubagentLoops`. The constructor creates the start node with id `"start_node"`, the id the API requires. |
 | `Workflow.fromAgent(agentOrWorkflow)` | Loads the workflow from a get-agent response, or from its `workflow` field. |
-| `Workflow.fromJSON(json)` | Loads wire-format JSON, given as a string or a parsed object. The input is either a workflow or a whole agent config with a `workflow` key. |
+| `Workflow.fromJSON(json, { toolsById? })` | Loads wire-format JSON, given as a string or a parsed object. The input is either a workflow or a whole agent config with a `workflow` key. Tool ids in `toolsById` become those `Tool` objects; other ids stay as they are. |
 | `startId` | The start node's id. It is `"start_node"` unless the workflow was loaded with a different one. |
 | `node(id)` | A handle to an existing node. |
 | `nodeIds` | Node ids, in insertion order. |

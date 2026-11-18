@@ -189,9 +189,7 @@ export class Agent {
      */
     get workflow(): Workflow | undefined {
         if (this._workflow === undefined && this._rawWorkflow !== undefined) {
-            const wf = Workflow.fromJSON(this._rawWorkflow);
-            wf._bindTools(this._toolsById);
-            this._workflow = wf;
+            this._workflow = Workflow.fromJSON(this._rawWorkflow, { toolsById: this._toolsById });
             this._rawWorkflow = undefined;
         }
         return this._workflow;
