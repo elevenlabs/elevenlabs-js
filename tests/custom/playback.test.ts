@@ -6,7 +6,6 @@ import { play } from "../../src/wrapper/play";
 import { stream } from "../../src/wrapper/stream";
 
 jest.mock("node:child_process", () => ({ spawn: jest.fn() }));
-jest.mock("command-exists", () => ({ __esModule: true, default: { sync: () => true } }));
 
 describe("audio playback input failures", () => {
     let player: EventEmitter & { stdin: PassThrough; stderr: PassThrough; kill: jest.Mock };
