@@ -6,22 +6,26 @@ import { Workflow } from "../workflow/Workflow";
 import { type AgentIssue, AgentValidationError } from "./errors";
 import { deepMerge, getPath, isObject, setPath, type WireObject } from "./wire";
 
+type AgentFields = NonNullable<ElevenLabs.ConversationalConfig["agent"]>;
+type PromptFields = NonNullable<AgentFields["prompt"]>;
+type TtsFields = NonNullable<ElevenLabs.ConversationalConfig["tts"]>;
+
 /** The settings an agent can be given in code. Every field is optional, so `update()` takes the same shape. */
 export interface AgentOptions {
     /** The agent's instructions: `conversation_config.agent.prompt.prompt`. */
-    prompt?: string;
+    prompt?: PromptFields["prompt"];
     /** What the agent says first: `conversation_config.agent.first_message`. */
-    firstMessage?: string;
+    firstMessage?: AgentFields["firstMessage"];
     /** `conversation_config.agent.language`, e.g. `"en"`. */
-    language?: string;
+    language?: AgentFields["language"];
     /** `conversation_config.agent.prompt.llm`. */
-    llm?: ElevenLabs.Llm;
+    llm?: PromptFields["llm"];
     /** `conversation_config.agent.prompt.temperature`. */
-    temperature?: number;
+    temperature?: PromptFields["temperature"];
     /** `conversation_config.tts.voice_id`. */
-    voiceId?: string;
+    voiceId?: TtsFields["voiceId"];
     /** `conversation_config.tts.model_id`. */
-    ttsModel?: ElevenLabs.TtsConversationalModel;
+    ttsModel?: TtsFields["modelId"];
     tags?: string[];
     /**
      * Tools the agent can use anywhere. Webhook and client tools are created or updated by `agents.push()` and
@@ -61,16 +65,33 @@ export interface AgentLoadOptions {
 
 type TypedKey = "prompt" | "firstMessage" | "language" | "llm" | "temperature" | "voiceId" | "ttsModel";
 
-/** Where each typed option goes in the API-format agent config. */
-const TYPED_PATHS: Record<TypedKey, string[]> = {
-    prompt: ["conversation_config", "agent", "prompt", "prompt"],
-    firstMessage: ["conversation_config", "agent", "first_message"],
-    language: ["conversation_config", "agent", "language"],
-    llm: ["conversation_config", "agent", "prompt", "llm"],
-    temperature: ["conversation_config", "agent", "prompt", "temperature"],
-    voiceId: ["conversation_config", "tts", "voice_id"],
-    ttsModel: ["conversation_config", "tts", "model_id"],
+/**
+ * Where each typed option goes, as the piece of the generated `ConversationalConfig` it sets. Written against the
+ * generated type, so a wrong or renamed field fails to compile; the generated serializer turns it into API format.
+ */
+const TYPED_OPTIONS: { [K in TypedKey]-?: (value: NonNullable<AgentOptions[K]>) => ElevenLabs.ConversationalConfig } = {
+    prompt: (prompt) => ({ agent: { prompt: { prompt } } }),
+    firstMessage: (firstMessage) => ({ agent: { firstMessage } }),
+    language: (language) => ({ agent: { language } }),
+    llm: (llm) => ({ agent: { prompt: { llm } } }),
+    temperature: (temperature) => ({ agent: { prompt: { temperature } } }),
+    voiceId: (voiceId) => ({ tts: { voiceId } }),
+    ttsModel: (modelId) => ({ tts: { modelId } }),
 };
+
+/** The API-format path a typed option sets, and its value in API format. */
+function typedOption(key: TypedKey, value: unknown): { path: string[]; wire: unknown } {
+    const piece = (TYPED_OPTIONS[key] as (v: unknown) => ElevenLabs.ConversationalConfig)(value);
+    let wire: unknown = serializers.ConversationalConfig.jsonOrThrow(piece, SERIALIZER_OPTIONS);
+    const path = ["conversation_config"];
+    while (isObject(wire) && Object.keys(wire).length === 1) {
+        const [field] = Object.keys(wire);
+        path.push(field);
+        wire = wire[field];
+    }
+    return { path, wire };
+}
+
 const TOOL_IDS_PATH = ["conversation_config", "agent", "prompt", "tool_ids"];
 const BUILT_IN_TOOLS_PATH = ["conversation_config", "agent", "prompt", "built_in_tools"];
 
@@ -79,6 +100,8 @@ const SERIALIZER_OPTIONS = {
     allowUnrecognizedUnionMembers: true,
     allowUnrecognizedEnumValues: true,
 } as const;
+
+const PROMPT_PATH: string[] = typedOption("prompt", "").path;
 
 /**
  * An agent, written as code: its settings, its tools and its workflow in one definition. Push it with
@@ -334,11 +357,11 @@ export class Agent {
         deepMerge(config, raw);
 
         for (const [key, value] of Object.entries(this._typed) as [TypedKey, unknown][]) {
-            const path = TYPED_PATHS[key];
+            const { path, wire } = typedOption(key, value);
             if (getPath(raw, path) !== undefined) {
                 issues.push(conflict(key, path));
             }
-            setPath(config, path, value);
+            setPath(config, path, wire);
         }
 
         // Tools: every one validates, and no two different tools share a name.
@@ -451,7 +474,7 @@ export class Agent {
             }
         }
 
-        if (typeof getPath(config, TYPED_PATHS.prompt) !== "string") {
+        if (typeof getPath(config, PROMPT_PATH) !== "string") {
             issues.push({
                 code: "missing_prompt",
                 severity: "warning",
