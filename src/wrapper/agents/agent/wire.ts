@@ -49,7 +49,7 @@ export function deepMerge(target: WireObject, source: WireObject): WireObject {
         if (value === undefined || UNSAFE_KEYS.has(key)) {
             continue;
         }
-        const existing = Object.prototype.hasOwnProperty.call(target, key) ? target[key] : undefined;
+        const existing = Object.getOwnPropertyDescriptor(target, key)?.value;
         if (isObject(value) && isObject(existing)) {
             deepMerge(existing, value);
         } else {
