@@ -21,8 +21,8 @@ Names are given in camelCase. Each SDK applies its own casing: `on_success` in P
 | `remove(id)` | Removes the node and every edge that touches it. |
 | `insertBetween(sourceId, targetId, insert)` | Replaces the edge `source → target` with new nodes and returns the last one. See below. |
 | `build(options?)` | Validates, then returns the SDK request model. `options.onWarning` is called once per warning. |
-| `toJSON()` | Wire-format object. Validates like `build()`. |
-| `toJSONString()` | The canonical file format. See "Wire format". |
+| `toJSON({ toolIds })` | Wire-format object. Validates like `build()`, and takes the same `toolIds`. |
+| `toJSONString({ toolIds })` | The canonical file format. See "Wire format". |
 | Verbs and `when` | The workflow acts as the start node. Calling a verb on it branches from start. |
 
 ### Node verbs

@@ -284,16 +284,21 @@ export class Workflow extends WorkflowChain {
 
     /**
      * The workflow in API format (snake_case keys, sorted at every level), for storing as config. Validates like
-     * `build()`. Also what `JSON.stringify(workflow)` uses.
+     * `build()`, and takes the same `toolIds`. Also what `JSON.stringify(workflow)` uses, which passes a key string
+     * instead of options.
      */
-    toJSON(): Record<string, unknown> {
-        const raw = serializers.AgentWorkflowRequestModel.jsonOrThrow(this.build(), SERIALIZER_OPTIONS);
+    toJSON(options: BuildOptions | string = {}): Record<string, unknown> {
+        const buildOptions = typeof options === "string" ? {} : options;
+        const raw = serializers.AgentWorkflowRequestModel.jsonOrThrow(this.build(buildOptions), SERIALIZER_OPTIONS);
         return sortKeys(raw) as Record<string, unknown>;
     }
 
-    /** `toJSON()` as a string with 2-space indentation and a trailing newline: the canonical file format. */
-    toJSONString(): string {
-        return `${JSON.stringify(this.toJSON(), null, 2)}\n`;
+    /**
+     * `toJSON()` as a string with 2-space indentation and a trailing newline: the canonical file format. Takes the
+     * same `toolIds`.
+     */
+    toJSONString(options: BuildOptions = {}): string {
+        return `${JSON.stringify(this.toJSON(options), null, 2)}\n`;
     }
 
     /** @internal */

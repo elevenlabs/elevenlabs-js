@@ -145,14 +145,21 @@ export class WorkflowGraph {
 
     /** Swaps `Tool` objects for placeholders, remembering each one. */
     refTools(nodeId: string, refs: ToolRef[]): string[] {
+        const inThisNode = new Map<string, Tool>();
         return refs.map((ref) => {
             if (typeof ref === "string") {
                 return ref;
             }
             const key = toolPlaceholder(ref.name);
             const known = this.toolRefs.get(key);
-            // Only a tool another node still uses conflicts; one left behind by a removed or edited node doesn't.
-            if (known !== undefined && known !== ref && this._usesPlaceholder(key, nodeId)) {
+            // A different tool of the same name conflicts if this node or another node still uses it; one left behind
+            // by a removed or edited node doesn't.
+            let clash = inThisNode.get(key);
+            if (clash === undefined && known !== undefined && this._usesPlaceholder(key, nodeId)) {
+                clash = known;
+            }
+            inThisNode.set(key, ref);
+            if (clash !== undefined && clash !== ref) {
                 this.issues.push({
                     code: "duplicate_tool_name",
                     severity: "error",

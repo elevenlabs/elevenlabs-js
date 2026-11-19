@@ -233,4 +233,29 @@ describe("Workflow tool refs", () => {
         wf.tool("b", [getOrder()]);
         expect(() => wf.build({ toolIds: { get_order: "tool_1" } })).not.toThrow();
     });
+
+    it("reports two different tools with one name in the same node", () => {
+        const wf = new Workflow();
+        wf.tool("lookup", [getOrder(), getOrder()]);
+        let codes: string[] = [];
+        try {
+            wf.build({ toolIds: { get_order: "tool_1" } });
+        } catch (err) {
+            codes = (err as { issues: Array<{ code: string }> }).issues.map((issue) => issue.code);
+        }
+        expect(codes).toEqual(["duplicate_tool_name"]);
+
+        const lookup = getOrder();
+        const same = new Workflow();
+        same.tool("lookup", [lookup, lookup]);
+        expect(() => same.build({ toolIds: { get_order: "tool_1" } })).not.toThrow();
+    });
+
+    it("writes Tool objects as ids in toJSON and toJSONString", () => {
+        const wf = new Workflow();
+        wf.tool("lookup", [getOrder()]);
+        const toolIds = { get_order: "tool_1" };
+        expect(JSON.parse(wf.toJSONString({ toolIds }))).toEqual(wf.toJSON({ toolIds }));
+        expect((wf.toJSON({ toolIds }) as any).nodes.lookup.tools).toEqual([{ tool_id: "tool_1" }]);
+    });
 });
