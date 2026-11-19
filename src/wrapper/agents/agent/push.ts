@@ -66,7 +66,12 @@ export async function pushAgent(clients: Clients, agent: Agent, options: AgentPu
     try {
         // The tools the agent already uses. With a project they're matched by recorded id; without one, by name
         // among the tools this agent uses, so a same-named tool another agent uses is never touched.
-        const inUse = agentId === undefined ? [] : await listToolsUsedBy(clients.tools, agentId, requestOptions);
+        const inUse =
+            agentId === undefined
+                ? []
+                : branchId !== undefined
+                  ? await toolsOnBranch(clients, agentId, branchId, requestOptions)
+                  : await listToolsUsedBy(clients.tools, agentId, requestOptions);
         const usedByName = new Map<string, ElevenLabs.ToolResponseModel>();
         for (const remote of inUse) {
             usedByName.set(toolName(remote), remote);
@@ -162,13 +167,7 @@ export async function pullAgent(clients: Clients, agentId: string, options: Agen
         config.workflow = live.workflow;
     }
 
-    const toolIds = getPath(config, ["conversation_config", "agent", "prompt", "tool_ids"]);
-    const wanted = [
-        ...new Set([
-            ...(Array.isArray(toolIds) ? (toolIds as string[]) : []),
-            ...rawWorkflowToolIds(isObject(config.workflow) ? config.workflow : undefined),
-        ]),
-    ];
+    const wanted = toolIdsIn(config);
     const toolsById = new Map<string, Tool>();
     const toolConfigs = new Map<string, WireObject>();
     for (const id of wanted) {
@@ -193,6 +192,36 @@ export async function pullAgent(clients: Clients, agentId: string, options: Agen
         }
     }
     return agent;
+}
+
+/** Every tool id an agent config uses, in the agent's `tool_ids` and the workflow's nodes, once each, in order. */
+function toolIdsIn(config: WireObject): string[] {
+    const toolIds = getPath(config, ["conversation_config", "agent", "prompt", "tool_ids"]);
+    return [
+        ...new Set([
+            ...(Array.isArray(toolIds) ? (toolIds as string[]) : []),
+            ...rawWorkflowToolIds(isObject(config.workflow) ? config.workflow : undefined),
+        ]),
+    ];
+}
+
+/**
+ * The tools a branch of the agent uses. The tools API's `usedByAgentId` covers the main branch only, so they come from
+ * the branch's config, by id.
+ */
+async function toolsOnBranch(
+    clients: Clients,
+    agentId: string,
+    branchId: string,
+    requestOptions: BaseRequestOptions | undefined,
+): Promise<ElevenLabs.ToolResponseModel[]> {
+    const branch = await clients.agents.get(agentId, { branchId }, requestOptions);
+    const wire = serializers.GetAgentResponseModel.jsonOrThrow(branch, SERIALIZER_OPTIONS) as unknown as WireObject;
+    const tools: ElevenLabs.ToolResponseModel[] = [];
+    for (const id of toolIdsIn(wire)) {
+        tools.push(await clients.tools.get(id, {}, requestOptions));
+    }
+    return tools;
 }
 
 async function listToolsUsedBy(

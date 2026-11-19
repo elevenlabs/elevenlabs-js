@@ -90,6 +90,31 @@ describe("agents.push", () => {
         expect(server.tools.has("tool_new_1")).toBe(true);
     });
 
+    it("matches a branch push against the branch's tools, not the main branch's", async () => {
+        const server = new FakeServer();
+        const client = server.client();
+        const { agentId } = await client.conversationalAi.agents.push(supportAgent());
+        // The branch uses its own copy of get_order, and no show_order.
+        server.addTool("tool_branch_order", getOrder("Branch lookup").toJSON());
+        const branch = JSON.parse(JSON.stringify(server.agents.get(agentId)));
+        branch.workflow.nodes.lookup.tools = [{ tool_id: "tool_branch_order" }];
+        branch.conversation_config.agent.prompt.tool_ids = [];
+        server.branches.set(`${agentId}/agtbrch_1`, branch);
+        server.calls.length = 0;
+
+        const result = await client.conversationalAi.agents.push(supportAgent([getOrder("Changed lookup")]), {
+            agentId,
+            branchId: "agtbrch_1",
+        });
+        expect(result.tools.get_order).toEqual({ id: "tool_branch_order", action: "updated" });
+        expect(result.tools.show_order).toBeUndefined(); // a main-branch tool the branch never used isn't "detached"
+        expect(server.writes()).toEqual([
+            "PATCH /v1/convai/tools/tool_branch_order",
+            `PATCH /v1/convai/agents/${agentId}`,
+        ]);
+        expect(server.calls.some((call) => call.query.used_by_agent_id !== undefined)).toBe(false);
+    });
+
     it("validates before any API call", async () => {
         const server = new FakeServer();
         const agent = new Agent("A", { prompt: "p", tools: [Tool.webhook("broken", "No URL")] });

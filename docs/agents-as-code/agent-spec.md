@@ -95,7 +95,7 @@ While the workflow is being built, a `Tool` object stands under the placeholder 
 Steps:
 
 1. **Validate.** Call `agent.validate()`, which throws before any request.
-2. **Find the tools the agent already uses.** This needs the agent's id: `options.agentId`, or with a project, the id recorded for it. Call `GET /v1/convai/tools?used_by_agent_id=…&page_size=100` and follow the cursor.
+2. **Find the tools the agent already uses.** This needs the agent's id: `options.agentId`, or with a project, the id recorded for it. Call `GET /v1/convai/tools?used_by_agent_id=…&page_size=100` and follow the cursor. That filter covers the agent's main branch only, so with `branchId`, instead read the branch's config (`GET /v1/convai/agents/{id}?branch_id=…`) and get each tool id it uses (`prompt.tool_ids` and the workflow's nodes) with `GET /v1/convai/tools/{id}`.
 3. **Push each tool in `agent.tools()`, in order.**
    - **Its known id:**
      - With a project, the id recorded for the tool. A project entry matches a tool by object if the project loaded it, otherwise by name. More than one entry with the same name is an error.

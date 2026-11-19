@@ -13,6 +13,8 @@ export interface Call {
 export class FakeServer {
     readonly tools = new Map<string, Json>();
     readonly agents = new Map<string, Json>();
+    /** Branch configs by `agentId/branchId`. Only the main branch counts for `used_by_agent_id`, as in the API. */
+    readonly branches = new Map<string, Json>();
     readonly calls: Call[] = [];
     /** Fails every request whose `METHOD path` matches. */
     failOn: RegExp | undefined;
@@ -69,6 +71,15 @@ export class FakeServer {
                 const agentId = `agent_new_${this._next++}`;
                 this._storeAgent(agentId, body);
                 return json({ agent_id: agentId });
+            }
+            const branchId = url.searchParams.get("branch_id");
+            if (branchId !== null) {
+                const key = `${id}/${branchId}`;
+                if (method === "PATCH") {
+                    this.branches.set(key, { ...this.branches.get(key), ...body });
+                }
+                const branch = this.branches.get(key);
+                return branch === undefined ? json({ detail: "not found" }, 404) : json(agentResponse(id, branch));
             }
             if (method === "PATCH") {
                 this._storeAgent(id, { ...this.agents.get(id), ...body });
