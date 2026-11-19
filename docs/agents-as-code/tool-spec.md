@@ -122,6 +122,8 @@ The two transfer tools add one entry to `params.transfers` per call:
 
 `condition` is plain text the LLM reads, not a workflow `Condition`, because the API field is a string. `Destination` and the transfer option names are the workflow builder's, shared between the two builders.
 
+A `transfer_to_number` tool can instead hold `params.transfer_rules`: per-telephony-provider transfer configs, which the API accepts in place of `transfers` (the two are mutually exclusive). The builder has no method for rules. A loaded tool keeps its `transfer_rules` exactly as loaded, and `transfer()` on it is a `conflicting_transfers` error. Since the API requires the `transfers` key, a tool pulled with rules carries `"transfers": []`, which is written back as loaded.
+
 ### Options
 
 | Kind | Options (→ API field) |
@@ -221,7 +223,8 @@ The workflow spec's rules apply. Tool-specific notes:
 | `missing_array_items` | error | An array schema has no `items` (only possible when loaded) |
 | `duplicate_header` | error | Two header names differ only in case |
 | `invalid_destination` | error | `transferToNumber` is given an agent destination, or a SIP URI destination (static or from a dynamic variable) without `transferType: "sip_refer"` (the API defaults to `conference`); or `transferToAgent` a phone or SIP one |
-| `no_transfers` | error | A transfer system tool has no `transfer()` entries |
+| `no_transfers` | error | A transfer system tool has no entries in `transfers` (from `transfer()` or loaded) and none in a loaded `transfer_rules` |
+| `conflicting_transfers` | error | A `transfer_to_number` tool has entries in both `transfers` and `transfer_rules`, which the API rejects |
 | `invalid_option` | error | An option doesn't apply to the tool's kind, or a documented range is broken: a webhook `responseTimeoutSecs` outside 5–300, a client one outside 1–120 other than -1, -1 without `expectsResponse: true`, or `followRedirects` without `followRedirectsAllowedDomains` |
 | `missing_value_source` | error | A literal has none of `describe`, `fromVariable`, `constant`, `systemProvided`, `omit`. An empty description or variable name doesn't count, since the API reads `""` as unset |
 | `unknown_tool_type` | warning | A loaded tool's type has no constructor in this SDK version (kind `"other"`); it round-trips but can't be edited |
@@ -244,7 +247,7 @@ Path-placeholder matching uses `{name}` where `name` is one or more characters o
 
 Each op calls one tool method. `{"op": "<method>", "args": [ … ]}`, where a schema argument is in wire format and loaded with `Schema.fromJSON`, or `{"build": [ops]}` for a schema built with `Schema` methods (needed for `optional()`, which has no wire form of its own), a header is `{"value"}`, `{"secret"}`, `{"variable"}` or `{"envVar"}`, and a destination is as in the workflow fixtures. Schema-only cases use `{"schema": <ops>}`, where the first op is a constructor (`string`, `integer`, `number`, `bool`, `object`, `array` with a schema argument, or `fromJSON` with a wire schema), each later op is a method called on the previous result, and `expected` is `schema.toJSON()`. In JS the runner is `tests/custom/agents/tools/fixtureRunner.ts`.
 
-The fixtures cover the example above, both transfer tools and a system tool with params, every value source, `required` order across a load, a replacement and a `without`, editing a loaded tool, a byte-identical round-trip with fields the builder doesn't model, a config with the API's defaults for unset fields, an unknown tool type, and every validation error.
+The fixtures cover the example above, both transfer tools and a system tool with params, a loaded `transfer_rules` tool, every value source, `required` order across a load, a replacement and a `without`, editing a loaded tool, a byte-identical round-trip with fields the builder doesn't model, a config with the API's defaults for unset fields, an unknown tool type, and every validation error.
 
 ## Not yet covered
 
