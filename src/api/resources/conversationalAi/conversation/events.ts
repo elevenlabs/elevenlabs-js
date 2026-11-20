@@ -55,6 +55,11 @@ export interface ConversationInitiationClientDataEvent extends BaseClientToOrche
     conversation_config_override?: Record<string, any>;
     dynamic_variables?: Record<string, any>;
     environment?: string;
+    user_id?: string;
+    branch_id?: string;
+    starting_workflow_node_id?: string;
+    procedure_ids?: string[];
+    start_procedure_ids?: string[];
 }
 
 /**
