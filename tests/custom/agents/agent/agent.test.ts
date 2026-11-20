@@ -1,0 +1,261 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { describe, expect, it } from "@jest/globals";
+import { Agent, AgentValidationError, Schema, SystemTool, Tool, Workflow } from "../../../../src";
+import { deepMerge } from "../../../../src/wrapper/agents/agent/wire";
+import { sortKeys } from "../../../../src/wrapper/agents/workflow/util";
+
+const CLI_PROJECT = join(__dirname, "../../../../docs/agents-as-code/fixtures/project/cli-graph");
+const readJson = (path: string): Record<string, unknown> => JSON.parse(readFileSync(join(CLI_PROJECT, path), "utf8"));
+
+const getOrder = () =>
+    Tool.webhook("get_order", "Look up an order by its number")
+        .get("https://api.example.com/orders/{order_id}")
+        .pathParam("order_id", Schema.string().describe("The order number"));
+const showOrder = () =>
+    Tool.client("show_order", "Show the order card").param("order_id", Schema.string().fromVariable("order_id"));
+
+function issuesOf(fn: () => unknown): Array<{ code: string; path?: string }> {
+    try {
+        fn();
+    } catch (err) {
+        if (err instanceof AgentValidationError) {
+            return err.issues.map(({ code, path }) => ({ code, path }));
+        }
+        throw err;
+    }
+    throw new Error("expected an AgentValidationError");
+}
+
+describe("Agent.toJSON / build", () => {
+    it("maps typed options, tools and system tools into the API config", () => {
+        const agent = new Agent("Support line", {
+            prompt: "You are a support agent.",
+            firstMessage: "Hi!",
+            language: "en",
+            llm: "gemini-2.0-flash",
+            temperature: 0.5,
+            voiceId: "voice_1",
+            ttsModel: "eleven_flash_v2_5",
+            tags: ["support"],
+            tools: [SystemTool.endCall(), getOrder()],
+            toolIds: ["tool_existing"],
+        });
+        const config = agent.toJSON({ toolIds: { get_order: "tool_1" } });
+        expect(config).toEqual({
+            conversation_config: {
+                agent: {
+                    first_message: "Hi!",
+                    language: "en",
+                    prompt: {
+                        built_in_tools: {
+                            end_call: { name: "end_call", params: { system_tool_type: "end_call" }, type: "system" },
+                        },
+                        llm: "gemini-2.0-flash",
+                        prompt: "You are a support agent.",
+                        temperature: 0.5,
+                        tool_ids: ["tool_existing", "tool_1"],
+                    },
+                },
+                tts: { model_id: "eleven_flash_v2_5", voice_id: "voice_1" },
+            },
+            name: "Support line",
+            platform_settings: {},
+            tags: ["support"],
+        });
+        expect(JSON.stringify(config)).toBe(JSON.stringify(sortKeys(config)));
+
+        const body = agent.build({ toolIds: { get_order: "tool_1" } });
+        expect(body.name).toBe("Support line");
+        expect(body.conversationConfig.agent?.prompt?.toolIds).toEqual(["tool_existing", "tool_1"]);
+        expect(body.conversationConfig.agent?.prompt?.builtInTools?.endCall?.name).toBe("end_call");
+    });
+
+    it("merges the raw config under the typed options", () => {
+        const agent = new Agent("A", {
+            prompt: "p",
+            conversationConfig: { turn: { turnTimeout: 7 }, agent: { disableFirstMessageInterruptions: true } },
+            platformSettings: { privacy: { recordVoice: false } },
+        });
+        agent.update({ conversationConfig: { turn: { silenceEndCallTimeout: 20 } } });
+        const config = agent.toJSON();
+        expect(config.conversation_config).toEqual({
+            agent: { disable_first_message_interruptions: true, prompt: { prompt: "p" } },
+            turn: { silence_end_call_timeout: 20, turn_timeout: 7 },
+        });
+        expect(config.platform_settings).toEqual({ privacy: { record_voice: false } });
+    });
+
+    it("fills in the ids of Tool objects used by workflow nodes", () => {
+        const lookup = getOrder();
+        const show = showOrder();
+        const wf = new Workflow();
+        const triage = wf.converse("triage", "Find out what the caller needs");
+        triage
+            .when("Caller gave an order number")
+            .tool("lookup", [lookup], {
+                schemaOverrides: { get_order: { "path_params.order_id": { source: "constant", constantValue: "1" } } },
+            })
+            .onSuccess()
+            .converse("resolve", "Explain the order", { toolIds: [show, "tool_raw"] });
+        const agent = new Agent("A", { prompt: "p", workflow: wf });
+
+        expect(agent.tools()).toEqual([lookup, show]);
+        const nodes = (
+            agent.toJSON({ toolIds: { get_order: "tool_g", show_order: "tool_s" } }).workflow as {
+                nodes: Record<string, Record<string, unknown>>;
+            }
+        ).nodes;
+        expect(nodes.lookup.tools).toEqual([
+            {
+                schema_overrides: { "path_params.order_id": { constant_value: "1", source: "constant" } },
+                tool_id: "tool_g",
+            },
+        ]);
+        expect(nodes.resolve.additional_tool_ids).toEqual(["tool_s", "tool_raw"]);
+        expect(issuesOf(() => agent.toJSON({ toolIds: { get_order: "tool_g" } }))).toEqual([
+            { code: "unresolved_tool", path: "tools.show_order" },
+        ]);
+    });
+
+    it("validates without ids, so CI needs no API key", () => {
+        expect(() => new Agent("A", { prompt: "p", tools: [getOrder()] }).validate()).not.toThrow();
+    });
+
+    it("reports every problem at once", () => {
+        const wf = new Workflow();
+        wf.tool("hang_up", [SystemTool.endCall()]);
+        const agent = new Agent("", {
+            prompt: "p",
+            tools: [getOrder(), getOrder(), Tool.webhook("broken", "No URL")],
+            workflow: wf,
+            conversationConfig: { agent: { prompt: { prompt: "raw prompt" } } },
+        });
+        expect(issuesOf(() => agent.validate())).toEqual([
+            { code: "missing_name", path: undefined },
+            { code: "option_conflict", path: "conversation_config.agent.prompt.prompt" },
+            { code: "duplicate_tool_name", path: "tools.get_order" },
+            { code: "invalid_tool", path: "tools.broken" },
+            { code: "system_tool_in_workflow", path: "workflow.tools.end_call" },
+        ]);
+    });
+
+    it("warns, without failing, when there's no prompt", () => {
+        const warnings: string[] = [];
+        new Agent("A").validate({ onWarning: (issue) => warnings.push(issue.code) });
+        expect(warnings).toEqual(["missing_prompt"]);
+    });
+});
+
+describe("Agent.fromJSON", () => {
+    it("round-trips a CLI agent config, keeping fields the SDK doesn't model and the tool order", () => {
+        const raw = readJson("agent_configs/support.json");
+        const lookup = Tool.fromJSON(readJson("tool_configs/lookup_order.json"));
+        const agent = Agent.fromJSON(raw, { toolsById: { tool_lookup: lookup } });
+
+        expect(agent.name).toBe("Support");
+        expect(agent.tools()).toEqual([lookup]);
+        expect(agent.toolIds).toEqual(["tool_from_dashboard"]);
+        expect(agent.toJSON({ toolIds: { lookup_order: "tool_lookup" } })).toEqual(sortKeys(raw));
+    });
+
+    it("turns a loaded workflow into a Workflow on first use, with tool ids bound to Tool objects", () => {
+        const raw = readJson("agent_configs/support.beta.json");
+        const refund = Tool.fromJSON(readJson("tool_configs/issue_refund.json"));
+        const agent = Agent.fromJSON(raw, { toolsById: { tool_refund: refund } });
+
+        expect(agent.tools()).toEqual([refund]); // read from the raw workflow, before it's materialized
+        const unedited = agent.toJSON({ toolIds: { issue_refund: "tool_refund" } });
+        expect(unedited.workflow).toEqual(sortKeys(raw.workflow));
+
+        agent.workflow?.node("refunds").update({ prompt: "Handle refunds" });
+        const nodes = (
+            agent.toJSON({ toolIds: { issue_refund: "tool_new" } }).workflow as {
+                nodes: Record<string, Record<string, unknown>>;
+            }
+        ).nodes;
+        expect(nodes.refunds.additional_tool_ids).toEqual(["tool_new"]);
+        expect(nodes.refunds.additional_prompt).toBe("Handle refunds");
+    });
+});
+
+describe("review fixes", () => {
+    it("ignores keys that could reach a prototype when merging config", () => {
+        const target: Record<string, unknown> = { turn: {} };
+        deepMerge(target, JSON.parse('{"turn": {"__proto__": {"polluted": true}}, "__proto__": {"polluted": true}}'));
+        deepMerge(target, JSON.parse('{"turn": {"__proto__": {"polluted": true}}}'));
+        expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+        expect(Object.getPrototypeOf(target.turn)).toBe(Object.prototype);
+    });
+
+    it("replaces a loaded agent's system tools along with its other tools", () => {
+        const raw = readJson("agent_configs/support.json");
+        const agent = Agent.fromJSON(raw);
+        expect(agent.tools()).toEqual([]); // system tools aren't managed by push
+        agent.update({ tools: [] });
+        const prompt = (agent.toJSON().conversation_config as any).agent.prompt;
+        expect(prompt.built_in_tools).toBeUndefined();
+        expect(prompt.tool_ids).toEqual(["tool_lookup", "tool_from_dashboard"]); // ids it doesn't manage stay
+    });
+
+    it("treats an explicitly empty tool list as set", () => {
+        const agent = new Agent("A", {
+            prompt: "p",
+            toolIds: [],
+            conversationConfig: { agent: { prompt: { toolIds: ["tool_existing"] } } },
+        });
+        expect(issuesOf(() => agent.validate())).toEqual([
+            { code: "option_conflict", path: "conversation_config.agent.prompt.tool_ids" },
+        ]);
+    });
+
+    it("validates a loaded workflow without materializing it", () => {
+        const raw = readJson("agent_configs/support.beta.json") as any;
+        raw.workflow.edges.broken = { source: "start_node", target: "nowhere" };
+        const agent = Agent.fromJSON(raw);
+        expect(issuesOf(() => agent.validate())).toEqual([{ code: "invalid_workflow", path: "workflow" }]);
+    });
+
+    it("writes new tool ids into a loaded workflow it hasn't materialized", () => {
+        const raw = readJson("agent_configs/support.beta.json");
+        const refund = Tool.fromJSON(readJson("tool_configs/issue_refund.json"));
+        const agent = Agent.fromJSON(raw, { toolsById: { tool_refund: refund } });
+        const nodes = (agent.toJSON({ toolIds: { issue_refund: "tool_clone" } }).workflow as any).nodes;
+        expect(nodes.refunds.additional_tool_ids).toEqual(["tool_clone"]);
+    });
+});
+
+describe("Workflow tool refs", () => {
+    it("lets a removed node's tool name be reused by a new Tool object", () => {
+        const wf = new Workflow();
+        wf.tool("a", [getOrder()]);
+        wf.remove("a");
+        wf.tool("b", [getOrder()]);
+        expect(() => wf.build({ toolIds: { get_order: "tool_1" } })).not.toThrow();
+    });
+
+    it("reports two different tools with one name in the same node", () => {
+        const wf = new Workflow();
+        wf.tool("lookup", [getOrder(), getOrder()]);
+        let codes: string[] = [];
+        try {
+            wf.build({ toolIds: { get_order: "tool_1" } });
+        } catch (err) {
+            codes = (err as { issues: Array<{ code: string }> }).issues.map((issue) => issue.code);
+        }
+        expect(codes).toEqual(["duplicate_tool_name"]);
+
+        const lookup = getOrder();
+        const same = new Workflow();
+        same.tool("lookup", [lookup, lookup]);
+        expect(() => same.build({ toolIds: { get_order: "tool_1" } })).not.toThrow();
+    });
+
+    it("writes Tool objects as ids in toJSON and toJSONString", () => {
+        const wf = new Workflow();
+        wf.tool("lookup", [getOrder()]);
+        const toolIds = { get_order: "tool_1" };
+        expect(JSON.parse(wf.toJSONString({ toolIds }))).toEqual(wf.toJSON({ toolIds }));
+        expect((wf.toJSON({ toolIds }) as any).nodes.lookup.tools).toEqual([{ tool_id: "tool_1" }]);
+    });
+});

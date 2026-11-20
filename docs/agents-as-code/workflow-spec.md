@@ -14,15 +14,15 @@ Names are given in camelCase. Each SDK applies its own casing: `on_success` in P
 |---|---|
 | `new Workflow(options?)` | An empty workflow. `options.preventSubagentLoops`. The constructor creates the start node with id `"start_node"`, the id the API requires. |
 | `Workflow.fromAgent(agentOrWorkflow)` | Loads the workflow from a get-agent response, or from its `workflow` field. |
-| `Workflow.fromJSON(json)` | Loads wire-format JSON, given as a string or a parsed object. The input is either a workflow or a whole agent config with a `workflow` key. |
+| `Workflow.fromJSON(json, { toolsById? })` | Loads wire-format JSON, given as a string or a parsed object. The input is either a workflow or a whole agent config with a `workflow` key. Tool ids in `toolsById` become those `Tool` objects; other ids stay as they are. |
 | `startId` | The start node's id. It is `"start_node"` unless the workflow was loaded with a different one. |
 | `node(id)` | A handle to an existing node. |
 | `nodeIds` | Node ids, in insertion order. |
 | `remove(id)` | Removes the node and every edge that touches it. |
 | `insertBetween(sourceId, targetId, insert)` | Replaces the edge `source → target` with new nodes and returns the last one. See below. |
 | `build(options?)` | Validates, then returns the SDK request model. `options.onWarning` is called once per warning. |
-| `toJSON()` | Wire-format object. Validates like `build()`. |
-| `toJSONString()` | The canonical file format. See "Wire format". |
+| `toJSON({ toolIds })` | Wire-format object. Validates like `build()`, and takes the same `toolIds`. |
+| `toJSONString({ toolIds })` | The canonical file format. See "Wire format". |
 | Verbs and `when` | The workflow acts as the start node. Calling a verb on it branches from start. |
 
 ### Node verbs
@@ -32,7 +32,7 @@ Node verbs exist on `Workflow`, `WorkflowNode` and `WorkflowBranch`. Each verb a
 | Verb | API node type |
 |---|---|
 | `converse(id, prompt, options?)` | `override_agent` (a "subagent" in the UI): the agent holds a conversation with `prompt` added to its instructions until an outgoing condition holds. `prompt` maps to `additional_prompt`. `label` defaults to `id`. |
-| `tool(id, toolIds, options?)` | `tool`. Creates one `{tool_id}` locator per id, with `schemaOverrides[toolId]` if given. |
+| `tool(id, toolIds, options?)` | `tool`. Creates one `{tool_id}` locator per id, with `schemaOverrides[toolId]` if given. Each entry may also be a `Tool` object, resolved when the workflow is built with `toolIds` (see `agent-spec.md`, "Workflow tool references"). |
 | `transfer(id, destination, options?)` | `phone_number` for phone or SIP destinations; `standalone_agent` for agent destinations. |
 | `end(options?)` | `end`. `options.id` defaults to `"end"`. When the id already belongs to an end node, that node is reused. |
 | `goTo(target, options?)` | No new node. Moves the conversation to `target` with a new edge to it, or, when `target` already has an edge to this node, as that edge's backward condition (see "One edge per pair of nodes"). `target` is a handle or an id, and may be created later. `options.back` sets the backward condition. |
