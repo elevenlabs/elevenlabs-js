@@ -10,6 +10,16 @@ export interface ConversationInitiationData {
     dynamicVariables?: Record<string, any>;
     /** The environment to use for the conversation */
     environment?: string;
+    /** ID of the end user participating in the conversation */
+    userId?: string;
+    /** ID of the agent branch to use for the conversation */
+    branchId?: string;
+    /** Workflow node to start the conversation at instead of the default entry */
+    startingWorkflowNodeId?: string;
+    /** Procedures available to the starting agent. An empty list disables all of the agent's procedures. */
+    procedureIds?: string[];
+    /** Free-form procedures that start when the conversation starts */
+    startProcedureIds?: string[];
 }
 
 /**
@@ -25,5 +35,10 @@ export function createConversationInitiationData(
         extraBody: options.extraBody || {},
         conversationConfigOverride: options.conversationConfigOverride || {},
         dynamicVariables: options.dynamicVariables || {},
+        userId: options.userId,
+        branchId: options.branchId,
+        startingWorkflowNodeId: options.startingWorkflowNodeId,
+        procedureIds: options.procedureIds,
+        startProcedureIds: options.startProcedureIds,
     };
 }

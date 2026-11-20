@@ -1,7 +1,11 @@
 import { describe, expect, it, jest } from "@jest/globals";
 import { EventEmitter } from "events";
 import { ElevenLabsClient } from "../../src";
-import { AudioInterface, Conversation } from "../../src/api/resources/conversationalAi/conversation";
+import {
+    AudioInterface,
+    Conversation,
+    type ConversationInitiationData,
+} from "../../src/api/resources/conversationalAi/conversation";
 import type { WebSocketInterface } from "../../src/api/resources/conversationalAi/conversation/interfaces/WebSocketInterface";
 
 class FakeSocket extends EventEmitter implements WebSocketInterface {
@@ -29,7 +33,7 @@ class FakeAudio extends AudioInterface {
     interrupt(): void {}
 }
 
-async function startConversation() {
+async function startConversation(config?: ConversationInitiationData) {
     const socket = new FakeSocket();
     const audio = new FakeAudio();
     const conversation = new Conversation({
@@ -38,6 +42,7 @@ async function startConversation() {
         agentId: "agent_1",
         requiresAuth: false,
         audioInterface: audio,
+        config,
     });
     const sessionEnded = jest.fn();
     conversation.on("session_ended", sessionEnded);
@@ -163,6 +168,56 @@ describe("Conversation session end", () => {
         expect(sessionEnded).toHaveBeenCalledWith("conv_1", undefined, undefined, {
             reason: "error",
             message: "socket write failed",
+        });
+    });
+});
+
+describe("Conversation initiation client data", () => {
+    function sentInitiation(socket: FakeSocket): Record<string, unknown> {
+        return JSON.parse(socket.send.mock.calls[0][0]);
+    }
+
+    it("sends every initiation field the application sets", async () => {
+        const { socket } = await startConversation({
+            extraBody: { temperature: 0.2 },
+            conversationConfigOverride: { agent: { first_message: "Hi" } },
+            dynamicVariables: { name: "Ada" },
+            environment: "staging",
+            userId: "user_1",
+            branchId: "branch_1",
+            startingWorkflowNodeId: "node_1",
+            procedureIds: ["proc_1", "proc_2"],
+            startProcedureIds: ["proc_1"],
+        });
+
+        expect(sentInitiation(socket)).toEqual({
+            type: "conversation_initiation_client_data",
+            custom_llm_extra_body: { temperature: 0.2 },
+            conversation_config_override: { agent: { first_message: "Hi" } },
+            dynamic_variables: { name: "Ada" },
+            environment: "staging",
+            user_id: "user_1",
+            branch_id: "branch_1",
+            starting_workflow_node_id: "node_1",
+            procedure_ids: ["proc_1", "proc_2"],
+            start_procedure_ids: ["proc_1"],
+        });
+    });
+
+    it("sends an empty procedure list, which disables the agent's procedures", async () => {
+        const { socket } = await startConversation({ procedureIds: [] });
+
+        expect(sentInitiation(socket)).toHaveProperty("procedure_ids", []);
+    });
+
+    it("leaves out the fields the application does not set", async () => {
+        const { socket } = await startConversation();
+
+        expect(sentInitiation(socket)).toEqual({
+            type: "conversation_initiation_client_data",
+            custom_llm_extra_body: {},
+            conversation_config_override: {},
+            dynamic_variables: {},
         });
     });
 });

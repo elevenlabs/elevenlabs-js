@@ -282,6 +282,11 @@ export class Conversation extends EventEmitter {
             conversation_config_override: this.config.conversationConfigOverride,
             dynamic_variables: this.config.dynamicVariables,
             environment: this.config.environment,
+            user_id: this.config.userId,
+            branch_id: this.config.branchId,
+            starting_workflow_node_id: this.config.startingWorkflowNodeId,
+            procedure_ids: this.config.procedureIds,
+            start_procedure_ids: this.config.startProcedureIds,
         };
 
         this.ws!.send(JSON.stringify(initEvent));
