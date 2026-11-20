@@ -262,7 +262,10 @@ export class AgentProject {
             this._agents.push(slot);
         }
         slot.entry.id = id;
-        const branch = Object.values(slot.entry.branches ?? {}).find((b) => b.branch_id === branchId);
+        const branch =
+            branchId === undefined
+                ? undefined
+                : Object.values(slot.entry.branches ?? {}).find((b) => b.branch_id === branchId);
         // A branch has its own file; the slot's agent is the main branch's, which a branch must not replace.
         if (branch === undefined) {
             slot.agent = agent;
@@ -275,7 +278,15 @@ export class AgentProject {
                 slot.entry.version_id = versionId;
             }
         }
-        this._write(branch?.config ?? slot.entry.config, formatConfig(config));
+        let path = slot.entry.config;
+        if (branch !== undefined) {
+            // _checkBranch made sure it has one; never fall back to the main branch's file.
+            if (!hasConfig(branch)) {
+                this._checkBranchOf(undefined, agent.name, branchId);
+            }
+            path = branch.config;
+        }
+        this._write(path, formatConfig(config));
         this._write(AGENTS_FILE, this._agentsIndex());
     }
 
@@ -300,7 +311,9 @@ export class AgentProject {
         if (branchId === undefined || slot?.entry.branch_id === branchId) {
             return;
         }
-        if (!Object.values(slot?.entry.branches ?? {}).some((b) => b.branch_id === branchId)) {
+        // The first branch entry with that id is the one recorded; it needs its own file.
+        const branch = Object.values(slot?.entry.branches ?? {}).find((b) => b.branch_id === branchId);
+        if (branch === undefined || !hasConfig(branch)) {
             throw new AgentProjectError(
                 `Branch ${branchId} of "${label}" has no config file in ${AGENTS_FILE}. Add it under "branches" ` +
                     "(the CLI's `agents pull --all-branches` does), or push the main branch",
@@ -411,4 +424,9 @@ function safeJson(tool: Tool): string | undefined {
 
 function dropUndefined(value: Record<string, unknown>): Record<string, unknown> {
     return Object.fromEntries(Object.entries(value).filter(([, v]) => v !== undefined));
+}
+
+/** Whether a branch entry names its own config file. */
+function hasConfig(branch: { config?: unknown }): branch is { config: string } {
+    return typeof branch.config === "string" && branch.config !== "";
 }

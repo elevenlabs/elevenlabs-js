@@ -337,3 +337,129 @@ describe("push review fixes, round 2", () => {
         expect(JSON.parse(reloaded.toFiles()["tool_configs/get_order.json"]).future_field).toBe(1);
     });
 });
+
+describe("tools push doesn't manage", () => {
+    const mcpConfig = {
+        type: "mcp",
+        name: "docs_search",
+        description: "Search the docs",
+        mcp_server_id: "mcp_1",
+    };
+    const mcpTool = (): Tool => Tool.fromJSON(mcpConfig);
+    const config = {
+        name: "A",
+        conversation_config: { agent: { prompt: { prompt: "p", tool_ids: ["tool_mcp"] } } },
+        platform_settings: {},
+        tags: [],
+    };
+    const message =
+        'Tool "docs_search" has type "mcp", which push doesn\'t create or update: load it with its id or attach it with toolIds';
+
+    function issuesOf(run: () => unknown): { code: string; path?: string; message: string }[] {
+        try {
+            run();
+        } catch (err) {
+            if (err instanceof AgentValidationError) {
+                return err.issues.map(({ code, path, message }) => ({ code, path, message }));
+            }
+            throw err;
+        }
+        return [];
+    }
+
+    // A tool push doesn't manage needs the id it was loaded with: given as a new object, it's reported before any
+    // request, whether the agent or a workflow node uses it.
+    it("rejects an MCP tool without an id", async () => {
+        const server = new FakeServer();
+        const agent = new Agent("A", { prompt: "p", tools: [mcpTool()] });
+        expect(issuesOf(() => agent.validate())).toEqual([
+            { code: "invalid_tool", path: "tools.docs_search", message },
+        ]);
+        await expect(server.client().conversationalAi.agents.push(agent)).rejects.toThrow(AgentValidationError);
+
+        const wf = new Workflow();
+        wf.converse("triage", "Find out what the caller needs").tool("search", [mcpTool()]);
+        const inWorkflow = new Agent("A", { prompt: "p", workflow: wf });
+        expect(issuesOf(() => inWorkflow.validate())).toEqual([
+            { code: "invalid_tool", path: "tools.docs_search", message },
+        ]);
+        expect(server.calls).toEqual([]);
+    });
+
+    // Push manages webhook and client tools only: an MCP tool, like pull leaves it, stays attached by the id it was
+    // loaded with and is never created or updated.
+    describe("leaves an MCP tool attached by id", () => {
+        async function check(server: FakeServer, agent: Agent, options: Parameters<typeof push>[1]): Promise<void> {
+            expect(agent.tools()).toEqual([]);
+            const result = await push(server, agent, options);
+            expect(server.writes()).toEqual(["PATCH /v1/convai/agents/agent_1"]);
+            expect(result.tools.docs_search).toBeUndefined();
+            const sent = server.agents.get("agent_1") as any;
+            expect(sent.conversation_config.agent.prompt.tool_ids).toEqual(["tool_mcp"]);
+            expect((server.tools.get("tool_mcp") as any).config).toEqual(mcpConfig);
+        }
+        const push = (server: FakeServer, agent: Agent, options: { agentId?: string; project?: AgentProject }) =>
+            server.client().conversationalAi.agents.push(agent, options);
+        const serverWithMcp = (): FakeServer => {
+            const server = new FakeServer();
+            server.addTool("tool_mcp", mcpConfig as never, ["agent_1"]);
+            server.addAgent("agent_1", {} as never);
+            return server;
+        };
+
+        it("loaded with its id", async () => {
+            const agent = Agent.fromJSON(config, { toolsById: { tool_mcp: mcpTool() } });
+            await check(serverWithMcp(), agent, { agentId: "agent_1" });
+        });
+
+        it("from a project's tools.json", async () => {
+            const project = AgentProject.fromFiles({
+                "agents.json": JSON.stringify({ agents: [{ config: "agent_configs/a.json", id: "agent_1" }] }),
+                "tools.json": JSON.stringify({
+                    tools: [{ type: "mcp", config: "tool_configs/docs.json", id: "tool_mcp" }],
+                }),
+                "agent_configs/a.json": JSON.stringify(config),
+                "tool_configs/docs.json": JSON.stringify(mcpConfig),
+            });
+            await check(serverWithMcp(), project.agent("A"), { project });
+        });
+
+        it("in a workflow node", async () => {
+            const server = serverWithMcp();
+            const mcp = mcpTool();
+            const agent = Agent.fromJSON(config, { toolsById: { tool_mcp: mcp } });
+            const wf = new Workflow();
+            wf.converse("triage", "Find out what the caller needs").tool("search", [mcp]);
+            agent.update({ workflow: wf });
+            await check(server, agent, { agentId: "agent_1" });
+            expect((server.agents.get("agent_1") as any).workflow.nodes.search.tools).toEqual([
+                { tool_id: "tool_mcp" },
+            ]);
+        });
+    });
+
+    // A loaded MCP tool stays in toolIds, as pull leaves it, so replacing the agent's tools keeps it attached.
+    it("keeps a loaded MCP tool in toolIds", () => {
+        const ping = Tool.fromJSON({ type: "client", name: "ping", description: "Ping the client" });
+        const mcp = mcpTool();
+        const agent = Agent.fromJSON(
+            {
+                ...config,
+                conversation_config: { agent: { prompt: { prompt: "p", tool_ids: ["tool_mcp", "tool_ping"] } } },
+            },
+            { toolsById: { tool_mcp: mcp, tool_ping: ping } },
+        );
+        expect(agent.toolIds).toEqual(["tool_mcp"]);
+        expect(agent.tools()).toEqual([ping]);
+
+        agent.update({ tools: [getOrder("Look up an order")] });
+        expect(agent.toolIds).toEqual(["tool_mcp"]);
+        const toolIdsOf = () =>
+            (agent.toJSON({ toolIds: { get_order: "tool_order" } }) as any).conversation_config.agent.prompt.tool_ids;
+        expect(toolIdsOf()).toEqual(["tool_mcp", "tool_order"]);
+
+        // Adding the loaded MCP object back, while its id is still in toolIds, attaches it once.
+        agent.addTool(mcp);
+        expect(toolIdsOf()).toEqual(["tool_mcp", "tool_order"]);
+    });
+});
