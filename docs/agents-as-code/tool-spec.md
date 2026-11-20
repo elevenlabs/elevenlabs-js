@@ -122,7 +122,7 @@ The two transfer tools add one entry to `params.transfers` per call:
 
 `condition` is plain text the LLM reads, not a workflow `Condition`, because the API field is a string. `Destination` and the transfer option names are the workflow builder's, shared between the two builders.
 
-A `transfer_to_number` tool can instead hold `params.transfer_rules`: per-telephony-provider transfer configs, which the API accepts in place of `transfers` (the two are mutually exclusive). The builder has no method for rules. A loaded tool keeps its `transfer_rules` exactly as loaded, and `transfer()` on it is a `conflicting_transfers` error. Since the API requires the `transfers` key, a tool pulled with rules carries `"transfers": []`, which is written back as loaded.
+A `transfer_to_number` tool can instead hold `params.transfer_rules`: per-telephony-provider transfer configs, which the API accepts in place of `transfers` (the two are mutually exclusive). The builder has no method for rules. A loaded tool keeps its `transfer_rules` exactly as loaded, and `transfer()` on it is a `conflicting_transfers` error. Since the API requires the `transfers` key, a tool pulled with rules carries `"transfers": []`, which is written back as loaded. `transfer_to_agent` has no rules: a loaded `transfer_rules` there doesn't count against `no_transfers`. An SDK whose generated request model predates `transfer_rules` can't send them: its `build()` reports `invalid_model` (an SDK-specific code) rather than send the tool without its destinations, and `toJSON()` still writes them. That stops once the SDK is regenerated with the field.
 
 ### Options
 
@@ -223,7 +223,7 @@ The workflow spec's rules apply. Tool-specific notes:
 | `missing_array_items` | error | An array schema has no `items` (only possible when loaded) |
 | `duplicate_header` | error | Two header names differ only in case |
 | `invalid_destination` | error | `transferToNumber` is given an agent destination, or a SIP URI destination (static or from a dynamic variable) without `transferType: "sip_refer"` (the API defaults to `conference`); or `transferToAgent` a phone or SIP one |
-| `no_transfers` | error | A transfer system tool has no entries in `transfers` (from `transfer()` or loaded) and none in a loaded `transfer_rules` |
+| `no_transfers` | error | A transfer system tool has no entries in `transfers` (from `transfer()` or loaded) and, on `transfer_to_number`, none in a loaded `transfer_rules` |
 | `conflicting_transfers` | error | A `transfer_to_number` tool has entries in both `transfers` and `transfer_rules`, which the API rejects |
 | `invalid_option` | error | An option doesn't apply to the tool's kind, or a documented range is broken: a webhook `responseTimeoutSecs` outside 5–300, a client one outside 1–120 other than -1, -1 without `expectsResponse: true`, or `followRedirects` without `followRedirectsAllowedDomains` |
 | `missing_value_source` | error | A literal has none of `describe`, `fromVariable`, `constant`, `systemProvided`, `omit`. An empty description or variable name doesn't count, since the API reads `""` as unset |

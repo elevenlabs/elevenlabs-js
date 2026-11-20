@@ -831,7 +831,11 @@ export class SystemTool extends Tool {
         }
         // A loaded transfer_to_number tool may use transfer_rules instead of transfers; the API takes exactly one.
         const transfers = ((this._params.transfers as unknown[] | undefined) ?? []).length;
-        const rules = ((this._params.transferRules as unknown[] | undefined) ?? []).length;
+        // Only transfer_to_number has transfer_rules; transfer_to_agent needs transfers.
+        const rules =
+            this.systemToolType === "transfer_to_number"
+                ? ((this._params.transferRules as unknown[] | undefined) ?? []).length
+                : 0;
         if (transfers === 0 && rules === 0) {
             return [error("no_transfers", "transfer", `${this.systemToolType} needs at least one transfer()`)];
         }
