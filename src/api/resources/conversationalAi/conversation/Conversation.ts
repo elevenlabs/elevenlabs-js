@@ -287,6 +287,10 @@ export class Conversation extends EventEmitter {
             starting_workflow_node_id: this.config.startingWorkflowNodeId,
             procedure_ids: this.config.procedureIds,
             start_procedure_ids: this.config.startProcedureIds,
+            source_info: {
+                source: "node_js_sdk",
+                version: SDK_VERSION,
+            },
         };
 
         this.ws!.send(JSON.stringify(initEvent));

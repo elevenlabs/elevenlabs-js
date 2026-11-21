@@ -60,6 +60,10 @@ export interface ConversationInitiationClientDataEvent extends BaseClientToOrche
     starting_workflow_node_id?: string;
     procedure_ids?: string[];
     start_procedure_ids?: string[];
+    source_info?: {
+        source: string;
+        version: string;
+    };
 }
 
 /**
