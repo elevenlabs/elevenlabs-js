@@ -1,5 +1,7 @@
 import { describe, expect, it, jest } from "@jest/globals";
 import { EventEmitter } from "events";
+import { readFileSync } from "fs";
+import { join } from "path";
 import { ElevenLabsClient } from "../../src";
 import {
     AudioInterface,
@@ -7,6 +9,7 @@ import {
     type ConversationInitiationData,
 } from "../../src/api/resources/conversationalAi/conversation";
 import type { WebSocketInterface } from "../../src/api/resources/conversationalAi/conversation/interfaces/WebSocketInterface";
+import { SDK_VERSION } from "../../src/version";
 
 class FakeSocket extends EventEmitter implements WebSocketInterface {
     readyState = 1;
@@ -201,6 +204,7 @@ describe("Conversation initiation client data", () => {
             starting_workflow_node_id: "node_1",
             procedure_ids: ["proc_1", "proc_2"],
             start_procedure_ids: ["proc_1"],
+            source_info: { source: "node_js_sdk", version: SDK_VERSION },
         });
     });
 
@@ -218,6 +222,14 @@ describe("Conversation initiation client data", () => {
             custom_llm_extra_body: {},
             conversation_config_override: {},
             dynamic_variables: {},
+            source_info: { source: "node_js_sdk", version: SDK_VERSION },
         });
+    });
+
+    it("identifies itself as node_js_sdk at this package's version", async () => {
+        const { version } = JSON.parse(readFileSync(join(__dirname, "../../package.json"), "utf8"));
+        const { socket } = await startConversation();
+
+        expect(sentInitiation(socket).source_info).toEqual({ source: "node_js_sdk", version });
     });
 });
