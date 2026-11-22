@@ -88,7 +88,7 @@ While the workflow is being built, a `Tool` object stands under the placeholder 
 |---|---|
 | `agentId` | The agent to update. Not allowed together with `project`. |
 | `project` | An `AgentProject`. It supplies the ids and records new ones. |
-| `branchId` | Update this branch. |
+| `branchId` | Update this branch of an existing agent. Needs `agentId`, or a project that has the agent's id; otherwise it's an error, before any request. |
 | `versionDescription` | Describes the new version. |
 | `requestOptions` | Passed to every request. |
 
@@ -96,19 +96,33 @@ Steps:
 
 1. **Validate.** Call `agent.validate()`, which throws before any request.
 2. **Find the tools the agent already uses.** This needs the agent's id: `options.agentId`, or with a project, the id recorded for it. Call `GET /v1/convai/tools?used_by_agent_id=…&page_size=100` and follow the cursor. That filter covers the agent's main branch only, so with `branchId`, instead read the branch's config (`GET /v1/convai/agents/{id}?branch_id=…`) and get each tool id it uses (`prompt.tool_ids` and the workflow's nodes) with `GET /v1/convai/tools/{id}`.
-3. **Push each tool in `agent.tools()`, in order.**
+3. **Push each tool in `agent.tools()`, in order.** This is the path without `branchId`; step 4 replaces it for a branch.
    - **Its known id:**
-     - With a project, the id recorded for the tool. A project entry matches a tool by object if the project loaded it, otherwise by name. More than one entry with the same name is an error.
-     - Without a project, the id of the tool with the same name among the tools from step 2.
+     - With a project, the id recorded for the tool. A project entry matches a tool by object if the project loaded it, otherwise by name.
+       - An entry that only a branch's config file uses is that branch's copy (step 4 adds them). It matches only if the agent already uses its id, so a main push never updates a branch's copy.
+       - By name, the entry whose id the agent already uses wins.
+       - Otherwise the only entry is taken, or the only one a main-branch agent config uses. More than one is an error.
+     - With a project that has no id for the tool, and without a project, the id of the tool with the same name among the tools from step 2.
      - Tools no other route reaches are never matched. In particular, a tool with the same name that only another agent uses is never touched.
    - **Fetch it:** if there's a known id, `GET /v1/convai/tools/{id}`, unless step 2 already returned it.
-   - **Compare.** The tool is `"unchanged"` if `Tool.fromResponse(remote).toJSON()` equals `tool.toJSON()`, and then it makes no request.
+   - **Compare.** The tool is `"unchanged"` if `Tool.fromResponse(remote).toJSON()` equals `tool.toJSON()` and every field of the config to send is already in the server's config. Then it makes no request.
    - **Otherwise update or create:** `PATCH /v1/convai/tools/{id}` (`"updated"`), or `POST /v1/convai/tools` (`"created"`).
-   - **Request body:** the tool's wire config. For a tool loaded from a project and not edited since, that's the loaded config exactly, so fields the SDK doesn't model survive.
-4. **Mark detached tools.** Tools from step 2 that the agent no longer references, by managed id or `toolIds`, are reported as `"detached"`. They are never deleted.
-5. **Push the agent.** `POST /v1/convai/agents/create`, or `PATCH /v1/convai/agents/{id}` with `branch_id`. The body is `agent.toJSON({ toolIds })`, sent in full, so fields kept from a loaded config reach the API.
-6. **Record in the project.**
+   - **Request body:** the tool's wire config. For a tool whose definition equals its project entry's (the loaded object, or one rebuilt in code), that's the loaded config exactly, so fields the SDK doesn't model survive.
+4. **With `branchId`, attach or create each tool instead.** A tool's definition is shared by every branch and version that uses its id, so a tool is never updated. A `branchId` equal to the `branch_id` on the agent's own `agents.json` entry is the main branch, and follows step 3.
+   - **Candidates, in order:** the same-named tool the branch uses (from step 2). Then, with a project, every entry with an id whose definition equals the tool's, such as the main branch's tool or the copy a failed push left. One of those that is gone from the server (404) is skipped.
+   - **Reuse:** the first candidate the comparison in step 3 finds equal is attached and reported as `"unchanged"`. No tool request is made, also when its id differs from the one the branch used.
+   - **Otherwise create:** `POST /v1/convai/tools` (`"created"`), and only this branch gets the new id. The tool it replaces is left as it is and isn't reported. A branch push never reports `"updated"`.
+   - **A response that lacks a field that was sent:** the project records the response's config, so the next push finds this copy instead of making another.
+   - **Without a project nothing remembers a copy.** A push that fails after creating one creates another when retried. The first one's id is in the error's `result`.
+5. **Mark detached tools.** Tools from step 2 that the agent no longer references, by managed id or `toolIds`, are reported as `"detached"`, unless a tool with the same name was pushed in step 3 or 4: the result has one entry per name. They are never deleted.
+6. **Push the agent.** `POST /v1/convai/agents/create`, or `PATCH /v1/convai/agents/{id}` with `branch_id`. The body is `agent.toJSON({ toolIds })`, sent in full, so fields kept from a loaded config reach the API.
+7. **Record in the project.**
    - New ids, and the configs that were sent, are written into the project.
+   - A branch push records the tool it attached under the entry with that id. A new copy without one takes the first of:
+     - the entry of the copy it replaced, if the branch has a config file of its own and no other agent config uses that copy. Repeated edits on a branch then keep one entry.
+     - an entry that has no id yet.
+     - a new entry and file (`tool_configs/<name>-1.json`).
+   - The main branch's entry is never taken over.
    - If the project was opened from a directory, it's saved, also when a request failed partway.
 
 **Result:** `{ agentId, action: "created" | "updated", tools: { [name]: { id, action } } }`.
@@ -131,7 +145,7 @@ This is the ElevenLabs CLI's layout:
 | File | Content |
 |---|---|
 | `agents.json` | `{ "agents": [{ "config", "id"?, "branch_id"?, "version_id"?, "branches"? }] }`. Fields are written in that order, and unset ones are left out. |
-| `tools.json` | `{ "tools": [{ "type", "config", "id"? }] }`. `type` is `"webhook"` or `"client"`. |
+| `tools.json` | `{ "tools": [{ "type", "config", "id"? }] }`. `type` is `"webhook"` or `"client"`. Entries may share a tool name: a branch's copy of a tool has its own entry. |
 | `agent_configs/*.json` | The agent's wire config. |
 | `tool_configs/*.json` | The tool's wire `tool_config`, without the `tool_config` wrapper. |
 
@@ -148,7 +162,7 @@ This is the ElevenLabs CLI's layout:
 | `AgentProject.fromFiles(files)` | No I/O. `files` maps project-relative paths to their text. |
 | `AgentProject.open(dir)` | Node.js only, through a lazy import. A directory with no index files opens as an empty project. |
 | `agents()`, `agent(name)`, `tools()` | Loaded objects. `agent(name)` returns the same object every time. |
-| `agentId(agent)`, `toolId(tool)` | Recorded ids. |
+| `agentId(agent)`, `toolId(tool)` | Recorded ids. `toolId` throws for a tool the project didn't load when several entries have its name, not counting a branch's own copies, and no single one is used by a main-branch agent config. |
 | `toFiles()` | The index files, plus every config file they list, branch configs included. |
 | `changedFiles`, `save()` | The paths `push` and `pull` changed, and writing them. |
 
@@ -194,4 +208,4 @@ This is the ElevenLabs CLI's layout:
 - Declared dynamic variables, and checking `{{vars}}` against `fromVariable` and `assign`.
 - Agent tests as code (`tests.json`).
 - A dry run that shows the diff before pushing.
-- Deleting detached tools.
+- Deleting detached tools, and the copies a branch push replaced.
