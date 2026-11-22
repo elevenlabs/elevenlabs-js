@@ -18,6 +18,8 @@ export class FakeServer {
     readonly calls: Call[] = [];
     /** Fails every request whose `METHOD path` matches. */
     failOn: RegExp | undefined;
+    /** A tool config field the server accepts but doesn't keep. */
+    dropsToolField: string | undefined;
     private _next = 1;
 
     addTool(id: string, config: Json, usedBy: string[] = []): void {
@@ -54,8 +56,11 @@ export class FakeServer {
             }
             if (method === "POST") {
                 const toolId = `tool_new_${this._next++}`;
-                this.tools.set(toolId, { config: body.tool_config, usedBy: [] });
-                return json(toolResponse(toolId, body.tool_config));
+                const config = Object.fromEntries(
+                    Object.entries(body.tool_config).filter(([key]) => key !== this.dropsToolField),
+                );
+                this.tools.set(toolId, { config, usedBy: [] });
+                return json(toolResponse(toolId, config));
             }
             const tool = this.tools.get(id);
             if (tool === undefined) {

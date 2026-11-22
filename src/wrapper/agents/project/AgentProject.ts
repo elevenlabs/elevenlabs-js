@@ -55,7 +55,8 @@ interface ToolSlot {
  * `elevenlabs agents init` / `pull` works here, and one written here works with the CLI.
  *
  * Pass it to `agents.push(agent, { project })` and `agents.pull(agentId, { project })`: the project records which
- * agent and tools on the server each definition is, so pushing again updates them instead of making copies.
+ * agent and tools on the server each definition is, so pushing again updates them instead of making copies. A push to
+ * a branch is the exception: it copies a tool it changes, so the main branch keeps its own.
  *
  * @example
  * const project = await AgentProject.open(".");
@@ -133,9 +134,14 @@ export class AgentProject {
         return this._agentSlot(agent)?.entry.id;
     }
 
-    /** The id `tools.json` records for this tool, if it was pushed or pulled. */
+    /**
+     * The id `tools.json` records for this tool, if it was pushed or pulled.
+     *
+     * @throws {AgentProjectError} for a tool the project didn't load, when several entries have its name and no single
+     * one is used by a main-branch agent config. A branch's own copy of a tool doesn't count.
+     */
     toolId(tool: Tool): string | undefined {
-        return this._toolSlot(tool)?.entry.id;
+        return (this._tools.find((slot) => slot.tool === tool) ?? this._toolSlot(tool))?.entry.id;
     }
 
     /**
@@ -197,15 +203,36 @@ export class AgentProject {
         );
     }
 
-    /** @internal The entry for a tool: the one it was loaded from, else the only one with its name. */
-    _toolSlot(tool: Tool): ToolSlot | undefined {
-        return (
-            this._tools.find((slot) => slot.tool === tool) ??
-            single(
-                this._tools.filter((slot) => slot.tool.name === tool.name),
-                TOOLS_FILE,
-                tool.name,
-            )
+    /**
+     * @internal The entry for a tool: the one it was loaded from, else one with its name. Several can share a name
+     * once a branch has its own copy. A copy only branch configs use counts only as `attachedId`, the id the target
+     * agent already uses. That entry wins; otherwise the only entry is taken, or the only one a main-branch config
+     * uses.
+     */
+    _toolSlot(tool: Tool, attachedId?: string): ToolSlot | undefined {
+        const { main, branches } = this._agentConfigs();
+        const onMain = (slot: ToolSlot) => slot.entry.id !== undefined && this._configsUse(main, slot.entry.id);
+        const branchOnly = (slot: ToolSlot) =>
+            slot.entry.id !== undefined &&
+            slot.entry.id !== attachedId &&
+            !onMain(slot) &&
+            this._configsUse(branches, slot.entry.id);
+        const loaded = this._tools.find((slot) => slot.tool === tool && !branchOnly(slot));
+        if (loaded !== undefined) {
+            return loaded;
+        }
+        const named = this._tools.filter((slot) => slot.tool.name === tool.name && !branchOnly(slot));
+        const attached = attachedId === undefined ? undefined : named.find((slot) => slot.entry.id === attachedId);
+        if (attached !== undefined || named.length < 2) {
+            return attached ?? named[0];
+        }
+        const used = named.filter(onMain);
+        if (used.length === 1) {
+            return used[0];
+        }
+        throw new AgentProjectError(
+            `${named.length} entries in ${TOOLS_FILE} are named "${tool.name}" and nothing says which one this is; ` +
+                "push the loaded one (project.tools())",
         );
     }
 
@@ -213,8 +240,8 @@ export class AgentProject {
      * @internal The loaded config to send for a tool whose definition matches its project entry (the loaded object, or
      * one rebuilt in code with the same name), so fields this SDK doesn't model survive.
      */
-    _unchangedRaw(tool: Tool): WireObject | undefined {
-        const slot = this._toolSlot(tool);
+    _unchangedRaw(tool: Tool, attachedId?: string): WireObject | undefined {
+        const slot = this._toolSlot(tool, attachedId);
         if (slot?.raw === undefined || slot.baseline === undefined) {
             return undefined;
         }
@@ -226,11 +253,34 @@ export class AgentProject {
     }
 
     /**
+     * @internal Every entry holding exactly this definition, the tool's own entry first: what a branch push can attach
+     * instead of creating another copy. `raw` is the loaded config, with the fields this SDK doesn't model.
+     */
+    _sameDefinitionEntries(tool: Tool): { id?: string; raw: WireObject }[] {
+        const json = safeJson(tool);
+        if (json === undefined) {
+            return [];
+        }
+        const copies: { id?: string; raw: WireObject }[] = [];
+        for (const slot of this._tools) {
+            if (slot.raw === undefined || slot.baseline !== json) {
+                continue;
+            }
+            if (slot.tool === tool) {
+                copies.unshift({ id: slot.entry.id, raw: slot.raw });
+            } else if (slot.tool.name === tool.name) {
+                copies.push({ id: slot.entry.id, raw: slot.raw });
+            }
+        }
+        return copies;
+    }
+
+    /**
      * @internal Records a tool's id and the config now on the server, adding an entry if it's new. Push finds the
      * entry by definition; pull, by id.
      */
     _recordTool(tool: Tool, id: string, config: WireObject, matchBy: "definition" | "id" = "definition"): void {
-        let slot = matchBy === "id" ? this._tools.find((s) => s.entry.id === id) : this._toolSlot(tool);
+        let slot = matchBy === "id" ? this._tools.find((s) => s.entry.id === id) : this._toolSlot(tool, id);
         if (slot === undefined) {
             const path = uniquePath(TOOL_CONFIGS_DIR, tool.name, this._taken);
             this._taken.add(path);
@@ -238,6 +288,79 @@ export class AgentProject {
             this._tools.push(slot);
         }
         slot.tool = tool;
+        this._writeTool(slot, tool, id, config);
+    }
+
+    /**
+     * @internal Records the tool a branch push attached to the branch, under the entry with that id. A new copy
+     * takes the entry of the copy it replaced (`replacedId`) if nothing else in the project uses that one, so
+     * repeated edits keep one entry. Failing that it takes an entry that was never pushed, or a new one. The main
+     * branch's entry is never taken over.
+     */
+    _recordBranchTool(
+        tool: Tool,
+        id: string,
+        config: WireObject,
+        branch: { agent: Agent; branchId: string; replacedId?: string },
+    ): void {
+        let slot =
+            this._tools.find((s) => s.entry.id === id) ?? this._replacedCopy(id, branch) ?? this._unpushedSlot(tool);
+        if (slot === undefined) {
+            const path = uniquePath(TOOL_CONFIGS_DIR, tool.name, this._taken);
+            this._taken.add(path);
+            // Its own Tool object: the caller's must not start resolving to the branch's copy on a main push.
+            slot = { entry: { type: tool.kind, config: path }, tool: Tool.fromJSON(config) };
+            this._tools.push(slot);
+        } else if (slot.tool !== tool && slot.baseline !== safeJson(tool)) {
+            slot.tool = Tool.fromJSON(config);
+        }
+        this._writeTool(slot, tool, id, config);
+    }
+
+    /** The entry of the tool a branch push just replaced, if the branch was the only thing in the project using it. */
+    private _replacedCopy(
+        id: string,
+        { agent, branchId, replacedId }: { agent: Agent; branchId: string; replacedId?: string },
+    ): ToolSlot | undefined {
+        if (replacedId === undefined || replacedId === id) {
+            return undefined;
+        }
+        const branchFiles = Object.values(this._agentSlot(agent)?.entry.branches ?? {});
+        const branchConfig = branchFiles.find((b) => b.branch_id === branchId)?.config;
+        const { main, branches } = this._agentConfigs();
+        // Without a file of the branch's own, nothing shows the replaced tool was only the branch's.
+        if (branchConfig === undefined || main.some((path) => samePath(path, branchConfig))) {
+            return undefined;
+        }
+        const others = [...main, ...branches].filter((path) => !samePath(path, branchConfig));
+        return this._configsUse(others, replacedId) ? undefined : this._tools.find((s) => s.entry.id === replacedId);
+    }
+
+    /** Every agent config file: each entry's own, which is its main branch's, and the ones under `branches`. */
+    private _agentConfigs(): { main: string[]; branches: string[] } {
+        return {
+            main: this._agents.map(({ entry }) => entry.config),
+            branches: this._agents.flatMap(({ entry }) => Object.values(entry.branches ?? {}).map((b) => b.config)),
+        };
+    }
+
+    /** An entry without an id for this tool: the one it was loaded from, else the only one with its name. */
+    private _unpushedSlot(tool: Tool): ToolSlot | undefined {
+        const unpushed = this._tools.filter((s) => s.entry.id === undefined);
+        const named = unpushed.filter((s) => s.tool.name === tool.name);
+        return unpushed.find((s) => s.tool === tool) ?? (named.length === 1 ? named[0] : undefined);
+    }
+
+    /** Whether any of these agent config files, as they stand now, mentions the tool id. */
+    private _configsUse(configPaths: string[], toolId: string): boolean {
+        const needle = JSON.stringify(toolId);
+        return configPaths.some((path) => {
+            const key = normalizePath(path);
+            return (this._changed.get(key) ?? this._files.get(key))?.includes(needle) === true;
+        });
+    }
+
+    private _writeTool(slot: ToolSlot, tool: Tool, id: string, config: WireObject): void {
         slot.entry.id = id;
         slot.entry.type = tool.kind;
         slot.raw = config;
@@ -285,6 +408,11 @@ export class AgentProject {
      */
     _checkBranch(agent: Agent, branchId: string | undefined): void {
         this._checkBranchOf(this._agentSlot(agent), agent.name, branchId);
+    }
+
+    /** @internal Whether this is the agent's main branch: the CLI records its id on the agent's own entry. */
+    _isMainBranch(agent: Agent, branchId: string): boolean {
+        return this._agentSlot(agent)?.entry.branch_id === branchId;
     }
 
     /** @internal `_checkBranch` for `pull`, which finds the agent by id. */
@@ -399,6 +527,10 @@ function single<T>(matches: T[], index: string, name: string): T | undefined {
         throw new AgentProjectError(`${matches.length} entries in ${index} are named "${name}"; push the loaded one`);
     }
     return matches[0];
+}
+
+function samePath(a: string, b: string): boolean {
+    return normalizePath(a) === normalizePath(b);
 }
 
 function safeJson(tool: Tool): string | undefined {

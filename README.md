@@ -354,6 +354,7 @@ await client.conversationalAi.agents.push(agent, { agentId }); // later: updates
 
 - **Validation first:** `push()` calls `agent.validate()` before any request, so an invalid agent writes nothing. CI can call `validate()` without an API key.
 - **Tools are matched safely:** with `agentId`, existing tools are found among the tools that agent already uses, by name. A tool with the same name that another agent uses is never touched. Tools the agent stops using are reported as `"detached"`, not deleted.
+- **Branches don't share edits:** with `branchId`, a tool the push changes is created as a new tool for that branch rather than updated, so the main branch and earlier versions keep the one they use.
 - **Escape hatch:** `conversationConfig` and `platformSettings` take any other setting, merged under the typed options. `toolIds` attaches existing tools that `push()` leaves alone.
 - **Partial failures:** if a request fails, `push()` throws an `AgentPushError` whose `result` lists the tools it had already created.
 

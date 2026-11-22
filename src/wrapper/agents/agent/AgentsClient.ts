@@ -13,12 +13,17 @@ export class AgentsClient extends GeneratedAgentsClient {
      *
      * 1. Validates the agent, so an invalid one writes nothing.
      * 2. Creates each tool that's new and updates each one that changed. Which tools already exist comes from the
-     *    project's `tools.json`, or, without a project, from the tools the agent (`agentId`) already uses, by name:
-     *    on its main branch, or on `branchId` when given. Tools other agents use are never touched.
+     *    project's `tools.json`, or, without a project, from the tools the agent (`agentId`) already uses, by name.
+     *    Tools other agents use are never touched.
+     *
+     *    With `branchId`, a tool is never updated in place, because other branches and versions share it: the branch
+     *    keeps a tool that already has this definition (its own, or one the project recorded), and a changed one is
+     *    created as a new tool that only this branch uses. The tool it replaces is left as it is.
      * 3. Creates the agent, or updates it, with the tools' ids filled in.
      *
      * Settings the SDK doesn't model, kept from a loaded config, are sent too. Tools the agent stops using are
-     * reported as `"detached"`, not deleted.
+     * reported as `"detached"`, not deleted. Without a project, a branch push that fails after creating a tool creates
+     * it again when retried; the first one's id is in the error's `result`.
      *
      * @throws {AgentValidationError} if the agent is invalid, before any API call
      * @throws {AgentPushError} if an API call fails, with what was already written
