@@ -104,6 +104,9 @@ export class Conversation extends EventEmitter {
      * Starts the conversation session.
      *
      * Will run until `endSession` is called.
+     *
+     * Rejects if the connection fails. `session_ended` is not emitted for a
+     * connection that never opened.
      */
     public async startSession(): Promise<void> {
         if (this.ws) {
@@ -113,27 +116,42 @@ export class Conversation extends EventEmitter {
         const wsUrl = this.requiresAuth ? await this._getSignedUrl() : this._getWssUrl();
 
         return new Promise((resolve, reject) => {
-            this.ws = this.webSocketFactory.create(wsUrl, {
+            let opened = false;
+
+            const ws = this.webSocketFactory.create(wsUrl, {
                 perMessageDeflate: false,
                 maxPayload: 16 * 1024 * 1024, // 16MB max message size
             });
+            this.ws = ws;
 
-            this.ws.on("open", () => {
+            ws.on("open", () => {
+                opened = true;
                 this._onWebSocketOpen();
                 resolve();
             });
 
-            this.ws.on("message", (data: WebSocket.Data) => {
+            ws.on("message", (data: WebSocket.Data) => {
                 this._onWebSocketMessage(data);
             });
 
-            this.ws.on("error", (error: Error) => {
-                this.socketError = error;
-                this.emit("error", error);
-                reject(error);
+            ws.on("error", (error: Error) => {
+                if (opened) {
+                    this.socketError = error;
+                } else {
+                    // Never connected, so there is no session to end
+                    if (this.ws === ws) {
+                        this.ws = undefined;
+                    }
+                    reject(error);
+                }
+                // Emitting "error" with no listener would throw
+                if (this.listenerCount("error") > 0) {
+                    this.emit("error", error);
+                }
             });
 
-            this.ws.on("close", (code: number, reason: Buffer) => {
+            ws.on("close", (code: number, reason: Buffer) => {
+                if (this.ws !== ws) return;
                 this._onWebSocketClose(code, reason);
             });
         });
