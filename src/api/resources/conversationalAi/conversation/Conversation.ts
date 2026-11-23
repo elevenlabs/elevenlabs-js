@@ -287,6 +287,10 @@ export class Conversation extends EventEmitter {
             starting_workflow_node_id: this.config.startingWorkflowNodeId,
             procedure_ids: this.config.procedureIds,
             start_procedure_ids: this.config.startProcedureIds,
+            source_info: {
+                source: "node_js_sdk",
+                version: SDK_VERSION,
+            },
         };
 
         this.ws!.send(JSON.stringify(initEvent));
@@ -439,7 +443,7 @@ export class Conversation extends EventEmitter {
     private _getWssUrl(): string {
         // Default to production environment WebSocket URL
         const baseWsUrl = "wss://api.elevenlabs.io";
-        return `${baseWsUrl}/v1/convai/conversation?agent_id=${this.agentId}&source=js_sdk&version=${SDK_VERSION}`;
+        return `${baseWsUrl}/v1/convai/conversation?agent_id=${this.agentId}&source=node_js_sdk&version=${SDK_VERSION}`;
     }
 
     private async _getSignedUrl(): Promise<string> {
@@ -448,6 +452,6 @@ export class Conversation extends EventEmitter {
         });
         const signedUrl = response.signedUrl;
         const separator = signedUrl.includes("?") ? "&" : "?";
-        return `${signedUrl}${separator}source=js_sdk&version=${SDK_VERSION}`;
+        return `${signedUrl}${separator}source=node_js_sdk&version=${SDK_VERSION}`;
     }
 }
