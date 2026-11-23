@@ -233,3 +233,41 @@ describe("Conversation initiation client data", () => {
         expect(sentInitiation(socket).source_info).toEqual({ source: "node_js_sdk", version });
     });
 });
+
+describe("Conversation URL", () => {
+    function connect(options: { requiresAuth: boolean; signedUrl?: string }): jest.Mock {
+        const create = jest.fn((_url: string) => new FakeSocket());
+        const conversation = new Conversation({
+            client: new ElevenLabsClient({ apiKey: "test" }),
+            conversationClient: {
+                conversationalAi: {
+                    conversations: { getSignedUrl: async () => ({ signedUrl: options.signedUrl ?? "" }) },
+                },
+            },
+            webSocketFactory: { create },
+            agentId: "agent_1",
+            requiresAuth: options.requiresAuth,
+            audioInterface: new FakeAudio(),
+        });
+        void conversation.startSession();
+        return create;
+    }
+
+    it("identifies itself as node_js_sdk on the public agent URL", async () => {
+        const create = connect({ requiresAuth: false });
+        await new Promise(setImmediate);
+
+        expect(create.mock.calls[0][0]).toBe(
+            `wss://api.elevenlabs.io/v1/convai/conversation?agent_id=agent_1&source=node_js_sdk&version=${SDK_VERSION}`,
+        );
+    });
+
+    it("identifies itself as node_js_sdk on the signed URL", async () => {
+        const create = connect({ requiresAuth: true, signedUrl: "wss://example.test/convai?token=t" });
+        await new Promise(setImmediate);
+
+        expect(create.mock.calls[0][0]).toBe(
+            `wss://example.test/convai?token=t&source=node_js_sdk&version=${SDK_VERSION}`,
+        );
+    });
+});
