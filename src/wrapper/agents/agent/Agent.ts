@@ -59,7 +59,10 @@ export interface AgentBuildOptions extends AgentValidateOptions {
 }
 
 export interface AgentLoadOptions {
-    /** Tools the config refers to, by id. Each matching id becomes a `Tool` the agent manages; others stay as ids. */
+    /**
+     * Tools the config refers to, by id. Each matching webhook or client tool becomes a `Tool` the agent manages; the
+     * other ids, including tools of other kinds such as `mcp`, stay as `toolIds`.
+     */
     toolsById?: Record<string, Tool> | Map<string, Tool>;
 }
 
@@ -144,8 +147,9 @@ export class Agent {
 
     /**
      * Loads an agent config in API format (snake_case): a CLI `agent_configs/*.json` file, or the `toJSON()` of an
-     * agent. Tool ids found in `toolsById` become `Tool` objects the agent manages; the rest stay as `toolIds`. Fields
-     * this SDK doesn't model are kept, so an unedited agent round-trips exactly.
+     * agent. Webhook and client tools found in `toolsById` become `Tool` objects the agent manages; the other ids,
+     * including tools of other kinds such as `mcp`, stay as `toolIds`. Fields this SDK doesn't model are kept, so an
+     * unedited agent round-trips exactly.
      */
     static fromJSON(json: string | object, options: AgentLoadOptions = {}): Agent {
         const parsed = structuredClone(typeof json === "string" ? JSON.parse(json) : json) as WireObject;
@@ -161,11 +165,13 @@ export class Agent {
             setPath(base, TOOL_IDS_PATH, undefined);
             agent._loadedToolIds = ids as string[];
             for (const id of ids as string[]) {
+                // Like pull: kinds push doesn't manage (mcp...) stay attached by id. `_toolsById` keeps them, so a
+                // workflow node or `addTool()` can still use the object under that id.
                 const tool = toolsById.get(id);
-                if (tool === undefined) {
-                    agent._toolIds.push(id);
-                } else {
+                if (tool !== undefined && isManaged(tool)) {
                     agent._tools.push(tool);
+                } else {
+                    agent._toolIds.push(id);
                 }
             }
         }
@@ -262,17 +268,27 @@ export class Agent {
 
     /**
      * Every webhook and client tool the agent and its workflow use, each once: the tools `agents.push()` creates or
-     * updates. System tools aren't included; they live inside the agent's config.
+     * updates. System tools aren't included; they live inside the agent's config. Nor are tools of other kinds (such
+     * as `mcp`): they stay attached by the id the agent was loaded with, as pull leaves them.
      */
     tools(): Tool[] {
         const seen = new Set<Tool>();
         return [...this._tools, ...this._workflowTools()].filter((tool) => {
-            if (tool.kind === "system" || seen.has(tool)) {
+            if (!isManaged(tool) || seen.has(tool)) {
                 return false;
             }
             seen.add(tool);
             return true;
         });
+    }
+
+    /**
+     * The id the agent was loaded with for `tool` (`toolsById`; a project passes its `tools.json` ids this way). Tools
+     * of kinds push doesn't manage stay attached by it.
+     */
+    private _knownId(tool: Tool): string | undefined {
+        const ids = [...this._toolsById].filter(([, t]) => t === tool).map(([id]) => id);
+        return ids.sort()[0];
     }
 
     private _workflowTools(): Tool[] {
@@ -328,7 +344,9 @@ export class Agent {
     ): WireObject {
         const issues: AgentIssue[] = [];
         const config = structuredClone(this._base) as WireObject;
-        const idOf = (tool: Tool): string => toolIds?.[tool.name] ?? `<tool:${tool.name}>`;
+        // A kind push doesn't manage keeps the id it was loaded with; a missing one is reported as invalid_tool below.
+        const idOf = (tool: Tool): string =>
+            (isManaged(tool) ? toolIds?.[tool.name] : this._knownId(tool)) ?? `<tool:${tool.name}>`;
 
         if (this._name.trim() === "") {
             issues.push({ code: "missing_name", severity: "error", message: "The agent needs a name" });
@@ -389,16 +407,40 @@ export class Agent {
                         path: `tools.${tool.name}`,
                     });
                 }
+                // Push only creates and updates webhook and client tools; any other kind needs an id.
+                if (tool.kind !== "system" && !isManaged(tool) && this._knownId(tool) === undefined) {
+                    issues.push({
+                        code: "invalid_tool",
+                        severity: "error",
+                        message:
+                            `Tool "${tool.name}" has type "${toolType(tool)}", which push doesn't create or update: ` +
+                            "load it with its id or attach it with toolIds",
+                        path: `tools.${tool.name}`,
+                    });
+                }
             }
         }
 
-        const managed = this._tools.filter((tool) => tool.kind !== "system");
+        // Webhook and client tools by their pushed ids, other kinds by the ids they were loaded with. An other-kind
+        // tool whose id is already attached (such as a loaded mcp tool added back with addTool() while its id is still
+        // in toolIds) isn't listed twice.
+        const attached: string[] = [];
+        for (const tool of this._tools) {
+            if (tool.kind === "system") {
+                continue;
+            }
+            const id = idOf(tool);
+            if (!isManaged(tool) && (this._toolIds.includes(id) || attached.includes(id))) {
+                continue;
+            }
+            attached.push(id);
+        }
         const system = this._tools.filter((tool): tool is SystemTool => tool.kind === "system");
         if (this._toolListGiven) {
             if (getPath(raw, TOOL_IDS_PATH) !== undefined) {
                 issues.push(conflict("tools", TOOL_IDS_PATH));
             }
-            setPath(config, TOOL_IDS_PATH, keepOrder([...this._toolIds, ...managed.map(idOf)], this._loadedToolIds));
+            setPath(config, TOOL_IDS_PATH, keepOrder([...this._toolIds, ...attached], this._loadedToolIds));
         }
         for (const tool of system) {
             const path = [...BUILT_IN_TOOLS_PATH, tool.systemToolType];
@@ -457,7 +499,7 @@ export class Agent {
             // Its managed tools may have new ids, e.g. when pushed as a new agent.
             config.workflow = mapRawWorkflowToolIds(structuredClone(this._rawWorkflow), (id) => {
                 const tool = this._toolsById.get(id);
-                return tool === undefined ? id : (toolIds?.[tool.name] ?? id);
+                return tool === undefined || !isManaged(tool) ? id : (toolIds?.[tool.name] ?? id);
             });
         }
 
@@ -518,6 +560,23 @@ export function mapRawWorkflowToolIds(workflow: WireObject, map: (id: string) =>
         }
     }
     return workflow;
+}
+
+/** Whether push creates or updates `tool`: a webhook or client tool. */
+function isManaged(tool: Tool): boolean {
+    return tool.kind === "webhook" || tool.kind === "client";
+}
+
+/** The type a tool's config gives, such as `"mcp"`. */
+function toolType(tool: Tool): string {
+    if (tool.kind !== "other") {
+        return tool.kind;
+    }
+    try {
+        return String((tool.toJSON() as { type?: unknown }).type);
+    } catch {
+        return "other";
+    }
 }
 
 function safeJson(tool: Tool): string | undefined {

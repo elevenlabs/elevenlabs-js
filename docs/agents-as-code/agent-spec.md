@@ -33,12 +33,12 @@ const pulled = await client.conversationalAi.agents.pull("agent_123", { project 
 | Member | Behaviour |
 |---|---|
 | `new Agent(name, options?)` | Options below. |
-| `Agent.fromJSON(config, { toolsById? })` | Loads an API-format agent config (a CLI `agent_configs/*.json` file). Ids in `tool_ids` that are in `toolsById` become `Tool` objects; the others stay as `toolIds`. Fields the SDK doesn't model are kept. |
+| `Agent.fromJSON(config, { toolsById? })` | Loads an API-format agent config (a CLI `agent_configs/*.json` file). Ids in `tool_ids` whose `toolsById` entry is a webhook or client tool become `Tool` objects; the others, including tools of other kinds such as `mcp`, stay as `toolIds`, as `pull` leaves them. `toolsById` keeps every entry, so a workflow node or `addTool()` can still use an other-kind object under its id. Fields the SDK doesn't model are kept. |
 | `name` | The agent's name. |
 | `workflow` | The agent's `Workflow`. A loaded workflow stays in API format until this is first read, then it's loaded with its tool ids swapped for the matching `Tool` objects. |
 | `update(options)` | Typed options, `tools`, `toolIds` and `workflow` replace what was there. `conversationConfig` and `platformSettings` merge. Also takes `name`. |
 | `addTool(tool)` | Appends to `tools`. |
-| `tools()` | Every webhook and client tool the agent and its workflow use, each once, in first-use order: the tools `push` manages. |
+| `tools()` | Every webhook and client tool the agent and its workflow use, each once, in first-use order: the tools `push` manages. System tools and tools of other kinds (such as `mcp`) aren't listed. |
 | `toolIds` | The ids of existing tools attached as they are, which `push` doesn't manage. |
 | `validate({ onWarning? })` | Runs every check that needs no ids. Throws `AgentValidationError`. |
 | `toJSON({ toolIds })` | The API-format config, with keys sorted at every level. `toolIds` maps each managed tool's name to its id. |
@@ -56,7 +56,7 @@ const pulled = await client.conversationalAi.agents.pull("agent_123", { project 
 | `voiceId` | `conversation_config.tts.voice_id` |
 | `ttsModel` | `conversation_config.tts.model_id` |
 | `tags` | `tags` |
-| `tools` | Webhook and client tools go in `conversation_config.agent.prompt.tool_ids`, by id. Each system tool goes in `conversation_config.agent.prompt.built_in_tools.<system_tool_type>`. |
+| `tools` | Webhook and client tools go in `conversation_config.agent.prompt.tool_ids`, by id. Each system tool goes in `conversation_config.agent.prompt.built_in_tools.<system_tool_type>`. A tool of another kind (such as `mcp`) goes in `tool_ids` by the id it was loaded with (its key in `toolsById`, the first in sort order if it has several); `push` never creates or updates it. |
 | `toolIds` | `conversation_config.agent.prompt.tool_ids`, first |
 | `workflow` | `workflow`, built with the tools' ids |
 | `conversationConfig`, `platformSettings` | Raw generated types, merged under everything above |
@@ -68,9 +68,9 @@ The steps, in order:
 1. Start from the loaded config, if there is one, without its `tool_ids`.
 2. Deep-merge the raw `conversationConfig` and `platformSettings`, converted to wire format. Objects merge key by key; arrays and scalars replace.
 3. Set each typed option at its path.
-4. Set `tool_ids` to `toolIds` followed by the managed tools' ids. For a loaded agent, ids it had keep their original order.
+4. Set `tool_ids` to `toolIds` followed by the ids of the agent's other non-system tools: managed tools by their pushed ids, tools of other kinds by their loaded ids. An other-kind tool whose id is already in the list (such as a loaded `mcp` tool added back with `addTool()` while its id is still in `toolIds`) isn't listed again. For a loaded agent, ids it had keep their original order.
 5. Set the system tools.
-6. Set the workflow.
+6. Set the workflow. Its nodes reference managed tools by their pushed ids and other-kind tools by their loaded ids; a loaded workflow nobody edited keeps the ids of other-kind tools as they were.
 7. Set `name`, `tags` (default `[]`), `conversation_config` (default `{}`) and `platform_settings` (default `{}`).
 8. Sort the keys.
 
@@ -88,7 +88,7 @@ While the workflow is being built, a `Tool` object stands under the placeholder 
 |---|---|
 | `agentId` | The agent to update. Not allowed together with `project`. |
 | `project` | An `AgentProject`. It supplies the ids and records new ones. |
-| `branchId` | Update this branch. |
+| `branchId` | Update this branch. With a project, the agent's `agents.json` entry must list the branch under `branches` with a non-empty `config` path, or the push fails with `AgentProjectError` (`Branch <id> of "<name>" has no config file…`) before any request. A branch never writes the main branch's file. `pull` with `branchId` checks the same way. |
 | `versionDescription` | Describes the new version. |
 | `requestOptions` | Passed to every request. |
 
@@ -163,7 +163,7 @@ This is the ElevenLabs CLI's layout:
 | `missing_name` | error | The name is empty |
 | `missing_prompt` | warning | No `prompt` after assembling the config |
 | `duplicate_tool_name` | error | Two different `Tool` objects share a name. The same object used twice is fine. |
-| `invalid_tool` | error | A tool's own `build()` fails. `path` is `tools.<name>`. |
+| `invalid_tool` | error | A tool's own `build()` fails, or a tool of a kind `push` doesn't manage (not webhook, client or system) has no loaded id: `Tool "<name>" has type "<type>", which push doesn't create or update: load it with its id or attach it with toolIds` (`tool_ids` in Python). `path` is `tools.<name>`. |
 | `invalid_workflow` | error | The workflow's own `build()` fails |
 | `invalid_config` | error | The raw `conversationConfig` or `platformSettings` doesn't serialize |
 | `option_conflict` | error | The raw config sets a field that a typed option, `tools` or a system tool also sets |

@@ -152,3 +152,50 @@ describe("AgentProject review fixes", () => {
         expect(project.toFiles()).toEqual({ ...files, "tools.json": '{\n    "tools": []\n}' });
     });
 });
+
+describe("AgentProject branch entries", () => {
+    const mainConfig = JSON.stringify({
+        name: "Support",
+        conversation_config: { agent: { prompt: { prompt: "p" } } },
+        platform_settings: {},
+        tags: [],
+    });
+
+    // A branch entry without a config path is rejected like a missing branch, before any request, so a branch never
+    // writes the main branch's file.
+    it.each([
+        ["no config", { branch_id: "agtbrch_beta" }],
+        ["an empty config", { branch_id: "agtbrch_beta", config: "" }],
+        ["a non-string config", { branch_id: "agtbrch_beta", config: 1 }],
+    ])("rejects a branch entry with %s before anything is written", async (_label, branch) => {
+        const project = AgentProject.fromFiles({
+            "agents.json": JSON.stringify({
+                agents: [{ config: "agent_configs/support.json", id: "agent_support", branches: { beta: branch } }],
+            }),
+            "agent_configs/support.json": mainConfig,
+        });
+        const server = new FakeServer();
+        server.addAgent("agent_support", JSON.parse(mainConfig));
+        server.branches.set("agent_support/agtbrch_beta", JSON.parse(mainConfig));
+        const support = project.agent("Support").update({ prompt: "changed" });
+        const client = server.client().conversationalAi.agents;
+
+        await expect(client.push(support, { project, branchId: "agtbrch_beta" })).rejects.toThrow(
+            'Branch agtbrch_beta of "Support" has no config file',
+        );
+        await expect(client.pull("agent_support", { project, branchId: "agtbrch_beta" })).rejects.toThrow(
+            'Branch agtbrch_beta of "agent_support" has no config file',
+        );
+        expect(server.calls).toEqual([]);
+        expect(project.changedFiles).toEqual([]);
+
+        // Recording directly never falls back to the main file either.
+        expect(() =>
+            project._recordAgent(support, "agent_support", support.toJSON(), {
+                branchId: "agtbrch_beta",
+                matchBy: "id",
+            }),
+        ).toThrow(AgentProjectError);
+        expect(project.changedFiles).toEqual([]);
+    });
+});
