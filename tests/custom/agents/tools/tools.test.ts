@@ -1,4 +1,5 @@
 import type * as ElevenLabs from "../../../../src/api/index";
+import * as serializers from "../../../../src/serialization/index";
 import {
     Header,
     Schema,
@@ -361,6 +362,37 @@ describe("SystemTool", () => {
         ).not.toThrow();
         const issues = issuesOf(() => SystemTool.transferToNumber().transfer("Caller is a partner", sip).build());
         expect(issues.map((issue) => issue.code)).toEqual(["invalid_destination", "no_transfers"]);
+    });
+
+    const transferRule = {
+        condition: "Caller asks for the front desk",
+        provider_configs: [
+            {
+                type: "twilio",
+                config: {
+                    type: "twilio_cold_blind_transfer",
+                    transfer_destination: { type: "phone", destination: "+15551234567" },
+                },
+            },
+        ],
+    };
+    const loadedTransfer = (systemToolType: string) =>
+        Tool.fromJSON({
+            type: "system",
+            name: systemToolType,
+            params: { system_tool_type: systemToolType, transfers: [], transfer_rules: [transferRule] },
+        });
+
+    it("doesn't let transfer_rules satisfy an agent transfer", () => {
+        const issues = issuesOf(() => loadedTransfer("transfer_to_agent").build());
+        expect(issues.map((issue) => issue.code)).toEqual(["no_transfers"]);
+    });
+
+    it("sends loaded transfer_rules in the built request", () => {
+        const sent = serializers.ToolRequestModel.jsonOrThrow(loadedTransfer("transfer_to_number").build()) as {
+            tool_config: { params: Record<string, unknown> };
+        };
+        expect(sent.tool_config.params.transfer_rules).toEqual([transferRule]);
     });
 
     it("rejects options of the other transfer kind", () => {

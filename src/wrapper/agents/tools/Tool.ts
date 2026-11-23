@@ -825,10 +825,28 @@ export class SystemTool extends Tool {
 
     /** @internal */
     protected _validate(): ToolIssue[] {
-        const transfers = this._params.transfers as unknown[] | undefined;
         const isTransfer = this.systemToolType === "transfer_to_number" || this.systemToolType === "transfer_to_agent";
-        if (isTransfer && (transfers === undefined || transfers.length === 0)) {
+        if (!isTransfer) {
+            return [];
+        }
+        // A loaded transfer_to_number tool may use transfer_rules instead of transfers; the API takes exactly one.
+        const transfers = ((this._params.transfers as unknown[] | undefined) ?? []).length;
+        // Only transfer_to_number has transfer_rules; transfer_to_agent needs transfers.
+        const rules =
+            this.systemToolType === "transfer_to_number"
+                ? ((this._params.transferRules as unknown[] | undefined) ?? []).length
+                : 0;
+        if (transfers === 0 && rules === 0) {
             return [error("no_transfers", "transfer", `${this.systemToolType} needs at least one transfer()`)];
+        }
+        if (transfers > 0 && rules > 0) {
+            return [
+                error(
+                    "conflicting_transfers",
+                    "transfer",
+                    `${this.systemToolType} has both transfers and transfer_rules; the API takes only one`,
+                ),
+            ];
         }
         return [];
     }
