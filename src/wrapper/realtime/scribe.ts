@@ -105,6 +105,27 @@ interface BaseOptions {
      */
     noVerbatim?: boolean;
     /**
+     * Add the words of every partial_transcript, each with a speaker_id (speaker_0, speaker_1, ...)
+     * once the speaker is identified, null until then. After each committed_transcript, a
+     * diarized_transcript event carries its words with their final speakers. Speaker IDs found to
+     * be the same person are reported in speakers_merged events.
+     *
+     * @remarks
+     * scribe_v3_live only. Cannot be combined with filterBackgroundAudio.
+     * @default false
+     */
+    diarize?: boolean;
+    /**
+     * Infer speaker names from the conversation (introductions, greetings, people addressed by name).
+     * The names are delivered in speaker_names events, each carrying the full current map of
+     * speaker_id to name, sent each time it changes.
+     *
+     * @remarks
+     * Requires diarize. Cannot be combined with entityRedaction.
+     * @default false
+     */
+    inferSpeakerNames?: boolean;
+    /**
      * Detect entities on committed transcripts. Accepts `"all"`, a single entity type or
      * category, or a list of types/categories. Detected entities are delivered in a separate
      * committed_transcript_entities event with their text, type, and character positions.
@@ -113,7 +134,7 @@ interface BaseOptions {
     /**
      * Redact entities from committed transcripts. Accepts the same values as entityDetection.
      * The redacted text is delivered in a separate redacted_transcript event containing the
-     * committed text and the redacted text. Cannot be combined with transcriptEdit.
+     * committed text and the redacted text. Cannot be combined with transcriptEdit or inferSpeakerNames.
      */
     entityRedaction?: EntityDetectionOption | EntityDetectionOption[];
     /**
@@ -137,7 +158,7 @@ interface BaseOptions {
      * lower default threshold.
      *
      * @remarks
-     * Cannot be combined with includeTimestamps.
+     * Cannot be combined with diarize.
      * @default false
      */
     filterBackgroundAudio?: boolean;
@@ -285,6 +306,14 @@ export class ScribeRealtime {
         }
         if (options.noVerbatim !== undefined) {
             params.append("no_verbatim", options.noVerbatim ? "true" : "false");
+        }
+
+        if (options.diarize !== undefined) {
+            params.append("diarize", options.diarize.toString());
+        }
+
+        if (options.inferSpeakerNames !== undefined) {
+            params.append("infer_speaker_names", options.inferSpeakerNames.toString());
         }
 
         if (options.entityDetection !== undefined) {
