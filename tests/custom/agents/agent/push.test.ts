@@ -343,7 +343,11 @@ describe("tools push doesn't manage", () => {
         type: "mcp",
         name: "docs_search",
         description: "Search the docs",
+        integration_type: "mcp_server",
+        mcp_tool_name: "search",
+        mcp_tool_description: "Search the docs",
         mcp_server_id: "mcp_1",
+        mcp_server_name: "Docs",
     };
     const mcpTool = (): Tool => Tool.fromJSON(mcpConfig);
     const config = {
