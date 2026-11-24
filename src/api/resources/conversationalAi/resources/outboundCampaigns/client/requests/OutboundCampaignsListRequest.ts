@@ -25,7 +25,7 @@ export interface OutboundCampaignsListRequest {
     channel?: ElevenLabs.OutboundChannel;
     /** Only voice or only message campaigns. */
     mode?: ElevenLabs.conversationalAi.OutboundCampaignsListRequestMode;
-    /** Only campaigns whose name contains this text. */
+    /** Only campaigns whose name contains this text, or whose ID is exactly this text. */
     search?: string;
     /** Used for fetching next page. Cursor is returned in the response. */
     cursor?: string;

@@ -50,6 +50,7 @@ export const ReceptionAgentInfoResponseCurrency = {
     Ngn: "NGN",
     Kes: "KES",
     Pkr: "PKR",
+    Gel: "GEL",
 } as const;
 export type ReceptionAgentInfoResponseCurrency =
     (typeof ReceptionAgentInfoResponseCurrency)[keyof typeof ReceptionAgentInfoResponseCurrency];

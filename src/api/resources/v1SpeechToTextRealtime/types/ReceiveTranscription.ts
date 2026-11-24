@@ -11,6 +11,7 @@ export type ReceiveTranscription =
     | ElevenLabs.CommittedTranscriptPayload
     | ElevenLabs.DiarizedTranscript
     | ElevenLabs.SpeakersMerged
+    | ElevenLabs.SpeakerNames
     | ElevenLabs.CommittedTranscriptWithTimestampsPayload
     | ElevenLabs.CommittedTranscriptEntitiesPayload
     | ElevenLabs.RedactedTranscript

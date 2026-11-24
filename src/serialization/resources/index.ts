@@ -53,6 +53,8 @@ export * as v1DubbingLive from "./v1DubbingLive";
 export * from "./v1DubbingLive/types";
 export * as v1SpeechToTextRealtime from "./v1SpeechToTextRealtime";
 export * from "./v1SpeechToTextRealtime/types";
+export * as v1SubtitlingRealtime from "./v1SubtitlingRealtime";
+export * from "./v1SubtitlingRealtime/types";
 export * as v1TextToDialogueMultiStreamInput from "./v1TextToDialogueMultiStreamInput";
 export * from "./v1TextToDialogueMultiStreamInput/types";
 export * as v1TextToDialogueStreamInput from "./v1TextToDialogueStreamInput";

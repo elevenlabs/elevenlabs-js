@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ClientToolConfigOutput } from "./ClientToolConfigOutput";
+import { McpToolConfigOutput } from "./McpToolConfigOutput";
 import { SystemToolConfigOutput } from "./SystemToolConfigOutput";
 import { WebhookToolConfigOutput } from "./WebhookToolConfigOutput";
 
@@ -13,9 +14,7 @@ export const ToolResponseModelToolConfig: core.serialization.Schema<
 > = core.serialization
     .union("type", {
         client: ClientToolConfigOutput,
-        mcp: core.serialization.object({
-            value: core.serialization.unknown(),
-        }),
+        mcp: McpToolConfigOutput,
         system: SystemToolConfigOutput,
         webhook: WebhookToolConfigOutput,
     })
@@ -35,9 +34,8 @@ export declare namespace ToolResponseModelToolConfig {
         type: "client";
     }
 
-    export interface Mcp {
+    export interface Mcp extends McpToolConfigOutput.Raw {
         type: "mcp";
-        value?: unknown;
     }
 
     export interface System extends SystemToolConfigOutput.Raw {

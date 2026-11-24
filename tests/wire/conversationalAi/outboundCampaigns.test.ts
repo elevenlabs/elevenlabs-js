@@ -173,6 +173,7 @@ describe("OutboundCampaignsClient", () => {
                     timezone: "timezone",
                     retry: {},
                     calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                    date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                     data_collection: {},
                     followup_context: {},
                 },
@@ -235,6 +236,12 @@ describe("OutboundCampaignsClient", () => {
                             ],
                         },
                     ],
+                    dateOverrides: [
+                        {
+                            startDate: "start_date",
+                            endDate: "end_date",
+                        },
+                    ],
                     dataCollection: {},
                     followupContext: {},
                 },
@@ -287,6 +294,7 @@ describe("OutboundCampaignsClient", () => {
                     max_consecutive_failures_per_number: 1,
                 },
                 calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                 data_collection: {
                     callback_time: "callback_time",
                     redirect_phone_number: "redirect_phone_number",
@@ -363,6 +371,12 @@ describe("OutboundCampaignsClient", () => {
                                 end: "end",
                             },
                         ],
+                    },
+                ],
+                dateOverrides: [
+                    {
+                        startDate: "start_date",
+                        endDate: "end_date",
                     },
                 ],
                 dataCollection: {
@@ -525,6 +539,7 @@ describe("OutboundCampaignsClient", () => {
                     max_consecutive_failures_per_number: 1,
                 },
                 calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                 data_collection: {
                     callback_time: "callback_time",
                     redirect_phone_number: "redirect_phone_number",
@@ -603,6 +618,12 @@ describe("OutboundCampaignsClient", () => {
                         ],
                     },
                 ],
+                dateOverrides: [
+                    {
+                        startDate: "start_date",
+                        endDate: "end_date",
+                    },
+                ],
                 dataCollection: {
                     callbackTime: "callback_time",
                     redirectPhoneNumber: "redirect_phone_number",
@@ -671,6 +692,7 @@ describe("OutboundCampaignsClient", () => {
                     max_consecutive_failures_per_number: 1,
                 },
                 calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                 data_collection: {
                     callback_time: "callback_time",
                     redirect_phone_number: "redirect_phone_number",
@@ -749,6 +771,12 @@ describe("OutboundCampaignsClient", () => {
                         ],
                     },
                 ],
+                dateOverrides: [
+                    {
+                        startDate: "start_date",
+                        endDate: "end_date",
+                    },
+                ],
                 dataCollection: {
                     callbackTime: "callback_time",
                     redirectPhoneNumber: "redirect_phone_number",
@@ -817,6 +845,7 @@ describe("OutboundCampaignsClient", () => {
                     max_consecutive_failures_per_number: 1,
                 },
                 calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                 data_collection: {
                     callback_time: "callback_time",
                     redirect_phone_number: "redirect_phone_number",
@@ -893,6 +922,12 @@ describe("OutboundCampaignsClient", () => {
                                 end: "end",
                             },
                         ],
+                    },
+                ],
+                dateOverrides: [
+                    {
+                        startDate: "start_date",
+                        endDate: "end_date",
                     },
                 ],
                 dataCollection: {

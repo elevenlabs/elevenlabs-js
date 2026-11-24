@@ -36,7 +36,8 @@ await client.history.list({
     dateAfterUnix: 1,
     sortDirection: "asc",
     search: "search",
-    source: "TTS"
+    source: "TTS",
+    sources: ["TTS"]
 });
 
 ```
@@ -2270,7 +2271,16 @@ Returns a list of shared voices similar to the provided audio sample. If neither
 <dd>
 
 ```typescript
-await client.voices.findSimilarVoices({});
+await client.voices.findSimilarVoices({
+    category: "professional",
+    gender: "gender",
+    age: "age",
+    useCases: ["use_cases"],
+    minNoticePeriodDays: 1,
+    includeCustomRates: true,
+    includeLiveModerated: true,
+    ownerId: "owner_id"
+});
 
 ```
 </dd>
@@ -2454,6 +2464,271 @@ await client.studio.createPodcast({
 <dd>
 
 **requestOptions:** `StudioClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AudioNative
+<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AudioNativeCreateProjectResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates Audio Native enabled project, optionally starts conversion and returns project ID and embeddable HTML snippet.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioNative.create({
+    name: "name"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioNativeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">getSettings</a>(project_id) -> ElevenLabs.GetAudioNativeProjectSettingsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get player settings for the specific project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioNative.getSettings("21m00Tcm4TlvDq8ikWAM");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` — The ID of the Studio project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioNativeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">update</a>(project_id, { ...params }) -> ElevenLabs.AudioNativeEditContentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates content for the specific AudioNative Project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioNative.update("21m00Tcm4TlvDq8ikWAM", {});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioNativeClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">updateContentFromUrl</a>({ ...params }) -> ElevenLabs.AudioNativeEditContentResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Finds an AudioNative project matching the provided URL, extracts content from the URL, updates the project content, and queues it for conversion and auto-publishing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.audioNative.updateContentFromUrl({
+    url: "https://elevenlabs.io/blog/the_first_ai_that_can_laugh/"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AudioNativeClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -2774,271 +3049,6 @@ await client.models.list();
 <dd>
 
 **requestOptions:** `ModelsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## AudioNative
-<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">create</a>({ ...params }) -> ElevenLabs.AudioNativeCreateProjectResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Creates Audio Native enabled project, optionally starts conversion and returns project ID and embeddable HTML snippet.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.audioNative.create({
-    name: "name"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyCreatesAudioNativeEnabledProjectV1AudioNativePost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AudioNativeClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">getSettings</a>(project_id) -> ElevenLabs.GetAudioNativeProjectSettingsResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get player settings for the specific project.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.audioNative.getSettings("21m00Tcm4TlvDq8ikWAM");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` — The ID of the Studio project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AudioNativeClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">update</a>(project_id, { ...params }) -> ElevenLabs.AudioNativeEditContentResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Updates content for the specific AudioNative Project.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.audioNative.update("21m00Tcm4TlvDq8ikWAM", {});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyUpdateAudioNativeProjectContentV1AudioNativeProjectIdContentPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AudioNativeClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.audioNative.<a href="/src/api/resources/audioNative/client/Client.ts">updateContentFromUrl</a>({ ...params }) -> ElevenLabs.AudioNativeEditContentResponseModel</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Finds an AudioNative project matching the provided URL, extracts content from the URL, updates the project content, and queues it for conversion and auto-publishing.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.audioNative.updateContentFromUrl({
-    url: "https://elevenlabs.io/blog/the_first_ai_that_can_laugh/"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `ElevenLabs.BodyUpdateAudioNativeContentFromUrlV1AudioNativeContentPost` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AudioNativeClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -4142,7 +4152,7 @@ await client.webhooks.test("webhook_id", {
 <dl>
 <dd>
 
-Sends a stored delivery again, once, with the same delivery ID, a new signature and an ElevenLabs-Webhook-Redelivery header. A retry that is already scheduled is still sent. Only workspace admins on a web session can redeliver, and only deliveries whose payload is stored. Redeliveries and test events share a limit of 10 per webhook per minute.
+Sends a stored delivery again, once, with the same delivery ID, a new signature and an ElevenLabs-Webhook-Redelivery header. A retry that is already scheduled is still sent. Redelivering needs permission to manage webhooks and a web session, and the delivery's payload must be stored. Redeliveries and test events share a limit of 10 per webhook per minute.
 </dd>
 </dl>
 </dd>
@@ -8680,7 +8690,6 @@ await client.conversationalAi.triageTickets.list("agent_id", {
     sortBy: "created_at",
     ownerUserId: "owner_user_id",
     assigneeUserId: "assignee_user_id",
-    issueType: "knowledge_gap",
     label: "label",
     mergedIntoTicketId: "merged_into_ticket_id",
     search: "search",
@@ -8838,7 +8847,6 @@ await client.conversationalAi.triageTickets.listForWorkspace({
     sortBy: "created_at",
     ownerUserId: "owner_user_id",
     assigneeUserId: "assignee_user_id",
-    issueType: "knowledge_gap",
     label: "label",
     mergedIntoTicketId: "merged_into_ticket_id",
     search: "search",
@@ -14917,7 +14925,7 @@ await client.conversationalAi.agents.branches.update("agent_3701k3ttaq12ewp8b7qv
 <dl>
 <dd>
 
-Returns the result of merging the source branch into the target branch without performing the merge. Useful for showing an accurate diff before confirming.
+Returns the result of merging the source branch into the target branch without performing the merge. When `conflicts` is not empty, the merge itself is rejected unless `conflict_resolutions` settles every conflict or `force` is set; until then the returned configuration shows one side of each conflict only as a placeholder.
 </dd>
 </dl>
 </dd>
@@ -15000,7 +15008,7 @@ await client.conversationalAi.agents.branches.previewMerge("agent_3701k3ttaq12ew
 <dl>
 <dd>
 
-Merge a branch into a target branch
+Merge a branch into a target branch. If both branches changed the same field, the merge returns 409 unless `conflict_resolutions` settles every conflict the merge preview reports, or `force` is set.
 </dd>
 </dl>
 </dd>
@@ -15081,7 +15089,7 @@ await client.conversationalAi.agents.branches.merge("agent_3701k3ttaq12ewp8b7qv5
 <dl>
 <dd>
 
-Returns the result of pulling changes from a source branch (defaults to main) into the given branch without performing it, preserving the given branch's own changes. Useful for showing an accurate diff before confirming.
+Returns the result of pulling changes from a source branch (defaults to main) into the given branch without performing it. When `conflicts` is not empty, the rebase itself is rejected unless `conflict_resolutions` settles every conflict; until then the returned configuration keeps the given branch's side of each conflict.
 </dd>
 </dl>
 </dd>
@@ -15163,7 +15171,7 @@ await client.conversationalAi.agents.branches.previewRebase("agent_3701k3ttaq12e
 <dl>
 <dd>
 
-Pull changes from a source branch (defaults to main) into this branch as a new version, preserving this branch's own changes on conflicts.
+Pull changes from a source branch (defaults to main) into this branch as a new version. If both branches changed the same field, the rebase returns 409 unless `conflict_resolutions` settles every conflict the rebase preview reports.
 </dd>
 </dl>
 </dd>
@@ -30354,7 +30362,7 @@ await client.reception.workspaces.create({
 <dl>
 <dd>
 
-**request:** `ElevenLabs.reception.ProvisionResellerWorkspaceRequest` 
+**request:** `ElevenLabs.reception.ReceptionProvisionResellerWorkspaceRequest` 
     
 </dd>
 </dl>
@@ -34481,7 +34489,7 @@ await client.textToVoice.preview.stream("generated_voice_id");
 </details>
 
 ## Tokens SingleUse
-<details><summary><code>client.tokens.singleUse.<a href="/src/api/resources/tokens/resources/singleUse/client/Client.ts">create</a>(token_type) -> ElevenLabs.SingleUseTokenResponseModel</code></summary>
+<details><summary><code>client.tokens.singleUse.<a href="/src/api/resources/tokens/resources/singleUse/client/Client.ts">create</a>(token_type, { ...params }) -> ElevenLabs.SingleUseTokenResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -34508,7 +34516,9 @@ Generate a time limited single-use token with embedded authentication for fronte
 <dd>
 
 ```typescript
-await client.tokens.singleUse.create("realtime_scribe");
+await client.tokens.singleUse.create("realtime_scribe", {
+    maxSessionDurationSeconds: 1
+});
 
 ```
 </dd>
@@ -34525,6 +34535,14 @@ await client.tokens.singleUse.create("realtime_scribe");
 <dd>
 
 **token_type:** `ElevenLabs.SingleUseTokenType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ElevenLabs.tokens.SingleUseCreateRequest` 
     
 </dd>
 </dl>

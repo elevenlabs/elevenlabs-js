@@ -5,8 +5,19 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 
 export const AsrProvider: core.serialization.Schema<serializers.AsrProvider.Raw, ElevenLabs.AsrProvider> =
-    core.serialization.enum_(["elevenlabs", "scribe_realtime", "scribe_v2_turbo"]);
+    core.serialization.enum_([
+        "elevenlabs",
+        "scribe_realtime",
+        "scribe_v2_turbo",
+        "scribe_v3_live",
+        "scribe_v3_live_medical",
+    ]);
 
 export declare namespace AsrProvider {
-    export type Raw = "elevenlabs" | "scribe_realtime" | "scribe_v2_turbo";
+    export type Raw =
+        | "elevenlabs"
+        | "scribe_realtime"
+        | "scribe_v2_turbo"
+        | "scribe_v3_live"
+        | "scribe_v3_live_medical";
 }

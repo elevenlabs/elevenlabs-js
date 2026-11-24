@@ -35,8 +35,14 @@ export interface MergePreviewResponseModel {
     defaultHoldAudioUrl?: string;
     /** Dot-paths of config fields where both branches modified the same field relative to their common ancestor (conflicts). Present regardless of which side wins the conflict. */
     overriddenFields?: string[];
-    /** Structured view of the same conflicts as overridden_fields, each carrying the value on the base (common ancestor), source branch, and target branch so the divergence can be presented and resolved field-by-field. */
+    /** Structured view of the same conflicts as overridden_fields, each carrying the value on the base (common ancestor), source branch, and target branch so the divergence can be presented and resolved field-by-field. A merge or rebase is rejected while any of them has no resolution in `conflict_resolutions`, unless the merge is forced. */
     conflicts?: ElevenLabs.FieldConflict[];
     /** True when the merge/rebase would be a no-op, i.e. the merged result is identical to the source branch tip. The rebase endpoint rejects in this case. */
     sourceIdenticalToTarget?: boolean;
+    /** Tip version of the source branch (the rebased branch for a rebase) the preview was computed from. */
+    sourceTipVersionId?: string;
+    /** Tip version of the target branch (main for a rebase) the preview was computed from. */
+    targetTipVersionId?: string;
+    /** Why the merge doesn't combine into a valid configuration while conflicts are left to resolve. The preview then shows the branch the merge writes unchanged. */
+    mergeError?: string;
 }

@@ -5,4 +5,5 @@ import type * as ElevenLabs from "../index";
 export type ObjectJsonSchemaPropertyOutputPropertiesValue =
     | ElevenLabs.LiteralJsonSchemaProperty
     | ElevenLabs.ObjectJsonSchemaPropertyOutput
-    | ElevenLabs.ArrayJsonSchemaPropertyOutput;
+    | ElevenLabs.ArrayJsonSchemaPropertyOutput
+    | ElevenLabs.AnyOfJsonSchemaPropertyOutput;

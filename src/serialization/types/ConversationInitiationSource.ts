@@ -26,11 +26,13 @@ export const ConversationInitiationSource: core.serialization.Schema<
     "whatsapp",
     "twilio_sms",
     "flutter_sdk",
+    "unity_sdk",
     "zendesk_integration",
     "slack_integration",
     "telegram_integration",
     "intercom_integration",
     "freshdesk_integration",
+    "plain_integration",
     "salesforce_integration",
     "template_preview",
     "genesys_bot_connector",
@@ -58,11 +60,13 @@ export declare namespace ConversationInitiationSource {
         | "whatsapp"
         | "twilio_sms"
         | "flutter_sdk"
+        | "unity_sdk"
         | "zendesk_integration"
         | "slack_integration"
         | "telegram_integration"
         | "intercom_integration"
         | "freshdesk_integration"
+        | "plain_integration"
         | "salesforce_integration"
         | "template_preview"
         | "genesys_bot_connector"

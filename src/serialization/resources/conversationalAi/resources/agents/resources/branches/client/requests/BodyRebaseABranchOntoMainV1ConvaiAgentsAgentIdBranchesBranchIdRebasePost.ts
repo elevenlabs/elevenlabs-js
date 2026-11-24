@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../../../../../api/index";
 import * as core from "../../../../../../../../../core";
 import type * as serializers from "../../../../../../../../index";
+import { ConflictResolution } from "../../../../../../../../types/ConflictResolution";
 
 export const BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost: core.serialization.Schema<
     serializers.conversationalAi.agents.BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost.Raw,
@@ -10,8 +11,19 @@ export const BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebas
         ElevenLabs.conversationalAi.agents.BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost,
         "sourceBranchId"
     >
-> = core.serialization.object({});
+> = core.serialization.object({
+    conflictResolutions: core.serialization.property(
+        "conflict_resolutions",
+        core.serialization.list(ConflictResolution).optional(),
+    ),
+    branchTipId: core.serialization.property("branch_tip_id", core.serialization.string().optional()),
+    sourceTipId: core.serialization.property("source_tip_id", core.serialization.string().optional()),
+});
 
 export declare namespace BodyRebaseABranchOntoMainV1ConvaiAgentsAgentIdBranchesBranchIdRebasePost {
-    export type Raw = {};
+    export interface Raw {
+        conflict_resolutions?: ConflictResolution.Raw[] | null;
+        branch_tip_id?: string | null;
+        source_tip_id?: string | null;
+    }
 }

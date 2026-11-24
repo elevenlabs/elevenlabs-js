@@ -24,6 +24,7 @@ export const ConfigEntityType: core.serialization.Schema<
     "occupation",
     "physical_attribute",
     "language",
+    "criminal_record",
     "username",
     "password",
     "url",
@@ -83,6 +84,7 @@ export declare namespace ConfigEntityType {
         | "occupation"
         | "physical_attribute"
         | "language"
+        | "criminal_record"
         | "username"
         | "password"
         | "url"

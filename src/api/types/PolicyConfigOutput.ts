@@ -8,6 +8,8 @@ export interface PolicyConfigOutput {
     retry?: ElevenLabs.RetryPolicy;
     /** The weekly windows calls may be placed in. */
     callingPeriods?: ElevenLabs.CallingPeriod[];
+    /** Local dates in `timezone` whose calling windows replace `calling_periods`. Date ranges may not overlap. */
+    dateOverrides?: ElevenLabs.DateOverride[];
     dataCollection?: ElevenLabs.DataCollectionConfig;
     followupContext?: ElevenLabs.FollowupContextPolicy;
 }

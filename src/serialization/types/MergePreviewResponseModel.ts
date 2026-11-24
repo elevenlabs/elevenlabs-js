@@ -47,6 +47,9 @@ export const MergePreviewResponseModel: core.serialization.ObjectSchema<
         "source_identical_to_target",
         core.serialization.boolean().optional(),
     ),
+    sourceTipVersionId: core.serialization.property("source_tip_version_id", core.serialization.string().optional()),
+    targetTipVersionId: core.serialization.property("target_tip_version_id", core.serialization.string().optional()),
+    mergeError: core.serialization.property("merge_error", core.serialization.string().optional()),
 });
 
 export declare namespace MergePreviewResponseModel {
@@ -69,5 +72,8 @@ export declare namespace MergePreviewResponseModel {
         overridden_fields?: string[] | null;
         conflicts?: FieldConflict.Raw[] | null;
         source_identical_to_target?: boolean | null;
+        source_tip_version_id?: string | null;
+        target_tip_version_id?: string | null;
+        merge_error?: string | null;
     }
 }

@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { CallingPeriod } from "./CallingPeriod";
 import { DataCollectionConfig } from "./DataCollectionConfig";
+import { DateOverride } from "./DateOverride";
 import { FollowupContextPolicy } from "./FollowupContextPolicy";
 import { RetryPolicy } from "./RetryPolicy";
 
@@ -15,6 +16,7 @@ export const AgentPolicyOverrideOutput: core.serialization.ObjectSchema<
     timezone: core.serialization.string().optional(),
     retry: RetryPolicy.optional(),
     callingPeriods: core.serialization.property("calling_periods", core.serialization.list(CallingPeriod).optional()),
+    dateOverrides: core.serialization.property("date_overrides", core.serialization.list(DateOverride).optional()),
     dataCollection: core.serialization.property("data_collection", DataCollectionConfig.optional()),
     followupContext: core.serialization.property("followup_context", FollowupContextPolicy.optional()),
 });
@@ -24,6 +26,7 @@ export declare namespace AgentPolicyOverrideOutput {
         timezone?: string | null;
         retry?: RetryPolicy.Raw | null;
         calling_periods?: CallingPeriod.Raw[] | null;
+        date_overrides?: DateOverride.Raw[] | null;
         data_collection?: DataCollectionConfig.Raw | null;
         followup_context?: FollowupContextPolicy.Raw | null;
     }

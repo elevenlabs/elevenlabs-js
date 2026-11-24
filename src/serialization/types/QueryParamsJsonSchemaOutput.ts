@@ -3,19 +3,19 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { LiteralJsonSchemaProperty } from "./LiteralJsonSchemaProperty";
+import { QueryParamsJsonSchemaOutputPropertiesValue } from "./QueryParamsJsonSchemaOutputPropertiesValue";
 
 export const QueryParamsJsonSchemaOutput: core.serialization.ObjectSchema<
     serializers.QueryParamsJsonSchemaOutput.Raw,
     ElevenLabs.QueryParamsJsonSchemaOutput
 > = core.serialization.object({
-    properties: core.serialization.record(core.serialization.string(), LiteralJsonSchemaProperty),
+    properties: core.serialization.record(core.serialization.string(), QueryParamsJsonSchemaOutputPropertiesValue),
     required: core.serialization.list(core.serialization.string()).optional(),
 });
 
 export declare namespace QueryParamsJsonSchemaOutput {
     export interface Raw {
-        properties: Record<string, LiteralJsonSchemaProperty.Raw>;
+        properties: Record<string, QueryParamsJsonSchemaOutputPropertiesValue.Raw>;
         required?: string[] | null;
     }
 }

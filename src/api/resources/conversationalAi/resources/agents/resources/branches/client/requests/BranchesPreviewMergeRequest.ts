@@ -11,7 +11,7 @@
 export interface BranchesPreviewMergeRequest {
     /** The ID of the target branch to merge into. */
     targetBranchId: string;
-    /** When true, source branch changes always win conflicts regardless of timestamps */
+    /** When true, the preview keeps the source branch's value for every conflict, as a merge with `force` does. Without it, a merge with conflicts needs `conflict_resolutions`. */
     force?: boolean;
     /** Whether to include the workflow nodes and edges generated from structured procedures. When false, the workflow contains only authored elements. */
     includeProcedureGeneratedWorkflowElements?: boolean;

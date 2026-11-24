@@ -66,6 +66,9 @@ export const AuditActivityName: core.serialization.Schema<
     "Notification Preference Deletion",
     "Notification Preference Management",
     "Notification Preference Update",
+    "OAuth App Authorization Grant",
+    "OAuth App Authorization Management",
+    "OAuth App Authorization Revocation",
     "Password Reset Email Request",
     "Password Reset Link Generation",
     "Reporting Workspace SSO Inheritance Update",
@@ -122,6 +125,14 @@ export const AuditActivityName: core.serialization.Schema<
     "Webhook Deletion",
     "Webhook Management",
     "Webhook Update",
+    "Workload Identity Federation Assignment Creation",
+    "Workload Identity Federation Assignment Deletion",
+    "Workload Identity Federation Assignment Management",
+    "Workload Identity Federation Pool Creation",
+    "Workload Identity Federation Pool Deletion",
+    "Workload Identity Federation Pool Management",
+    "Workload Identity Federation Pool Update",
+    "Workload Identity Federation Token Exchange",
     "Workspace Creation",
     "Workspace Deletion",
     "Workspace Deletion Cancellation",
@@ -200,6 +211,9 @@ export declare namespace AuditActivityName {
         | "Notification Preference Deletion"
         | "Notification Preference Management"
         | "Notification Preference Update"
+        | "OAuth App Authorization Grant"
+        | "OAuth App Authorization Management"
+        | "OAuth App Authorization Revocation"
         | "Password Reset Email Request"
         | "Password Reset Link Generation"
         | "Reporting Workspace SSO Inheritance Update"
@@ -256,6 +270,14 @@ export declare namespace AuditActivityName {
         | "Webhook Deletion"
         | "Webhook Management"
         | "Webhook Update"
+        | "Workload Identity Federation Assignment Creation"
+        | "Workload Identity Federation Assignment Deletion"
+        | "Workload Identity Federation Assignment Management"
+        | "Workload Identity Federation Pool Creation"
+        | "Workload Identity Federation Pool Deletion"
+        | "Workload Identity Federation Pool Management"
+        | "Workload Identity Federation Pool Update"
+        | "Workload Identity Federation Token Exchange"
         | "Workspace Creation"
         | "Workspace Deletion"
         | "Workspace Deletion Cancellation"

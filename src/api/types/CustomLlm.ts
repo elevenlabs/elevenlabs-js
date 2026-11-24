@@ -11,6 +11,8 @@ export interface CustomLlm {
     apiKey?: ElevenLabs.CustomLlmApiKey;
     /** Optional workspace auth connection for authentication. Only auth connections that produce an Authorization Bearer token are supported; Basic auth, mTLS, custom header, and URL secret auth connections are not supported. */
     authConnection?: ElevenLabs.CustomLlmAuthConnection;
+    /** Optional mTLS auth connection. When set, its client certificate is used for the TLS handshake with the LLM endpoint and, when auth_connection is OAuth2 client credentials or OAuth2 JWT, with its token endpoint too. Application auth stays on auth_connection or api_key. auth_connection must then be OAuth2 client credentials, OAuth2 JWT or bearer. */
+    mtlsAuthConnection?: ElevenLabs.CustomLlmMtlsAuthConnection;
     /** Headers that should be included in the request */
     requestHeaders?: Record<string, ElevenLabs.CustomLlmRequestHeadersValue>;
     /** The API version to use for the request */

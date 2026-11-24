@@ -16,6 +16,7 @@ export const ResellerWorkspaceSummary: core.serialization.ObjectSchema<
     callsLast30Days: core.serialization.property("calls_last_30_days", core.serialization.number()),
     createdAtUnix: core.serialization.property("created_at_unix", core.serialization.number()),
     subscription: ResellerWorkspaceSubscription.optional(),
+    chargeCustomer: core.serialization.property("charge_customer", core.serialization.boolean().optional()),
     hasPaymentIssue: core.serialization.property("has_payment_issue", core.serialization.boolean().optional()),
     onboardingCompletedAtUnix: core.serialization.property(
         "onboarding_completed_at_unix",
@@ -32,6 +33,7 @@ export declare namespace ResellerWorkspaceSummary {
         calls_last_30_days: number;
         created_at_unix: number;
         subscription?: ResellerWorkspaceSubscription.Raw | null;
+        charge_customer?: boolean | null;
         has_payment_issue?: boolean | null;
         onboarding_completed_at_unix?: number | null;
     }

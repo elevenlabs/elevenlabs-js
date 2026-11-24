@@ -8,5 +8,7 @@ import type * as ElevenLabs from "../index";
 export interface ResellerTierResponse {
     tierId: string;
     displayName: string;
+    /** What the prices are in. The same for every tier on a ladder. */
+    currency: ElevenLabs.ResellerTierResponseCurrency;
     tierEconomics: ElevenLabs.ResellerTierEconomics;
 }

@@ -9,6 +9,8 @@ export interface AgentPolicyOverrideInput {
     timezone?: string;
     retry?: ElevenLabs.RetryPolicy;
     callingPeriods?: ElevenLabs.CallingPeriod[];
+    /** Replaces the inherited date overrides; unset inherits them and an empty list clears them. */
+    dateOverrides?: ElevenLabs.DateOverride[];
     dataCollection?: ElevenLabs.DataCollectionConfig;
     followupContext?: ElevenLabs.FollowupContextPolicy;
 }

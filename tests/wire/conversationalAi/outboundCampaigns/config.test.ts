@@ -14,11 +14,13 @@ describe("ConfigClient", () => {
                 policy: {
                     timezone: "timezone",
                     calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                    date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                 },
                 agent_policies: { key: {} },
                 whatsapp_voice_policy: {
                     timezone: "timezone",
                     calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                    date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                 },
             },
         };
@@ -48,6 +50,12 @@ describe("ConfigClient", () => {
                             ],
                         },
                     ],
+                    dateOverrides: [
+                        {
+                            startDate: "start_date",
+                            endDate: "end_date",
+                        },
+                    ],
                 },
                 agentPolicies: {
                     key: {},
@@ -65,6 +73,12 @@ describe("ConfigClient", () => {
                             ],
                         },
                     ],
+                    dateOverrides: [
+                        {
+                            startDate: "start_date",
+                            endDate: "end_date",
+                        },
+                    ],
                 },
             },
         });
@@ -80,11 +94,13 @@ describe("ConfigClient", () => {
                 policy: {
                     timezone: "timezone",
                     calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                    date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                 },
                 agent_policies: { key: {} },
                 whatsapp_voice_policy: {
                     timezone: "timezone",
                     calling_periods: [{ weekdays: [1], intervals: [{ start: "start", end: "end" }] }],
+                    date_overrides: [{ start_date: "start_date", end_date: "end_date" }],
                 },
             },
         };
@@ -117,6 +133,12 @@ describe("ConfigClient", () => {
                             ],
                         },
                     ],
+                    dateOverrides: [
+                        {
+                            startDate: "start_date",
+                            endDate: "end_date",
+                        },
+                    ],
                 },
                 agentPolicies: {
                     key: {},
@@ -132,6 +154,12 @@ describe("ConfigClient", () => {
                                     end: "end",
                                 },
                             ],
+                        },
+                    ],
+                    dateOverrides: [
+                        {
+                            startDate: "start_date",
+                            endDate: "end_date",
                         },
                     ],
                 },

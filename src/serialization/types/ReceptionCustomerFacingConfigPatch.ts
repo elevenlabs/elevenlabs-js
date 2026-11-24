@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
+import { FirstMessageMode } from "./FirstMessageMode";
 import { Llm } from "./Llm";
 import { LlmReasoningEffort } from "./LlmReasoningEffort";
 import { ReceptionTurnEagerness } from "./ReceptionTurnEagerness";
@@ -34,10 +35,7 @@ export const ReceptionCustomerFacingConfigPatch: core.serialization.ObjectSchema
         core.serialization.list(SupportedLang).optional(),
     ),
     firstMessage: core.serialization.property("first_message", core.serialization.string().optional()),
-    disableFirstMessageInterruptions: core.serialization.property(
-        "disable_first_message_interruptions",
-        core.serialization.boolean().optional(),
-    ),
+    firstMessageMode: core.serialization.property("first_message_mode", FirstMessageMode.optional()),
     enableEndCallTool: core.serialization.property("enable_end_call_tool", core.serialization.boolean().optional()),
     enableSkipTurnTool: core.serialization.property("enable_skip_turn_tool", core.serialization.boolean().optional()),
     enablePlayKeypadTouchToneTool: core.serialization.property(
@@ -73,7 +71,7 @@ export declare namespace ReceptionCustomerFacingConfigPatch {
         language?: SupportedLang.Raw | null;
         additional_languages?: SupportedLang.Raw[] | null;
         first_message?: string | null;
-        disable_first_message_interruptions?: boolean | null;
+        first_message_mode?: FirstMessageMode.Raw | null;
         enable_end_call_tool?: boolean | null;
         enable_skip_turn_tool?: boolean | null;
         enable_play_keypad_touch_tone_tool?: boolean | null;

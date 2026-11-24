@@ -8,6 +8,7 @@ export type AgentWorkflowRequestModelNodesValue =
     | ElevenLabs.AgentWorkflowRequestModelNodesValue.PhoneNumber
     | ElevenLabs.AgentWorkflowRequestModelNodesValue.StandaloneAgent
     | ElevenLabs.AgentWorkflowRequestModelNodesValue.Start
+    | ElevenLabs.AgentWorkflowRequestModelNodesValue.StartProcedure
     | ElevenLabs.AgentWorkflowRequestModelNodesValue.Tool
     | ElevenLabs.AgentWorkflowRequestModelNodesValue.Say
     | ElevenLabs.AgentWorkflowRequestModelNodesValue.UpdateState;
@@ -31,6 +32,10 @@ export namespace AgentWorkflowRequestModelNodesValue {
 
     export interface Start extends ElevenLabs.WorkflowStartNodeModelInput {
         type: "start";
+    }
+
+    export interface StartProcedure extends ElevenLabs.WorkflowStartProcedureNodeModelInput {
+        type: "start_procedure";
     }
 
     export interface Tool extends ElevenLabs.WorkflowToolNodeModelInput {

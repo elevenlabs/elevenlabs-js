@@ -13,7 +13,6 @@ import type * as ElevenLabs from "../../../../../../index";
  *         sortBy: "created_at",
  *         ownerUserId: "owner_user_id",
  *         assigneeUserId: "assignee_user_id",
- *         issueType: "knowledge_gap",
  *         label: "label",
  *         mergedIntoTicketId: "merged_into_ticket_id",
  *         search: "search",
@@ -31,14 +30,12 @@ export interface TriageTicketsListRequest {
     sources?: ElevenLabs.AgentConversationTicketSource | ElevenLabs.AgentConversationTicketSource[];
     /** Filter agent issues by priority. Repeat the parameter to filter by multiple priorities. */
     priorities?: ElevenLabs.AgentConversationTicketPriority | ElevenLabs.AgentConversationTicketPriority[];
-    /** Order by most recently created, by priority (most urgent first, then most recently created), or by most recently reported (the newest report merged into the agent issue, else its creation). */
+    /** Order by most recently created, by priority (most urgent first, then most recently created), by most recently reported (the newest report merged into the agent issue, else its creation), or by report count (most reports merged into the agent issue first, then most recently created). */
     sortBy?: ElevenLabs.AgentConversationTicketSortBy;
     /** Filter agent issues by creator. Use 'agent' for agent-raised issues. */
     ownerUserId?: string;
     /** Filter agent issues by assignee. Use 'unassigned' for issues with no assignee. */
     assigneeUserId?: string;
-    /** Filter agent issues by type. */
-    issueType?: ElevenLabs.AgentConversationTicketIssueType;
     /** Filter agent issues by an exact label. */
     label?: string;
     /** Filter agent issues merged into this issue. */

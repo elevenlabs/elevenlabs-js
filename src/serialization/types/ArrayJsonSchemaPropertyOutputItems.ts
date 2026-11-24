@@ -12,11 +12,13 @@ export const ArrayJsonSchemaPropertyOutputItems: core.serialization.Schema<
     LiteralJsonSchemaProperty,
     core.serialization.lazyObject(() => serializers.ObjectJsonSchemaPropertyOutput),
     core.serialization.lazyObject(() => serializers.ArrayJsonSchemaPropertyOutput),
+    core.serialization.lazyObject(() => serializers.AnyOfJsonSchemaPropertyOutput),
 ]);
 
 export declare namespace ArrayJsonSchemaPropertyOutputItems {
     export type Raw =
         | LiteralJsonSchemaProperty.Raw
         | serializers.ObjectJsonSchemaPropertyOutput.Raw
-        | serializers.ArrayJsonSchemaPropertyOutput.Raw;
+        | serializers.ArrayJsonSchemaPropertyOutput.Raw
+        | serializers.AnyOfJsonSchemaPropertyOutput.Raw;
 }

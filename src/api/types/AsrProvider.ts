@@ -6,5 +6,7 @@ export const AsrProvider = {
     Elevenlabs: "elevenlabs",
     ScribeRealtime: "scribe_realtime",
     ScribeV2Turbo: "scribe_v2_turbo",
+    ScribeV3Live: "scribe_v3_live",
+    ScribeV3LiveMedical: "scribe_v3_live_medical",
 } as const;
 export type AsrProvider = (typeof AsrProvider)[keyof typeof AsrProvider];

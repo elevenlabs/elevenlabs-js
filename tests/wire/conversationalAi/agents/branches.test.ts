@@ -712,6 +712,7 @@ describe("BranchesClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
+                    environments: ["environments"],
                     notifiers: [{ type: "webhook", webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
@@ -1561,9 +1562,14 @@ describe("BranchesClient", () => {
                     base_value: { key: "value" },
                     source_value: { key: "value" },
                     target_value: { key: "value" },
+                    id: "id",
+                    accepts_custom_value: true,
                 },
             ],
             source_identical_to_target: true,
+            source_tip_version_id: "source_tip_version_id",
+            target_tip_version_id: "target_tip_version_id",
+            merge_error: "merge_error",
         };
 
         server
@@ -2028,6 +2034,7 @@ describe("BranchesClient", () => {
                         key: {},
                     },
                     autoResolveAfterInactiveMinutes: 1,
+                    environments: ["environments"],
                     notifiers: [
                         {
                             type: "webhook",
@@ -3104,9 +3111,14 @@ describe("BranchesClient", () => {
                     targetValue: {
                         key: "value",
                     },
+                    id: "id",
+                    acceptsCustomValue: true,
                 },
             ],
             sourceIdenticalToTarget: true,
+            sourceTipVersionId: "source_tip_version_id",
+            targetTipVersionId: "target_tip_version_id",
+            mergeError: "merge_error",
         });
     });
 
@@ -3480,6 +3492,7 @@ describe("BranchesClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
+                    environments: ["environments"],
                     notifiers: [{ type: "webhook", webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
@@ -4329,9 +4342,14 @@ describe("BranchesClient", () => {
                     base_value: { key: "value" },
                     source_value: { key: "value" },
                     target_value: { key: "value" },
+                    id: "id",
+                    accepts_custom_value: true,
                 },
             ],
             source_identical_to_target: true,
+            source_tip_version_id: "source_tip_version_id",
+            target_tip_version_id: "target_tip_version_id",
+            merge_error: "merge_error",
         };
 
         server
@@ -4795,6 +4813,7 @@ describe("BranchesClient", () => {
                         key: {},
                     },
                     autoResolveAfterInactiveMinutes: 1,
+                    environments: ["environments"],
                     notifiers: [
                         {
                             type: "webhook",
@@ -5871,9 +5890,14 @@ describe("BranchesClient", () => {
                     targetValue: {
                         key: "value",
                     },
+                    id: "id",
+                    acceptsCustomValue: true,
                 },
             ],
             sourceIdenticalToTarget: true,
+            sourceTipVersionId: "source_tip_version_id",
+            targetTipVersionId: "target_tip_version_id",
+            mergeError: "merge_error",
         });
     });
 

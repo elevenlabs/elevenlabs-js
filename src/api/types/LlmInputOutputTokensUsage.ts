@@ -11,4 +11,6 @@ export interface LlmInputOutputTokensUsage {
     inputCacheWrite?: ElevenLabs.LlmTokensCategoryUsage;
     /** Output (completion) tokens. */
     outputTotal?: ElevenLabs.LlmTokensCategoryUsage;
+    /** Subset of `output_total` spent on reasoning, when the provider reports it. Informational; already charged as part of `output_total`. */
+    outputTotalReasoningPortion?: ElevenLabs.LlmTokensCategoryUsage;
 }

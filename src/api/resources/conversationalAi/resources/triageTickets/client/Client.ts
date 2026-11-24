@@ -45,7 +45,6 @@ export class TriageTicketsClient {
      *         sortBy: "created_at",
      *         ownerUserId: "owner_user_id",
      *         assigneeUserId: "assignee_user_id",
-     *         issueType: "knowledge_gap",
      *         label: "label",
      *         mergedIntoTicketId: "merged_into_ticket_id",
      *         search: "search",
@@ -74,7 +73,6 @@ export class TriageTicketsClient {
             sortBy,
             ownerUserId,
             assigneeUserId,
-            issueType,
             label,
             mergedIntoTicketId,
             search,
@@ -111,12 +109,6 @@ export class TriageTicketsClient {
                     : undefined,
             owner_user_id: ownerUserId,
             assignee_user_id: assigneeUserId,
-            issue_type:
-                issueType != null
-                    ? serializers.AgentConversationTicketIssueType.jsonOrThrow(issueType, {
-                          unrecognizedObjectKeys: "strip",
-                      })
-                    : undefined,
             label,
             merged_into_ticket_id: mergedIntoTicketId,
             search,
@@ -295,7 +287,6 @@ export class TriageTicketsClient {
      *         sortBy: "created_at",
      *         ownerUserId: "owner_user_id",
      *         assigneeUserId: "assignee_user_id",
-     *         issueType: "knowledge_gap",
      *         label: "label",
      *         mergedIntoTicketId: "merged_into_ticket_id",
      *         search: "search",
@@ -322,7 +313,6 @@ export class TriageTicketsClient {
             sortBy,
             ownerUserId,
             assigneeUserId,
-            issueType,
             label,
             mergedIntoTicketId,
             search,
@@ -359,12 +349,6 @@ export class TriageTicketsClient {
                     : undefined,
             owner_user_id: ownerUserId,
             assignee_user_id: assigneeUserId,
-            issue_type:
-                issueType != null
-                    ? serializers.AgentConversationTicketIssueType.jsonOrThrow(issueType, {
-                          unrecognizedObjectKeys: "strip",
-                      })
-                    : undefined,
             label,
             merged_into_ticket_id: mergedIntoTicketId,
             search,

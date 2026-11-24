@@ -3,7 +3,10 @@
 import type * as ElevenLabs from "../index";
 
 export interface AdhocAgentConfigOverrideForTestRequestModel {
-    conversationConfig: ElevenLabs.ConversationalConfig;
-    platformSettings: ElevenLabs.AgentPlatformSettingsRequestModel;
+    /** Conversation config fields to change for this run. Fields left out keep the agent's values. */
+    conversationConfig?: ElevenLabs.ConversationalConfig;
+    /** Platform settings fields to change for this run. Fields left out keep the agent's values. */
+    platformSettings?: ElevenLabs.AgentPlatformSettingsRequestModel;
+    /** A workflow to run instead of the agent's. It replaces the agent's workflow whole. */
     workflow?: ElevenLabs.AgentWorkflowRequestModel;
 }

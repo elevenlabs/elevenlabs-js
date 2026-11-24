@@ -9,8 +9,10 @@ export interface ProvisionResellerWorkspaceResponse {
     receptionistCount: number;
     callsLast30Days: number;
     createdAtUnix: number;
-    /** The reseller-managed subscription, when this workspace has one. None means nothing is sold here yet and a tier can be assigned. */
+    /** The reseller-managed subscription, when this workspace has one. None means the reseller sells nothing here: no tier is assigned yet, or the workspace pays for its own subscription (see charge_customer). */
     subscription?: ElevenLabs.ResellerWorkspaceSubscription;
+    /** The workspace pays for its own subscription, so its tier can't be assigned or changed here. */
+    chargeCustomer?: boolean;
     /** A charge for this workspace is unpaid. Assigning or changing a tier is refused until it clears, so surface it rather than letting it fail. */
     hasPaymentIssue?: boolean;
     /** When onboarding finished. Until then the onboarding wizard may replace or remove the workspace's business data. */

@@ -11,15 +11,15 @@ export const AdhocAgentConfigOverrideForTestRequestModel: core.serialization.Obj
     serializers.AdhocAgentConfigOverrideForTestRequestModel.Raw,
     ElevenLabs.AdhocAgentConfigOverrideForTestRequestModel
 > = core.serialization.object({
-    conversationConfig: core.serialization.property("conversation_config", ConversationalConfig),
-    platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel),
+    conversationConfig: core.serialization.property("conversation_config", ConversationalConfig.optional()),
+    platformSettings: core.serialization.property("platform_settings", AgentPlatformSettingsRequestModel.optional()),
     workflow: AgentWorkflowRequestModel.optional(),
 });
 
 export declare namespace AdhocAgentConfigOverrideForTestRequestModel {
     export interface Raw {
-        conversation_config: ConversationalConfig.Raw;
-        platform_settings: AgentPlatformSettingsRequestModel.Raw;
+        conversation_config?: ConversationalConfig.Raw | null;
+        platform_settings?: AgentPlatformSettingsRequestModel.Raw | null;
         workflow?: AgentWorkflowRequestModel.Raw | null;
     }
 }

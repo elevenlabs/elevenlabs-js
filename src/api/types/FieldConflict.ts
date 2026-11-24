@@ -13,4 +13,8 @@ export interface FieldConflict {
     sourceValue?: unknown;
     /** Value on the target branch tip. */
     targetValue?: unknown;
+    /** Stable identifier of this conflict within a merge. */
+    id?: string;
+    /** Whether a resolution of this conflict may use `custom` with a `custom_value` instead of keeping a side. */
+    acceptsCustomValue?: boolean;
 }

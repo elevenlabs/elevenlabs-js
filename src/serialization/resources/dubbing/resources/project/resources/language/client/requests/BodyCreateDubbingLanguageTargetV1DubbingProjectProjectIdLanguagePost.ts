@@ -3,14 +3,14 @@
 import type * as ElevenLabs from "../../../../../../../../../api/index";
 import * as core from "../../../../../../../../../core";
 import type * as serializers from "../../../../../../../../index";
-import { VoiceSettings } from "../../../../../../../../types/VoiceSettings";
+import { DubbingVoiceSettings } from "../../../../../../../../types/DubbingVoiceSettings";
 
 export const BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost: core.serialization.Schema<
     serializers.dubbing.project.BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost.Raw,
     ElevenLabs.dubbing.project.BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost
 > = core.serialization.object({
     targetLanguage: core.serialization.property("target_language", core.serialization.string()),
-    voiceSettings: core.serialization.property("voice_settings", VoiceSettings.optional()),
+    voiceSettings: core.serialization.property("voice_settings", DubbingVoiceSettings.optional()),
     translations: core.serialization
         .record(core.serialization.string(), core.serialization.string().optional())
         .optional(),
@@ -19,7 +19,7 @@ export const BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePos
 export declare namespace BodyCreateDubbingLanguageTargetV1DubbingProjectProjectIdLanguagePost {
     export interface Raw {
         target_language: string;
-        voice_settings?: VoiceSettings.Raw | null;
+        voice_settings?: DubbingVoiceSettings.Raw | null;
         translations?: Record<string, string | null | undefined> | null;
     }
 }
