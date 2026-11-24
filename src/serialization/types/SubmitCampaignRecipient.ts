@@ -16,6 +16,7 @@ export const SubmitCampaignRecipient: core.serialization.ObjectSchema<
     ),
     whatsappUserId: core.serialization.property("whatsapp_user_id", core.serialization.string().optional()),
     id: core.serialization.string().optional(),
+    timezoneOverride: core.serialization.property("timezone_override", core.serialization.string().optional()),
     conversationInitiationClientData: core.serialization.property(
         "conversation_initiation_client_data",
         ConversationInitiationClientDataRequestInput.optional(),
@@ -28,6 +29,7 @@ export declare namespace SubmitCampaignRecipient {
         phone_numbers?: string[] | null;
         whatsapp_user_id?: string | null;
         id?: string | null;
+        timezone_override?: string | null;
         conversation_initiation_client_data?: ConversationInitiationClientDataRequestInput.Raw | null;
     }
 }

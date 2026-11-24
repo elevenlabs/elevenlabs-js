@@ -18,6 +18,7 @@ export const AlertingSettingsResponse: core.serialization.ObjectSchema<
         "auto_resolve_after_inactive_minutes",
         core.serialization.number().optional(),
     ),
+    environments: core.serialization.list(core.serialization.string()).optional(),
     notifiers: core.serialization.list(AlertingSettingsResponseNotifiersItem).optional(),
 });
 
@@ -25,6 +26,7 @@ export declare namespace AlertingSettingsResponse {
     export interface Raw {
         monitor_configs?: Record<string, AlertingMonitorConfig.Raw> | null;
         auto_resolve_after_inactive_minutes?: number | null;
+        environments?: string[] | null;
         notifiers?: AlertingSettingsResponseNotifiersItem.Raw[] | null;
     }
 }

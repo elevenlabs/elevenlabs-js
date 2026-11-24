@@ -30,8 +30,8 @@ export interface ReceptionCustomerFacingConfigPatch {
     additionalLanguages?: ElevenLabs.SupportedLang[];
     /** The first message the agent says when starting a conversation */
     firstMessage?: string;
-    /** When true, callers cannot interrupt the receptionist while the first message is being delivered. Use when the greeting carries a recording or legal notice callers must hear in full. */
-    disableFirstMessageInterruptions?: boolean;
+    /** How the first message plays. interruptible: callers can talk over it. uninterruptible: it always plays to the end. recording_notice: it opens with a short 'this call may be recorded' notice in the receptionist's language, spoken by a separate voice, and always plays to the end. */
+    firstMessageMode?: ElevenLabs.FirstMessageMode;
     /** Allow the end_call system tool during conversations. */
     enableEndCallTool?: boolean;
     /** Allow the skip_turn system tool during conversations. */

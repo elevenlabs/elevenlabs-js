@@ -1,1 +1,1 @@
-export { ProvisionResellerWorkspaceRequest } from "./ProvisionResellerWorkspaceRequest";
+export { ReceptionProvisionResellerWorkspaceRequest } from "./ReceptionProvisionResellerWorkspaceRequest";

@@ -3,6 +3,6 @@
 import type * as ElevenLabs from "../index";
 
 export interface QueryParamsJsonSchemaOutput {
-    properties: Record<string, ElevenLabs.LiteralJsonSchemaProperty>;
+    properties: Record<string, ElevenLabs.QueryParamsJsonSchemaOutputPropertiesValue>;
     required?: string[];
 }

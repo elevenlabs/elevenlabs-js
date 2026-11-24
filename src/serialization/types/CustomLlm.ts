@@ -6,6 +6,7 @@ import type * as serializers from "../index";
 import { CustomLlmApiKey } from "./CustomLlmApiKey";
 import { CustomLlmAuthConnection } from "./CustomLlmAuthConnection";
 import { CustomLlmapiType } from "./CustomLlmapiType";
+import { CustomLlmMtlsAuthConnection } from "./CustomLlmMtlsAuthConnection";
 import { CustomLlmRequestHeadersValue } from "./CustomLlmRequestHeadersValue";
 
 export const CustomLlm: core.serialization.ObjectSchema<serializers.CustomLlm.Raw, ElevenLabs.CustomLlm> =
@@ -14,6 +15,7 @@ export const CustomLlm: core.serialization.ObjectSchema<serializers.CustomLlm.Ra
         modelId: core.serialization.property("model_id", core.serialization.string().optional()),
         apiKey: core.serialization.property("api_key", CustomLlmApiKey.optional()),
         authConnection: core.serialization.property("auth_connection", CustomLlmAuthConnection.optional()),
+        mtlsAuthConnection: core.serialization.property("mtls_auth_connection", CustomLlmMtlsAuthConnection.optional()),
         requestHeaders: core.serialization.property(
             "request_headers",
             core.serialization.record(core.serialization.string(), CustomLlmRequestHeadersValue).optional(),
@@ -28,6 +30,7 @@ export declare namespace CustomLlm {
         model_id?: string | null;
         api_key?: CustomLlmApiKey.Raw | null;
         auth_connection?: CustomLlmAuthConnection.Raw | null;
+        mtls_auth_connection?: CustomLlmMtlsAuthConnection.Raw | null;
         request_headers?: Record<string, CustomLlmRequestHeadersValue.Raw> | null;
         api_version?: string | null;
         api_type?: CustomLlmapiType.Raw | null;

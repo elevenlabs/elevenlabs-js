@@ -58,9 +58,9 @@ export class ElevenLabsClient {
     protected _user: UserClient | undefined;
     protected _voices: VoicesClient | undefined;
     protected _studio: StudioClient | undefined;
+    protected _audioNative: AudioNativeClient | undefined;
     protected _dubbing: DubbingClient | undefined;
     protected _models: ModelsClient | undefined;
-    protected _audioNative: AudioNativeClient | undefined;
     protected _contentProvenance: ContentProvenanceClient | undefined;
     protected _usage: UsageClient | undefined;
     protected _pronunciationDictionaries: PronunciationDictionariesClient | undefined;
@@ -133,16 +133,16 @@ export class ElevenLabsClient {
         return (this._studio ??= new StudioClient(this._options));
     }
 
+    public get audioNative(): AudioNativeClient {
+        return (this._audioNative ??= new AudioNativeClient(this._options));
+    }
+
     public get dubbing(): DubbingClient {
         return (this._dubbing ??= new DubbingClient(this._options));
     }
 
     public get models(): ModelsClient {
         return (this._models ??= new ModelsClient(this._options));
-    }
-
-    public get audioNative(): AudioNativeClient {
-        return (this._audioNative ??= new AudioNativeClient(this._options));
     }
 
     public get contentProvenance(): ContentProvenanceClient {

@@ -59,6 +59,7 @@ describe("HistoryClient", () => {
             sortDirection: "asc",
             search: "search",
             source: "TTS",
+            sources: ["TTS"],
         });
         expect(response).toEqual({
             history: [

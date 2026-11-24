@@ -4,6 +4,7 @@ import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
 import { ResellerTierEconomics } from "./ResellerTierEconomics";
+import { ResellerTierResponseCurrency } from "./ResellerTierResponseCurrency";
 
 export const ResellerTierResponse: core.serialization.ObjectSchema<
     serializers.ResellerTierResponse.Raw,
@@ -11,6 +12,7 @@ export const ResellerTierResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({
     tierId: core.serialization.property("tier_id", core.serialization.string()),
     displayName: core.serialization.property("display_name", core.serialization.string()),
+    currency: ResellerTierResponseCurrency,
     tierEconomics: core.serialization.property("tier_economics", ResellerTierEconomics),
 });
 
@@ -18,6 +20,7 @@ export declare namespace ResellerTierResponse {
     export interface Raw {
         tier_id: string;
         display_name: string;
+        currency: ResellerTierResponseCurrency.Raw;
         tier_economics: ResellerTierEconomics.Raw;
     }
 }

@@ -12,6 +12,8 @@ export interface LeadDetailResponse {
     phoneNumbers?: string[];
     /** The position in `phone_numbers` of the number being called. */
     phoneNumbersIndex: number;
+    /** The timezone the recipient's calling windows are read in; unset when the lead follows the campaign's. */
+    timezoneOverride?: string;
     /** The contact's identity: the `user_id` submitted in `conversation_initiation_client_data`, else the lead's phone number. */
     userId: string;
     /** Calls placed, counted against the policy's `max_total_calls`. */

@@ -15,9 +15,6 @@ export const PromptAgentApiModelWorkflowOverrideInputToolsItem: core.serializati
     .union("type", {
         api_integration_webhook: ApiIntegrationWebhookToolConfigInput,
         client: ClientToolConfigInput,
-        mcp: core.serialization.object({
-            value: core.serialization.unknown(),
-        }),
         smb: core.serialization.object({
             value: core.serialization.unknown(),
         }),
@@ -33,7 +30,6 @@ export declare namespace PromptAgentApiModelWorkflowOverrideInputToolsItem {
     export type Raw =
         | PromptAgentApiModelWorkflowOverrideInputToolsItem.ApiIntegrationWebhook
         | PromptAgentApiModelWorkflowOverrideInputToolsItem.Client
-        | PromptAgentApiModelWorkflowOverrideInputToolsItem.Mcp
         | PromptAgentApiModelWorkflowOverrideInputToolsItem.Smb
         | PromptAgentApiModelWorkflowOverrideInputToolsItem.System
         | PromptAgentApiModelWorkflowOverrideInputToolsItem.Webhook;
@@ -44,11 +40,6 @@ export declare namespace PromptAgentApiModelWorkflowOverrideInputToolsItem {
 
     export interface Client extends ClientToolConfigInput.Raw {
         type: "client";
-    }
-
-    export interface Mcp {
-        type: "mcp";
-        value?: unknown;
     }
 
     export interface Smb {

@@ -10,5 +10,6 @@ import type * as ElevenLabs from "../index";
 export interface AlertingSettingsResponse {
     monitorConfigs?: Record<string, ElevenLabs.AlertingMonitorConfig>;
     autoResolveAfterInactiveMinutes?: number;
+    environments?: string[];
     notifiers?: ElevenLabs.AlertingSettingsResponseNotifiersItem[];
 }

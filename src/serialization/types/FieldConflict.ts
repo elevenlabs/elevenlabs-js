@@ -12,6 +12,11 @@ export const FieldConflict: core.serialization.ObjectSchema<serializers.FieldCon
         baseValue: core.serialization.property("base_value", core.serialization.unknown().optional()),
         sourceValue: core.serialization.property("source_value", core.serialization.unknown().optional()),
         targetValue: core.serialization.property("target_value", core.serialization.unknown().optional()),
+        id: core.serialization.string().optional(),
+        acceptsCustomValue: core.serialization.property(
+            "accepts_custom_value",
+            core.serialization.boolean().optional(),
+        ),
     });
 
 export declare namespace FieldConflict {
@@ -21,5 +26,7 @@ export declare namespace FieldConflict {
         base_value?: unknown | null;
         source_value?: unknown | null;
         target_value?: unknown | null;
+        id?: string | null;
+        accepts_custom_value?: boolean | null;
     }
 }

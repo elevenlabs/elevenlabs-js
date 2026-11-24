@@ -44,7 +44,8 @@ export class HistoryClient {
      *         dateAfterUnix: 1,
      *         sortDirection: "asc",
      *         search: "search",
-     *         source: "TTS"
+     *         source: "TTS",
+     *         sources: ["TTS"]
      *     })
      */
     public list(
@@ -68,6 +69,7 @@ export class HistoryClient {
             sortDirection,
             search,
             source,
+            sources,
         } = request;
         const _queryParams: Record<string, unknown> = {
             page_size: pageSize,
@@ -87,6 +89,13 @@ export class HistoryClient {
                 source != null
                     ? serializers.HistoryListRequestSource.jsonOrThrow(source, { unrecognizedObjectKeys: "strip" })
                     : undefined,
+            sources: Array.isArray(sources)
+                ? sources.map((item) =>
+                      serializers.HistoryListRequestSourcesItem.jsonOrThrow(item, { unrecognizedObjectKeys: "strip" }),
+                  )
+                : sources != null
+                  ? serializers.HistoryListRequestSourcesItem.jsonOrThrow(sources, { unrecognizedObjectKeys: "strip" })
+                  : undefined,
         };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,

@@ -11,6 +11,8 @@ export interface SubmitCampaignRecipient {
     whatsappUserId?: string;
     /** Your identifier for the recipient, returned as its lead's `recipient_id`. */
     id?: string;
+    /** IANA timezone to read the calling windows and callback times in for this recipient, overriding the campaign's. */
+    timezoneOverride?: string;
     /** Dynamic variables and overrides for this recipient's calls. */
     conversationInitiationClientData?: ElevenLabs.ConversationInitiationClientDataRequestInput;
 }

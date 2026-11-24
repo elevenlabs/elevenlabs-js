@@ -14,7 +14,7 @@ export interface DubbingLanguageResponse {
     /** Dubbing model this target is dubbed with, inherited from the project and not selectable per language. */
     modelId?: string;
     /** Voice settings applied to every speaker in this language, or null if the defaults apply. */
-    voiceSettings?: ElevenLabs.VoiceSettings;
+    voiceSettings?: ElevenLabs.DubbingVoiceSettings;
     /** Signed output URLs; null until the target has produced an output (present once `completed`, and kept while `stale` — compare `output_revision` against `revision` to tell whether the output is up to date). */
     outputs?: ElevenLabs.DubbingLanguageOutputs;
     /** Monotonic counter incremented whenever this target's transcript changes (a source edit affecting it, or an edit to its translation). */

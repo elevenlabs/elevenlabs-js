@@ -9,6 +9,7 @@ import { WorkflowPhoneNumberNodeModelOutput } from "./WorkflowPhoneNumberNodeMod
 import { WorkflowSayNodeModelOutput } from "./WorkflowSayNodeModelOutput";
 import { WorkflowStandaloneAgentNodeModelOutput } from "./WorkflowStandaloneAgentNodeModelOutput";
 import { WorkflowStartNodeModelOutput } from "./WorkflowStartNodeModelOutput";
+import { WorkflowStartProcedureNodeModelOutput } from "./WorkflowStartProcedureNodeModelOutput";
 import { WorkflowToolNodeModelOutput } from "./WorkflowToolNodeModelOutput";
 import { WorkflowUpdateStateNodeModelOutput } from "./WorkflowUpdateStateNodeModelOutput";
 
@@ -22,6 +23,7 @@ export const AgentWorkflowResponseModelNodesValue: core.serialization.Schema<
         phone_number: WorkflowPhoneNumberNodeModelOutput,
         standalone_agent: WorkflowStandaloneAgentNodeModelOutput,
         start: WorkflowStartNodeModelOutput,
+        start_procedure: WorkflowStartProcedureNodeModelOutput,
         tool: WorkflowToolNodeModelOutput,
         say: WorkflowSayNodeModelOutput,
         update_state: WorkflowUpdateStateNodeModelOutput,
@@ -38,6 +40,7 @@ export declare namespace AgentWorkflowResponseModelNodesValue {
         | AgentWorkflowResponseModelNodesValue.PhoneNumber
         | AgentWorkflowResponseModelNodesValue.StandaloneAgent
         | AgentWorkflowResponseModelNodesValue.Start
+        | AgentWorkflowResponseModelNodesValue.StartProcedure
         | AgentWorkflowResponseModelNodesValue.Tool
         | AgentWorkflowResponseModelNodesValue.Say
         | AgentWorkflowResponseModelNodesValue.UpdateState;
@@ -60,6 +63,10 @@ export declare namespace AgentWorkflowResponseModelNodesValue {
 
     export interface Start extends WorkflowStartNodeModelOutput.Raw {
         type: "start";
+    }
+
+    export interface StartProcedure extends WorkflowStartProcedureNodeModelOutput.Raw {
+        type: "start_procedure";
     }
 
     export interface Tool extends WorkflowToolNodeModelOutput.Raw {

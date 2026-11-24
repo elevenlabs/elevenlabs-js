@@ -17,6 +17,7 @@ export const LeadView: core.serialization.ObjectSchema<serializers.LeadView.Raw,
             core.serialization.list(core.serialization.string()).optional(),
         ),
         phoneNumbersIndex: core.serialization.property("phone_numbers_index", core.serialization.number()),
+        timezoneOverride: core.serialization.property("timezone_override", core.serialization.string().optional()),
         userId: core.serialization.property("user_id", core.serialization.string()),
         attemptCount: core.serialization.property("attempt_count", core.serialization.number()),
         failureCount: core.serialization.property("failure_count", core.serialization.number()),
@@ -41,6 +42,7 @@ export declare namespace LeadView {
         phone_number: string;
         phone_numbers?: string[] | null;
         phone_numbers_index: number;
+        timezone_override?: string | null;
         user_id: string;
         attempt_count: number;
         failure_count: number;

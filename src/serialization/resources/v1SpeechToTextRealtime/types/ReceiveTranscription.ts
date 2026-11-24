@@ -26,6 +26,7 @@ import { ScribeTranscriberErrorPayload } from "../../../types/ScribeTranscriberE
 import { ScribeUnacceptedTermsErrorPayload } from "../../../types/ScribeUnacceptedTermsErrorPayload";
 import { ScribeWarning } from "../../../types/ScribeWarning";
 import { SessionStartedPayload } from "../../../types/SessionStartedPayload";
+import { SpeakerNames } from "../../../types/SpeakerNames";
 import { SpeakersMerged } from "../../../types/SpeakersMerged";
 
 export const ReceiveTranscription: core.serialization.Schema<
@@ -37,6 +38,7 @@ export const ReceiveTranscription: core.serialization.Schema<
     CommittedTranscriptPayload,
     DiarizedTranscript,
     SpeakersMerged,
+    SpeakerNames,
     CommittedTranscriptWithTimestampsPayload,
     CommittedTranscriptEntitiesPayload,
     RedactedTranscript,
@@ -65,6 +67,7 @@ export declare namespace ReceiveTranscription {
         | CommittedTranscriptPayload.Raw
         | DiarizedTranscript.Raw
         | SpeakersMerged.Raw
+        | SpeakerNames.Raw
         | CommittedTranscriptWithTimestampsPayload.Raw
         | CommittedTranscriptEntitiesPayload.Raw
         | RedactedTranscript.Raw

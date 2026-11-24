@@ -13,6 +13,10 @@ export const LlmInputOutputTokensUsage: core.serialization.ObjectSchema<
     inputCacheRead: core.serialization.property("input_cache_read", LlmTokensCategoryUsage.optional()),
     inputCacheWrite: core.serialization.property("input_cache_write", LlmTokensCategoryUsage.optional()),
     outputTotal: core.serialization.property("output_total", LlmTokensCategoryUsage.optional()),
+    outputTotalReasoningPortion: core.serialization.property(
+        "output_total_reasoning_portion",
+        LlmTokensCategoryUsage.optional(),
+    ),
 });
 
 export declare namespace LlmInputOutputTokensUsage {
@@ -21,5 +25,6 @@ export declare namespace LlmInputOutputTokensUsage {
         input_cache_read?: LlmTokensCategoryUsage.Raw | null;
         input_cache_write?: LlmTokensCategoryUsage.Raw | null;
         output_total?: LlmTokensCategoryUsage.Raw | null;
+        output_total_reasoning_portion?: LlmTokensCategoryUsage.Raw | null;
     }
 }

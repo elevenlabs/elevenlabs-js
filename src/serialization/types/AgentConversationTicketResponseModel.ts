@@ -3,7 +3,6 @@
 import type * as ElevenLabs from "../../api/index";
 import * as core from "../../core";
 import type * as serializers from "../index";
-import { AgentConversationTicketIssueType } from "./AgentConversationTicketIssueType";
 import { AgentConversationTicketPriority } from "./AgentConversationTicketPriority";
 import { AgentConversationTicketSource } from "./AgentConversationTicketSource";
 import { AgentConversationTicketStatus } from "./AgentConversationTicketStatus";
@@ -23,7 +22,7 @@ export const AgentConversationTicketResponseModel: core.serialization.ObjectSche
     agentId: core.serialization.property("agent_id", core.serialization.string()),
     needsClustering: core.serialization.property("needs_clustering", core.serialization.boolean()),
     title: core.serialization.string().optional(),
-    issueType: core.serialization.property("issue_type", AgentConversationTicketIssueType.optional()),
+    issueType: core.serialization.property("issue_type", core.serialization.unknown().optional()),
     labels: core.serialization.list(core.serialization.string()),
     conversationIds: core.serialization.property(
         "conversation_ids",
@@ -60,7 +59,7 @@ export declare namespace AgentConversationTicketResponseModel {
         agent_id: string;
         needs_clustering: boolean;
         title?: string | null;
-        issue_type?: AgentConversationTicketIssueType.Raw | null;
+        issue_type?: unknown | null;
         labels: string[];
         conversation_ids: string[];
         first_seen_unix_secs?: number | null;

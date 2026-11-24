@@ -10,7 +10,8 @@ export interface AgentConversationTicketResponseModel {
     needsClustering: boolean;
     /** One-line headline for the agent issue. None only on issues created before titles existed. */
     title?: string;
-    issueType?: ElevenLabs.AgentConversationTicketIssueType;
+    /** Always null. Issue types are labels, written as `issue_type:<value>`. */
+    issueType?: unknown;
     labels: string[];
     conversationIds: string[];
     firstSeenUnixSecs?: number;

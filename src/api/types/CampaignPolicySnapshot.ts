@@ -9,6 +9,7 @@ export interface CampaignPolicySnapshot {
     timezone: string;
     retry: ElevenLabs.RetryPolicy;
     callingPeriods: ElevenLabs.CallingPeriodPolicy[];
+    dateOverrides?: ElevenLabs.DateOverridePolicy[];
     dataCollection: ElevenLabs.DataCollectionPolicy;
     followupContext: ElevenLabs.FollowupContextPolicy;
 }

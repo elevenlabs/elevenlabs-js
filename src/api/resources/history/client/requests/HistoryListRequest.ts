@@ -13,7 +13,8 @@ import type * as ElevenLabs from "../../../../index";
  *         dateAfterUnix: 1,
  *         sortDirection: "asc",
  *         search: "search",
- *         source: "TTS"
+ *         source: "TTS",
+ *         sources: ["TTS"]
  *     }
  */
 export interface HistoryListRequest {
@@ -35,4 +36,6 @@ export interface HistoryListRequest {
     search?: string;
     /** Source of the generated history item */
     source?: ElevenLabs.HistoryListRequestSource;
+    /** Sources of the generated history items, matching any of them. Cannot be combined with source. */
+    sources?: ElevenLabs.HistoryListRequestSourcesItem | ElevenLabs.HistoryListRequestSourcesItem[];
 }

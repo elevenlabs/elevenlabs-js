@@ -119,7 +119,7 @@ export class WorkspacesClient {
     /**
      * Create a workspace for one of your customers, optionally with a tier, a phone number and team invites.
      *
-     * @param {ElevenLabs.reception.ProvisionResellerWorkspaceRequest} request
+     * @param {ElevenLabs.reception.ReceptionProvisionResellerWorkspaceRequest} request
      * @param {WorkspacesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -132,14 +132,14 @@ export class WorkspacesClient {
      *     })
      */
     public create(
-        request: ElevenLabs.reception.ProvisionResellerWorkspaceRequest,
+        request: ElevenLabs.reception.ReceptionProvisionResellerWorkspaceRequest,
         requestOptions?: WorkspacesClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.ProvisionResellerWorkspaceResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: ElevenLabs.reception.ProvisionResellerWorkspaceRequest,
+        request: ElevenLabs.reception.ReceptionProvisionResellerWorkspaceRequest,
         requestOptions?: WorkspacesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.ProvisionResellerWorkspaceResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -162,7 +162,7 @@ export class WorkspacesClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.reception.ProvisionResellerWorkspaceRequest.jsonOrThrow(request, {
+                serializers.reception.ReceptionProvisionResellerWorkspaceRequest.jsonOrThrow(request, {
                     unrecognizedObjectKeys: "strip",
                 }),
                 requestOptions?.additionalBodyParameters,

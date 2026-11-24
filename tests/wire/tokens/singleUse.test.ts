@@ -18,7 +18,9 @@ describe("SingleUseClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tokens.singleUse.create("realtime_scribe");
+        const response = await client.tokens.singleUse.create("realtime_scribe", {
+            maxSessionDurationSeconds: 1,
+        });
         expect(response).toEqual({
             token: "sutkn_1234567890",
         });

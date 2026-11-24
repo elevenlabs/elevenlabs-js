@@ -23,6 +23,7 @@ export const SoftTimeoutConfigWorkflowOverride: core.serialization.ObjectSchema<
         "max_soft_timeouts_per_generation",
         core.serialization.number().optional(),
     ),
+    pauseAfterFiller: core.serialization.property("pause_after_filler", core.serialization.boolean().optional()),
     llmGeneratedMessagePromptOverride: core.serialization.property(
         "llm_generated_message_prompt_override",
         core.serialization.string().optional(),
@@ -41,6 +42,7 @@ export declare namespace SoftTimeoutConfigWorkflowOverride {
         use_llm_generated_message?: boolean | null;
         randomize_fillers?: boolean | null;
         max_soft_timeouts_per_generation?: number | null;
+        pause_after_filler?: boolean | null;
         llm_generated_message_prompt_override?: string | null;
         disable_until_first_user_message?: boolean | null;
     }

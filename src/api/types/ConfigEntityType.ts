@@ -27,6 +27,7 @@ export const ConfigEntityType = {
     Occupation: "occupation",
     PhysicalAttribute: "physical_attribute",
     Language: "language",
+    CriminalRecord: "criminal_record",
     Username: "username",
     Password: "password",
     Url: "url",

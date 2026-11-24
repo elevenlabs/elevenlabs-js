@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { ApiIntegrationWebhookToolConfigOutput } from "./ApiIntegrationWebhookToolConfigOutput";
 import { ClientToolConfigOutput } from "./ClientToolConfigOutput";
+import { McpToolConfigOutput } from "./McpToolConfigOutput";
 import { SystemToolConfigOutput } from "./SystemToolConfigOutput";
 import { WebhookToolConfigOutput } from "./WebhookToolConfigOutput";
 
@@ -15,9 +16,7 @@ export const PromptAgentApiModelWorkflowOverrideOutputToolsItem: core.serializat
     .union("type", {
         api_integration_webhook: ApiIntegrationWebhookToolConfigOutput,
         client: ClientToolConfigOutput,
-        mcp: core.serialization.object({
-            value: core.serialization.unknown(),
-        }),
+        mcp: McpToolConfigOutput,
         smb: core.serialization.object({
             value: core.serialization.unknown(),
         }),
@@ -46,9 +45,8 @@ export declare namespace PromptAgentApiModelWorkflowOverrideOutputToolsItem {
         type: "client";
     }
 
-    export interface Mcp {
+    export interface Mcp extends McpToolConfigOutput.Raw {
         type: "mcp";
-        value?: unknown;
     }
 
     export interface Smb {

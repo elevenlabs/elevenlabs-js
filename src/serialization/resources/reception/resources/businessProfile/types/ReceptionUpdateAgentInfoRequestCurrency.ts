@@ -56,6 +56,7 @@ export const ReceptionUpdateAgentInfoRequestCurrency: core.serialization.Schema<
     "NGN",
     "KES",
     "PKR",
+    "GEL",
 ]);
 
 export declare namespace ReceptionUpdateAgentInfoRequestCurrency {
@@ -107,5 +108,6 @@ export declare namespace ReceptionUpdateAgentInfoRequestCurrency {
         | "EGP"
         | "NGN"
         | "KES"
-        | "PKR";
+        | "PKR"
+        | "GEL";
 }

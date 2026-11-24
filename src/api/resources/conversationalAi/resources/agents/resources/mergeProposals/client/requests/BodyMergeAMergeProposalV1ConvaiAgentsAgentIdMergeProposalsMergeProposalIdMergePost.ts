@@ -7,6 +7,6 @@
 export interface BodyMergeAMergeProposalV1ConvaiAgentsAgentIdMergeProposalsMergeProposalIdMergePost {
     /** Whether to archive the source branch after merging. */
     archiveSourceBranch?: boolean;
-    /** Force source branch changes onto the target, overriding timestamp-based conflict resolution. */
+    /** Keep the source branch's value for every conflict. */
     force?: boolean;
 }

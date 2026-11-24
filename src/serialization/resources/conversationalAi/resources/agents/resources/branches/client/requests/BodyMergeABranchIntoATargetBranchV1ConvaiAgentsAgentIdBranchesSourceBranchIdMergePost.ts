@@ -3,6 +3,7 @@
 import type * as ElevenLabs from "../../../../../../../../../api/index";
 import * as core from "../../../../../../../../../core";
 import type * as serializers from "../../../../../../../../index";
+import { ConflictResolution } from "../../../../../../../../types/ConflictResolution";
 
 export const BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost: core.serialization.Schema<
     serializers.conversationalAi.agents.BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost.Raw,
@@ -13,11 +14,20 @@ export const BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourc
 > = core.serialization.object({
     archiveSourceBranch: core.serialization.property("archive_source_branch", core.serialization.boolean().optional()),
     force: core.serialization.boolean().optional(),
+    conflictResolutions: core.serialization.property(
+        "conflict_resolutions",
+        core.serialization.list(ConflictResolution).optional(),
+    ),
+    sourceTipId: core.serialization.property("source_tip_id", core.serialization.string().optional()),
+    targetTipId: core.serialization.property("target_tip_id", core.serialization.string().optional()),
 });
 
 export declare namespace BodyMergeABranchIntoATargetBranchV1ConvaiAgentsAgentIdBranchesSourceBranchIdMergePost {
     export interface Raw {
         archive_source_branch?: boolean | null;
         force?: boolean | null;
+        conflict_resolutions?: ConflictResolution.Raw[] | null;
+        source_tip_id?: string | null;
+        target_tip_id?: string | null;
     }
 }

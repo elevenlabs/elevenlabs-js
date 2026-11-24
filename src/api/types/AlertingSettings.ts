@@ -12,6 +12,8 @@ export interface AlertingSettings {
     monitorConfigs?: Record<string, ElevenLabs.AlertingMonitorConfig>;
     /** How many minutes an alert can stay inactive before it is auto-resolved. Unset values fall through to the next layer. */
     autoResolveAfterInactiveMinutes?: number;
+    /** Environments whose conversations are monitored, e.g. ``['production']``. The list must include ``production``. Unset values fall through to the next layer; when no layer sets it, every environment is monitored. */
+    environments?: string[];
     /** Delivery channels for alert lifecycle notifications. Stacked with other layers and deduped by ``webhook_id``, PagerDuty ``connection_id``, or Slack ``(connection_id, channel_id)``. */
     notifiers?: ElevenLabs.AlertingSettingsNotifiersItem[];
 }

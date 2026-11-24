@@ -779,7 +779,16 @@ export class VoicesClient {
      *
      * @example
      *     import { createReadStream } from "fs";
-     *     await client.voices.findSimilarVoices({})
+     *     await client.voices.findSimilarVoices({
+     *         category: "professional",
+     *         gender: "gender",
+     *         age: "age",
+     *         useCases: ["use_cases"],
+     *         minNoticePeriodDays: 1,
+     *         includeCustomRates: true,
+     *         includeLiveModerated: true,
+     *         ownerId: "owner_id"
+     *     })
      */
     public findSimilarVoices(
         request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
@@ -792,6 +801,21 @@ export class VoicesClient {
         request: ElevenLabs.BodyGetSimilarLibraryVoicesV1SimilarVoicesPost,
         requestOptions?: VoicesClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.GetLibraryVoicesResponse>> {
+        const _queryParams: Record<string, unknown> = {
+            category:
+                request.category != null
+                    ? serializers.VoicesFindSimilarVoicesRequestCategory.jsonOrThrow(request.category, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            gender: request.gender,
+            age: request.age,
+            use_cases: request.useCases,
+            min_notice_period_days: request.minNoticePeriodDays,
+            include_custom_rates: request.includeCustomRates,
+            include_live_moderated: request.includeLiveModerated,
+            owner_id: request.ownerId,
+        };
         const _body = await core.newFormData();
         if (request.audioFile != null) {
             await _body.appendFile("audio_file", request.audioFile);
@@ -823,7 +847,11 @@ export class VoicesClient {
             ),
             method: "POST",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             requestType: "file",
             duplex: _maybeEncodedRequest.duplex,
             body: _maybeEncodedRequest.body,

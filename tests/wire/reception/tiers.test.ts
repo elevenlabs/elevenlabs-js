@@ -12,6 +12,7 @@ describe("TiersClient", () => {
             {
                 tier_id: "tier_id",
                 display_name: "display_name",
+                currency: "USD",
                 tier_economics: {
                     monthly_price_usd: 99,
                     annual_price_usd: 1.1,
@@ -40,6 +41,7 @@ describe("TiersClient", () => {
             {
                 tierId: "tier_id",
                 displayName: "display_name",
+                currency: "USD",
                 tierEconomics: {
                     monthlyPriceUsd: 99,
                     annualPriceUsd: 1.1,

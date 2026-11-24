@@ -27,6 +27,7 @@ export class SingleUseClient {
      * Generate a time limited single-use token with embedded authentication for frontend clients.
      *
      * @param {ElevenLabs.SingleUseTokenType} token_type
+     * @param {ElevenLabs.tokens.SingleUseCreateRequest} request
      * @param {SingleUseClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link ElevenLabs.UnprocessableEntityError}
@@ -34,19 +35,27 @@ export class SingleUseClient {
      * @throws {@link errors.ElevenLabsTimeoutError}
      *
      * @example
-     *     await client.tokens.singleUse.create("realtime_scribe")
+     *     await client.tokens.singleUse.create("realtime_scribe", {
+     *         maxSessionDurationSeconds: 1
+     *     })
      */
     public create(
         token_type: ElevenLabs.SingleUseTokenType,
+        request: ElevenLabs.tokens.SingleUseCreateRequest = {},
         requestOptions?: SingleUseClient.RequestOptions,
     ): core.HttpResponsePromise<ElevenLabs.SingleUseTokenResponseModel> {
-        return core.HttpResponsePromise.fromPromise(this.__create(token_type, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__create(token_type, request, requestOptions));
     }
 
     private async __create(
         token_type: ElevenLabs.SingleUseTokenType,
+        request: ElevenLabs.tokens.SingleUseCreateRequest = {},
         requestOptions?: SingleUseClient.RequestOptions,
     ): Promise<core.WithRawResponse<ElevenLabs.SingleUseTokenResponseModel>> {
+        const { maxSessionDurationSeconds } = request;
+        const _queryParams: Record<string, unknown> = {
+            max_session_duration_seconds: maxSessionDurationSeconds,
+        };
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
@@ -63,7 +72,11 @@ export class SingleUseClient {
             ),
             method: "POST",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 240) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

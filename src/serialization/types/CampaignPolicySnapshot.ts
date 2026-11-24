@@ -5,6 +5,7 @@ import * as core from "../../core";
 import type * as serializers from "../index";
 import { CallingPeriodPolicy } from "./CallingPeriodPolicy";
 import { DataCollectionPolicy } from "./DataCollectionPolicy";
+import { DateOverridePolicy } from "./DateOverridePolicy";
 import { FollowupContextPolicy } from "./FollowupContextPolicy";
 import { RetryPolicy } from "./RetryPolicy";
 
@@ -15,6 +16,10 @@ export const CampaignPolicySnapshot: core.serialization.ObjectSchema<
     timezone: core.serialization.string(),
     retry: RetryPolicy,
     callingPeriods: core.serialization.property("calling_periods", core.serialization.list(CallingPeriodPolicy)),
+    dateOverrides: core.serialization.property(
+        "date_overrides",
+        core.serialization.list(DateOverridePolicy).optional(),
+    ),
     dataCollection: core.serialization.property("data_collection", DataCollectionPolicy),
     followupContext: core.serialization.property("followup_context", FollowupContextPolicy),
 });
@@ -24,6 +29,7 @@ export declare namespace CampaignPolicySnapshot {
         timezone: string;
         retry: RetryPolicy.Raw;
         calling_periods: CallingPeriodPolicy.Raw[];
+        date_overrides?: DateOverridePolicy.Raw[] | null;
         data_collection: DataCollectionPolicy.Raw;
         followup_context: FollowupContextPolicy.Raw;
     }

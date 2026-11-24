@@ -369,6 +369,7 @@ describe("AgentsClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
+                    environments: ["environments"],
                     notifiers: [{ type: "webhook", webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
@@ -1668,6 +1669,7 @@ describe("AgentsClient", () => {
                         key: {},
                     },
                     autoResolveAfterInactiveMinutes: 1,
+                    environments: ["environments"],
                     notifiers: [
                         {
                             type: "webhook",
@@ -3091,6 +3093,7 @@ describe("AgentsClient", () => {
                 alerting: {
                     monitor_configs: { key: {} },
                     auto_resolve_after_inactive_minutes: 1,
+                    environments: ["environments"],
                     notifiers: [{ type: "webhook", webhook_id: "webhook_id" }],
                 },
                 safety: { is_blocked_ivc: true, is_blocked_non_ivc: true, ignore_safety_evaluation: true },
@@ -4391,6 +4394,7 @@ describe("AgentsClient", () => {
                         key: {},
                     },
                     autoResolveAfterInactiveMinutes: 1,
+                    environments: ["environments"],
                     notifiers: [
                         {
                             type: "webhook",

@@ -6,7 +6,7 @@ import type * as serializers from "../index";
 import { DubbingError } from "./DubbingError";
 import { DubbingLanguageOutputs } from "./DubbingLanguageOutputs";
 import { DubbingLanguageResponseStatus } from "./DubbingLanguageResponseStatus";
-import { VoiceSettings } from "./VoiceSettings";
+import { DubbingVoiceSettings } from "./DubbingVoiceSettings";
 import { VoicesNotPermittedWarning } from "./VoicesNotPermittedWarning";
 
 export const DubbingLanguageResponse: core.serialization.ObjectSchema<
@@ -18,7 +18,7 @@ export const DubbingLanguageResponse: core.serialization.ObjectSchema<
     targetLanguage: core.serialization.property("target_language", core.serialization.string()),
     status: DubbingLanguageResponseStatus,
     modelId: core.serialization.property("model_id", core.serialization.string().optional()),
-    voiceSettings: core.serialization.property("voice_settings", VoiceSettings.optional()),
+    voiceSettings: core.serialization.property("voice_settings", DubbingVoiceSettings.optional()),
     outputs: DubbingLanguageOutputs.optional(),
     revision: core.serialization.number(),
     outputRevision: core.serialization.property("output_revision", core.serialization.number().optional()),
@@ -35,7 +35,7 @@ export declare namespace DubbingLanguageResponse {
         target_language: string;
         status: DubbingLanguageResponseStatus.Raw;
         model_id?: string | null;
-        voice_settings?: VoiceSettings.Raw | null;
+        voice_settings?: DubbingVoiceSettings.Raw | null;
         outputs?: DubbingLanguageOutputs.Raw | null;
         revision: number;
         output_revision?: number | null;
