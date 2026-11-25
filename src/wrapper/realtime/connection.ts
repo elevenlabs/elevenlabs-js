@@ -73,31 +73,6 @@ export interface FinalTranscriptWordsItem {
 }
 
 /**
- * Word-level detail on a partial or diarized transcript, with the speaker it is attributed to.
- * Only sent when the diarize option is set.
- */
-export interface DiarizedWordsItem {
-    /** The word or sound that was transcribed. */
-    text: string;
-    /** The start time of the word or sound in seconds. */
-    start?: number | null;
-    /** The end time of the word or sound in seconds. */
-    end?: number | null;
-    type: FinalTranscriptWordsItemType;
-    /** The speaker of this word (speaker_0, speaker_1, ...), null where the speaker is not identified. */
-    speaker_id?: string | null;
-    /**
-     * The log of the probability with which this word was predicted, in the
-     * range [-infinity, 0]. Higher values indicate higher confidence.
-     */
-    logprob: number;
-    /** The characters that make up the word, and their timing information. */
-    characters?: TranscriptCharacter[] | null;
-    /** The channel this word was spoken on. Null for single-channel transcriptions. */
-    channel_index?: number | null;
-}
-
-/**
  * The session configuration echoed back by the server in the session_started message.
  */
 export interface Config {
@@ -153,11 +128,6 @@ export interface SessionStartedMessage {
 export interface PartialTranscriptMessage {
     message_type: "partial_transcript";
     text: string;
-    /**
-     * Draft words with speaker IDs. Only sent when the diarize option is set.
-     * Speaker IDs and timestamps may change as more audio is received.
-     */
-    words?: DiarizedWordsItem[] | null;
 }
 
 /**
@@ -183,11 +153,6 @@ export interface FinalTranscriptWithTimestampsMessage {
 export interface CommittedTranscriptMessage {
     message_type: "committed_transcript";
     text: string;
-    /**
-     * Zero-based commit index. Only sent when the diarize option is set; matches the
-     * segment_index of the diarized_transcript that follows.
-     */
-    segment_index?: number | null;
 }
 
 export interface CommittedTranscriptWithTimestampsMessage {
@@ -231,40 +196,6 @@ export interface RedactedTranscriptMessage {
     text: string;
     /** The committed transcript text with each redacted entity replaced by a marker such as `{NAME_0}`. */
     redacted_text: string;
-}
-
-/**
- * A committed transcript's words with their final speakers.
- * Only sent when the diarize option is set, after each committed_transcript and in commit order.
- */
-export interface DiarizedTranscriptMessage {
-    message_type: "diarized_transcript";
-    /** The segment_index of the committed_transcript the words are of. */
-    segment_index: number;
-    /** The committed transcript text the words are of. */
-    text: string;
-    /** The words, each with its speaker_id, null where the speaker could not be identified. */
-    words: DiarizedWordsItem[];
-}
-
-/**
- * Two speaker IDs turned out to be the same person: replace earlier uses of from_speaker_id
- * with to_speaker_id, applying merges in the order received.
- * Only sent when the diarize option is set.
- */
-export interface SpeakersMergedMessage {
-    message_type: "speakers_merged";
-    from_speaker_id: string;
-    to_speaker_id: string;
-}
-
-/**
- * The full current map of speaker_id to inferred name, sent each time it changes.
- * Only sent when the inferSpeakerNames option is set.
- */
-export interface SpeakerNamesMessage {
-    message_type: "speaker_names";
-    speaker_names: Record<string, string>;
 }
 
 export interface ErrorMessage {
@@ -369,9 +300,6 @@ export type WebSocketMessage =
     | CommittedTranscriptEntitiesMessage
     | EditedTranscriptMessage
     | RedactedTranscriptMessage
-    | DiarizedTranscriptMessage
-    | SpeakersMergedMessage
-    | SpeakerNamesMessage
     | ServerErrorMessage;
 
 /**
@@ -402,12 +330,6 @@ export enum RealtimeEvents {
     EDITED_TRANSCRIPT = "edited_transcript",
     /** Emitted when the redacted version of a committed transcript is available */
     REDACTED_TRANSCRIPT = "redacted_transcript",
-    /** Emitted when the final speakers of a committed transcript's words are available */
-    DIARIZED_TRANSCRIPT = "diarized_transcript",
-    /** Emitted when two speaker IDs turn out to be the same person */
-    SPEAKERS_MERGED = "speakers_merged",
-    /** Emitted when the inferred speaker names change */
-    SPEAKER_NAMES = "speaker_names",
     /** Emitted when an error occurs - can be any error message from the server or a native WebSocket error */
     ERROR = "error",
     /** Emitted when an auth error occurs */
@@ -455,9 +377,6 @@ export interface RealtimeEventMap {
     [RealtimeEvents.COMMITTED_TRANSCRIPT_ENTITIES]: CommittedTranscriptEntitiesMessage;
     [RealtimeEvents.EDITED_TRANSCRIPT]: EditedTranscriptMessage;
     [RealtimeEvents.REDACTED_TRANSCRIPT]: RedactedTranscriptMessage;
-    [RealtimeEvents.DIARIZED_TRANSCRIPT]: DiarizedTranscriptMessage;
-    [RealtimeEvents.SPEAKERS_MERGED]: SpeakersMergedMessage;
-    [RealtimeEvents.SPEAKER_NAMES]: SpeakerNamesMessage;
     [RealtimeEvents.ERROR]: RealtimeErrorPayload;
     [RealtimeEvents.AUTH_ERROR]: AuthErrorMessage;
     [RealtimeEvents.QUOTA_EXCEEDED]: QuotaExceededErrorMessage;
@@ -567,15 +486,6 @@ export class RealtimeConnection {
                     break;
                 case "redacted_transcript":
                     this.eventEmitter.emit(RealtimeEvents.REDACTED_TRANSCRIPT, data);
-                    break;
-                case "diarized_transcript":
-                    this.eventEmitter.emit(RealtimeEvents.DIARIZED_TRANSCRIPT, data);
-                    break;
-                case "speakers_merged":
-                    this.eventEmitter.emit(RealtimeEvents.SPEAKERS_MERGED, data);
-                    break;
-                case "speaker_names":
-                    this.eventEmitter.emit(RealtimeEvents.SPEAKER_NAMES, data);
                     break;
                 case "error":
                     this.eventEmitter.emit(RealtimeEvents.ERROR, data);
