@@ -119,8 +119,6 @@ describe("ScribeRealtime handshake URL", () => {
             includeLanguageDetection: true,
             keyterms: ["ElevenLabs", "Scribe"],
             noVerbatim: true,
-            diarize: true,
-            inferSpeakerNames: true,
             entityDetection: ["pii", "email_address"],
             entityRedaction: ["pci", "name"],
             entityRedactionMode: "entity_type",
@@ -133,7 +131,6 @@ describe("ScribeRealtime handshake URL", () => {
         expect(queryParams(url)).toEqual([
             ["audio_format", "pcm_16000"],
             ["commit_strategy", "vad"],
-            ["diarize", "true"],
             ["enable_logging", "false"],
             ["entity_detection", "email_address"],
             ["entity_detection", "pii"],
@@ -143,7 +140,6 @@ describe("ScribeRealtime handshake URL", () => {
             ["filter_background_audio", "true"],
             ["include_language_detection", "true"],
             ["include_timestamps", "false"],
-            ["infer_speaker_names", "true"],
             ["keyterms", "ElevenLabs"],
             ["keyterms", "Scribe"],
             ["language_code", "en"],
@@ -167,8 +163,6 @@ describe("ScribeRealtime handshake URL", () => {
             includeTimestamps: false,
             includeLanguageDetection: false,
             noVerbatim: false,
-            diarize: false,
-            inferSpeakerNames: false,
             filterBackgroundAudio: false,
             enableLogging: false,
         });
@@ -176,8 +170,6 @@ describe("ScribeRealtime handshake URL", () => {
         expect(url.searchParams.get("include_timestamps")).toBe("false");
         expect(url.searchParams.get("include_language_detection")).toBe("false");
         expect(url.searchParams.get("no_verbatim")).toBe("false");
-        expect(url.searchParams.get("diarize")).toBe("false");
-        expect(url.searchParams.get("infer_speaker_names")).toBe("false");
         expect(url.searchParams.get("filter_background_audio")).toBe("false");
         expect(url.searchParams.get("enable_logging")).toBe("false");
     });
@@ -328,42 +320,6 @@ describe("RealtimeConnection message dispatch", () => {
         socket.deliver(payload);
 
         expect(received[RealtimeEvents.REDACTED_TRANSCRIPT]).toEqual([payload]);
-    });
-
-    it("routes diarized_transcript with the committed text and each word's speaker", () => {
-        const { socket, received } = listen([RealtimeEvents.DIARIZED_TRANSCRIPT]);
-        const payload = {
-            message_type: "diarized_transcript",
-            segment_index: 0,
-            text: "hi Anna",
-            words: [
-                { text: "hi", start: 0.0, end: 0.3, type: "word", speaker_id: "speaker_0", logprob: -0.1 },
-                { text: " ", start: 0.3, end: 0.4, type: "spacing", speaker_id: "speaker_0", logprob: 0 },
-                { text: "Anna", start: 0.4, end: 0.8, type: "word", speaker_id: null, logprob: -0.2 },
-            ],
-        };
-
-        socket.deliver(payload);
-
-        expect(received[RealtimeEvents.DIARIZED_TRANSCRIPT]).toEqual([payload]);
-    });
-
-    it("routes speakers_merged with the speaker ID to replace and its replacement", () => {
-        const { socket, received } = listen([RealtimeEvents.SPEAKERS_MERGED]);
-        const payload = { message_type: "speakers_merged", from_speaker_id: "speaker_2", to_speaker_id: "speaker_0" };
-
-        socket.deliver(payload);
-
-        expect(received[RealtimeEvents.SPEAKERS_MERGED]).toEqual([payload]);
-    });
-
-    it("routes speaker_names with the full map of speaker IDs to names", () => {
-        const { socket, received } = listen([RealtimeEvents.SPEAKER_NAMES]);
-        const payload = { message_type: "speaker_names", speaker_names: { speaker_0: "Anna", speaker_1: "Tom" } };
-
-        socket.deliver(payload);
-
-        expect(received[RealtimeEvents.SPEAKER_NAMES]).toEqual([payload]);
     });
 
     // Parameter rejections arrive as a message before the socket closes; dropping
